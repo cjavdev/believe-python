@@ -18,7 +18,7 @@ class CharacterListParams(TypedDict, total=False):
     """Minimum optimism score"""
 
     role: Optional[CharacterRole]
-    """Roles characters can have."""
+    """Filter by role"""
 
     skip: int
     """Number of items to skip (offset)"""

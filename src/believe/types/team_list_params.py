@@ -12,7 +12,7 @@ __all__ = ["TeamListParams"]
 
 class TeamListParams(TypedDict, total=False):
     league: Optional[League]
-    """Football leagues."""
+    """Filter by league"""
 
     limit: int
     """Maximum number of items to return (max: 100)"""

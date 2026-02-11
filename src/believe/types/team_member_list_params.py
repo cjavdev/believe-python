@@ -13,7 +13,7 @@ class TeamMemberListParams(TypedDict, total=False):
     """Maximum number of items to return (max: 100)"""
 
     member_type: Optional[Literal["player", "coach", "medical_staff", "equipment_manager"]]
-    """Types of team members - used as discriminator."""
+    """Filter by member type"""
 
     skip: int
     """Number of items to skip (offset)"""

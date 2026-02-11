@@ -290,9 +290,9 @@ class MatchesResource(SyncAPIResource):
         Args:
           limit: Maximum number of items to return (max: 100)
 
-          match_type: Types of matches.
+          match_type: Filter by match type
 
-          result: Match result types.
+          result: Filter by result
 
           skip: Number of items to skip (offset)
 
@@ -763,9 +763,9 @@ class AsyncMatchesResource(AsyncAPIResource):
         Args:
           limit: Maximum number of items to return (max: 100)
 
-          match_type: Types of matches.
+          match_type: Filter by match type
 
-          result: Match result types.
+          result: Filter by result
 
           skip: Number of items to skip (offset)
 

@@ -265,7 +265,7 @@ class CharactersResource(SyncAPIResource):
 
           min_optimism: Minimum optimism score
 
-          role: Roles characters can have.
+          role: Filter by role
 
           skip: Number of items to skip (offset)
 
@@ -600,7 +600,7 @@ class AsyncCharactersResource(AsyncAPIResource):
 
           min_optimism: Minimum optimism score
 
-          role: Roles characters can have.
+          role: Filter by role
 
           skip: Number of items to skip (offset)
 

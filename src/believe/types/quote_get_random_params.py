@@ -18,4 +18,4 @@ class QuoteGetRandomParams(TypedDict, total=False):
     """Filter inspirational quotes"""
 
     theme: Optional[QuoteTheme]
-    """Themes that quotes can be categorized under."""
+    """Filter by theme"""
