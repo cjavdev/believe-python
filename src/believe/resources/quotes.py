@@ -260,11 +260,11 @@ class QuotesResource(SyncAPIResource):
 
           limit: Maximum number of items to return (max: 100)
 
-          moment_type: Types of moments when quotes occur.
+          moment_type: Filter by moment type
 
           skip: Number of items to skip (offset)
 
-          theme: Themes that quotes can be categorized under.
+          theme: Filter by theme
 
           extra_headers: Send extra headers
 
@@ -353,7 +353,7 @@ class QuotesResource(SyncAPIResource):
 
           inspirational: Filter inspirational quotes
 
-          theme: Themes that quotes can be categorized under.
+          theme: Filter by theme
 
           extra_headers: Send extra headers
 
@@ -710,11 +710,11 @@ class AsyncQuotesResource(AsyncAPIResource):
 
           limit: Maximum number of items to return (max: 100)
 
-          moment_type: Types of moments when quotes occur.
+          moment_type: Filter by moment type
 
           skip: Number of items to skip (offset)
 
-          theme: Themes that quotes can be categorized under.
+          theme: Filter by theme
 
           extra_headers: Send extra headers
 
@@ -803,7 +803,7 @@ class AsyncQuotesResource(AsyncAPIResource):
 
           inspirational: Filter inspirational quotes
 
-          theme: Themes that quotes can be categorized under.
+          theme: Filter by theme
 
           extra_headers: Send extra headers
 

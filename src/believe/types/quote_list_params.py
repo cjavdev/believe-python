@@ -25,10 +25,10 @@ class QuoteListParams(TypedDict, total=False):
     """Maximum number of items to return (max: 100)"""
 
     moment_type: Optional[QuoteMoment]
-    """Types of moments when quotes occur."""
+    """Filter by moment type"""
 
     skip: int
     """Number of items to skip (offset)"""
 
     theme: Optional[QuoteTheme]
-    """Themes that quotes can be categorized under."""
+    """Filter by theme"""

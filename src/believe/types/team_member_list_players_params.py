@@ -15,7 +15,7 @@ class TeamMemberListPlayersParams(TypedDict, total=False):
     """Maximum number of items to return (max: 100)"""
 
     position: Optional[Position]
-    """Football positions for players."""
+    """Filter by position"""
 
     skip: int
     """Number of items to skip (offset)"""

@@ -18,7 +18,7 @@ class TeamMemberListCoachesParams(TypedDict, total=False):
     """Number of items to skip (offset)"""
 
     specialty: Optional[CoachSpecialty]
-    """Coaching specialties."""
+    """Filter by specialty"""
 
     team_id: Optional[str]
     """Filter by team ID"""

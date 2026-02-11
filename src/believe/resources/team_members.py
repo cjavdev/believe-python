@@ -248,7 +248,7 @@ class TeamMembersResource(SyncAPIResource):
         Args:
           limit: Maximum number of items to return (max: 100)
 
-          member_type: Types of team members - used as discriminator.
+          member_type: Filter by member type
 
           skip: Number of items to skip (offset)
 
@@ -339,7 +339,7 @@ class TeamMembersResource(SyncAPIResource):
 
           skip: Number of items to skip (offset)
 
-          specialty: Coaching specialties.
+          specialty: Filter by specialty
 
           team_id: Filter by team ID
 
@@ -392,7 +392,7 @@ class TeamMembersResource(SyncAPIResource):
         Args:
           limit: Maximum number of items to return (max: 100)
 
-          position: Football positions for players.
+          position: Filter by position
 
           skip: Number of items to skip (offset)
 
@@ -690,7 +690,7 @@ class AsyncTeamMembersResource(AsyncAPIResource):
         Args:
           limit: Maximum number of items to return (max: 100)
 
-          member_type: Types of team members - used as discriminator.
+          member_type: Filter by member type
 
           skip: Number of items to skip (offset)
 
@@ -781,7 +781,7 @@ class AsyncTeamMembersResource(AsyncAPIResource):
 
           skip: Number of items to skip (offset)
 
-          specialty: Coaching specialties.
+          specialty: Filter by specialty
 
           team_id: Filter by team ID
 
@@ -834,7 +834,7 @@ class AsyncTeamMembersResource(AsyncAPIResource):
         Args:
           limit: Maximum number of items to return (max: 100)
 
-          position: Football positions for players.
+          position: Filter by position
 
           skip: Number of items to skip (offset)
 

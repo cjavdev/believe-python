@@ -295,7 +295,7 @@ class TeamsResource(SyncAPIResource):
         score.
 
         Args:
-          league: Football leagues.
+          league: Filter by league
 
           limit: Maximum number of items to return (max: 100)
 
@@ -723,7 +723,7 @@ class AsyncTeamsResource(AsyncAPIResource):
         score.
 
         Args:
-          league: Football leagues.
+          league: Filter by league
 
           limit: Maximum number of items to return (max: 100)
 

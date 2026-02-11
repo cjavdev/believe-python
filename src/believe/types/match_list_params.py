@@ -16,10 +16,10 @@ class MatchListParams(TypedDict, total=False):
     """Maximum number of items to return (max: 100)"""
 
     match_type: Optional[MatchType]
-    """Types of matches."""
+    """Filter by match type"""
 
     result: Optional[MatchResult]
-    """Match result types."""
+    """Filter by result"""
 
     skip: int
     """Number of items to skip (offset)"""
