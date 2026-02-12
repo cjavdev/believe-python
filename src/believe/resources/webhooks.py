@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+import json
+from typing import List, Optional, cast
 from typing_extensions import Literal
 
 import httpx
@@ -11,6 +12,7 @@ from ..types import webhook_create_params, webhook_trigger_event_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
+from .._models import construct_type
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
     to_raw_response_wrapper,
@@ -20,6 +22,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.registered_webhook import RegisteredWebhook
+from ..types.unwrap_webhook_event import UnwrapWebhookEvent
 from ..types.webhook_list_response import WebhookListResponse
 from ..types.webhook_create_response import WebhookCreateResponse
 from ..types.webhook_delete_response import WebhookDeleteResponse
@@ -269,6 +272,15 @@ class WebhooksResource(SyncAPIResource):
             cast_to=WebhookTriggerEventResponse,
         )
 
+    def unwrap(self, payload: str) -> UnwrapWebhookEvent:
+        return cast(
+            UnwrapWebhookEvent,
+            construct_type(
+                type_=UnwrapWebhookEvent,
+                value=json.loads(payload),
+            ),
+        )
+
 
 class AsyncWebhooksResource(AsyncAPIResource):
     @cached_property
@@ -509,6 +521,15 @@ class AsyncWebhooksResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=WebhookTriggerEventResponse,
+        )
+
+    def unwrap(self, payload: str) -> UnwrapWebhookEvent:
+        return cast(
+            UnwrapWebhookEvent,
+            construct_type(
+                type_=UnwrapWebhookEvent,
+                value=json.loads(payload),
+            ),
         )
 
 
