@@ -43,6 +43,7 @@ from .match_update_params import MatchUpdateParams as MatchUpdateParams
 from .quote_create_params import QuoteCreateParams as QuoteCreateParams
 from .quote_update_params import QuoteUpdateParams as QuoteUpdateParams
 from .turning_point_param import TurningPointParam as TurningPointParam
+from .unwrap_webhook_event import UnwrapWebhookEvent as UnwrapWebhookEvent
 from .believe_submit_params import BelieveSubmitParams as BelieveSubmitParams
 from .character_list_params import CharacterListParams as CharacterListParams
 from .emotional_stats_param import EmotionalStatsParam as EmotionalStatsParam
@@ -79,6 +80,7 @@ from .team_member_update_response import TeamMemberUpdateResponse as TeamMemberU
 from .webhook_trigger_event_params import WebhookTriggerEventParams as WebhookTriggerEventParams
 from .character_get_quotes_response import CharacterGetQuotesResponse as CharacterGetQuotesResponse
 from .episode_list_by_season_params import EpisodeListBySeasonParams as EpisodeListBySeasonParams
+from .match_completed_webhook_event import MatchCompletedWebhookEvent as MatchCompletedWebhookEvent
 from .team_member_list_staff_params import TeamMemberListStaffParams as TeamMemberListStaffParams
 from .team_member_retrieve_response import TeamMemberRetrieveResponse as TeamMemberRetrieveResponse
 from .quote_list_by_character_params import QuoteListByCharacterParams as QuoteListByCharacterParams
@@ -87,6 +89,9 @@ from .team_member_list_coaches_params import TeamMemberListCoachesParams as Team
 from .team_member_list_players_params import TeamMemberListPlayersParams as TeamMemberListPlayersParams
 from .team_member_list_staff_response import TeamMemberListStaffResponse as TeamMemberListStaffResponse
 from .match_get_turning_points_response import MatchGetTurningPointsResponse as MatchGetTurningPointsResponse
+from .team_member_transferred_webhook_event import (
+    TeamMemberTransferredWebhookEvent as TeamMemberTransferredWebhookEvent,
+)
 from .reframe_transform_negative_thoughts_params import (
     ReframeTransformNegativeThoughtsParams as ReframeTransformNegativeThoughtsParams,
 )

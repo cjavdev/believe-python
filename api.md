@@ -276,6 +276,9 @@ from believe.types import (
     WebhookListResponse,
     WebhookDeleteResponse,
     WebhookTriggerEventResponse,
+    MatchCompletedWebhookEvent,
+    TeamMemberTransferredWebhookEvent,
+    UnwrapWebhookEvent,
 )
 ```
 
