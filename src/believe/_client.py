@@ -75,6 +75,7 @@ if TYPE_CHECKING:
     from .resources.characters import CharactersResource, AsyncCharactersResource
     from .resources.teams.teams import TeamsResource, AsyncTeamsResource
     from .resources.team_members import TeamMembersResource, AsyncTeamMembersResource
+    from .resources.client.client import ClientResource, AsyncClientResource
     from .resources.matches.matches import MatchesResource, AsyncMatchesResource
     from .resources.coaching.coaching import CoachingResource, AsyncCoachingResource
 
@@ -85,11 +86,20 @@ class Believe(SyncAPIClient):
     # client options
     api_key: str
 
+    websocket_base_url: str | httpx.URL | None
+    """Base URL for WebSocket connections.
+
+    If not specified, the default base URL will be used, with 'wss://' replacing the
+    'http://' or 'https://' scheme. For example: 'http://example.com' becomes
+    'wss://example.com'
+    """
+
     def __init__(
         self,
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
+        websocket_base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -119,6 +129,8 @@ class Believe(SyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the BELIEVE_API_KEY environment variable"
             )
         self.api_key = api_key
+
+        self.websocket_base_url = websocket_base_url
 
         if base_url is None:
             base_url = os.environ.get("BELIEVE_BASE_URL")
@@ -239,6 +251,12 @@ class Believe(SyncAPIClient):
         return VersionResource(self)
 
     @cached_property
+    def client(self) -> ClientResource:
+        from .resources.client import ClientResource
+
+        return ClientResource(self)
+
+    @cached_property
     def with_raw_response(self) -> BelieveWithRawResponse:
         return BelieveWithRawResponse(self)
 
@@ -270,6 +288,7 @@ class Believe(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        websocket_base_url: str | httpx.URL | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -304,6 +323,7 @@ class Believe(SyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            websocket_base_url=websocket_base_url or self.websocket_base_url,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -374,11 +394,20 @@ class AsyncBelieve(AsyncAPIClient):
     # client options
     api_key: str
 
+    websocket_base_url: str | httpx.URL | None
+    """Base URL for WebSocket connections.
+
+    If not specified, the default base URL will be used, with 'wss://' replacing the
+    'http://' or 'https://' scheme. For example: 'http://example.com' becomes
+    'wss://example.com'
+    """
+
     def __init__(
         self,
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
+        websocket_base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -408,6 +437,8 @@ class AsyncBelieve(AsyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the BELIEVE_API_KEY environment variable"
             )
         self.api_key = api_key
+
+        self.websocket_base_url = websocket_base_url
 
         if base_url is None:
             base_url = os.environ.get("BELIEVE_BASE_URL")
@@ -528,6 +559,12 @@ class AsyncBelieve(AsyncAPIClient):
         return AsyncVersionResource(self)
 
     @cached_property
+    def client(self) -> AsyncClientResource:
+        from .resources.client import AsyncClientResource
+
+        return AsyncClientResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncBelieveWithRawResponse:
         return AsyncBelieveWithRawResponse(self)
 
@@ -559,6 +596,7 @@ class AsyncBelieve(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        websocket_base_url: str | httpx.URL | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -593,6 +631,7 @@ class AsyncBelieve(AsyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            websocket_base_url=websocket_base_url or self.websocket_base_url,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
