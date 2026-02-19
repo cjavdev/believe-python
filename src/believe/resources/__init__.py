@@ -16,14 +16,6 @@ from .teams import (
     TeamsResourceWithStreamingResponse,
     AsyncTeamsResourceWithStreamingResponse,
 )
-from .client import (
-    ClientResource,
-    AsyncClientResource,
-    ClientResourceWithRawResponse,
-    AsyncClientResourceWithRawResponse,
-    ClientResourceWithStreamingResponse,
-    AsyncClientResourceWithStreamingResponse,
-)
 from .health import (
     HealthResource,
     AsyncHealthResource,
@@ -248,10 +240,4 @@ __all__ = [
     "AsyncVersionResourceWithRawResponse",
     "VersionResourceWithStreamingResponse",
     "AsyncVersionResourceWithStreamingResponse",
-    "ClientResource",
-    "AsyncClientResource",
-    "ClientResourceWithRawResponse",
-    "AsyncClientResourceWithRawResponse",
-    "ClientResourceWithStreamingResponse",
-    "AsyncClientResourceWithStreamingResponse",
 ]

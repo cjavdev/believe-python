@@ -44,7 +44,6 @@ if TYPE_CHECKING:
     from .resources import (
         press,
         teams,
-        client,
         health,
         quotes,
         stream,
@@ -76,7 +75,6 @@ if TYPE_CHECKING:
     from .resources.characters import CharactersResource, AsyncCharactersResource
     from .resources.teams.teams import TeamsResource, AsyncTeamsResource
     from .resources.team_members import TeamMembersResource, AsyncTeamMembersResource
-    from .resources.client.client import ClientResource, AsyncClientResource
     from .resources.matches.matches import MatchesResource, AsyncMatchesResource
     from .resources.coaching.coaching import CoachingResource, AsyncCoachingResource
 
@@ -239,12 +237,6 @@ class Believe(SyncAPIClient):
         from .resources.version import VersionResource
 
         return VersionResource(self)
-
-    @cached_property
-    def client(self) -> ClientResource:
-        from .resources.client import ClientResource
-
-        return ClientResource(self)
 
     @cached_property
     def with_raw_response(self) -> BelieveWithRawResponse:
@@ -536,12 +528,6 @@ class AsyncBelieve(AsyncAPIClient):
         return AsyncVersionResource(self)
 
     @cached_property
-    def client(self) -> AsyncClientResource:
-        from .resources.client import AsyncClientResource
-
-        return AsyncClientResource(self)
-
-    @cached_property
     def with_raw_response(self) -> AsyncBelieveWithRawResponse:
         return AsyncBelieveWithRawResponse(self)
 
@@ -785,12 +771,6 @@ class BelieveWithRawResponse:
 
         return VersionResourceWithRawResponse(self._client.version)
 
-    @cached_property
-    def client(self) -> client.ClientResourceWithRawResponse:
-        from .resources.client import ClientResourceWithRawResponse
-
-        return ClientResourceWithRawResponse(self._client.client)
-
 
 class AsyncBelieveWithRawResponse:
     _client: AsyncBelieve
@@ -903,12 +883,6 @@ class AsyncBelieveWithRawResponse:
         from .resources.version import AsyncVersionResourceWithRawResponse
 
         return AsyncVersionResourceWithRawResponse(self._client.version)
-
-    @cached_property
-    def client(self) -> client.AsyncClientResourceWithRawResponse:
-        from .resources.client import AsyncClientResourceWithRawResponse
-
-        return AsyncClientResourceWithRawResponse(self._client.client)
 
 
 class BelieveWithStreamedResponse:
@@ -1023,12 +997,6 @@ class BelieveWithStreamedResponse:
 
         return VersionResourceWithStreamingResponse(self._client.version)
 
-    @cached_property
-    def client(self) -> client.ClientResourceWithStreamingResponse:
-        from .resources.client import ClientResourceWithStreamingResponse
-
-        return ClientResourceWithStreamingResponse(self._client.client)
-
 
 class AsyncBelieveWithStreamedResponse:
     _client: AsyncBelieve
@@ -1141,12 +1109,6 @@ class AsyncBelieveWithStreamedResponse:
         from .resources.version import AsyncVersionResourceWithStreamingResponse
 
         return AsyncVersionResourceWithStreamingResponse(self._client.version)
-
-    @cached_property
-    def client(self) -> client.AsyncClientResourceWithStreamingResponse:
-        from .resources.client import AsyncClientResourceWithStreamingResponse
-
-        return AsyncClientResourceWithStreamingResponse(self._client.client)
 
 
 Client = Believe
