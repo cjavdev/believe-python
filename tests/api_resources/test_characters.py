@@ -22,7 +22,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestCharacters:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Believe) -> None:
         character = client.characters.create(
@@ -40,7 +40,7 @@ class TestCharacters:
         )
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Believe) -> None:
         character = client.characters.create(
@@ -74,7 +74,7 @@ class TestCharacters:
         )
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Believe) -> None:
         response = client.characters.with_raw_response.create(
@@ -96,7 +96,7 @@ class TestCharacters:
         character = response.parse()
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Believe) -> None:
         with client.characters.with_streaming_response.create(
@@ -120,7 +120,7 @@ class TestCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Believe) -> None:
         character = client.characters.retrieve(
@@ -128,7 +128,7 @@ class TestCharacters:
         )
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Believe) -> None:
         response = client.characters.with_raw_response.retrieve(
@@ -140,7 +140,7 @@ class TestCharacters:
         character = response.parse()
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Believe) -> None:
         with client.characters.with_streaming_response.retrieve(
@@ -154,7 +154,7 @@ class TestCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `character_id` but received ''"):
@@ -162,7 +162,7 @@ class TestCharacters:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Believe) -> None:
         character = client.characters.update(
@@ -170,7 +170,7 @@ class TestCharacters:
         )
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Believe) -> None:
         character = client.characters.update(
@@ -205,7 +205,7 @@ class TestCharacters:
         )
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Believe) -> None:
         response = client.characters.with_raw_response.update(
@@ -217,7 +217,7 @@ class TestCharacters:
         character = response.parse()
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Believe) -> None:
         with client.characters.with_streaming_response.update(
@@ -231,7 +231,7 @@ class TestCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `character_id` but received ''"):
@@ -239,13 +239,13 @@ class TestCharacters:
                 character_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Believe) -> None:
         character = client.characters.list()
         assert_matches_type(SyncSkipLimitPage[Character], character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Believe) -> None:
         character = client.characters.list(
@@ -257,7 +257,7 @@ class TestCharacters:
         )
         assert_matches_type(SyncSkipLimitPage[Character], character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Believe) -> None:
         response = client.characters.with_raw_response.list()
@@ -267,7 +267,7 @@ class TestCharacters:
         character = response.parse()
         assert_matches_type(SyncSkipLimitPage[Character], character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Believe) -> None:
         with client.characters.with_streaming_response.list() as response:
@@ -279,7 +279,7 @@ class TestCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Believe) -> None:
         character = client.characters.delete(
@@ -287,7 +287,7 @@ class TestCharacters:
         )
         assert character is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Believe) -> None:
         response = client.characters.with_raw_response.delete(
@@ -299,7 +299,7 @@ class TestCharacters:
         character = response.parse()
         assert character is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Believe) -> None:
         with client.characters.with_streaming_response.delete(
@@ -313,7 +313,7 @@ class TestCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `character_id` but received ''"):
@@ -321,7 +321,7 @@ class TestCharacters:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_quotes(self, client: Believe) -> None:
         character = client.characters.get_quotes(
@@ -329,7 +329,7 @@ class TestCharacters:
         )
         assert_matches_type(CharacterGetQuotesResponse, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_quotes(self, client: Believe) -> None:
         response = client.characters.with_raw_response.get_quotes(
@@ -341,7 +341,7 @@ class TestCharacters:
         character = response.parse()
         assert_matches_type(CharacterGetQuotesResponse, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_quotes(self, client: Believe) -> None:
         with client.characters.with_streaming_response.get_quotes(
@@ -355,7 +355,7 @@ class TestCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_quotes(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `character_id` but received ''"):
@@ -369,7 +369,7 @@ class TestAsyncCharacters:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncBelieve) -> None:
         character = await async_client.characters.create(
@@ -387,7 +387,7 @@ class TestAsyncCharacters:
         )
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBelieve) -> None:
         character = await async_client.characters.create(
@@ -421,7 +421,7 @@ class TestAsyncCharacters:
         )
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBelieve) -> None:
         response = await async_client.characters.with_raw_response.create(
@@ -443,7 +443,7 @@ class TestAsyncCharacters:
         character = await response.parse()
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBelieve) -> None:
         async with async_client.characters.with_streaming_response.create(
@@ -467,7 +467,7 @@ class TestAsyncCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBelieve) -> None:
         character = await async_client.characters.retrieve(
@@ -475,7 +475,7 @@ class TestAsyncCharacters:
         )
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBelieve) -> None:
         response = await async_client.characters.with_raw_response.retrieve(
@@ -487,7 +487,7 @@ class TestAsyncCharacters:
         character = await response.parse()
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBelieve) -> None:
         async with async_client.characters.with_streaming_response.retrieve(
@@ -501,7 +501,7 @@ class TestAsyncCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `character_id` but received ''"):
@@ -509,7 +509,7 @@ class TestAsyncCharacters:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncBelieve) -> None:
         character = await async_client.characters.update(
@@ -517,7 +517,7 @@ class TestAsyncCharacters:
         )
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncBelieve) -> None:
         character = await async_client.characters.update(
@@ -552,7 +552,7 @@ class TestAsyncCharacters:
         )
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncBelieve) -> None:
         response = await async_client.characters.with_raw_response.update(
@@ -564,7 +564,7 @@ class TestAsyncCharacters:
         character = await response.parse()
         assert_matches_type(Character, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncBelieve) -> None:
         async with async_client.characters.with_streaming_response.update(
@@ -578,7 +578,7 @@ class TestAsyncCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `character_id` but received ''"):
@@ -586,13 +586,13 @@ class TestAsyncCharacters:
                 character_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncBelieve) -> None:
         character = await async_client.characters.list()
         assert_matches_type(AsyncSkipLimitPage[Character], character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncBelieve) -> None:
         character = await async_client.characters.list(
@@ -604,7 +604,7 @@ class TestAsyncCharacters:
         )
         assert_matches_type(AsyncSkipLimitPage[Character], character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncBelieve) -> None:
         response = await async_client.characters.with_raw_response.list()
@@ -614,7 +614,7 @@ class TestAsyncCharacters:
         character = await response.parse()
         assert_matches_type(AsyncSkipLimitPage[Character], character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncBelieve) -> None:
         async with async_client.characters.with_streaming_response.list() as response:
@@ -626,7 +626,7 @@ class TestAsyncCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncBelieve) -> None:
         character = await async_client.characters.delete(
@@ -634,7 +634,7 @@ class TestAsyncCharacters:
         )
         assert character is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncBelieve) -> None:
         response = await async_client.characters.with_raw_response.delete(
@@ -646,7 +646,7 @@ class TestAsyncCharacters:
         character = await response.parse()
         assert character is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncBelieve) -> None:
         async with async_client.characters.with_streaming_response.delete(
@@ -660,7 +660,7 @@ class TestAsyncCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `character_id` but received ''"):
@@ -668,7 +668,7 @@ class TestAsyncCharacters:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_quotes(self, async_client: AsyncBelieve) -> None:
         character = await async_client.characters.get_quotes(
@@ -676,7 +676,7 @@ class TestAsyncCharacters:
         )
         assert_matches_type(CharacterGetQuotesResponse, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_quotes(self, async_client: AsyncBelieve) -> None:
         response = await async_client.characters.with_raw_response.get_quotes(
@@ -688,7 +688,7 @@ class TestAsyncCharacters:
         character = await response.parse()
         assert_matches_type(CharacterGetQuotesResponse, character, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_quotes(self, async_client: AsyncBelieve) -> None:
         async with async_client.characters.with_streaming_response.get_quotes(
@@ -702,7 +702,7 @@ class TestAsyncCharacters:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_quotes(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `character_id` but received ''"):

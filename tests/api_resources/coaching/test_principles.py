@@ -18,7 +18,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestPrinciples:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Believe) -> None:
         principle = client.coaching.principles.retrieve(
@@ -26,7 +26,7 @@ class TestPrinciples:
         )
         assert_matches_type(CoachingPrinciple, principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Believe) -> None:
         response = client.coaching.principles.with_raw_response.retrieve(
@@ -38,7 +38,7 @@ class TestPrinciples:
         principle = response.parse()
         assert_matches_type(CoachingPrinciple, principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Believe) -> None:
         with client.coaching.principles.with_streaming_response.retrieve(
@@ -52,7 +52,7 @@ class TestPrinciples:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `principle_id` but received ''"):
@@ -60,13 +60,13 @@ class TestPrinciples:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Believe) -> None:
         principle = client.coaching.principles.list()
         assert_matches_type(SyncSkipLimitPage[CoachingPrinciple], principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Believe) -> None:
         principle = client.coaching.principles.list(
@@ -75,7 +75,7 @@ class TestPrinciples:
         )
         assert_matches_type(SyncSkipLimitPage[CoachingPrinciple], principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Believe) -> None:
         response = client.coaching.principles.with_raw_response.list()
@@ -85,7 +85,7 @@ class TestPrinciples:
         principle = response.parse()
         assert_matches_type(SyncSkipLimitPage[CoachingPrinciple], principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Believe) -> None:
         with client.coaching.principles.with_streaming_response.list() as response:
@@ -97,13 +97,13 @@ class TestPrinciples:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_random(self, client: Believe) -> None:
         principle = client.coaching.principles.get_random()
         assert_matches_type(CoachingPrinciple, principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_random(self, client: Believe) -> None:
         response = client.coaching.principles.with_raw_response.get_random()
@@ -113,7 +113,7 @@ class TestPrinciples:
         principle = response.parse()
         assert_matches_type(CoachingPrinciple, principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_random(self, client: Believe) -> None:
         with client.coaching.principles.with_streaming_response.get_random() as response:
@@ -131,7 +131,7 @@ class TestAsyncPrinciples:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBelieve) -> None:
         principle = await async_client.coaching.principles.retrieve(
@@ -139,7 +139,7 @@ class TestAsyncPrinciples:
         )
         assert_matches_type(CoachingPrinciple, principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBelieve) -> None:
         response = await async_client.coaching.principles.with_raw_response.retrieve(
@@ -151,7 +151,7 @@ class TestAsyncPrinciples:
         principle = await response.parse()
         assert_matches_type(CoachingPrinciple, principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBelieve) -> None:
         async with async_client.coaching.principles.with_streaming_response.retrieve(
@@ -165,7 +165,7 @@ class TestAsyncPrinciples:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `principle_id` but received ''"):
@@ -173,13 +173,13 @@ class TestAsyncPrinciples:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncBelieve) -> None:
         principle = await async_client.coaching.principles.list()
         assert_matches_type(AsyncSkipLimitPage[CoachingPrinciple], principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncBelieve) -> None:
         principle = await async_client.coaching.principles.list(
@@ -188,7 +188,7 @@ class TestAsyncPrinciples:
         )
         assert_matches_type(AsyncSkipLimitPage[CoachingPrinciple], principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncBelieve) -> None:
         response = await async_client.coaching.principles.with_raw_response.list()
@@ -198,7 +198,7 @@ class TestAsyncPrinciples:
         principle = await response.parse()
         assert_matches_type(AsyncSkipLimitPage[CoachingPrinciple], principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncBelieve) -> None:
         async with async_client.coaching.principles.with_streaming_response.list() as response:
@@ -210,13 +210,13 @@ class TestAsyncPrinciples:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_random(self, async_client: AsyncBelieve) -> None:
         principle = await async_client.coaching.principles.get_random()
         assert_matches_type(CoachingPrinciple, principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_random(self, async_client: AsyncBelieve) -> None:
         response = await async_client.coaching.principles.with_raw_response.get_random()
@@ -226,7 +226,7 @@ class TestAsyncPrinciples:
         principle = await response.parse()
         assert_matches_type(CoachingPrinciple, principle, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_random(self, async_client: AsyncBelieve) -> None:
         async with async_client.coaching.principles.with_streaming_response.get_random() as response:

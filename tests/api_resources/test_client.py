@@ -16,13 +16,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestClient:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_welcome(self, client: Believe) -> None:
         client_ = client.get_welcome()
         assert_matches_type(object, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_welcome(self, client: Believe) -> None:
         response = client.with_raw_response.get_welcome()
@@ -32,7 +32,7 @@ class TestClient:
         client_ = response.parse()
         assert_matches_type(object, client_, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_welcome(self, client: Believe) -> None:
         with client.with_streaming_response.get_welcome() as response:
@@ -50,13 +50,13 @@ class TestAsyncClient:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_welcome(self, async_client: AsyncBelieve) -> None:
         client = await async_client.get_welcome()
         assert_matches_type(object, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_welcome(self, async_client: AsyncBelieve) -> None:
         response = await async_client.with_raw_response.get_welcome()
@@ -66,7 +66,7 @@ class TestAsyncClient:
         client = await response.parse()
         assert_matches_type(object, client, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_welcome(self, async_client: AsyncBelieve) -> None:
         async with async_client.with_streaming_response.get_welcome() as response:

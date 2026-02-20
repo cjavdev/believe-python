@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestReframe:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_transform_negative_thoughts(self, client: Believe) -> None:
         reframe = client.reframe.transform_negative_thoughts(
@@ -25,7 +25,7 @@ class TestReframe:
         )
         assert_matches_type(ReframeTransformNegativeThoughtsResponse, reframe, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_transform_negative_thoughts_with_all_params(self, client: Believe) -> None:
         reframe = client.reframe.transform_negative_thoughts(
@@ -34,7 +34,7 @@ class TestReframe:
         )
         assert_matches_type(ReframeTransformNegativeThoughtsResponse, reframe, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_transform_negative_thoughts(self, client: Believe) -> None:
         response = client.reframe.with_raw_response.transform_negative_thoughts(
@@ -46,7 +46,7 @@ class TestReframe:
         reframe = response.parse()
         assert_matches_type(ReframeTransformNegativeThoughtsResponse, reframe, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_transform_negative_thoughts(self, client: Believe) -> None:
         with client.reframe.with_streaming_response.transform_negative_thoughts(
@@ -66,7 +66,7 @@ class TestAsyncReframe:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_transform_negative_thoughts(self, async_client: AsyncBelieve) -> None:
         reframe = await async_client.reframe.transform_negative_thoughts(
@@ -74,7 +74,7 @@ class TestAsyncReframe:
         )
         assert_matches_type(ReframeTransformNegativeThoughtsResponse, reframe, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_transform_negative_thoughts_with_all_params(self, async_client: AsyncBelieve) -> None:
         reframe = await async_client.reframe.transform_negative_thoughts(
@@ -83,7 +83,7 @@ class TestAsyncReframe:
         )
         assert_matches_type(ReframeTransformNegativeThoughtsResponse, reframe, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_transform_negative_thoughts(self, async_client: AsyncBelieve) -> None:
         response = await async_client.reframe.with_raw_response.transform_negative_thoughts(
@@ -95,7 +95,7 @@ class TestAsyncReframe:
         reframe = await response.parse()
         assert_matches_type(ReframeTransformNegativeThoughtsResponse, reframe, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_transform_negative_thoughts(self, async_client: AsyncBelieve) -> None:
         async with async_client.reframe.with_streaming_response.transform_negative_thoughts(
