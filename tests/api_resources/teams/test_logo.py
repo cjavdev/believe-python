@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestLogo:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Believe) -> None:
         logo = client.teams.logo.delete(
@@ -26,7 +26,7 @@ class TestLogo:
         )
         assert logo is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Believe) -> None:
         response = client.teams.logo.with_raw_response.delete(
@@ -39,7 +39,7 @@ class TestLogo:
         logo = response.parse()
         assert logo is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Believe) -> None:
         with client.teams.logo.with_streaming_response.delete(
@@ -54,7 +54,7 @@ class TestLogo:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
@@ -69,7 +69,7 @@ class TestLogo:
                 team_id="team_id",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_download(self, client: Believe) -> None:
         logo = client.teams.logo.download(
@@ -78,7 +78,7 @@ class TestLogo:
         )
         assert_matches_type(object, logo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_download(self, client: Believe) -> None:
         response = client.teams.logo.with_raw_response.download(
@@ -91,7 +91,7 @@ class TestLogo:
         logo = response.parse()
         assert_matches_type(object, logo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_download(self, client: Believe) -> None:
         with client.teams.logo.with_streaming_response.download(
@@ -106,7 +106,7 @@ class TestLogo:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_download(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
@@ -121,7 +121,7 @@ class TestLogo:
                 team_id="team_id",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_upload(self, client: Believe) -> None:
         logo = client.teams.logo.upload(
@@ -130,7 +130,7 @@ class TestLogo:
         )
         assert_matches_type(FileUpload, logo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_upload(self, client: Believe) -> None:
         response = client.teams.logo.with_raw_response.upload(
@@ -143,7 +143,7 @@ class TestLogo:
         logo = response.parse()
         assert_matches_type(FileUpload, logo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_upload(self, client: Believe) -> None:
         with client.teams.logo.with_streaming_response.upload(
@@ -158,7 +158,7 @@ class TestLogo:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_upload(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
@@ -173,7 +173,7 @@ class TestAsyncLogo:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncBelieve) -> None:
         logo = await async_client.teams.logo.delete(
@@ -182,7 +182,7 @@ class TestAsyncLogo:
         )
         assert logo is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncBelieve) -> None:
         response = await async_client.teams.logo.with_raw_response.delete(
@@ -195,7 +195,7 @@ class TestAsyncLogo:
         logo = await response.parse()
         assert logo is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncBelieve) -> None:
         async with async_client.teams.logo.with_streaming_response.delete(
@@ -210,7 +210,7 @@ class TestAsyncLogo:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
@@ -225,7 +225,7 @@ class TestAsyncLogo:
                 team_id="team_id",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_download(self, async_client: AsyncBelieve) -> None:
         logo = await async_client.teams.logo.download(
@@ -234,7 +234,7 @@ class TestAsyncLogo:
         )
         assert_matches_type(object, logo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_download(self, async_client: AsyncBelieve) -> None:
         response = await async_client.teams.logo.with_raw_response.download(
@@ -247,7 +247,7 @@ class TestAsyncLogo:
         logo = await response.parse()
         assert_matches_type(object, logo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_download(self, async_client: AsyncBelieve) -> None:
         async with async_client.teams.logo.with_streaming_response.download(
@@ -262,7 +262,7 @@ class TestAsyncLogo:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_download(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
@@ -277,7 +277,7 @@ class TestAsyncLogo:
                 team_id="team_id",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_upload(self, async_client: AsyncBelieve) -> None:
         logo = await async_client.teams.logo.upload(
@@ -286,7 +286,7 @@ class TestAsyncLogo:
         )
         assert_matches_type(FileUpload, logo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_upload(self, async_client: AsyncBelieve) -> None:
         response = await async_client.teams.logo.with_raw_response.upload(
@@ -299,7 +299,7 @@ class TestAsyncLogo:
         logo = await response.parse()
         assert_matches_type(FileUpload, logo, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_upload(self, async_client: AsyncBelieve) -> None:
         async with async_client.teams.logo.with_streaming_response.upload(
@@ -314,7 +314,7 @@ class TestAsyncLogo:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_upload(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):

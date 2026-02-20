@@ -22,7 +22,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestEpisodes:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Believe) -> None:
         episode = client.episodes.create(
@@ -40,7 +40,7 @@ class TestEpisodes:
         )
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Believe) -> None:
         episode = client.episodes.create(
@@ -66,7 +66,7 @@ class TestEpisodes:
         )
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Believe) -> None:
         response = client.episodes.with_raw_response.create(
@@ -88,7 +88,7 @@ class TestEpisodes:
         episode = response.parse()
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Believe) -> None:
         with client.episodes.with_streaming_response.create(
@@ -112,7 +112,7 @@ class TestEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Believe) -> None:
         episode = client.episodes.retrieve(
@@ -120,7 +120,7 @@ class TestEpisodes:
         )
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Believe) -> None:
         response = client.episodes.with_raw_response.retrieve(
@@ -132,7 +132,7 @@ class TestEpisodes:
         episode = response.parse()
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Believe) -> None:
         with client.episodes.with_streaming_response.retrieve(
@@ -146,7 +146,7 @@ class TestEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
@@ -154,7 +154,7 @@ class TestEpisodes:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Believe) -> None:
         episode = client.episodes.update(
@@ -162,7 +162,7 @@ class TestEpisodes:
         )
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Believe) -> None:
         episode = client.episodes.update(
@@ -185,7 +185,7 @@ class TestEpisodes:
         )
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Believe) -> None:
         response = client.episodes.with_raw_response.update(
@@ -197,7 +197,7 @@ class TestEpisodes:
         episode = response.parse()
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Believe) -> None:
         with client.episodes.with_streaming_response.update(
@@ -211,7 +211,7 @@ class TestEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
@@ -219,13 +219,13 @@ class TestEpisodes:
                 episode_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Believe) -> None:
         episode = client.episodes.list()
         assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Believe) -> None:
         episode = client.episodes.list(
@@ -236,7 +236,7 @@ class TestEpisodes:
         )
         assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Believe) -> None:
         response = client.episodes.with_raw_response.list()
@@ -246,7 +246,7 @@ class TestEpisodes:
         episode = response.parse()
         assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Believe) -> None:
         with client.episodes.with_streaming_response.list() as response:
@@ -258,7 +258,7 @@ class TestEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Believe) -> None:
         episode = client.episodes.delete(
@@ -266,7 +266,7 @@ class TestEpisodes:
         )
         assert episode is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Believe) -> None:
         response = client.episodes.with_raw_response.delete(
@@ -278,7 +278,7 @@ class TestEpisodes:
         episode = response.parse()
         assert episode is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Believe) -> None:
         with client.episodes.with_streaming_response.delete(
@@ -292,7 +292,7 @@ class TestEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
@@ -300,7 +300,7 @@ class TestEpisodes:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_wisdom(self, client: Believe) -> None:
         episode = client.episodes.get_wisdom(
@@ -308,7 +308,7 @@ class TestEpisodes:
         )
         assert_matches_type(EpisodeGetWisdomResponse, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_wisdom(self, client: Believe) -> None:
         response = client.episodes.with_raw_response.get_wisdom(
@@ -320,7 +320,7 @@ class TestEpisodes:
         episode = response.parse()
         assert_matches_type(EpisodeGetWisdomResponse, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_wisdom(self, client: Believe) -> None:
         with client.episodes.with_streaming_response.get_wisdom(
@@ -334,7 +334,7 @@ class TestEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_wisdom(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
@@ -342,7 +342,7 @@ class TestEpisodes:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_by_season(self, client: Believe) -> None:
         episode = client.episodes.list_by_season(
@@ -350,7 +350,7 @@ class TestEpisodes:
         )
         assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_by_season_with_all_params(self, client: Believe) -> None:
         episode = client.episodes.list_by_season(
@@ -360,7 +360,7 @@ class TestEpisodes:
         )
         assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list_by_season(self, client: Believe) -> None:
         response = client.episodes.with_raw_response.list_by_season(
@@ -372,7 +372,7 @@ class TestEpisodes:
         episode = response.parse()
         assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list_by_season(self, client: Believe) -> None:
         with client.episodes.with_streaming_response.list_by_season(
@@ -392,7 +392,7 @@ class TestAsyncEpisodes:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.create(
@@ -410,7 +410,7 @@ class TestAsyncEpisodes:
         )
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.create(
@@ -436,7 +436,7 @@ class TestAsyncEpisodes:
         )
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBelieve) -> None:
         response = await async_client.episodes.with_raw_response.create(
@@ -458,7 +458,7 @@ class TestAsyncEpisodes:
         episode = await response.parse()
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBelieve) -> None:
         async with async_client.episodes.with_streaming_response.create(
@@ -482,7 +482,7 @@ class TestAsyncEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.retrieve(
@@ -490,7 +490,7 @@ class TestAsyncEpisodes:
         )
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBelieve) -> None:
         response = await async_client.episodes.with_raw_response.retrieve(
@@ -502,7 +502,7 @@ class TestAsyncEpisodes:
         episode = await response.parse()
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBelieve) -> None:
         async with async_client.episodes.with_streaming_response.retrieve(
@@ -516,7 +516,7 @@ class TestAsyncEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
@@ -524,7 +524,7 @@ class TestAsyncEpisodes:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.update(
@@ -532,7 +532,7 @@ class TestAsyncEpisodes:
         )
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.update(
@@ -555,7 +555,7 @@ class TestAsyncEpisodes:
         )
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncBelieve) -> None:
         response = await async_client.episodes.with_raw_response.update(
@@ -567,7 +567,7 @@ class TestAsyncEpisodes:
         episode = await response.parse()
         assert_matches_type(Episode, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncBelieve) -> None:
         async with async_client.episodes.with_streaming_response.update(
@@ -581,7 +581,7 @@ class TestAsyncEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
@@ -589,13 +589,13 @@ class TestAsyncEpisodes:
                 episode_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.list()
         assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.list(
@@ -606,7 +606,7 @@ class TestAsyncEpisodes:
         )
         assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncBelieve) -> None:
         response = await async_client.episodes.with_raw_response.list()
@@ -616,7 +616,7 @@ class TestAsyncEpisodes:
         episode = await response.parse()
         assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncBelieve) -> None:
         async with async_client.episodes.with_streaming_response.list() as response:
@@ -628,7 +628,7 @@ class TestAsyncEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.delete(
@@ -636,7 +636,7 @@ class TestAsyncEpisodes:
         )
         assert episode is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncBelieve) -> None:
         response = await async_client.episodes.with_raw_response.delete(
@@ -648,7 +648,7 @@ class TestAsyncEpisodes:
         episode = await response.parse()
         assert episode is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncBelieve) -> None:
         async with async_client.episodes.with_streaming_response.delete(
@@ -662,7 +662,7 @@ class TestAsyncEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
@@ -670,7 +670,7 @@ class TestAsyncEpisodes:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_wisdom(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.get_wisdom(
@@ -678,7 +678,7 @@ class TestAsyncEpisodes:
         )
         assert_matches_type(EpisodeGetWisdomResponse, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_wisdom(self, async_client: AsyncBelieve) -> None:
         response = await async_client.episodes.with_raw_response.get_wisdom(
@@ -690,7 +690,7 @@ class TestAsyncEpisodes:
         episode = await response.parse()
         assert_matches_type(EpisodeGetWisdomResponse, episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_wisdom(self, async_client: AsyncBelieve) -> None:
         async with async_client.episodes.with_streaming_response.get_wisdom(
@@ -704,7 +704,7 @@ class TestAsyncEpisodes:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_wisdom(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
@@ -712,7 +712,7 @@ class TestAsyncEpisodes:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_by_season(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.list_by_season(
@@ -720,7 +720,7 @@ class TestAsyncEpisodes:
         )
         assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_by_season_with_all_params(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.list_by_season(
@@ -730,7 +730,7 @@ class TestAsyncEpisodes:
         )
         assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list_by_season(self, async_client: AsyncBelieve) -> None:
         response = await async_client.episodes.with_raw_response.list_by_season(
@@ -742,7 +742,7 @@ class TestAsyncEpisodes:
         episode = await response.parse()
         assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list_by_season(self, async_client: AsyncBelieve) -> None:
         async with async_client.episodes.with_streaming_response.list_by_season(

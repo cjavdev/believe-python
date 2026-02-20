@@ -17,13 +17,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestPepTalk:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Believe) -> None:
         pep_talk = client.pep_talk.retrieve()
         assert_matches_type(PepTalkRetrieveResponse, pep_talk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Believe) -> None:
         pep_talk = client.pep_talk.retrieve(
@@ -31,7 +31,7 @@ class TestPepTalk:
         )
         assert_matches_type(PepTalkRetrieveResponse, pep_talk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Believe) -> None:
         response = client.pep_talk.with_raw_response.retrieve()
@@ -41,7 +41,7 @@ class TestPepTalk:
         pep_talk = response.parse()
         assert_matches_type(PepTalkRetrieveResponse, pep_talk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Believe) -> None:
         with client.pep_talk.with_streaming_response.retrieve() as response:
@@ -59,13 +59,13 @@ class TestAsyncPepTalk:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBelieve) -> None:
         pep_talk = await async_client.pep_talk.retrieve()
         assert_matches_type(PepTalkRetrieveResponse, pep_talk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncBelieve) -> None:
         pep_talk = await async_client.pep_talk.retrieve(
@@ -73,7 +73,7 @@ class TestAsyncPepTalk:
         )
         assert_matches_type(PepTalkRetrieveResponse, pep_talk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBelieve) -> None:
         response = await async_client.pep_talk.with_raw_response.retrieve()
@@ -83,7 +83,7 @@ class TestAsyncPepTalk:
         pep_talk = await response.parse()
         assert_matches_type(PepTalkRetrieveResponse, pep_talk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBelieve) -> None:
         async with async_client.pep_talk.with_streaming_response.retrieve() as response:
