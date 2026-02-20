@@ -375,13 +375,13 @@ class TestMatches:
                 "",
             )
 
-    @pytest.mark.skip(reason="Mock server doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_live(self, client: Believe) -> None:
         match = client.matches.stream_live()
         assert match is None
 
-    @pytest.mark.skip(reason="Mock server doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stream_live_with_all_params(self, client: Believe) -> None:
         match = client.matches.stream_live(
@@ -392,7 +392,7 @@ class TestMatches:
         )
         assert match is None
 
-    @pytest.mark.skip(reason="Mock server doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_stream_live(self, client: Believe) -> None:
         response = client.matches.with_raw_response.stream_live()
@@ -402,7 +402,7 @@ class TestMatches:
         match = response.parse()
         assert match is None
 
-    @pytest.mark.skip(reason="Mock server doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_stream_live(self, client: Believe) -> None:
         with client.matches.with_streaming_response.stream_live() as response:
@@ -772,13 +772,13 @@ class TestAsyncMatches:
                 "",
             )
 
-    @pytest.mark.skip(reason="Mock server doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_live(self, async_client: AsyncBelieve) -> None:
         match = await async_client.matches.stream_live()
         assert match is None
 
-    @pytest.mark.skip(reason="Mock server doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stream_live_with_all_params(self, async_client: AsyncBelieve) -> None:
         match = await async_client.matches.stream_live(
@@ -789,7 +789,7 @@ class TestAsyncMatches:
         )
         assert match is None
 
-    @pytest.mark.skip(reason="Mock server doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_stream_live(self, async_client: AsyncBelieve) -> None:
         response = await async_client.matches.with_raw_response.stream_live()
@@ -799,7 +799,7 @@ class TestAsyncMatches:
         match = await response.parse()
         assert match is None
 
-    @pytest.mark.skip(reason="Mock server doesn't support callbacks yet")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_stream_live(self, async_client: AsyncBelieve) -> None:
         async with async_client.matches.with_streaming_response.stream_live() as response:
