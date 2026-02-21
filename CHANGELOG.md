@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0 (2026-02-21)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/cjavdev/believe-python/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([c705c90](https://github.com/cjavdev/believe-python/commit/c705c90d4ded5f04a3a482978ca4fd3f7a877536))
+* **api:** manual updates ([d19a0c4](https://github.com/cjavdev/believe-python/commit/d19a0c4d2cfcc908cfcaab142102e8312605808e))
+* **api:** manual updates ([fa96e83](https://github.com/cjavdev/believe-python/commit/fa96e8365d56178583705331a3f5df8d6ccc6f2a))
+
 ## 0.1.0 (2026-02-20)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/cjavdev/believe-python/compare/v0.0.1...v0.1.0)
