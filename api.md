@@ -300,3 +300,11 @@ Methods:
 Methods:
 
 - <code title="get /version">client.version.<a href="./src/believe/resources/version.py">retrieve</a>() -> object</code>
+
+# Client
+
+## Ws
+
+Methods:
+
+- <code title="get /ws/test">client.client.ws.<a href="./src/believe/resources/client/ws.py">test</a>() -> None</code>
