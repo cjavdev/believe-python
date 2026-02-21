@@ -301,13 +301,3 @@ Methods:
 Methods:
 
 - <code title="get /version">client.version.<a href="./src/believe/resources/version.py">retrieve</a>() -> object</code>
-
-# Client
-
-## Ws
-
-Types:
-
-```python
-from believe.types.client import TestClientEvent, TestServerEvent
-```
