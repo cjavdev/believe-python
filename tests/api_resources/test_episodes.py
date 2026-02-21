@@ -342,50 +342,6 @@ class TestEpisodes:
                 "",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_list_by_season(self, client: Believe) -> None:
-        episode = client.episodes.list_by_season(
-            season_number=0,
-        )
-        assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_list_by_season_with_all_params(self, client: Believe) -> None:
-        episode = client.episodes.list_by_season(
-            season_number=0,
-            limit=10,
-            skip=0,
-        )
-        assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_list_by_season(self, client: Believe) -> None:
-        response = client.episodes.with_raw_response.list_by_season(
-            season_number=0,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        episode = response.parse()
-        assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_list_by_season(self, client: Believe) -> None:
-        with client.episodes.with_streaming_response.list_by_season(
-            season_number=0,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            episode = response.parse()
-            assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
 
 class TestAsyncEpisodes:
     parametrize = pytest.mark.parametrize(
@@ -711,47 +667,3 @@ class TestAsyncEpisodes:
             await async_client.episodes.with_raw_response.get_wisdom(
                 "",
             )
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_list_by_season(self, async_client: AsyncBelieve) -> None:
-        episode = await async_client.episodes.list_by_season(
-            season_number=0,
-        )
-        assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_list_by_season_with_all_params(self, async_client: AsyncBelieve) -> None:
-        episode = await async_client.episodes.list_by_season(
-            season_number=0,
-            limit=10,
-            skip=0,
-        )
-        assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_list_by_season(self, async_client: AsyncBelieve) -> None:
-        response = await async_client.episodes.with_raw_response.list_by_season(
-            season_number=0,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        episode = await response.parse()
-        assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_list_by_season(self, async_client: AsyncBelieve) -> None:
-        async with async_client.episodes.with_streaming_response.list_by_season(
-            season_number=0,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            episode = await response.parse()
-            assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
-
-        assert cast(Any, response.is_closed) is True

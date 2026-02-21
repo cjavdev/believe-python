@@ -116,7 +116,6 @@ Methods:
 - <code title="get /episodes">client.episodes.<a href="./src/believe/resources/episodes.py">list</a>(\*\*<a href="src/believe/types/episode_list_params.py">params</a>) -> <a href="./src/believe/types/episode.py">SyncSkipLimitPage[Episode]</a></code>
 - <code title="delete /episodes/{episode_id}">client.episodes.<a href="./src/believe/resources/episodes.py">delete</a>(episode_id) -> None</code>
 - <code title="get /episodes/{episode_id}/wisdom">client.episodes.<a href="./src/believe/resources/episodes.py">get_wisdom</a>(episode_id) -> <a href="./src/believe/types/episode_get_wisdom_response.py">EpisodeGetWisdomResponse</a></code>
-- <code title="get /episodes/seasons/{season_number}">client.episodes.<a href="./src/believe/resources/episodes.py">list_by_season</a>(season_number, \*\*<a href="src/believe/types/episode_list_by_season_params.py">params</a>) -> <a href="./src/believe/types/episode.py">SyncSkipLimitPage[Episode]</a></code>
 
 # Quotes
 
