@@ -1,6 +1,6 @@
 [project]
 name = "believe"
-version = "0.0.1"
+version = "0.1.0"
 description = "The official Python library for the believe API"
 dynamic = ["readme"]
 license = "MIT"
@@ -37,11 +37,12 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/stainless-sdks/believe-python"
-Repository = "https://github.com/stainless-sdks/believe-python"
+Homepage = "https://github.com/cjavdev/believe-python"
+Repository = "https://github.com/cjavdev/believe-python"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
+websockets = ["websockets >= 13, < 16"]
 
 [tool.uv]
 managed = true
@@ -112,7 +113,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/stainless-sdks/believe-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/cjavdev/believe-python/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

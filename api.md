@@ -276,6 +276,9 @@ from believe.types import (
     WebhookListResponse,
     WebhookDeleteResponse,
     WebhookTriggerEventResponse,
+    MatchCompletedWebhookEvent,
+    TeamMemberTransferredWebhookEvent,
+    UnwrapWebhookEvent,
 )
 ```
 
@@ -303,6 +306,8 @@ Methods:
 
 ## Ws
 
-Methods:
+Types:
 
-- <code title="get /ws/test">client.client.ws.<a href="./src/believe/resources/client/ws.py">test</a>() -> None</code>
+```python
+from believe.types.client import TestClientEvent, TestServerEvent
+```
