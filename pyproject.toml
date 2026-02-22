@@ -1,6 +1,6 @@
 [project]
 name = "believe"
-version = "0.1.0"
+version = "0.2.0"
 description = "The official Python library for the believe API"
 dynamic = ["readme"]
 license = "MIT"
@@ -42,7 +42,6 @@ Repository = "https://github.com/cjavdev/believe-python"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
-websockets = ["websockets >= 13, < 16"]
 
 [tool.uv]
 managed = true

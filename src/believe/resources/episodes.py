@@ -7,7 +7,7 @@ from datetime import date
 
 import httpx
 
-from ..types import episode_list_params, episode_create_params, episode_update_params, episode_list_by_season_params
+from ..types import episode_list_params, episode_create_params, episode_update_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -365,54 +365,6 @@ class EpisodesResource(SyncAPIResource):
             cast_to=EpisodeGetWisdomResponse,
         )
 
-    def list_by_season(
-        self,
-        season_number: int,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[Episode]:
-        """
-        Get a paginated list of episodes from a specific season.
-
-        Args:
-          limit: Maximum number of items to return (max: 100)
-
-          skip: Number of items to skip (offset)
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get_api_list(
-            f"/episodes/seasons/{season_number}",
-            page=SyncSkipLimitPage[Episode],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                    },
-                    episode_list_by_season_params.EpisodeListBySeasonParams,
-                ),
-            ),
-            model=Episode,
-        )
-
 
 class AsyncEpisodesResource(AsyncAPIResource):
     @cached_property
@@ -753,54 +705,6 @@ class AsyncEpisodesResource(AsyncAPIResource):
             cast_to=EpisodeGetWisdomResponse,
         )
 
-    def list_by_season(
-        self,
-        season_number: int,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Episode, AsyncSkipLimitPage[Episode]]:
-        """
-        Get a paginated list of episodes from a specific season.
-
-        Args:
-          limit: Maximum number of items to return (max: 100)
-
-          skip: Number of items to skip (offset)
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get_api_list(
-            f"/episodes/seasons/{season_number}",
-            page=AsyncSkipLimitPage[Episode],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                    },
-                    episode_list_by_season_params.EpisodeListBySeasonParams,
-                ),
-            ),
-            model=Episode,
-        )
-
 
 class EpisodesResourceWithRawResponse:
     def __init__(self, episodes: EpisodesResource) -> None:
@@ -823,9 +727,6 @@ class EpisodesResourceWithRawResponse:
         )
         self.get_wisdom = to_raw_response_wrapper(
             episodes.get_wisdom,
-        )
-        self.list_by_season = to_raw_response_wrapper(
-            episodes.list_by_season,
         )
 
 
@@ -851,9 +752,6 @@ class AsyncEpisodesResourceWithRawResponse:
         self.get_wisdom = async_to_raw_response_wrapper(
             episodes.get_wisdom,
         )
-        self.list_by_season = async_to_raw_response_wrapper(
-            episodes.list_by_season,
-        )
 
 
 class EpisodesResourceWithStreamingResponse:
@@ -878,9 +776,6 @@ class EpisodesResourceWithStreamingResponse:
         self.get_wisdom = to_streamed_response_wrapper(
             episodes.get_wisdom,
         )
-        self.list_by_season = to_streamed_response_wrapper(
-            episodes.list_by_season,
-        )
 
 
 class AsyncEpisodesResourceWithStreamingResponse:
@@ -904,7 +799,4 @@ class AsyncEpisodesResourceWithStreamingResponse:
         )
         self.get_wisdom = async_to_streamed_response_wrapper(
             episodes.get_wisdom,
-        )
-        self.list_by_season = async_to_streamed_response_wrapper(
-            episodes.list_by_season,
         )
