@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.1 (2026-02-27)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/cjavdev/believe-python/compare/v0.2.0...v0.2.1)
+
+### Chores
+
+* **ci:** bump uv version ([7344f93](https://github.com/cjavdev/believe-python/commit/7344f93f7eeb6b0f6ffaed4258259fe47c8a8cb5))
+* **internal:** add request options to SSE classes ([1e2c744](https://github.com/cjavdev/believe-python/commit/1e2c7442f0b950e5d9e2789bca4bcb4b6d2d10eb))
+* **internal:** make `test_proxy_environment_variables` more resilient ([14af17c](https://github.com/cjavdev/believe-python/commit/14af17cf21f2186245913fc6f82d83b2b624154b))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([cd9d224](https://github.com/cjavdev/believe-python/commit/cd9d2242cbf3e1b7ac0af14a4d19365071cf65ef))
+
 ## 0.2.0 (2026-02-21)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/cjavdev/believe-python/compare/v0.1.0...v0.2.0)
