@@ -24,6 +24,8 @@ __all__ = ["LogoResource", "AsyncLogoResource"]
 
 
 class LogoResource(SyncAPIResource):
+    """Operations related to football teams"""
+
     @cached_property
     def with_raw_response(self) -> LogoResourceWithRawResponse:
         """
@@ -163,6 +165,8 @@ class LogoResource(SyncAPIResource):
 
 
 class AsyncLogoResource(AsyncAPIResource):
+    """Operations related to football teams"""
+
     @cached_property
     def with_raw_response(self) -> AsyncLogoResourceWithRawResponse:
         """

@@ -25,6 +25,8 @@ __all__ = ["ConflictsResource", "AsyncConflictsResource"]
 
 
 class ConflictsResource(SyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> ConflictsResourceWithRawResponse:
         """
@@ -99,6 +101,8 @@ class ConflictsResource(SyncAPIResource):
 
 
 class AsyncConflictsResource(AsyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> AsyncConflictsResourceWithRawResponse:
         """

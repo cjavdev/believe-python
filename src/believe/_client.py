@@ -140,12 +140,14 @@ class Believe(SyncAPIClient):
 
     @cached_property
     def characters(self) -> CharactersResource:
+        """Operations related to Ted Lasso characters"""
         from .resources.characters import CharactersResource
 
         return CharactersResource(self)
 
     @cached_property
     def teams(self) -> TeamsResource:
+        """Operations related to football teams"""
         from .resources.teams import TeamsResource
 
         return TeamsResource(self)
@@ -158,36 +160,42 @@ class Believe(SyncAPIClient):
 
     @cached_property
     def episodes(self) -> EpisodesResource:
+        """Operations related to TV episodes"""
         from .resources.episodes import EpisodesResource
 
         return EpisodesResource(self)
 
     @cached_property
     def quotes(self) -> QuotesResource:
+        """Memorable quotes from the show"""
         from .resources.quotes import QuotesResource
 
         return QuotesResource(self)
 
     @cached_property
     def believe(self) -> BelieveResource:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.believe import BelieveResource
 
         return BelieveResource(self)
 
     @cached_property
     def conflicts(self) -> ConflictsResource:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.conflicts import ConflictsResource
 
         return ConflictsResource(self)
 
     @cached_property
     def reframe(self) -> ReframeResource:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.reframe import ReframeResource
 
         return ReframeResource(self)
 
     @cached_property
     def press(self) -> PressResource:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.press import PressResource
 
         return PressResource(self)
@@ -200,30 +208,37 @@ class Believe(SyncAPIClient):
 
     @cached_property
     def biscuits(self) -> BiscuitsResource:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.biscuits import BiscuitsResource
 
         return BiscuitsResource(self)
 
     @cached_property
     def pep_talk(self) -> PepTalkResource:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.pep_talk import PepTalkResource
 
         return PepTalkResource(self)
 
     @cached_property
     def stream(self) -> StreamResource:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.stream import StreamResource
 
         return StreamResource(self)
 
     @cached_property
     def team_members(self) -> TeamMembersResource:
+        """
+        Team members with union types (oneOf) - Players, Coaches, Medical Staff, Equipment Managers
+        """
         from .resources.team_members import TeamMembersResource
 
         return TeamMembersResource(self)
 
     @cached_property
     def webhooks(self) -> WebhooksResource:
+        """Register webhook endpoints and trigger events for testing"""
         from .resources.webhooks import WebhooksResource
 
         return WebhooksResource(self)
@@ -435,12 +450,14 @@ class AsyncBelieve(AsyncAPIClient):
 
     @cached_property
     def characters(self) -> AsyncCharactersResource:
+        """Operations related to Ted Lasso characters"""
         from .resources.characters import AsyncCharactersResource
 
         return AsyncCharactersResource(self)
 
     @cached_property
     def teams(self) -> AsyncTeamsResource:
+        """Operations related to football teams"""
         from .resources.teams import AsyncTeamsResource
 
         return AsyncTeamsResource(self)
@@ -453,36 +470,42 @@ class AsyncBelieve(AsyncAPIClient):
 
     @cached_property
     def episodes(self) -> AsyncEpisodesResource:
+        """Operations related to TV episodes"""
         from .resources.episodes import AsyncEpisodesResource
 
         return AsyncEpisodesResource(self)
 
     @cached_property
     def quotes(self) -> AsyncQuotesResource:
+        """Memorable quotes from the show"""
         from .resources.quotes import AsyncQuotesResource
 
         return AsyncQuotesResource(self)
 
     @cached_property
     def believe(self) -> AsyncBelieveResource:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.believe import AsyncBelieveResource
 
         return AsyncBelieveResource(self)
 
     @cached_property
     def conflicts(self) -> AsyncConflictsResource:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.conflicts import AsyncConflictsResource
 
         return AsyncConflictsResource(self)
 
     @cached_property
     def reframe(self) -> AsyncReframeResource:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.reframe import AsyncReframeResource
 
         return AsyncReframeResource(self)
 
     @cached_property
     def press(self) -> AsyncPressResource:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.press import AsyncPressResource
 
         return AsyncPressResource(self)
@@ -495,30 +518,37 @@ class AsyncBelieve(AsyncAPIClient):
 
     @cached_property
     def biscuits(self) -> AsyncBiscuitsResource:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.biscuits import AsyncBiscuitsResource
 
         return AsyncBiscuitsResource(self)
 
     @cached_property
     def pep_talk(self) -> AsyncPepTalkResource:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.pep_talk import AsyncPepTalkResource
 
         return AsyncPepTalkResource(self)
 
     @cached_property
     def stream(self) -> AsyncStreamResource:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.stream import AsyncStreamResource
 
         return AsyncStreamResource(self)
 
     @cached_property
     def team_members(self) -> AsyncTeamMembersResource:
+        """
+        Team members with union types (oneOf) - Players, Coaches, Medical Staff, Equipment Managers
+        """
         from .resources.team_members import AsyncTeamMembersResource
 
         return AsyncTeamMembersResource(self)
 
     @cached_property
     def webhooks(self) -> AsyncWebhooksResource:
+        """Register webhook endpoints and trigger events for testing"""
         from .resources.webhooks import AsyncWebhooksResource
 
         return AsyncWebhooksResource(self)
@@ -685,12 +715,14 @@ class BelieveWithRawResponse:
 
     @cached_property
     def characters(self) -> characters.CharactersResourceWithRawResponse:
+        """Operations related to Ted Lasso characters"""
         from .resources.characters import CharactersResourceWithRawResponse
 
         return CharactersResourceWithRawResponse(self._client.characters)
 
     @cached_property
     def teams(self) -> teams.TeamsResourceWithRawResponse:
+        """Operations related to football teams"""
         from .resources.teams import TeamsResourceWithRawResponse
 
         return TeamsResourceWithRawResponse(self._client.teams)
@@ -703,36 +735,42 @@ class BelieveWithRawResponse:
 
     @cached_property
     def episodes(self) -> episodes.EpisodesResourceWithRawResponse:
+        """Operations related to TV episodes"""
         from .resources.episodes import EpisodesResourceWithRawResponse
 
         return EpisodesResourceWithRawResponse(self._client.episodes)
 
     @cached_property
     def quotes(self) -> quotes.QuotesResourceWithRawResponse:
+        """Memorable quotes from the show"""
         from .resources.quotes import QuotesResourceWithRawResponse
 
         return QuotesResourceWithRawResponse(self._client.quotes)
 
     @cached_property
     def believe(self) -> believe.BelieveResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.believe import BelieveResourceWithRawResponse
 
         return BelieveResourceWithRawResponse(self._client.believe)
 
     @cached_property
     def conflicts(self) -> conflicts.ConflictsResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.conflicts import ConflictsResourceWithRawResponse
 
         return ConflictsResourceWithRawResponse(self._client.conflicts)
 
     @cached_property
     def reframe(self) -> reframe.ReframeResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.reframe import ReframeResourceWithRawResponse
 
         return ReframeResourceWithRawResponse(self._client.reframe)
 
     @cached_property
     def press(self) -> press.PressResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.press import PressResourceWithRawResponse
 
         return PressResourceWithRawResponse(self._client.press)
@@ -745,30 +783,37 @@ class BelieveWithRawResponse:
 
     @cached_property
     def biscuits(self) -> biscuits.BiscuitsResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.biscuits import BiscuitsResourceWithRawResponse
 
         return BiscuitsResourceWithRawResponse(self._client.biscuits)
 
     @cached_property
     def pep_talk(self) -> pep_talk.PepTalkResourceWithRawResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.pep_talk import PepTalkResourceWithRawResponse
 
         return PepTalkResourceWithRawResponse(self._client.pep_talk)
 
     @cached_property
     def stream(self) -> stream.StreamResourceWithRawResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.stream import StreamResourceWithRawResponse
 
         return StreamResourceWithRawResponse(self._client.stream)
 
     @cached_property
     def team_members(self) -> team_members.TeamMembersResourceWithRawResponse:
+        """
+        Team members with union types (oneOf) - Players, Coaches, Medical Staff, Equipment Managers
+        """
         from .resources.team_members import TeamMembersResourceWithRawResponse
 
         return TeamMembersResourceWithRawResponse(self._client.team_members)
 
     @cached_property
     def webhooks(self) -> webhooks.WebhooksResourceWithRawResponse:
+        """Register webhook endpoints and trigger events for testing"""
         from .resources.webhooks import WebhooksResourceWithRawResponse
 
         return WebhooksResourceWithRawResponse(self._client.webhooks)
@@ -804,12 +849,14 @@ class AsyncBelieveWithRawResponse:
 
     @cached_property
     def characters(self) -> characters.AsyncCharactersResourceWithRawResponse:
+        """Operations related to Ted Lasso characters"""
         from .resources.characters import AsyncCharactersResourceWithRawResponse
 
         return AsyncCharactersResourceWithRawResponse(self._client.characters)
 
     @cached_property
     def teams(self) -> teams.AsyncTeamsResourceWithRawResponse:
+        """Operations related to football teams"""
         from .resources.teams import AsyncTeamsResourceWithRawResponse
 
         return AsyncTeamsResourceWithRawResponse(self._client.teams)
@@ -822,36 +869,42 @@ class AsyncBelieveWithRawResponse:
 
     @cached_property
     def episodes(self) -> episodes.AsyncEpisodesResourceWithRawResponse:
+        """Operations related to TV episodes"""
         from .resources.episodes import AsyncEpisodesResourceWithRawResponse
 
         return AsyncEpisodesResourceWithRawResponse(self._client.episodes)
 
     @cached_property
     def quotes(self) -> quotes.AsyncQuotesResourceWithRawResponse:
+        """Memorable quotes from the show"""
         from .resources.quotes import AsyncQuotesResourceWithRawResponse
 
         return AsyncQuotesResourceWithRawResponse(self._client.quotes)
 
     @cached_property
     def believe(self) -> believe.AsyncBelieveResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.believe import AsyncBelieveResourceWithRawResponse
 
         return AsyncBelieveResourceWithRawResponse(self._client.believe)
 
     @cached_property
     def conflicts(self) -> conflicts.AsyncConflictsResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.conflicts import AsyncConflictsResourceWithRawResponse
 
         return AsyncConflictsResourceWithRawResponse(self._client.conflicts)
 
     @cached_property
     def reframe(self) -> reframe.AsyncReframeResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.reframe import AsyncReframeResourceWithRawResponse
 
         return AsyncReframeResourceWithRawResponse(self._client.reframe)
 
     @cached_property
     def press(self) -> press.AsyncPressResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.press import AsyncPressResourceWithRawResponse
 
         return AsyncPressResourceWithRawResponse(self._client.press)
@@ -864,30 +917,37 @@ class AsyncBelieveWithRawResponse:
 
     @cached_property
     def biscuits(self) -> biscuits.AsyncBiscuitsResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.biscuits import AsyncBiscuitsResourceWithRawResponse
 
         return AsyncBiscuitsResourceWithRawResponse(self._client.biscuits)
 
     @cached_property
     def pep_talk(self) -> pep_talk.AsyncPepTalkResourceWithRawResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.pep_talk import AsyncPepTalkResourceWithRawResponse
 
         return AsyncPepTalkResourceWithRawResponse(self._client.pep_talk)
 
     @cached_property
     def stream(self) -> stream.AsyncStreamResourceWithRawResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.stream import AsyncStreamResourceWithRawResponse
 
         return AsyncStreamResourceWithRawResponse(self._client.stream)
 
     @cached_property
     def team_members(self) -> team_members.AsyncTeamMembersResourceWithRawResponse:
+        """
+        Team members with union types (oneOf) - Players, Coaches, Medical Staff, Equipment Managers
+        """
         from .resources.team_members import AsyncTeamMembersResourceWithRawResponse
 
         return AsyncTeamMembersResourceWithRawResponse(self._client.team_members)
 
     @cached_property
     def webhooks(self) -> webhooks.AsyncWebhooksResourceWithRawResponse:
+        """Register webhook endpoints and trigger events for testing"""
         from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
 
         return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
@@ -923,12 +983,14 @@ class BelieveWithStreamedResponse:
 
     @cached_property
     def characters(self) -> characters.CharactersResourceWithStreamingResponse:
+        """Operations related to Ted Lasso characters"""
         from .resources.characters import CharactersResourceWithStreamingResponse
 
         return CharactersResourceWithStreamingResponse(self._client.characters)
 
     @cached_property
     def teams(self) -> teams.TeamsResourceWithStreamingResponse:
+        """Operations related to football teams"""
         from .resources.teams import TeamsResourceWithStreamingResponse
 
         return TeamsResourceWithStreamingResponse(self._client.teams)
@@ -941,36 +1003,42 @@ class BelieveWithStreamedResponse:
 
     @cached_property
     def episodes(self) -> episodes.EpisodesResourceWithStreamingResponse:
+        """Operations related to TV episodes"""
         from .resources.episodes import EpisodesResourceWithStreamingResponse
 
         return EpisodesResourceWithStreamingResponse(self._client.episodes)
 
     @cached_property
     def quotes(self) -> quotes.QuotesResourceWithStreamingResponse:
+        """Memorable quotes from the show"""
         from .resources.quotes import QuotesResourceWithStreamingResponse
 
         return QuotesResourceWithStreamingResponse(self._client.quotes)
 
     @cached_property
     def believe(self) -> believe.BelieveResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.believe import BelieveResourceWithStreamingResponse
 
         return BelieveResourceWithStreamingResponse(self._client.believe)
 
     @cached_property
     def conflicts(self) -> conflicts.ConflictsResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.conflicts import ConflictsResourceWithStreamingResponse
 
         return ConflictsResourceWithStreamingResponse(self._client.conflicts)
 
     @cached_property
     def reframe(self) -> reframe.ReframeResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.reframe import ReframeResourceWithStreamingResponse
 
         return ReframeResourceWithStreamingResponse(self._client.reframe)
 
     @cached_property
     def press(self) -> press.PressResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.press import PressResourceWithStreamingResponse
 
         return PressResourceWithStreamingResponse(self._client.press)
@@ -983,30 +1051,37 @@ class BelieveWithStreamedResponse:
 
     @cached_property
     def biscuits(self) -> biscuits.BiscuitsResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.biscuits import BiscuitsResourceWithStreamingResponse
 
         return BiscuitsResourceWithStreamingResponse(self._client.biscuits)
 
     @cached_property
     def pep_talk(self) -> pep_talk.PepTalkResourceWithStreamingResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.pep_talk import PepTalkResourceWithStreamingResponse
 
         return PepTalkResourceWithStreamingResponse(self._client.pep_talk)
 
     @cached_property
     def stream(self) -> stream.StreamResourceWithStreamingResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.stream import StreamResourceWithStreamingResponse
 
         return StreamResourceWithStreamingResponse(self._client.stream)
 
     @cached_property
     def team_members(self) -> team_members.TeamMembersResourceWithStreamingResponse:
+        """
+        Team members with union types (oneOf) - Players, Coaches, Medical Staff, Equipment Managers
+        """
         from .resources.team_members import TeamMembersResourceWithStreamingResponse
 
         return TeamMembersResourceWithStreamingResponse(self._client.team_members)
 
     @cached_property
     def webhooks(self) -> webhooks.WebhooksResourceWithStreamingResponse:
+        """Register webhook endpoints and trigger events for testing"""
         from .resources.webhooks import WebhooksResourceWithStreamingResponse
 
         return WebhooksResourceWithStreamingResponse(self._client.webhooks)
@@ -1042,12 +1117,14 @@ class AsyncBelieveWithStreamedResponse:
 
     @cached_property
     def characters(self) -> characters.AsyncCharactersResourceWithStreamingResponse:
+        """Operations related to Ted Lasso characters"""
         from .resources.characters import AsyncCharactersResourceWithStreamingResponse
 
         return AsyncCharactersResourceWithStreamingResponse(self._client.characters)
 
     @cached_property
     def teams(self) -> teams.AsyncTeamsResourceWithStreamingResponse:
+        """Operations related to football teams"""
         from .resources.teams import AsyncTeamsResourceWithStreamingResponse
 
         return AsyncTeamsResourceWithStreamingResponse(self._client.teams)
@@ -1060,36 +1137,42 @@ class AsyncBelieveWithStreamedResponse:
 
     @cached_property
     def episodes(self) -> episodes.AsyncEpisodesResourceWithStreamingResponse:
+        """Operations related to TV episodes"""
         from .resources.episodes import AsyncEpisodesResourceWithStreamingResponse
 
         return AsyncEpisodesResourceWithStreamingResponse(self._client.episodes)
 
     @cached_property
     def quotes(self) -> quotes.AsyncQuotesResourceWithStreamingResponse:
+        """Memorable quotes from the show"""
         from .resources.quotes import AsyncQuotesResourceWithStreamingResponse
 
         return AsyncQuotesResourceWithStreamingResponse(self._client.quotes)
 
     @cached_property
     def believe(self) -> believe.AsyncBelieveResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.believe import AsyncBelieveResourceWithStreamingResponse
 
         return AsyncBelieveResourceWithStreamingResponse(self._client.believe)
 
     @cached_property
     def conflicts(self) -> conflicts.AsyncConflictsResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.conflicts import AsyncConflictsResourceWithStreamingResponse
 
         return AsyncConflictsResourceWithStreamingResponse(self._client.conflicts)
 
     @cached_property
     def reframe(self) -> reframe.AsyncReframeResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.reframe import AsyncReframeResourceWithStreamingResponse
 
         return AsyncReframeResourceWithStreamingResponse(self._client.reframe)
 
     @cached_property
     def press(self) -> press.AsyncPressResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.press import AsyncPressResourceWithStreamingResponse
 
         return AsyncPressResourceWithStreamingResponse(self._client.press)
@@ -1102,30 +1185,37 @@ class AsyncBelieveWithStreamedResponse:
 
     @cached_property
     def biscuits(self) -> biscuits.AsyncBiscuitsResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         from .resources.biscuits import AsyncBiscuitsResourceWithStreamingResponse
 
         return AsyncBiscuitsResourceWithStreamingResponse(self._client.biscuits)
 
     @cached_property
     def pep_talk(self) -> pep_talk.AsyncPepTalkResourceWithStreamingResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.pep_talk import AsyncPepTalkResourceWithStreamingResponse
 
         return AsyncPepTalkResourceWithStreamingResponse(self._client.pep_talk)
 
     @cached_property
     def stream(self) -> stream.AsyncStreamResourceWithStreamingResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         from .resources.stream import AsyncStreamResourceWithStreamingResponse
 
         return AsyncStreamResourceWithStreamingResponse(self._client.stream)
 
     @cached_property
     def team_members(self) -> team_members.AsyncTeamMembersResourceWithStreamingResponse:
+        """
+        Team members with union types (oneOf) - Players, Coaches, Medical Staff, Equipment Managers
+        """
         from .resources.team_members import AsyncTeamMembersResourceWithStreamingResponse
 
         return AsyncTeamMembersResourceWithStreamingResponse(self._client.team_members)
 
     @cached_property
     def webhooks(self) -> webhooks.AsyncWebhooksResourceWithStreamingResponse:
+        """Register webhook endpoints and trigger events for testing"""
         from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
 
         return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)

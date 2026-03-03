@@ -19,6 +19,9 @@ __all__ = ["ClientResource", "AsyncClientResource"]
 class ClientResource(SyncAPIResource):
     @cached_property
     def ws(self) -> WsResource:
+        """
+        WebSocket endpoints for real-time bidirectional communication - Live match simulation
+        """
         return WsResource(self._client)
 
     @cached_property
@@ -44,6 +47,9 @@ class ClientResource(SyncAPIResource):
 class AsyncClientResource(AsyncAPIResource):
     @cached_property
     def ws(self) -> AsyncWsResource:
+        """
+        WebSocket endpoints for real-time bidirectional communication - Live match simulation
+        """
         return AsyncWsResource(self._client)
 
     @cached_property
@@ -72,6 +78,9 @@ class ClientResourceWithRawResponse:
 
     @cached_property
     def ws(self) -> WsResourceWithRawResponse:
+        """
+        WebSocket endpoints for real-time bidirectional communication - Live match simulation
+        """
         return WsResourceWithRawResponse(self._client.ws)
 
 
@@ -81,6 +90,9 @@ class AsyncClientResourceWithRawResponse:
 
     @cached_property
     def ws(self) -> AsyncWsResourceWithRawResponse:
+        """
+        WebSocket endpoints for real-time bidirectional communication - Live match simulation
+        """
         return AsyncWsResourceWithRawResponse(self._client.ws)
 
 
@@ -90,6 +102,9 @@ class ClientResourceWithStreamingResponse:
 
     @cached_property
     def ws(self) -> WsResourceWithStreamingResponse:
+        """
+        WebSocket endpoints for real-time bidirectional communication - Live match simulation
+        """
         return WsResourceWithStreamingResponse(self._client.ws)
 
 
@@ -99,4 +114,7 @@ class AsyncClientResourceWithStreamingResponse:
 
     @cached_property
     def ws(self) -> AsyncWsResourceWithStreamingResponse:
+        """
+        WebSocket endpoints for real-time bidirectional communication - Live match simulation
+        """
         return AsyncWsResourceWithStreamingResponse(self._client.ws)

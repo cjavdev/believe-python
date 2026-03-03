@@ -27,6 +27,8 @@ __all__ = ["EpisodesResource", "AsyncEpisodesResource"]
 
 
 class EpisodesResource(SyncAPIResource):
+    """Operations related to TV episodes"""
+
     @cached_property
     def with_raw_response(self) -> EpisodesResourceWithRawResponse:
         """
@@ -367,6 +369,8 @@ class EpisodesResource(SyncAPIResource):
 
 
 class AsyncEpisodesResource(AsyncAPIResource):
+    """Operations related to TV episodes"""
+
     @cached_property
     def with_raw_response(self) -> AsyncEpisodesResourceWithRawResponse:
         """

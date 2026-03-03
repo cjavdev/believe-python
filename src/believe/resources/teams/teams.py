@@ -39,8 +39,11 @@ __all__ = ["TeamsResource", "AsyncTeamsResource"]
 
 
 class TeamsResource(SyncAPIResource):
+    """Operations related to football teams"""
+
     @cached_property
     def logo(self) -> LogoResource:
+        """Operations related to football teams"""
         return LogoResource(self._client)
 
     @cached_property
@@ -467,8 +470,11 @@ class TeamsResource(SyncAPIResource):
 
 
 class AsyncTeamsResource(AsyncAPIResource):
+    """Operations related to football teams"""
+
     @cached_property
     def logo(self) -> AsyncLogoResource:
+        """Operations related to football teams"""
         return AsyncLogoResource(self._client)
 
     @cached_property
@@ -925,6 +931,7 @@ class TeamsResourceWithRawResponse:
 
     @cached_property
     def logo(self) -> LogoResourceWithRawResponse:
+        """Operations related to football teams"""
         return LogoResourceWithRawResponse(self._teams.logo)
 
 
@@ -959,6 +966,7 @@ class AsyncTeamsResourceWithRawResponse:
 
     @cached_property
     def logo(self) -> AsyncLogoResourceWithRawResponse:
+        """Operations related to football teams"""
         return AsyncLogoResourceWithRawResponse(self._teams.logo)
 
 
@@ -993,6 +1001,7 @@ class TeamsResourceWithStreamingResponse:
 
     @cached_property
     def logo(self) -> LogoResourceWithStreamingResponse:
+        """Operations related to football teams"""
         return LogoResourceWithStreamingResponse(self._teams.logo)
 
 
@@ -1027,4 +1036,5 @@ class AsyncTeamsResourceWithStreamingResponse:
 
     @cached_property
     def logo(self) -> AsyncLogoResourceWithStreamingResponse:
+        """Operations related to football teams"""
         return AsyncLogoResourceWithStreamingResponse(self._teams.logo)

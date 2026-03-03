@@ -19,6 +19,8 @@ __all__ = ["StreamResource", "AsyncStreamResource"]
 
 
 class StreamResource(SyncAPIResource):
+    """Server-Sent Events (SSE) streaming endpoints"""
+
     @cached_property
     def with_raw_response(self) -> StreamResourceWithRawResponse:
         """
@@ -59,6 +61,8 @@ class StreamResource(SyncAPIResource):
 
 
 class AsyncStreamResource(AsyncAPIResource):
+    """Server-Sent Events (SSE) streaming endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncStreamResourceWithRawResponse:
         """
