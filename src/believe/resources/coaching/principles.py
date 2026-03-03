@@ -23,6 +23,8 @@ __all__ = ["PrinciplesResource", "AsyncPrinciplesResource"]
 
 
 class PrinciplesResource(SyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> PrinciplesResourceWithRawResponse:
         """
@@ -143,6 +145,8 @@ class PrinciplesResource(SyncAPIResource):
 
 
 class AsyncPrinciplesResource(AsyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> AsyncPrinciplesResourceWithRawResponse:
         """

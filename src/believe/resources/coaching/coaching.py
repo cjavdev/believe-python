@@ -19,6 +19,7 @@ __all__ = ["CoachingResource", "AsyncCoachingResource"]
 class CoachingResource(SyncAPIResource):
     @cached_property
     def principles(self) -> PrinciplesResource:
+        """Interactive endpoints for motivation and guidance"""
         return PrinciplesResource(self._client)
 
     @cached_property
@@ -44,6 +45,7 @@ class CoachingResource(SyncAPIResource):
 class AsyncCoachingResource(AsyncAPIResource):
     @cached_property
     def principles(self) -> AsyncPrinciplesResource:
+        """Interactive endpoints for motivation and guidance"""
         return AsyncPrinciplesResource(self._client)
 
     @cached_property
@@ -72,6 +74,7 @@ class CoachingResourceWithRawResponse:
 
     @cached_property
     def principles(self) -> PrinciplesResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         return PrinciplesResourceWithRawResponse(self._coaching.principles)
 
 
@@ -81,6 +84,7 @@ class AsyncCoachingResourceWithRawResponse:
 
     @cached_property
     def principles(self) -> AsyncPrinciplesResourceWithRawResponse:
+        """Interactive endpoints for motivation and guidance"""
         return AsyncPrinciplesResourceWithRawResponse(self._coaching.principles)
 
 
@@ -90,6 +94,7 @@ class CoachingResourceWithStreamingResponse:
 
     @cached_property
     def principles(self) -> PrinciplesResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         return PrinciplesResourceWithStreamingResponse(self._coaching.principles)
 
 
@@ -99,4 +104,5 @@ class AsyncCoachingResourceWithStreamingResponse:
 
     @cached_property
     def principles(self) -> AsyncPrinciplesResourceWithStreamingResponse:
+        """Interactive endpoints for motivation and guidance"""
         return AsyncPrinciplesResourceWithStreamingResponse(self._coaching.principles)

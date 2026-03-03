@@ -43,6 +43,10 @@ __all__ = ["TeamMembersResource", "AsyncTeamMembersResource"]
 
 
 class TeamMembersResource(SyncAPIResource):
+    """
+    Team members with union types (oneOf) - Players, Coaches, Medical Staff, Equipment Managers
+    """
+
     @cached_property
     def with_raw_response(self) -> TeamMembersResourceWithRawResponse:
         """
@@ -485,6 +489,10 @@ class TeamMembersResource(SyncAPIResource):
 
 
 class AsyncTeamMembersResource(AsyncAPIResource):
+    """
+    Team members with union types (oneOf) - Players, Coaches, Medical Staff, Equipment Managers
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncTeamMembersResourceWithRawResponse:
         """

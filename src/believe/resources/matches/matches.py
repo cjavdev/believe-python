@@ -48,6 +48,7 @@ __all__ = ["MatchesResource", "AsyncMatchesResource"]
 class MatchesResource(SyncAPIResource):
     @cached_property
     def commentary(self) -> CommentaryResource:
+        """Server-Sent Events (SSE) streaming endpoints"""
         return CommentaryResource(self._client)
 
     @cached_property
@@ -521,6 +522,7 @@ class MatchesResource(SyncAPIResource):
 class AsyncMatchesResource(AsyncAPIResource):
     @cached_property
     def commentary(self) -> AsyncCommentaryResource:
+        """Server-Sent Events (SSE) streaming endpoints"""
         return AsyncCommentaryResource(self._client)
 
     @cached_property
@@ -1022,6 +1024,7 @@ class MatchesResourceWithRawResponse:
 
     @cached_property
     def commentary(self) -> CommentaryResourceWithRawResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         return CommentaryResourceWithRawResponse(self._matches.commentary)
 
 
@@ -1056,6 +1059,7 @@ class AsyncMatchesResourceWithRawResponse:
 
     @cached_property
     def commentary(self) -> AsyncCommentaryResourceWithRawResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         return AsyncCommentaryResourceWithRawResponse(self._matches.commentary)
 
 
@@ -1090,6 +1094,7 @@ class MatchesResourceWithStreamingResponse:
 
     @cached_property
     def commentary(self) -> CommentaryResourceWithStreamingResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         return CommentaryResourceWithStreamingResponse(self._matches.commentary)
 
 
@@ -1124,4 +1129,5 @@ class AsyncMatchesResourceWithStreamingResponse:
 
     @cached_property
     def commentary(self) -> AsyncCommentaryResourceWithStreamingResponse:
+        """Server-Sent Events (SSE) streaming endpoints"""
         return AsyncCommentaryResourceWithStreamingResponse(self._matches.commentary)

@@ -19,6 +19,8 @@ __all__ = ["CommentaryResource", "AsyncCommentaryResource"]
 
 
 class CommentaryResource(SyncAPIResource):
+    """Server-Sent Events (SSE) streaming endpoints"""
+
     @cached_property
     def with_raw_response(self) -> CommentaryResourceWithRawResponse:
         """
@@ -75,6 +77,8 @@ class CommentaryResource(SyncAPIResource):
 
 
 class AsyncCommentaryResource(AsyncAPIResource):
+    """Server-Sent Events (SSE) streaming endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncCommentaryResourceWithRawResponse:
         """

@@ -35,6 +35,8 @@ __all__ = ["CharactersResource", "AsyncCharactersResource"]
 
 
 class CharactersResource(SyncAPIResource):
+    """Operations related to Ted Lasso characters"""
+
     @cached_property
     def with_raw_response(self) -> CharactersResourceWithRawResponse:
         """
@@ -370,6 +372,8 @@ class CharactersResource(SyncAPIResource):
 
 
 class AsyncCharactersResource(AsyncAPIResource):
+    """Operations related to Ted Lasso characters"""
+
     @cached_property
     def with_raw_response(self) -> AsyncCharactersResourceWithRawResponse:
         """
