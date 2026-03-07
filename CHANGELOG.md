@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.3.0 (2026-03-07)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/cjavdev/believe-python/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** manual updates ([bfd949b](https://github.com/cjavdev/believe-python/commit/bfd949bd82fe35eb49dff5f19700896c07f5c97f))
+
+
+### Chores
+
+* **ci:** bump uv version ([7344f93](https://github.com/cjavdev/believe-python/commit/7344f93f7eeb6b0f6ffaed4258259fe47c8a8cb5))
+* **ci:** skip uploading artifacts on stainless-internal branches ([a90695a](https://github.com/cjavdev/believe-python/commit/a90695a59c5f0b36f05ea5bf954d5f10846448f8))
+* **internal:** add request options to SSE classes ([1e2c744](https://github.com/cjavdev/believe-python/commit/1e2c7442f0b950e5d9e2789bca4bcb4b6d2d10eb))
+* **internal:** codegen related update ([0bb8baf](https://github.com/cjavdev/believe-python/commit/0bb8baf21d652a58f5dd2aca0d95d4f8310fea07))
+* **internal:** make `test_proxy_environment_variables` more resilient ([14af17c](https://github.com/cjavdev/believe-python/commit/14af17cf21f2186245913fc6f82d83b2b624154b))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([cd9d224](https://github.com/cjavdev/believe-python/commit/cd9d2242cbf3e1b7ac0af14a4d19365071cf65ef))
+* **internal:** refactor authentication internals ([d7c487e](https://github.com/cjavdev/believe-python/commit/d7c487e2e0c9f4ceda310e02796d8f0b5eeebf54))
+* update placeholder string ([52d710d](https://github.com/cjavdev/believe-python/commit/52d710d2864314c75a3054f5a3b76da6bbc4337a))
+
 ## 0.2.0 (2026-02-21)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/cjavdev/believe-python/compare/v0.1.0...v0.2.0)
