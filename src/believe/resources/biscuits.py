@@ -23,6 +23,8 @@ __all__ = ["BiscuitsResource", "AsyncBiscuitsResource"]
 
 
 class BiscuitsResource(SyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> BiscuitsResourceWithRawResponse:
         """
@@ -144,6 +146,8 @@ class BiscuitsResource(SyncAPIResource):
 
 
 class AsyncBiscuitsResource(AsyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> AsyncBiscuitsResourceWithRawResponse:
         """

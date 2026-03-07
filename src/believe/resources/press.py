@@ -24,6 +24,8 @@ __all__ = ["PressResource", "AsyncPressResource"]
 
 
 class PressResource(SyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> PressResourceWithRawResponse:
         """
@@ -92,6 +94,8 @@ class PressResource(SyncAPIResource):
 
 
 class AsyncPressResource(AsyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> AsyncPressResourceWithRawResponse:
         """

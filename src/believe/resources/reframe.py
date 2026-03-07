@@ -22,6 +22,8 @@ __all__ = ["ReframeResource", "AsyncReframeResource"]
 
 
 class ReframeResource(SyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> ReframeResourceWithRawResponse:
         """
@@ -86,6 +88,8 @@ class ReframeResource(SyncAPIResource):
 
 
 class AsyncReframeResource(AsyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> AsyncReframeResourceWithRawResponse:
         """

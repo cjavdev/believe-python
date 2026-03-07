@@ -36,6 +36,8 @@ __all__ = ["QuotesResource", "AsyncQuotesResource"]
 
 
 class QuotesResource(SyncAPIResource):
+    """Memorable quotes from the show"""
+
     @cached_property
     def with_raw_response(self) -> QuotesResourceWithRawResponse:
         """
@@ -486,6 +488,8 @@ class QuotesResource(SyncAPIResource):
 
 
 class AsyncQuotesResource(AsyncAPIResource):
+    """Memorable quotes from the show"""
+
     @cached_property
     def with_raw_response(self) -> AsyncQuotesResourceWithRawResponse:
         """
