@@ -1,51 +1,48 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from __future__ import annotations
+
 from typing import Optional
-from typing_extensions import Literal
+from typing_extensions import Required, TypedDict
 
-from ..._models import BaseModel
+from .purchase_method import PurchaseMethod
 
-__all__ = ["TicketSaleRetrieveResponse"]
+__all__ = ["TicketSaleCreateParams"]
 
 
-class TicketSaleRetrieveResponse(BaseModel):
-    """Full ticket sale model with ID."""
-
-    id: str
-    """Unique identifier"""
-
-    buyer_name: str
+class TicketSaleCreateParams(TypedDict, total=False):
+    buyer_name: Required[str]
     """Name of the ticket buyer"""
 
-    currency: str
+    currency: Required[str]
     """Currency code (GBP, USD, or EUR)"""
 
-    discount: str
+    discount: Required[str]
     """Discount amount applied from coupon"""
 
-    match_id: str
+    match_id: Required[str]
     """ID of the match"""
 
-    purchase_method: Literal["online", "box_office", "will_call", "phone"]
+    purchase_method: Required[PurchaseMethod]
     """How the ticket was purchased"""
 
-    quantity: int
+    quantity: Required[int]
     """Number of tickets purchased"""
 
-    subtotal: str
+    subtotal: Required[str]
     """Subtotal before discount and tax (unit_price \\** quantity)"""
 
-    tax: str
+    tax: Required[str]
     """Tax amount (20% UK VAT on discounted subtotal)"""
 
-    total: str
+    total: Required[str]
     """Final total (subtotal - discount + tax)"""
 
-    unit_price: str
+    unit_price: Required[str]
     """Price per ticket (decimal string)"""
 
-    buyer_email: Optional[str] = None
+    buyer_email: Optional[str]
     """Email of the ticket buyer"""
 
-    coupon_code: Optional[str] = None
+    coupon_code: Optional[str]
     """Coupon code applied, if any"""

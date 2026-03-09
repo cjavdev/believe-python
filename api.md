@@ -289,6 +289,22 @@ Methods:
 - <code title="delete /webhooks/{webhook_id}">client.webhooks.<a href="./src/believe/resources/webhooks.py">delete</a>(webhook_id) -> <a href="./src/believe/types/webhook_delete_response.py">WebhookDeleteResponse</a></code>
 - <code title="post /webhooks/trigger">client.webhooks.<a href="./src/believe/resources/webhooks.py">trigger_event</a>(\*\*<a href="src/believe/types/webhook_trigger_event_params.py">params</a>) -> <a href="./src/believe/types/webhook_trigger_event_response.py">WebhookTriggerEventResponse</a></code>
 
+# TicketSales
+
+Types:
+
+```python
+from believe.types import PurchaseMethod, TicketSale
+```
+
+Methods:
+
+- <code title="post /ticket-sales">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">create</a>(\*\*<a href="src/believe/types/ticket_sale_create_params.py">params</a>) -> <a href="./src/believe/types/ticket_sale.py">TicketSale</a></code>
+- <code title="get /ticket-sales/{ticket_sale_id}">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">retrieve</a>(ticket_sale_id) -> <a href="./src/believe/types/ticket_sale.py">TicketSale</a></code>
+- <code title="patch /ticket-sales/{ticket_sale_id}">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">update</a>(ticket_sale_id, \*\*<a href="src/believe/types/ticket_sale_update_params.py">params</a>) -> <a href="./src/believe/types/ticket_sale.py">TicketSale</a></code>
+- <code title="get /ticket-sales">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">list</a>(\*\*<a href="src/believe/types/ticket_sale_list_params.py">params</a>) -> <a href="./src/believe/types/ticket_sale.py">SyncSkipLimitPage[TicketSale]</a></code>
+- <code title="delete /ticket-sales/{ticket_sale_id}">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">delete</a>(ticket_sale_id) -> None</code>
+
 # Health
 
 Methods:
@@ -308,24 +324,3 @@ Methods:
 Methods:
 
 - <code title="get /ws/test">client.client.ws.<a href="./src/believe/resources/client/ws.py">test</a>() -> None</code>
-
-## TicketSales
-
-Types:
-
-```python
-from believe.types.client import (
-    TicketSaleCreateResponse,
-    TicketSaleRetrieveResponse,
-    TicketSaleUpdateResponse,
-    TicketSaleListResponse,
-)
-```
-
-Methods:
-
-- <code title="post /ticket-sales">client.client.ticket_sales.<a href="./src/believe/resources/client/ticket_sales.py">create</a>(\*\*<a href="src/believe/types/client/ticket_sale_create_params.py">params</a>) -> <a href="./src/believe/types/client/ticket_sale_create_response.py">TicketSaleCreateResponse</a></code>
-- <code title="get /ticket-sales/{ticket_sale_id}">client.client.ticket_sales.<a href="./src/believe/resources/client/ticket_sales.py">retrieve</a>(ticket_sale_id) -> <a href="./src/believe/types/client/ticket_sale_retrieve_response.py">TicketSaleRetrieveResponse</a></code>
-- <code title="patch /ticket-sales/{ticket_sale_id}">client.client.ticket_sales.<a href="./src/believe/resources/client/ticket_sales.py">update</a>(ticket_sale_id, \*\*<a href="src/believe/types/client/ticket_sale_update_params.py">params</a>) -> <a href="./src/believe/types/client/ticket_sale_update_response.py">TicketSaleUpdateResponse</a></code>
-- <code title="get /ticket-sales">client.client.ticket_sales.<a href="./src/believe/resources/client/ticket_sales.py">list</a>(\*\*<a href="src/believe/types/client/ticket_sale_list_params.py">params</a>) -> <a href="./src/believe/types/client/ticket_sale_list_response.py">SyncSkipLimitPage[TicketSaleListResponse]</a></code>
-- <code title="delete /ticket-sales/{ticket_sale_id}">client.client.ticket_sales.<a href="./src/believe/resources/client/ticket_sales.py">delete</a>(ticket_sale_id) -> None</code>

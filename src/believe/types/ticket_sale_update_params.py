@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, TypedDict
+from typing_extensions import TypedDict
+
+from .purchase_method import PurchaseMethod
 
 __all__ = ["TicketSaleUpdateParams"]
 
@@ -21,7 +23,7 @@ class TicketSaleUpdateParams(TypedDict, total=False):
 
     match_id: Optional[str]
 
-    purchase_method: Optional[Literal["online", "box_office", "will_call", "phone"]]
+    purchase_method: Optional[PurchaseMethod]
     """How the ticket was purchased."""
 
     quantity: Optional[int]

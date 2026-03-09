@@ -9,13 +9,10 @@ import pytest
 
 from believe import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
-from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
-from believe.types.client import (
-    TicketSaleListResponse,
-    TicketSaleCreateResponse,
-    TicketSaleUpdateResponse,
-    TicketSaleRetrieveResponse,
+from believe.types import (
+    TicketSale,
 )
+from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -26,7 +23,7 @@ class TestTicketSales:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Believe) -> None:
-        ticket_sale = client.client.ticket_sales.create(
+        ticket_sale = client.ticket_sales.create(
             buyer_name="Mae Green",
             currency="GBP",
             discount="9.00",
@@ -38,12 +35,12 @@ class TestTicketSales:
             total="97.20",
             unit_price="45.00",
         )
-        assert_matches_type(TicketSaleCreateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Believe) -> None:
-        ticket_sale = client.client.ticket_sales.create(
+        ticket_sale = client.ticket_sales.create(
             buyer_name="Mae Green",
             currency="GBP",
             discount="9.00",
@@ -57,12 +54,12 @@ class TestTicketSales:
             buyer_email="mae.green@example.com",
             coupon_code="BELIEVE10",
         )
-        assert_matches_type(TicketSaleCreateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Believe) -> None:
-        response = client.client.ticket_sales.with_raw_response.create(
+        response = client.ticket_sales.with_raw_response.create(
             buyer_name="Mae Green",
             currency="GBP",
             discount="9.00",
@@ -78,12 +75,12 @@ class TestTicketSales:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         ticket_sale = response.parse()
-        assert_matches_type(TicketSaleCreateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Believe) -> None:
-        with client.client.ticket_sales.with_streaming_response.create(
+        with client.ticket_sales.with_streaming_response.create(
             buyer_name="Mae Green",
             currency="GBP",
             discount="9.00",
@@ -99,41 +96,41 @@ class TestTicketSales:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             ticket_sale = response.parse()
-            assert_matches_type(TicketSaleCreateResponse, ticket_sale, path=["response"])
+            assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Believe) -> None:
-        ticket_sale = client.client.ticket_sales.retrieve(
+        ticket_sale = client.ticket_sales.retrieve(
             "ticket_sale_id",
         )
-        assert_matches_type(TicketSaleRetrieveResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Believe) -> None:
-        response = client.client.ticket_sales.with_raw_response.retrieve(
+        response = client.ticket_sales.with_raw_response.retrieve(
             "ticket_sale_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         ticket_sale = response.parse()
-        assert_matches_type(TicketSaleRetrieveResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Believe) -> None:
-        with client.client.ticket_sales.with_streaming_response.retrieve(
+        with client.ticket_sales.with_streaming_response.retrieve(
             "ticket_sale_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             ticket_sale = response.parse()
-            assert_matches_type(TicketSaleRetrieveResponse, ticket_sale, path=["response"])
+            assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -141,22 +138,22 @@ class TestTicketSales:
     @parametrize
     def test_path_params_retrieve(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ticket_sale_id` but received ''"):
-            client.client.ticket_sales.with_raw_response.retrieve(
+            client.ticket_sales.with_raw_response.retrieve(
                 "",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Believe) -> None:
-        ticket_sale = client.client.ticket_sales.update(
+        ticket_sale = client.ticket_sales.update(
             ticket_sale_id="ticket_sale_id",
         )
-        assert_matches_type(TicketSaleUpdateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Believe) -> None:
-        ticket_sale = client.client.ticket_sales.update(
+        ticket_sale = client.ticket_sales.update(
             ticket_sale_id="ticket_sale_id",
             buyer_email="dev@stainless.com",
             buyer_name="buyer_name",
@@ -171,31 +168,31 @@ class TestTicketSales:
             total="total",
             unit_price="unit_price",
         )
-        assert_matches_type(TicketSaleUpdateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Believe) -> None:
-        response = client.client.ticket_sales.with_raw_response.update(
+        response = client.ticket_sales.with_raw_response.update(
             ticket_sale_id="ticket_sale_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         ticket_sale = response.parse()
-        assert_matches_type(TicketSaleUpdateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Believe) -> None:
-        with client.client.ticket_sales.with_streaming_response.update(
+        with client.ticket_sales.with_streaming_response.update(
             ticket_sale_id="ticket_sale_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             ticket_sale = response.parse()
-            assert_matches_type(TicketSaleUpdateResponse, ticket_sale, path=["response"])
+            assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -203,20 +200,20 @@ class TestTicketSales:
     @parametrize
     def test_path_params_update(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ticket_sale_id` but received ''"):
-            client.client.ticket_sales.with_raw_response.update(
+            client.ticket_sales.with_raw_response.update(
                 ticket_sale_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Believe) -> None:
-        ticket_sale = client.client.ticket_sales.list()
-        assert_matches_type(SyncSkipLimitPage[TicketSaleListResponse], ticket_sale, path=["response"])
+        ticket_sale = client.ticket_sales.list()
+        assert_matches_type(SyncSkipLimitPage[TicketSale], ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Believe) -> None:
-        ticket_sale = client.client.ticket_sales.list(
+        ticket_sale = client.ticket_sales.list(
             coupon_code="coupon_code",
             currency="currency",
             limit=10,
@@ -224,34 +221,34 @@ class TestTicketSales:
             purchase_method="online",
             skip=0,
         )
-        assert_matches_type(SyncSkipLimitPage[TicketSaleListResponse], ticket_sale, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[TicketSale], ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Believe) -> None:
-        response = client.client.ticket_sales.with_raw_response.list()
+        response = client.ticket_sales.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         ticket_sale = response.parse()
-        assert_matches_type(SyncSkipLimitPage[TicketSaleListResponse], ticket_sale, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[TicketSale], ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Believe) -> None:
-        with client.client.ticket_sales.with_streaming_response.list() as response:
+        with client.ticket_sales.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             ticket_sale = response.parse()
-            assert_matches_type(SyncSkipLimitPage[TicketSaleListResponse], ticket_sale, path=["response"])
+            assert_matches_type(SyncSkipLimitPage[TicketSale], ticket_sale, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Believe) -> None:
-        ticket_sale = client.client.ticket_sales.delete(
+        ticket_sale = client.ticket_sales.delete(
             "ticket_sale_id",
         )
         assert ticket_sale is None
@@ -259,7 +256,7 @@ class TestTicketSales:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Believe) -> None:
-        response = client.client.ticket_sales.with_raw_response.delete(
+        response = client.ticket_sales.with_raw_response.delete(
             "ticket_sale_id",
         )
 
@@ -271,7 +268,7 @@ class TestTicketSales:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Believe) -> None:
-        with client.client.ticket_sales.with_streaming_response.delete(
+        with client.ticket_sales.with_streaming_response.delete(
             "ticket_sale_id",
         ) as response:
             assert not response.is_closed
@@ -286,7 +283,7 @@ class TestTicketSales:
     @parametrize
     def test_path_params_delete(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ticket_sale_id` but received ''"):
-            client.client.ticket_sales.with_raw_response.delete(
+            client.ticket_sales.with_raw_response.delete(
                 "",
             )
 
@@ -299,7 +296,7 @@ class TestAsyncTicketSales:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncBelieve) -> None:
-        ticket_sale = await async_client.client.ticket_sales.create(
+        ticket_sale = await async_client.ticket_sales.create(
             buyer_name="Mae Green",
             currency="GBP",
             discount="9.00",
@@ -311,12 +308,12 @@ class TestAsyncTicketSales:
             total="97.20",
             unit_price="45.00",
         )
-        assert_matches_type(TicketSaleCreateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBelieve) -> None:
-        ticket_sale = await async_client.client.ticket_sales.create(
+        ticket_sale = await async_client.ticket_sales.create(
             buyer_name="Mae Green",
             currency="GBP",
             discount="9.00",
@@ -330,12 +327,12 @@ class TestAsyncTicketSales:
             buyer_email="mae.green@example.com",
             coupon_code="BELIEVE10",
         )
-        assert_matches_type(TicketSaleCreateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBelieve) -> None:
-        response = await async_client.client.ticket_sales.with_raw_response.create(
+        response = await async_client.ticket_sales.with_raw_response.create(
             buyer_name="Mae Green",
             currency="GBP",
             discount="9.00",
@@ -351,12 +348,12 @@ class TestAsyncTicketSales:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         ticket_sale = await response.parse()
-        assert_matches_type(TicketSaleCreateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBelieve) -> None:
-        async with async_client.client.ticket_sales.with_streaming_response.create(
+        async with async_client.ticket_sales.with_streaming_response.create(
             buyer_name="Mae Green",
             currency="GBP",
             discount="9.00",
@@ -372,41 +369,41 @@ class TestAsyncTicketSales:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             ticket_sale = await response.parse()
-            assert_matches_type(TicketSaleCreateResponse, ticket_sale, path=["response"])
+            assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBelieve) -> None:
-        ticket_sale = await async_client.client.ticket_sales.retrieve(
+        ticket_sale = await async_client.ticket_sales.retrieve(
             "ticket_sale_id",
         )
-        assert_matches_type(TicketSaleRetrieveResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBelieve) -> None:
-        response = await async_client.client.ticket_sales.with_raw_response.retrieve(
+        response = await async_client.ticket_sales.with_raw_response.retrieve(
             "ticket_sale_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         ticket_sale = await response.parse()
-        assert_matches_type(TicketSaleRetrieveResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBelieve) -> None:
-        async with async_client.client.ticket_sales.with_streaming_response.retrieve(
+        async with async_client.ticket_sales.with_streaming_response.retrieve(
             "ticket_sale_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             ticket_sale = await response.parse()
-            assert_matches_type(TicketSaleRetrieveResponse, ticket_sale, path=["response"])
+            assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -414,22 +411,22 @@ class TestAsyncTicketSales:
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ticket_sale_id` but received ''"):
-            await async_client.client.ticket_sales.with_raw_response.retrieve(
+            await async_client.ticket_sales.with_raw_response.retrieve(
                 "",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncBelieve) -> None:
-        ticket_sale = await async_client.client.ticket_sales.update(
+        ticket_sale = await async_client.ticket_sales.update(
             ticket_sale_id="ticket_sale_id",
         )
-        assert_matches_type(TicketSaleUpdateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncBelieve) -> None:
-        ticket_sale = await async_client.client.ticket_sales.update(
+        ticket_sale = await async_client.ticket_sales.update(
             ticket_sale_id="ticket_sale_id",
             buyer_email="dev@stainless.com",
             buyer_name="buyer_name",
@@ -444,31 +441,31 @@ class TestAsyncTicketSales:
             total="total",
             unit_price="unit_price",
         )
-        assert_matches_type(TicketSaleUpdateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncBelieve) -> None:
-        response = await async_client.client.ticket_sales.with_raw_response.update(
+        response = await async_client.ticket_sales.with_raw_response.update(
             ticket_sale_id="ticket_sale_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         ticket_sale = await response.parse()
-        assert_matches_type(TicketSaleUpdateResponse, ticket_sale, path=["response"])
+        assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncBelieve) -> None:
-        async with async_client.client.ticket_sales.with_streaming_response.update(
+        async with async_client.ticket_sales.with_streaming_response.update(
             ticket_sale_id="ticket_sale_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             ticket_sale = await response.parse()
-            assert_matches_type(TicketSaleUpdateResponse, ticket_sale, path=["response"])
+            assert_matches_type(TicketSale, ticket_sale, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -476,20 +473,20 @@ class TestAsyncTicketSales:
     @parametrize
     async def test_path_params_update(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ticket_sale_id` but received ''"):
-            await async_client.client.ticket_sales.with_raw_response.update(
+            await async_client.ticket_sales.with_raw_response.update(
                 ticket_sale_id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncBelieve) -> None:
-        ticket_sale = await async_client.client.ticket_sales.list()
-        assert_matches_type(AsyncSkipLimitPage[TicketSaleListResponse], ticket_sale, path=["response"])
+        ticket_sale = await async_client.ticket_sales.list()
+        assert_matches_type(AsyncSkipLimitPage[TicketSale], ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncBelieve) -> None:
-        ticket_sale = await async_client.client.ticket_sales.list(
+        ticket_sale = await async_client.ticket_sales.list(
             coupon_code="coupon_code",
             currency="currency",
             limit=10,
@@ -497,34 +494,34 @@ class TestAsyncTicketSales:
             purchase_method="online",
             skip=0,
         )
-        assert_matches_type(AsyncSkipLimitPage[TicketSaleListResponse], ticket_sale, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[TicketSale], ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncBelieve) -> None:
-        response = await async_client.client.ticket_sales.with_raw_response.list()
+        response = await async_client.ticket_sales.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         ticket_sale = await response.parse()
-        assert_matches_type(AsyncSkipLimitPage[TicketSaleListResponse], ticket_sale, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[TicketSale], ticket_sale, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncBelieve) -> None:
-        async with async_client.client.ticket_sales.with_streaming_response.list() as response:
+        async with async_client.ticket_sales.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             ticket_sale = await response.parse()
-            assert_matches_type(AsyncSkipLimitPage[TicketSaleListResponse], ticket_sale, path=["response"])
+            assert_matches_type(AsyncSkipLimitPage[TicketSale], ticket_sale, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncBelieve) -> None:
-        ticket_sale = await async_client.client.ticket_sales.delete(
+        ticket_sale = await async_client.ticket_sales.delete(
             "ticket_sale_id",
         )
         assert ticket_sale is None
@@ -532,7 +529,7 @@ class TestAsyncTicketSales:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncBelieve) -> None:
-        response = await async_client.client.ticket_sales.with_raw_response.delete(
+        response = await async_client.ticket_sales.with_raw_response.delete(
             "ticket_sale_id",
         )
 
@@ -544,7 +541,7 @@ class TestAsyncTicketSales:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncBelieve) -> None:
-        async with async_client.client.ticket_sales.with_streaming_response.delete(
+        async with async_client.ticket_sales.with_streaming_response.delete(
             "ticket_sale_id",
         ) as response:
             assert not response.is_closed
@@ -559,6 +556,6 @@ class TestAsyncTicketSales:
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ticket_sale_id` but received ''"):
-            await async_client.client.ticket_sales.with_raw_response.delete(
+            await async_client.ticket_sales.with_raw_response.delete(
                 "",
             )
