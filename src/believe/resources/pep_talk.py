@@ -22,6 +22,8 @@ __all__ = ["PepTalkResource", "AsyncPepTalkResource"]
 
 
 class PepTalkResource(SyncAPIResource):
+    """Server-Sent Events (SSE) streaming endpoints"""
+
     @cached_property
     def with_raw_response(self) -> PepTalkResourceWithRawResponse:
         """
@@ -83,6 +85,8 @@ class PepTalkResource(SyncAPIResource):
 
 
 class AsyncPepTalkResource(AsyncAPIResource):
+    """Server-Sent Events (SSE) streaming endpoints"""
+
     @cached_property
     def with_raw_response(self) -> AsyncPepTalkResourceWithRawResponse:
         """

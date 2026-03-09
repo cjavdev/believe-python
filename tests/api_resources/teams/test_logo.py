@@ -126,7 +126,7 @@ class TestLogo:
     def test_method_upload(self, client: Believe) -> None:
         logo = client.teams.logo.upload(
             team_id="team_id",
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(FileUpload, logo, path=["response"])
 
@@ -135,7 +135,7 @@ class TestLogo:
     def test_raw_response_upload(self, client: Believe) -> None:
         response = client.teams.logo.with_raw_response.upload(
             team_id="team_id",
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -148,7 +148,7 @@ class TestLogo:
     def test_streaming_response_upload(self, client: Believe) -> None:
         with client.teams.logo.with_streaming_response.upload(
             team_id="team_id",
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -164,7 +164,7 @@ class TestLogo:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
             client.teams.logo.with_raw_response.upload(
                 team_id="",
-                file=b"raw file contents",
+                file=b"Example data",
             )
 
 
@@ -282,7 +282,7 @@ class TestAsyncLogo:
     async def test_method_upload(self, async_client: AsyncBelieve) -> None:
         logo = await async_client.teams.logo.upload(
             team_id="team_id",
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(FileUpload, logo, path=["response"])
 
@@ -291,7 +291,7 @@ class TestAsyncLogo:
     async def test_raw_response_upload(self, async_client: AsyncBelieve) -> None:
         response = await async_client.teams.logo.with_raw_response.upload(
             team_id="team_id",
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -304,7 +304,7 @@ class TestAsyncLogo:
     async def test_streaming_response_upload(self, async_client: AsyncBelieve) -> None:
         async with async_client.teams.logo.with_streaming_response.upload(
             team_id="team_id",
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -320,5 +320,5 @@ class TestAsyncLogo:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
             await async_client.teams.logo.with_raw_response.upload(
                 team_id="",
-                file=b"raw file contents",
+                file=b"Example data",
             )

@@ -16,6 +16,14 @@ from .client import (
     ClientResourceWithStreamingResponse,
     AsyncClientResourceWithStreamingResponse,
 )
+from .ticket_sales import (
+    TicketSalesResource,
+    AsyncTicketSalesResource,
+    TicketSalesResourceWithRawResponse,
+    AsyncTicketSalesResourceWithRawResponse,
+    TicketSalesResourceWithStreamingResponse,
+    AsyncTicketSalesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "WsResource",
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncWsResourceWithRawResponse",
     "WsResourceWithStreamingResponse",
     "AsyncWsResourceWithStreamingResponse",
+    "TicketSalesResource",
+    "AsyncTicketSalesResource",
+    "TicketSalesResourceWithRawResponse",
+    "AsyncTicketSalesResourceWithRawResponse",
+    "TicketSalesResourceWithStreamingResponse",
+    "AsyncTicketSalesResourceWithStreamingResponse",
     "ClientResource",
     "AsyncClientResource",
     "ClientResourceWithRawResponse",

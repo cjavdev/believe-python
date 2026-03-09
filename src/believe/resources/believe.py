@@ -25,6 +25,8 @@ __all__ = ["BelieveResource", "AsyncBelieveResource"]
 
 
 class BelieveResource(SyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> BelieveResourceWithRawResponse:
         """
@@ -106,6 +108,8 @@ class BelieveResource(SyncAPIResource):
 
 
 class AsyncBelieveResource(AsyncAPIResource):
+    """Interactive endpoints for motivation and guidance"""
+
     @cached_property
     def with_raw_response(self) -> AsyncBelieveResourceWithRawResponse:
         """
