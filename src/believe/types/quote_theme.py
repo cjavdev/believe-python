@@ -32,4 +32,8 @@ QuoteTheme: TypeAlias = Literal[
     "conflict",
     "honesty",
     "integrity",
+    "intimidation",
+    "ambition",
+    "narcissism",
+    "maturity",
 ]
