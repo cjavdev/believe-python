@@ -144,6 +144,14 @@ from .team_members import (
     TeamMembersResourceWithStreamingResponse,
     AsyncTeamMembersResourceWithStreamingResponse,
 )
+from .ticket_sales import (
+    TicketSalesResource,
+    AsyncTicketSalesResource,
+    TicketSalesResourceWithRawResponse,
+    AsyncTicketSalesResourceWithRawResponse,
+    TicketSalesResourceWithStreamingResponse,
+    AsyncTicketSalesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "CharactersResource",
@@ -236,6 +244,12 @@ __all__ = [
     "AsyncWebhooksResourceWithRawResponse",
     "WebhooksResourceWithStreamingResponse",
     "AsyncWebhooksResourceWithStreamingResponse",
+    "TicketSalesResource",
+    "AsyncTicketSalesResource",
+    "TicketSalesResourceWithRawResponse",
+    "AsyncTicketSalesResourceWithRawResponse",
+    "TicketSalesResourceWithStreamingResponse",
+    "AsyncTicketSalesResourceWithStreamingResponse",
     "HealthResource",
     "AsyncHealthResource",
     "HealthResourceWithRawResponse",
