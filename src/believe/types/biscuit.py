@@ -22,7 +22,7 @@ class Biscuit(BaseModel):
     ted_note: str
     """A handwritten note from Ted"""
 
-    type: Literal["classic", "shortbread", "chocolate_chip", "oatmeal_raisin"]
+    type: Literal["classic", "shortbread", "chocolate_chip", "oatmeal_raisin", "snickerdoodle", "lemon_drizzle"]
     """Type of biscuit"""
 
     warmth_level: int
