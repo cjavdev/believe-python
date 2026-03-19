@@ -45,11 +45,14 @@ if TYPE_CHECKING:
     from .resources import (
         press,
         teams,
+        client,
+        health,
         quotes,
         stream,
         believe,
         matches,
         reframe,
+        version,
         biscuits,
         coaching,
         episodes,
@@ -61,10 +64,12 @@ if TYPE_CHECKING:
         ticket_sales,
     )
     from .resources.press import PressResource, AsyncPressResource
+    from .resources.health import HealthResource, AsyncHealthResource
     from .resources.quotes import QuotesResource, AsyncQuotesResource
     from .resources.stream import StreamResource, AsyncStreamResource
     from .resources.believe import BelieveResource, AsyncBelieveResource
     from .resources.reframe import ReframeResource, AsyncReframeResource
+    from .resources.version import VersionResource, AsyncVersionResource
     from .resources.biscuits import BiscuitsResource, AsyncBiscuitsResource
     from .resources.episodes import EpisodesResource, AsyncEpisodesResource
     from .resources.pep_talk import PepTalkResource, AsyncPepTalkResource
@@ -74,6 +79,7 @@ if TYPE_CHECKING:
     from .resources.teams.teams import TeamsResource, AsyncTeamsResource
     from .resources.team_members import TeamMembersResource, AsyncTeamMembersResource
     from .resources.ticket_sales import TicketSalesResource, AsyncTicketSalesResource
+    from .resources.client.client import ClientResource, AsyncClientResource
     from .resources.matches.matches import MatchesResource, AsyncMatchesResource
     from .resources.coaching.coaching import CoachingResource, AsyncCoachingResource
 
@@ -248,6 +254,24 @@ class Believe(SyncAPIClient):
         from .resources.ticket_sales import TicketSalesResource
 
         return TicketSalesResource(self)
+
+    @cached_property
+    def health(self) -> HealthResource:
+        from .resources.health import HealthResource
+
+        return HealthResource(self)
+
+    @cached_property
+    def version(self) -> VersionResource:
+        from .resources.version import VersionResource
+
+        return VersionResource(self)
+
+    @cached_property
+    def client(self) -> ClientResource:
+        from .resources.client import ClientResource
+
+        return ClientResource(self)
 
     @cached_property
     def with_raw_response(self) -> BelieveWithRawResponse:
@@ -556,6 +580,24 @@ class AsyncBelieve(AsyncAPIClient):
         return AsyncTicketSalesResource(self)
 
     @cached_property
+    def health(self) -> AsyncHealthResource:
+        from .resources.health import AsyncHealthResource
+
+        return AsyncHealthResource(self)
+
+    @cached_property
+    def version(self) -> AsyncVersionResource:
+        from .resources.version import AsyncVersionResource
+
+        return AsyncVersionResource(self)
+
+    @cached_property
+    def client(self) -> AsyncClientResource:
+        from .resources.client import AsyncClientResource
+
+        return AsyncClientResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncBelieveWithRawResponse:
         return AsyncBelieveWithRawResponse(self)
 
@@ -816,6 +858,24 @@ class BelieveWithRawResponse:
 
         return TicketSalesResourceWithRawResponse(self._client.ticket_sales)
 
+    @cached_property
+    def health(self) -> health.HealthResourceWithRawResponse:
+        from .resources.health import HealthResourceWithRawResponse
+
+        return HealthResourceWithRawResponse(self._client.health)
+
+    @cached_property
+    def version(self) -> version.VersionResourceWithRawResponse:
+        from .resources.version import VersionResourceWithRawResponse
+
+        return VersionResourceWithRawResponse(self._client.version)
+
+    @cached_property
+    def client(self) -> client.ClientResourceWithRawResponse:
+        from .resources.client import ClientResourceWithRawResponse
+
+        return ClientResourceWithRawResponse(self._client.client)
+
 
 class AsyncBelieveWithRawResponse:
     _client: AsyncBelieve
@@ -940,6 +1000,24 @@ class AsyncBelieveWithRawResponse:
         from .resources.ticket_sales import AsyncTicketSalesResourceWithRawResponse
 
         return AsyncTicketSalesResourceWithRawResponse(self._client.ticket_sales)
+
+    @cached_property
+    def health(self) -> health.AsyncHealthResourceWithRawResponse:
+        from .resources.health import AsyncHealthResourceWithRawResponse
+
+        return AsyncHealthResourceWithRawResponse(self._client.health)
+
+    @cached_property
+    def version(self) -> version.AsyncVersionResourceWithRawResponse:
+        from .resources.version import AsyncVersionResourceWithRawResponse
+
+        return AsyncVersionResourceWithRawResponse(self._client.version)
+
+    @cached_property
+    def client(self) -> client.AsyncClientResourceWithRawResponse:
+        from .resources.client import AsyncClientResourceWithRawResponse
+
+        return AsyncClientResourceWithRawResponse(self._client.client)
 
 
 class BelieveWithStreamedResponse:
@@ -1066,6 +1144,24 @@ class BelieveWithStreamedResponse:
 
         return TicketSalesResourceWithStreamingResponse(self._client.ticket_sales)
 
+    @cached_property
+    def health(self) -> health.HealthResourceWithStreamingResponse:
+        from .resources.health import HealthResourceWithStreamingResponse
+
+        return HealthResourceWithStreamingResponse(self._client.health)
+
+    @cached_property
+    def version(self) -> version.VersionResourceWithStreamingResponse:
+        from .resources.version import VersionResourceWithStreamingResponse
+
+        return VersionResourceWithStreamingResponse(self._client.version)
+
+    @cached_property
+    def client(self) -> client.ClientResourceWithStreamingResponse:
+        from .resources.client import ClientResourceWithStreamingResponse
+
+        return ClientResourceWithStreamingResponse(self._client.client)
+
 
 class AsyncBelieveWithStreamedResponse:
     _client: AsyncBelieve
@@ -1190,6 +1286,24 @@ class AsyncBelieveWithStreamedResponse:
         from .resources.ticket_sales import AsyncTicketSalesResourceWithStreamingResponse
 
         return AsyncTicketSalesResourceWithStreamingResponse(self._client.ticket_sales)
+
+    @cached_property
+    def health(self) -> health.AsyncHealthResourceWithStreamingResponse:
+        from .resources.health import AsyncHealthResourceWithStreamingResponse
+
+        return AsyncHealthResourceWithStreamingResponse(self._client.health)
+
+    @cached_property
+    def version(self) -> version.AsyncVersionResourceWithStreamingResponse:
+        from .resources.version import AsyncVersionResourceWithStreamingResponse
+
+        return AsyncVersionResourceWithStreamingResponse(self._client.version)
+
+    @cached_property
+    def client(self) -> client.AsyncClientResourceWithStreamingResponse:
+        from .resources.client import AsyncClientResourceWithStreamingResponse
+
+        return AsyncClientResourceWithStreamingResponse(self._client.client)
 
 
 Client = Believe
