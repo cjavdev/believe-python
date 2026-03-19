@@ -44,6 +44,7 @@ if TYPE_CHECKING:
         coaching,
         episodes,
         pep_talk,
+        webhooks,
         conflicts,
         characters,
         team_members,
@@ -56,6 +57,7 @@ if TYPE_CHECKING:
     from .resources.biscuits import BiscuitsResource, AsyncBiscuitsResource
     from .resources.episodes import EpisodesResource, AsyncEpisodesResource
     from .resources.pep_talk import PepTalkResource, AsyncPepTalkResource
+    from .resources.webhooks import WebhooksResource, AsyncWebhooksResource
     from .resources.conflicts import ConflictsResource, AsyncConflictsResource
     from .resources.characters import CharactersResource, AsyncCharactersResource
     from .resources.teams.teams import TeamsResource, AsyncTeamsResource
@@ -218,6 +220,13 @@ class Believe(SyncAPIClient):
         from .resources.team_members import TeamMembersResource
 
         return TeamMembersResource(self)
+
+    @cached_property
+    def webhooks(self) -> WebhooksResource:
+        """Register webhook endpoints and trigger events for testing"""
+        from .resources.webhooks import WebhooksResource
+
+        return WebhooksResource(self)
 
     @cached_property
     def with_raw_response(self) -> BelieveWithRawResponse:
@@ -491,6 +500,13 @@ class AsyncBelieve(AsyncAPIClient):
         return AsyncTeamMembersResource(self)
 
     @cached_property
+    def webhooks(self) -> AsyncWebhooksResource:
+        """Register webhook endpoints and trigger events for testing"""
+        from .resources.webhooks import AsyncWebhooksResource
+
+        return AsyncWebhooksResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncBelieveWithRawResponse:
         return AsyncBelieveWithRawResponse(self)
 
@@ -712,6 +728,13 @@ class BelieveWithRawResponse:
 
         return TeamMembersResourceWithRawResponse(self._client.team_members)
 
+    @cached_property
+    def webhooks(self) -> webhooks.WebhooksResourceWithRawResponse:
+        """Register webhook endpoints and trigger events for testing"""
+        from .resources.webhooks import WebhooksResourceWithRawResponse
+
+        return WebhooksResourceWithRawResponse(self._client.webhooks)
+
 
 class AsyncBelieveWithRawResponse:
     _client: AsyncBelieve
@@ -816,6 +839,13 @@ class AsyncBelieveWithRawResponse:
         from .resources.team_members import AsyncTeamMembersResourceWithRawResponse
 
         return AsyncTeamMembersResourceWithRawResponse(self._client.team_members)
+
+    @cached_property
+    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithRawResponse:
+        """Register webhook endpoints and trigger events for testing"""
+        from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
+
+        return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
 
 
 class BelieveWithStreamedResponse:
@@ -922,6 +952,13 @@ class BelieveWithStreamedResponse:
 
         return TeamMembersResourceWithStreamingResponse(self._client.team_members)
 
+    @cached_property
+    def webhooks(self) -> webhooks.WebhooksResourceWithStreamingResponse:
+        """Register webhook endpoints and trigger events for testing"""
+        from .resources.webhooks import WebhooksResourceWithStreamingResponse
+
+        return WebhooksResourceWithStreamingResponse(self._client.webhooks)
+
 
 class AsyncBelieveWithStreamedResponse:
     _client: AsyncBelieve
@@ -1026,6 +1063,13 @@ class AsyncBelieveWithStreamedResponse:
         from .resources.team_members import AsyncTeamMembersResourceWithStreamingResponse
 
         return AsyncTeamMembersResourceWithStreamingResponse(self._client.team_members)
+
+    @cached_property
+    def webhooks(self) -> webhooks.AsyncWebhooksResourceWithStreamingResponse:
+        """Register webhook endpoints and trigger events for testing"""
+        from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
+
+        return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
 
 
 Client = Believe

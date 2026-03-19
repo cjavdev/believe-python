@@ -257,3 +257,25 @@ Methods:
 - <code title="get /team-members/coaches/">client.team_members.<a href="./src/believe/resources/team_members.py">list_coaches</a>(\*\*<a href="src/believe/types/team_member_list_coaches_params.py">params</a>) -> <a href="./src/believe/types/coach.py">SyncSkipLimitPage[Coach]</a></code>
 - <code title="get /team-members/players/">client.team_members.<a href="./src/believe/resources/team_members.py">list_players</a>(\*\*<a href="src/believe/types/team_member_list_players_params.py">params</a>) -> <a href="./src/believe/types/player.py">SyncSkipLimitPage[Player]</a></code>
 - <code title="get /team-members/staff/">client.team_members.<a href="./src/believe/resources/team_members.py">list_staff</a>(\*\*<a href="src/believe/types/team_member_list_staff_params.py">params</a>) -> <a href="./src/believe/types/team_member_list_staff_response.py">SyncSkipLimitPage[TeamMemberListStaffResponse]</a></code>
+
+# Webhooks
+
+Types:
+
+```python
+from believe.types import (
+    RegisteredWebhook,
+    WebhookCreateResponse,
+    WebhookListResponse,
+    WebhookDeleteResponse,
+    WebhookTriggerEventResponse,
+)
+```
+
+Methods:
+
+- <code title="post /webhooks">client.webhooks.<a href="./src/believe/resources/webhooks.py">create</a>(\*\*<a href="src/believe/types/webhook_create_params.py">params</a>) -> <a href="./src/believe/types/webhook_create_response.py">WebhookCreateResponse</a></code>
+- <code title="get /webhooks/{webhook_id}">client.webhooks.<a href="./src/believe/resources/webhooks.py">retrieve</a>(webhook_id) -> <a href="./src/believe/types/registered_webhook.py">RegisteredWebhook</a></code>
+- <code title="get /webhooks">client.webhooks.<a href="./src/believe/resources/webhooks.py">list</a>() -> <a href="./src/believe/types/webhook_list_response.py">WebhookListResponse</a></code>
+- <code title="delete /webhooks/{webhook_id}">client.webhooks.<a href="./src/believe/resources/webhooks.py">delete</a>(webhook_id) -> <a href="./src/believe/types/webhook_delete_response.py">WebhookDeleteResponse</a></code>
+- <code title="post /webhooks/trigger">client.webhooks.<a href="./src/believe/resources/webhooks.py">trigger_event</a>(\*\*<a href="src/believe/types/webhook_trigger_event_params.py">params</a>) -> <a href="./src/believe/types/webhook_trigger_event_response.py">WebhookTriggerEventResponse</a></code>
