@@ -16,6 +16,22 @@ from .teams import (
     TeamsResourceWithStreamingResponse,
     AsyncTeamsResourceWithStreamingResponse,
 )
+from .client import (
+    ClientResource,
+    AsyncClientResource,
+    ClientResourceWithRawResponse,
+    AsyncClientResourceWithRawResponse,
+    ClientResourceWithStreamingResponse,
+    AsyncClientResourceWithStreamingResponse,
+)
+from .health import (
+    HealthResource,
+    AsyncHealthResource,
+    HealthResourceWithRawResponse,
+    AsyncHealthResourceWithRawResponse,
+    HealthResourceWithStreamingResponse,
+    AsyncHealthResourceWithStreamingResponse,
+)
 from .quotes import (
     QuotesResource,
     AsyncQuotesResource,
@@ -55,6 +71,14 @@ from .reframe import (
     AsyncReframeResourceWithRawResponse,
     ReframeResourceWithStreamingResponse,
     AsyncReframeResourceWithStreamingResponse,
+)
+from .version import (
+    VersionResource,
+    AsyncVersionResource,
+    VersionResourceWithRawResponse,
+    AsyncVersionResourceWithRawResponse,
+    VersionResourceWithStreamingResponse,
+    AsyncVersionResourceWithStreamingResponse,
 )
 from .biscuits import (
     BiscuitsResource,
@@ -226,4 +250,22 @@ __all__ = [
     "AsyncTicketSalesResourceWithRawResponse",
     "TicketSalesResourceWithStreamingResponse",
     "AsyncTicketSalesResourceWithStreamingResponse",
+    "HealthResource",
+    "AsyncHealthResource",
+    "HealthResourceWithRawResponse",
+    "AsyncHealthResourceWithRawResponse",
+    "HealthResourceWithStreamingResponse",
+    "AsyncHealthResourceWithStreamingResponse",
+    "VersionResource",
+    "AsyncVersionResource",
+    "VersionResourceWithRawResponse",
+    "AsyncVersionResourceWithRawResponse",
+    "VersionResourceWithStreamingResponse",
+    "AsyncVersionResourceWithStreamingResponse",
+    "ClientResource",
+    "AsyncClientResource",
+    "ClientResourceWithRawResponse",
+    "AsyncClientResourceWithRawResponse",
+    "ClientResourceWithStreamingResponse",
+    "AsyncClientResourceWithStreamingResponse",
 ]

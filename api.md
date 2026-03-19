@@ -301,3 +301,23 @@ Methods:
 - <code title="patch /ticket-sales/{ticket_sale_id}">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">update</a>(ticket_sale_id, \*\*<a href="src/believe/types/ticket_sale_update_params.py">params</a>) -> <a href="./src/believe/types/ticket_sale.py">TicketSale</a></code>
 - <code title="get /ticket-sales">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">list</a>(\*\*<a href="src/believe/types/ticket_sale_list_params.py">params</a>) -> <a href="./src/believe/types/ticket_sale.py">SyncSkipLimitPage[TicketSale]</a></code>
 - <code title="delete /ticket-sales/{ticket_sale_id}">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">delete</a>(ticket_sale_id) -> None</code>
+
+# Health
+
+Methods:
+
+- <code title="get /health">client.health.<a href="./src/believe/resources/health.py">check</a>() -> object</code>
+
+# Version
+
+Methods:
+
+- <code title="get /version">client.version.<a href="./src/believe/resources/version.py">retrieve</a>() -> object</code>
+
+# Client
+
+## Ws
+
+Methods:
+
+- <code title="get /ws/test">client.client.ws.<a href="./src/believe/resources/client/ws.py">test</a>() -> None</code>
