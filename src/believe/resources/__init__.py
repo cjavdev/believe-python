@@ -16,22 +16,6 @@ from .teams import (
     TeamsResourceWithStreamingResponse,
     AsyncTeamsResourceWithStreamingResponse,
 )
-from .client import (
-    ClientResource,
-    AsyncClientResource,
-    ClientResourceWithRawResponse,
-    AsyncClientResourceWithRawResponse,
-    ClientResourceWithStreamingResponse,
-    AsyncClientResourceWithStreamingResponse,
-)
-from .health import (
-    HealthResource,
-    AsyncHealthResource,
-    HealthResourceWithRawResponse,
-    AsyncHealthResourceWithRawResponse,
-    HealthResourceWithStreamingResponse,
-    AsyncHealthResourceWithStreamingResponse,
-)
 from .quotes import (
     QuotesResource,
     AsyncQuotesResource,
@@ -72,14 +56,6 @@ from .reframe import (
     ReframeResourceWithStreamingResponse,
     AsyncReframeResourceWithStreamingResponse,
 )
-from .version import (
-    VersionResource,
-    AsyncVersionResource,
-    VersionResourceWithRawResponse,
-    AsyncVersionResourceWithRawResponse,
-    VersionResourceWithStreamingResponse,
-    AsyncVersionResourceWithStreamingResponse,
-)
 from .biscuits import (
     BiscuitsResource,
     AsyncBiscuitsResource,
@@ -112,14 +88,6 @@ from .pep_talk import (
     PepTalkResourceWithStreamingResponse,
     AsyncPepTalkResourceWithStreamingResponse,
 )
-from .webhooks import (
-    WebhooksResource,
-    AsyncWebhooksResource,
-    WebhooksResourceWithRawResponse,
-    AsyncWebhooksResourceWithRawResponse,
-    WebhooksResourceWithStreamingResponse,
-    AsyncWebhooksResourceWithStreamingResponse,
-)
 from .conflicts import (
     ConflictsResource,
     AsyncConflictsResource,
@@ -143,14 +111,6 @@ from .team_members import (
     AsyncTeamMembersResourceWithRawResponse,
     TeamMembersResourceWithStreamingResponse,
     AsyncTeamMembersResourceWithStreamingResponse,
-)
-from .ticket_sales import (
-    TicketSalesResource,
-    AsyncTicketSalesResource,
-    TicketSalesResourceWithRawResponse,
-    AsyncTicketSalesResourceWithRawResponse,
-    TicketSalesResourceWithStreamingResponse,
-    AsyncTicketSalesResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -238,34 +198,4 @@ __all__ = [
     "AsyncTeamMembersResourceWithRawResponse",
     "TeamMembersResourceWithStreamingResponse",
     "AsyncTeamMembersResourceWithStreamingResponse",
-    "WebhooksResource",
-    "AsyncWebhooksResource",
-    "WebhooksResourceWithRawResponse",
-    "AsyncWebhooksResourceWithRawResponse",
-    "WebhooksResourceWithStreamingResponse",
-    "AsyncWebhooksResourceWithStreamingResponse",
-    "TicketSalesResource",
-    "AsyncTicketSalesResource",
-    "TicketSalesResourceWithRawResponse",
-    "AsyncTicketSalesResourceWithRawResponse",
-    "TicketSalesResourceWithStreamingResponse",
-    "AsyncTicketSalesResourceWithStreamingResponse",
-    "HealthResource",
-    "AsyncHealthResource",
-    "HealthResourceWithRawResponse",
-    "AsyncHealthResourceWithRawResponse",
-    "HealthResourceWithStreamingResponse",
-    "AsyncHealthResourceWithStreamingResponse",
-    "VersionResource",
-    "AsyncVersionResource",
-    "VersionResourceWithRawResponse",
-    "AsyncVersionResourceWithRawResponse",
-    "VersionResourceWithStreamingResponse",
-    "AsyncVersionResourceWithStreamingResponse",
-    "ClientResource",
-    "AsyncClientResource",
-    "ClientResourceWithRawResponse",
-    "AsyncClientResourceWithRawResponse",
-    "ClientResourceWithStreamingResponse",
-    "AsyncClientResourceWithStreamingResponse",
 ]
