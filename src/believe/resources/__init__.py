@@ -88,6 +88,14 @@ from .pep_talk import (
     PepTalkResourceWithStreamingResponse,
     AsyncPepTalkResourceWithStreamingResponse,
 )
+from .webhooks import (
+    WebhooksResource,
+    AsyncWebhooksResource,
+    WebhooksResourceWithRawResponse,
+    AsyncWebhooksResourceWithRawResponse,
+    WebhooksResourceWithStreamingResponse,
+    AsyncWebhooksResourceWithStreamingResponse,
+)
 from .conflicts import (
     ConflictsResource,
     AsyncConflictsResource,
@@ -198,4 +206,10 @@ __all__ = [
     "AsyncTeamMembersResourceWithRawResponse",
     "TeamMembersResourceWithStreamingResponse",
     "AsyncTeamMembersResourceWithStreamingResponse",
+    "WebhooksResource",
+    "AsyncWebhooksResource",
+    "WebhooksResourceWithRawResponse",
+    "AsyncWebhooksResourceWithRawResponse",
+    "WebhooksResourceWithStreamingResponse",
+    "AsyncWebhooksResourceWithStreamingResponse",
 ]

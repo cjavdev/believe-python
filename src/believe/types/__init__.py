@@ -33,6 +33,7 @@ from .quote_list_params import QuoteListParams as QuoteListParams
 from .team_values_param import TeamValuesParam as TeamValuesParam
 from .geo_location_param import GeoLocationParam as GeoLocationParam
 from .paginated_response import PaginatedResponse as PaginatedResponse
+from .registered_webhook import RegisteredWebhook as RegisteredWebhook
 from .team_create_params import TeamCreateParams as TeamCreateParams
 from .team_update_params import TeamUpdateParams as TeamUpdateParams
 from .biscuit_list_params import BiscuitListParams as BiscuitListParams
@@ -48,6 +49,8 @@ from .emotional_stats_param import EmotionalStatsParam as EmotionalStatsParam
 from .episode_create_params import EpisodeCreateParams as EpisodeCreateParams
 from .episode_update_params import EpisodeUpdateParams as EpisodeUpdateParams
 from .press_simulate_params import PressSimulateParams as PressSimulateParams
+from .webhook_create_params import WebhookCreateParams as WebhookCreateParams
+from .webhook_list_response import WebhookListResponse as WebhookListResponse
 from .believe_submit_response import BelieveSubmitResponse as BelieveSubmitResponse
 from .character_create_params import CharacterCreateParams as CharacterCreateParams
 from .character_update_params import CharacterUpdateParams as CharacterUpdateParams
@@ -55,6 +58,8 @@ from .conflict_resolve_params import ConflictResolveParams as ConflictResolvePar
 from .press_simulate_response import PressSimulateResponse as PressSimulateResponse
 from .quote_get_random_params import QuoteGetRandomParams as QuoteGetRandomParams
 from .team_member_list_params import TeamMemberListParams as TeamMemberListParams
+from .webhook_create_response import WebhookCreateResponse as WebhookCreateResponse
+from .webhook_delete_response import WebhookDeleteResponse as WebhookDeleteResponse
 from .match_stream_live_params import MatchStreamLiveParams as MatchStreamLiveParams
 from .paginated_response_quote import PaginatedResponseQuote as PaginatedResponseQuote
 from .pep_talk_retrieve_params import PepTalkRetrieveParams as PepTalkRetrieveParams
@@ -71,10 +76,12 @@ from .quote_list_by_theme_params import QuoteListByThemeParams as QuoteListByThe
 from .episode_get_wisdom_response import EpisodeGetWisdomResponse as EpisodeGetWisdomResponse
 from .team_member_create_response import TeamMemberCreateResponse as TeamMemberCreateResponse
 from .team_member_update_response import TeamMemberUpdateResponse as TeamMemberUpdateResponse
+from .webhook_trigger_event_params import WebhookTriggerEventParams as WebhookTriggerEventParams
 from .character_get_quotes_response import CharacterGetQuotesResponse as CharacterGetQuotesResponse
 from .team_member_list_staff_params import TeamMemberListStaffParams as TeamMemberListStaffParams
 from .team_member_retrieve_response import TeamMemberRetrieveResponse as TeamMemberRetrieveResponse
 from .quote_list_by_character_params import QuoteListByCharacterParams as QuoteListByCharacterParams
+from .webhook_trigger_event_response import WebhookTriggerEventResponse as WebhookTriggerEventResponse
 from .team_member_list_coaches_params import TeamMemberListCoachesParams as TeamMemberListCoachesParams
 from .team_member_list_players_params import TeamMemberListPlayersParams as TeamMemberListPlayersParams
 from .team_member_list_staff_response import TeamMemberListStaffResponse as TeamMemberListStaffResponse
