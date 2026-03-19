@@ -1,3 +1,9 @@
+# Believe
+
+Methods:
+
+- <code title="get /">client.<a href="./src/believe/_client.py">get_welcome</a>() -> object</code>
+
 # Characters
 
 Types:
@@ -279,3 +285,19 @@ Methods:
 - <code title="get /webhooks">client.webhooks.<a href="./src/believe/resources/webhooks.py">list</a>() -> <a href="./src/believe/types/webhook_list_response.py">WebhookListResponse</a></code>
 - <code title="delete /webhooks/{webhook_id}">client.webhooks.<a href="./src/believe/resources/webhooks.py">delete</a>(webhook_id) -> <a href="./src/believe/types/webhook_delete_response.py">WebhookDeleteResponse</a></code>
 - <code title="post /webhooks/trigger">client.webhooks.<a href="./src/believe/resources/webhooks.py">trigger_event</a>(\*\*<a href="src/believe/types/webhook_trigger_event_params.py">params</a>) -> <a href="./src/believe/types/webhook_trigger_event_response.py">WebhookTriggerEventResponse</a></code>
+
+# TicketSales
+
+Types:
+
+```python
+from believe.types import PurchaseMethod, TicketSale
+```
+
+Methods:
+
+- <code title="post /ticket-sales">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">create</a>(\*\*<a href="src/believe/types/ticket_sale_create_params.py">params</a>) -> <a href="./src/believe/types/ticket_sale.py">TicketSale</a></code>
+- <code title="get /ticket-sales/{ticket_sale_id}">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">retrieve</a>(ticket_sale_id) -> <a href="./src/believe/types/ticket_sale.py">TicketSale</a></code>
+- <code title="patch /ticket-sales/{ticket_sale_id}">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">update</a>(ticket_sale_id, \*\*<a href="src/believe/types/ticket_sale_update_params.py">params</a>) -> <a href="./src/believe/types/ticket_sale.py">TicketSale</a></code>
+- <code title="get /ticket-sales">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">list</a>(\*\*<a href="src/believe/types/ticket_sale_list_params.py">params</a>) -> <a href="./src/believe/types/ticket_sale.py">SyncSkipLimitPage[TicketSale]</a></code>
+- <code title="delete /ticket-sales/{ticket_sale_id}">client.ticket_sales.<a href="./src/believe/resources/ticket_sales.py">delete</a>(ticket_sale_id) -> None</code>

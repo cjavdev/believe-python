@@ -11,7 +11,10 @@ import httpx
 from . import _exceptions
 from ._qs import Querystring
 from ._types import (
+    Body,
     Omit,
+    Query,
+    Headers,
     Timeout,
     NotGiven,
     Transport,
@@ -23,12 +26,19 @@ from ._utils import is_given, get_async_library
 from ._compat import cached_property
 from ._models import SecurityOptions
 from ._version import __version__
+from ._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import BelieveError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
     AsyncAPIClient,
+    make_request_options,
 )
 
 if TYPE_CHECKING:
@@ -48,6 +58,7 @@ if TYPE_CHECKING:
         conflicts,
         characters,
         team_members,
+        ticket_sales,
     )
     from .resources.press import PressResource, AsyncPressResource
     from .resources.quotes import QuotesResource, AsyncQuotesResource
@@ -62,6 +73,7 @@ if TYPE_CHECKING:
     from .resources.characters import CharactersResource, AsyncCharactersResource
     from .resources.teams.teams import TeamsResource, AsyncTeamsResource
     from .resources.team_members import TeamMembersResource, AsyncTeamMembersResource
+    from .resources.ticket_sales import TicketSalesResource, AsyncTicketSalesResource
     from .resources.matches.matches import MatchesResource, AsyncMatchesResource
     from .resources.coaching.coaching import CoachingResource, AsyncCoachingResource
 
@@ -229,6 +241,15 @@ class Believe(SyncAPIClient):
         return WebhooksResource(self)
 
     @cached_property
+    def ticket_sales(self) -> TicketSalesResource:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import TicketSalesResource
+
+        return TicketSalesResource(self)
+
+    @cached_property
     def with_raw_response(self) -> BelieveWithRawResponse:
         return BelieveWithRawResponse(self)
 
@@ -311,6 +332,25 @@ class Believe(SyncAPIClient):
     # Alias for `copy` for nicer inline usage, e.g.
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
+
+    def get_welcome(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> object:
+        """Get a warm welcome and overview of available endpoints."""
+        return self.get(
+            "/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
 
     @override
     def _make_status_error(
@@ -507,6 +547,15 @@ class AsyncBelieve(AsyncAPIClient):
         return AsyncWebhooksResource(self)
 
     @cached_property
+    def ticket_sales(self) -> AsyncTicketSalesResource:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import AsyncTicketSalesResource
+
+        return AsyncTicketSalesResource(self)
+
+    @cached_property
     def with_raw_response(self) -> AsyncBelieveWithRawResponse:
         return AsyncBelieveWithRawResponse(self)
 
@@ -590,6 +639,25 @@ class AsyncBelieve(AsyncAPIClient):
     # client.with_options(timeout=10).foo.create(...)
     with_options = copy
 
+    async def get_welcome(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> object:
+        """Get a warm welcome and overview of available endpoints."""
+        return await self.get(
+            "/",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
     @override
     def _make_status_error(
         self,
@@ -629,6 +697,10 @@ class BelieveWithRawResponse:
 
     def __init__(self, client: Believe) -> None:
         self._client = client
+
+        self.get_welcome = to_raw_response_wrapper(
+            client.get_welcome,
+        )
 
     @cached_property
     def characters(self) -> characters.CharactersResourceWithRawResponse:
@@ -735,12 +807,25 @@ class BelieveWithRawResponse:
 
         return WebhooksResourceWithRawResponse(self._client.webhooks)
 
+    @cached_property
+    def ticket_sales(self) -> ticket_sales.TicketSalesResourceWithRawResponse:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import TicketSalesResourceWithRawResponse
+
+        return TicketSalesResourceWithRawResponse(self._client.ticket_sales)
+
 
 class AsyncBelieveWithRawResponse:
     _client: AsyncBelieve
 
     def __init__(self, client: AsyncBelieve) -> None:
         self._client = client
+
+        self.get_welcome = async_to_raw_response_wrapper(
+            client.get_welcome,
+        )
 
     @cached_property
     def characters(self) -> characters.AsyncCharactersResourceWithRawResponse:
@@ -847,12 +932,25 @@ class AsyncBelieveWithRawResponse:
 
         return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
 
+    @cached_property
+    def ticket_sales(self) -> ticket_sales.AsyncTicketSalesResourceWithRawResponse:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import AsyncTicketSalesResourceWithRawResponse
+
+        return AsyncTicketSalesResourceWithRawResponse(self._client.ticket_sales)
+
 
 class BelieveWithStreamedResponse:
     _client: Believe
 
     def __init__(self, client: Believe) -> None:
         self._client = client
+
+        self.get_welcome = to_streamed_response_wrapper(
+            client.get_welcome,
+        )
 
     @cached_property
     def characters(self) -> characters.CharactersResourceWithStreamingResponse:
@@ -959,12 +1057,25 @@ class BelieveWithStreamedResponse:
 
         return WebhooksResourceWithStreamingResponse(self._client.webhooks)
 
+    @cached_property
+    def ticket_sales(self) -> ticket_sales.TicketSalesResourceWithStreamingResponse:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import TicketSalesResourceWithStreamingResponse
+
+        return TicketSalesResourceWithStreamingResponse(self._client.ticket_sales)
+
 
 class AsyncBelieveWithStreamedResponse:
     _client: AsyncBelieve
 
     def __init__(self, client: AsyncBelieve) -> None:
         self._client = client
+
+        self.get_welcome = async_to_streamed_response_wrapper(
+            client.get_welcome,
+        )
 
     @cached_property
     def characters(self) -> characters.AsyncCharactersResourceWithStreamingResponse:
@@ -1070,6 +1181,15 @@ class AsyncBelieveWithStreamedResponse:
         from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
 
         return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
+
+    @cached_property
+    def ticket_sales(self) -> ticket_sales.AsyncTicketSalesResourceWithStreamingResponse:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import AsyncTicketSalesResourceWithStreamingResponse
+
+        return AsyncTicketSalesResourceWithStreamingResponse(self._client.ticket_sales)
 
 
 Client = Believe
