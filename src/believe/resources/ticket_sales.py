@@ -8,7 +8,7 @@ import httpx
 
 from ..types import PurchaseMethod, ticket_sale_list_params, ticket_sale_create_params, ticket_sale_update_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -158,7 +158,7 @@ class TicketSalesResource(SyncAPIResource):
         if not ticket_sale_id:
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         return self._get(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -205,7 +205,7 @@ class TicketSalesResource(SyncAPIResource):
         if not ticket_sale_id:
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         return self._patch(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             body=maybe_transform(
                 {
                     "buyer_email": buyer_email,
@@ -321,7 +321,7 @@ class TicketSalesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -462,7 +462,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         if not ticket_sale_id:
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         return await self._get(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -509,7 +509,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         if not ticket_sale_id:
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         return await self._patch(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             body=await async_maybe_transform(
                 {
                     "buyer_email": buyer_email,
@@ -625,7 +625,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

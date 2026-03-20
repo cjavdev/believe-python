@@ -5,6 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Query, Headers, NotGiven, not_given
+from ..._utils import path_template
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -68,7 +69,7 @@ class CommentaryResource(SyncAPIResource):
         if not match_id:
             raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
         return self._post(
-            f"/matches/{match_id}/commentary/stream",
+            path_template("/matches/{match_id}/commentary/stream", match_id=match_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -126,7 +127,7 @@ class AsyncCommentaryResource(AsyncAPIResource):
         if not match_id:
             raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
         return await self._post(
-            f"/matches/{match_id}/commentary/stream",
+            path_template("/matches/{match_id}/commentary/stream", match_id=match_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

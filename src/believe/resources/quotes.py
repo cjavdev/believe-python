@@ -17,7 +17,7 @@ from ..types import (
     quote_list_by_character_params,
 )
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -162,7 +162,7 @@ class QuotesResource(SyncAPIResource):
         if not quote_id:
             raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
         return self._get(
-            f"/quotes/{quote_id}",
+            path_template("/quotes/{quote_id}", quote_id=quote_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -210,7 +210,7 @@ class QuotesResource(SyncAPIResource):
         if not quote_id:
             raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
         return self._patch(
-            f"/quotes/{quote_id}",
+            path_template("/quotes/{quote_id}", quote_id=quote_id),
             body=maybe_transform(
                 {
                     "character_id": character_id,
@@ -327,7 +327,7 @@ class QuotesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/quotes/{quote_id}",
+            path_template("/quotes/{quote_id}", quote_id=quote_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -416,7 +416,7 @@ class QuotesResource(SyncAPIResource):
         if not character_id:
             raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
         return self._get_api_list(
-            f"/quotes/characters/{character_id}",
+            path_template("/quotes/characters/{character_id}", character_id=character_id),
             page=SyncSkipLimitPage[Quote],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -468,7 +468,7 @@ class QuotesResource(SyncAPIResource):
         if not theme:
             raise ValueError(f"Expected a non-empty value for `theme` but received {theme!r}")
         return self._get_api_list(
-            f"/quotes/themes/{theme}",
+            path_template("/quotes/themes/{theme}", theme=theme),
             page=SyncSkipLimitPage[Quote],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -614,7 +614,7 @@ class AsyncQuotesResource(AsyncAPIResource):
         if not quote_id:
             raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
         return await self._get(
-            f"/quotes/{quote_id}",
+            path_template("/quotes/{quote_id}", quote_id=quote_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -662,7 +662,7 @@ class AsyncQuotesResource(AsyncAPIResource):
         if not quote_id:
             raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
         return await self._patch(
-            f"/quotes/{quote_id}",
+            path_template("/quotes/{quote_id}", quote_id=quote_id),
             body=await async_maybe_transform(
                 {
                     "character_id": character_id,
@@ -779,7 +779,7 @@ class AsyncQuotesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/quotes/{quote_id}",
+            path_template("/quotes/{quote_id}", quote_id=quote_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -868,7 +868,7 @@ class AsyncQuotesResource(AsyncAPIResource):
         if not character_id:
             raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
         return self._get_api_list(
-            f"/quotes/characters/{character_id}",
+            path_template("/quotes/characters/{character_id}", character_id=character_id),
             page=AsyncSkipLimitPage[Quote],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -920,7 +920,7 @@ class AsyncQuotesResource(AsyncAPIResource):
         if not theme:
             raise ValueError(f"Expected a non-empty value for `theme` but received {theme!r}")
         return self._get_api_list(
-            f"/quotes/themes/{theme}",
+            path_template("/quotes/themes/{theme}", theme=theme),
             page=AsyncSkipLimitPage[Quote],
             options=make_request_options(
                 extra_headers=extra_headers,
