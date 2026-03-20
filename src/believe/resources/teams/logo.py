@@ -7,7 +7,7 @@ from typing import Mapping, cast
 import httpx
 
 from ..._types import Body, Query, Headers, NoneType, NotGiven, FileTypes, not_given
-from ..._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from ..._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -75,7 +75,7 @@ class LogoResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/teams/{team_id}/logo/{file_id}",
+            path_template("/teams/{team_id}/logo/{file_id}", team_id=team_id, file_id=file_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -111,7 +111,7 @@ class LogoResource(SyncAPIResource):
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
         return self._get(
-            f"/teams/{team_id}/logo/{file_id}",
+            path_template("/teams/{team_id}/logo/{file_id}", team_id=team_id, file_id=file_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -154,7 +154,7 @@ class LogoResource(SyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
-            f"/teams/{team_id}/logo",
+            path_template("/teams/{team_id}/logo", team_id=team_id),
             body=maybe_transform(body, logo_upload_params.LogoUploadParams),
             files=files,
             options=make_request_options(
@@ -216,7 +216,7 @@ class AsyncLogoResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/teams/{team_id}/logo/{file_id}",
+            path_template("/teams/{team_id}/logo/{file_id}", team_id=team_id, file_id=file_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -252,7 +252,7 @@ class AsyncLogoResource(AsyncAPIResource):
         if not file_id:
             raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
         return await self._get(
-            f"/teams/{team_id}/logo/{file_id}",
+            path_template("/teams/{team_id}/logo/{file_id}", team_id=team_id, file_id=file_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -295,7 +295,7 @@ class AsyncLogoResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
-            f"/teams/{team_id}/logo",
+            path_template("/teams/{team_id}/logo", team_id=team_id),
             body=await async_maybe_transform(body, logo_upload_params.LogoUploadParams),
             files=files,
             options=make_request_options(
