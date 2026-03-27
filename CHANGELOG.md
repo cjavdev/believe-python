@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.4.0 (2026-03-27)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/cjavdev/believe-python/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** manual updates ([f17a394](https://github.com/cjavdev/believe-python/commit/f17a39401077639e13f2f2355a801256df4fd3d2))
+* **api:** manual updates ([e2d05c2](https://github.com/cjavdev/believe-python/commit/e2d05c2c31498f3c86c42b9e80d37318de3e1292))
+* **api:** manual updates ([2fc0526](https://github.com/cjavdev/believe-python/commit/2fc05260319470849b232f1e848dc850d46c7d24))
+* **api:** manual updates ([5be9815](https://github.com/cjavdev/believe-python/commit/5be981537b1fdcfcdad986d6906eaed327411a94))
+* **api:** manual updates ([ebbf0f6](https://github.com/cjavdev/believe-python/commit/ebbf0f6a758e3c0c9737da6d9e404d7b92a9d30c))
+* **api:** manual updates ([c75aab4](https://github.com/cjavdev/believe-python/commit/c75aab48cf321230dc8e5724f90a2e9aff186cf9))
+* **api:** manual updates ([6dc2e87](https://github.com/cjavdev/believe-python/commit/6dc2e87e2686a4019f9f4cd190d529e3f97d7e88))
+* **internal:** implement indices array format for query and form serialization ([fe2e2a2](https://github.com/cjavdev/believe-python/commit/fe2e2a25d1e4fc11caf4a5dc0234626799b4481e))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([3c90749](https://github.com/cjavdev/believe-python/commit/3c9074934f95c12d178bcd45414e151ccf129e35))
+* sanitize endpoint path params ([6e39c32](https://github.com/cjavdev/believe-python/commit/6e39c3277eff7fcedb8dd1836ffc0b1a95d9e4f4))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([40cc1a9](https://github.com/cjavdev/believe-python/commit/40cc1a9b1e81ef710fbb50a7b6013f8ac1382ddd))
+* **internal:** codegen related update ([635d3dd](https://github.com/cjavdev/believe-python/commit/635d3dd6f216a6fbbc08344b8583fab1df8045c5))
+* **internal:** tweak CI branches ([baf4bdc](https://github.com/cjavdev/believe-python/commit/baf4bdc143039c0369acb8c3f7ba33795237ee6c))
+* **internal:** update gitignore ([2929fd1](https://github.com/cjavdev/believe-python/commit/2929fd1c0f334362bea5b404d0e336081940072f))
+
 ## 0.3.0 (2026-03-09)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/cjavdev/believe-python/compare/v0.2.0...v0.3.0)

@@ -61,6 +61,7 @@ if TYPE_CHECKING:
         conflicts,
         characters,
         team_members,
+        ticket_sales,
     )
     from .resources.press import PressResource, AsyncPressResource
     from .resources.health import HealthResource, AsyncHealthResource
@@ -77,6 +78,7 @@ if TYPE_CHECKING:
     from .resources.characters import CharactersResource, AsyncCharactersResource
     from .resources.teams.teams import TeamsResource, AsyncTeamsResource
     from .resources.team_members import TeamMembersResource, AsyncTeamMembersResource
+    from .resources.ticket_sales import TicketSalesResource, AsyncTicketSalesResource
     from .resources.client.client import ClientResource, AsyncClientResource
     from .resources.matches.matches import MatchesResource, AsyncMatchesResource
     from .resources.coaching.coaching import CoachingResource, AsyncCoachingResource
@@ -243,6 +245,15 @@ class Believe(SyncAPIClient):
         from .resources.webhooks import WebhooksResource
 
         return WebhooksResource(self)
+
+    @cached_property
+    def ticket_sales(self) -> TicketSalesResource:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import TicketSalesResource
+
+        return TicketSalesResource(self)
 
     @cached_property
     def health(self) -> HealthResource:
@@ -560,6 +571,15 @@ class AsyncBelieve(AsyncAPIClient):
         return AsyncWebhooksResource(self)
 
     @cached_property
+    def ticket_sales(self) -> AsyncTicketSalesResource:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import AsyncTicketSalesResource
+
+        return AsyncTicketSalesResource(self)
+
+    @cached_property
     def health(self) -> AsyncHealthResource:
         from .resources.health import AsyncHealthResource
 
@@ -830,6 +850,15 @@ class BelieveWithRawResponse:
         return WebhooksResourceWithRawResponse(self._client.webhooks)
 
     @cached_property
+    def ticket_sales(self) -> ticket_sales.TicketSalesResourceWithRawResponse:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import TicketSalesResourceWithRawResponse
+
+        return TicketSalesResourceWithRawResponse(self._client.ticket_sales)
+
+    @cached_property
     def health(self) -> health.HealthResourceWithRawResponse:
         from .resources.health import HealthResourceWithRawResponse
 
@@ -962,6 +991,15 @@ class AsyncBelieveWithRawResponse:
         from .resources.webhooks import AsyncWebhooksResourceWithRawResponse
 
         return AsyncWebhooksResourceWithRawResponse(self._client.webhooks)
+
+    @cached_property
+    def ticket_sales(self) -> ticket_sales.AsyncTicketSalesResourceWithRawResponse:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import AsyncTicketSalesResourceWithRawResponse
+
+        return AsyncTicketSalesResourceWithRawResponse(self._client.ticket_sales)
 
     @cached_property
     def health(self) -> health.AsyncHealthResourceWithRawResponse:
@@ -1098,6 +1136,15 @@ class BelieveWithStreamedResponse:
         return WebhooksResourceWithStreamingResponse(self._client.webhooks)
 
     @cached_property
+    def ticket_sales(self) -> ticket_sales.TicketSalesResourceWithStreamingResponse:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import TicketSalesResourceWithStreamingResponse
+
+        return TicketSalesResourceWithStreamingResponse(self._client.ticket_sales)
+
+    @cached_property
     def health(self) -> health.HealthResourceWithStreamingResponse:
         from .resources.health import HealthResourceWithStreamingResponse
 
@@ -1230,6 +1277,15 @@ class AsyncBelieveWithStreamedResponse:
         from .resources.webhooks import AsyncWebhooksResourceWithStreamingResponse
 
         return AsyncWebhooksResourceWithStreamingResponse(self._client.webhooks)
+
+    @cached_property
+    def ticket_sales(self) -> ticket_sales.AsyncTicketSalesResourceWithStreamingResponse:
+        """
+        Ticket sales with 300 records for practicing pagination, filtering, and financial data
+        """
+        from .resources.ticket_sales import AsyncTicketSalesResourceWithStreamingResponse
+
+        return AsyncTicketSalesResourceWithStreamingResponse(self._client.ticket_sales)
 
     @cached_property
     def health(self) -> health.AsyncHealthResourceWithStreamingResponse:

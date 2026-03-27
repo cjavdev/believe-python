@@ -3,27 +3,24 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal
 
 import httpx
 
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from ..types import PurchaseMethod, ticket_sale_list_params, ticket_sale_create_params, ticket_sale_update_params
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from .._utils import path_template, maybe_transform, async_maybe_transform
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncSkipLimitPage, AsyncSkipLimitPage
-from ..._base_client import AsyncPaginator, make_request_options
-from ...types.client import ticket_sale_list_params, ticket_sale_create_params, ticket_sale_update_params
-from ...types.client.ticket_sale_list_response import TicketSaleListResponse
-from ...types.client.ticket_sale_create_response import TicketSaleCreateResponse
-from ...types.client.ticket_sale_update_response import TicketSaleUpdateResponse
-from ...types.client.ticket_sale_retrieve_response import TicketSaleRetrieveResponse
+from ..pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+from .._base_client import AsyncPaginator, make_request_options
+from ..types.ticket_sale import TicketSale
+from ..types.purchase_method import PurchaseMethod
 
 __all__ = ["TicketSalesResource", "AsyncTicketSalesResource"]
 
@@ -59,7 +56,7 @@ class TicketSalesResource(SyncAPIResource):
         currency: str,
         discount: str,
         match_id: str,
-        purchase_method: Literal["online", "box_office", "will_call", "phone"],
+        purchase_method: PurchaseMethod,
         quantity: int,
         subtotal: str,
         tax: str,
@@ -73,7 +70,7 @@ class TicketSalesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TicketSaleCreateResponse:
+    ) -> TicketSale:
         """
         Record a new ticket sale.
 
@@ -132,7 +129,7 @@ class TicketSalesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TicketSaleCreateResponse,
+            cast_to=TicketSale,
         )
 
     def retrieve(
@@ -145,7 +142,7 @@ class TicketSalesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TicketSaleRetrieveResponse:
+    ) -> TicketSale:
         """
         Retrieve detailed information about a specific ticket sale.
 
@@ -161,11 +158,11 @@ class TicketSalesResource(SyncAPIResource):
         if not ticket_sale_id:
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         return self._get(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TicketSaleRetrieveResponse,
+            cast_to=TicketSale,
         )
 
     def update(
@@ -178,7 +175,7 @@ class TicketSalesResource(SyncAPIResource):
         currency: Optional[str] | Omit = omit,
         discount: Optional[str] | Omit = omit,
         match_id: Optional[str] | Omit = omit,
-        purchase_method: Optional[Literal["online", "box_office", "will_call", "phone"]] | Omit = omit,
+        purchase_method: Optional[PurchaseMethod] | Omit = omit,
         quantity: Optional[int] | Omit = omit,
         subtotal: Optional[str] | Omit = omit,
         tax: Optional[str] | Omit = omit,
@@ -190,7 +187,7 @@ class TicketSalesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TicketSaleUpdateResponse:
+    ) -> TicketSale:
         """
         Update specific fields of an existing ticket sale.
 
@@ -208,7 +205,7 @@ class TicketSalesResource(SyncAPIResource):
         if not ticket_sale_id:
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         return self._patch(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             body=maybe_transform(
                 {
                     "buyer_email": buyer_email,
@@ -229,7 +226,7 @@ class TicketSalesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TicketSaleUpdateResponse,
+            cast_to=TicketSale,
         )
 
     def list(
@@ -239,7 +236,7 @@ class TicketSalesResource(SyncAPIResource):
         currency: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         match_id: Optional[str] | Omit = omit,
-        purchase_method: Optional[Literal["online", "box_office", "will_call", "phone"]] | Omit = omit,
+        purchase_method: Optional[PurchaseMethod] | Omit = omit,
         skip: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -247,7 +244,7 @@ class TicketSalesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[TicketSaleListResponse]:
+    ) -> SyncSkipLimitPage[TicketSale]:
         """Get a paginated list of all ticket sales with optional filtering.
 
         With 300
@@ -276,7 +273,7 @@ class TicketSalesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/ticket-sales",
-            page=SyncSkipLimitPage[TicketSaleListResponse],
+            page=SyncSkipLimitPage[TicketSale],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -294,7 +291,7 @@ class TicketSalesResource(SyncAPIResource):
                     ticket_sale_list_params.TicketSaleListParams,
                 ),
             ),
-            model=TicketSaleListResponse,
+            model=TicketSale,
         )
 
     def delete(
@@ -324,7 +321,7 @@ class TicketSalesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -363,7 +360,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         currency: str,
         discount: str,
         match_id: str,
-        purchase_method: Literal["online", "box_office", "will_call", "phone"],
+        purchase_method: PurchaseMethod,
         quantity: int,
         subtotal: str,
         tax: str,
@@ -377,7 +374,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TicketSaleCreateResponse:
+    ) -> TicketSale:
         """
         Record a new ticket sale.
 
@@ -436,7 +433,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TicketSaleCreateResponse,
+            cast_to=TicketSale,
         )
 
     async def retrieve(
@@ -449,7 +446,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TicketSaleRetrieveResponse:
+    ) -> TicketSale:
         """
         Retrieve detailed information about a specific ticket sale.
 
@@ -465,11 +462,11 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         if not ticket_sale_id:
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         return await self._get(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TicketSaleRetrieveResponse,
+            cast_to=TicketSale,
         )
 
     async def update(
@@ -482,7 +479,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         currency: Optional[str] | Omit = omit,
         discount: Optional[str] | Omit = omit,
         match_id: Optional[str] | Omit = omit,
-        purchase_method: Optional[Literal["online", "box_office", "will_call", "phone"]] | Omit = omit,
+        purchase_method: Optional[PurchaseMethod] | Omit = omit,
         quantity: Optional[int] | Omit = omit,
         subtotal: Optional[str] | Omit = omit,
         tax: Optional[str] | Omit = omit,
@@ -494,7 +491,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TicketSaleUpdateResponse:
+    ) -> TicketSale:
         """
         Update specific fields of an existing ticket sale.
 
@@ -512,7 +509,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         if not ticket_sale_id:
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         return await self._patch(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             body=await async_maybe_transform(
                 {
                     "buyer_email": buyer_email,
@@ -533,7 +530,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TicketSaleUpdateResponse,
+            cast_to=TicketSale,
         )
 
     def list(
@@ -543,7 +540,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         currency: Optional[str] | Omit = omit,
         limit: int | Omit = omit,
         match_id: Optional[str] | Omit = omit,
-        purchase_method: Optional[Literal["online", "box_office", "will_call", "phone"]] | Omit = omit,
+        purchase_method: Optional[PurchaseMethod] | Omit = omit,
         skip: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -551,7 +548,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[TicketSaleListResponse, AsyncSkipLimitPage[TicketSaleListResponse]]:
+    ) -> AsyncPaginator[TicketSale, AsyncSkipLimitPage[TicketSale]]:
         """Get a paginated list of all ticket sales with optional filtering.
 
         With 300
@@ -580,7 +577,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/ticket-sales",
-            page=AsyncSkipLimitPage[TicketSaleListResponse],
+            page=AsyncSkipLimitPage[TicketSale],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -598,7 +595,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
                     ticket_sale_list_params.TicketSaleListParams,
                 ),
             ),
-            model=TicketSaleListResponse,
+            model=TicketSale,
         )
 
     async def delete(
@@ -628,7 +625,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `ticket_sale_id` but received {ticket_sale_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/ticket-sales/{ticket_sale_id}",
+            path_template("/ticket-sales/{ticket_sale_id}", ticket_sale_id=ticket_sale_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
