@@ -2,21 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
+from typing_extensions import TypedDict, Literal, Required, Annotated, TypeAliasType, TypeAlias
+
+from typing import Optional, Union
+
 from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = [
-    "WebhookTriggerEventParams",
-    "Payload",
-    "PayloadMatchCompletedPayload",
-    "PayloadMatchCompletedPayloadData",
-    "PayloadTeamMemberTransferredPayload",
-    "PayloadTeamMemberTransferredPayloadData",
-]
-
+__all__ = ["WebhookTriggerEventParams", "Payload", "PayloadMatchCompletedPayload", "PayloadMatchCompletedPayloadData", "PayloadTeamMemberTransferredPayload", "PayloadTeamMemberTransferredPayloadData"]
 
 class WebhookTriggerEventParams(TypedDict, total=False):
     event_type: Required[Literal["match.completed", "team_member.transferred"]]
@@ -25,17 +19,15 @@ class WebhookTriggerEventParams(TypedDict, total=False):
     payload: Optional[Payload]
     """Optional event payload. If not provided, a sample payload will be generated."""
 
-
 class PayloadMatchCompletedPayloadData(TypedDict, total=False):
     """Event data"""
-
     away_score: Required[int]
     """Final away team score"""
 
     away_team_id: Required[str]
     """Away team ID"""
 
-    completed_at: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
+    completed_at: Required[Annotated[Union[str, datetime], PropertyInfo(format = "iso8601")]]
     """When the match completed"""
 
     home_score: Required[int]
@@ -62,20 +54,16 @@ class PayloadMatchCompletedPayloadData(TypedDict, total=False):
     man_of_the_match: Optional[str]
     """Player of the match (if awarded)"""
 
-
 class PayloadMatchCompletedPayload(TypedDict, total=False):
     """Payload for match.completed event."""
-
     data: Required[PayloadMatchCompletedPayloadData]
     """Event data"""
 
     event_type: Literal["match.completed"]
     """The type of webhook event"""
 
-
 class PayloadTeamMemberTransferredPayloadData(TypedDict, total=False):
     """Event data"""
-
     character_id: Required[str]
     """ID of the character (links to /characters)"""
 
@@ -112,15 +100,12 @@ class PayloadTeamMemberTransferredPayloadData(TypedDict, total=False):
     years_with_previous_team: Optional[int]
     """Years spent with previous team"""
 
-
 class PayloadTeamMemberTransferredPayload(TypedDict, total=False):
     """Payload for team_member.transferred event."""
-
     data: Required[PayloadTeamMemberTransferredPayloadData]
     """Event data"""
 
     event_type: Literal["team_member.transferred"]
     """The type of webhook event"""
-
 
 Payload: TypeAlias = Union[PayloadMatchCompletedPayload, PayloadTeamMemberTransferredPayload]

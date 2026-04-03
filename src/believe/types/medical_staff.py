@@ -1,17 +1,17 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
-from typing_extensions import Literal
-
 from .._models import BaseModel
+
 from .medical_specialty import MedicalSpecialty
+
+from typing import Optional, List
+
+from typing_extensions import Literal
 
 __all__ = ["MedicalStaff"]
 
-
 class MedicalStaff(BaseModel):
     """Full medical staff model with ID."""
-
     id: str
     """Unique identifier for this team membership"""
 

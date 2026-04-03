@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import TypedDict
+
+from typing import Optional
 
 from .position import Position
 
 __all__ = ["TeamMemberListPlayersParams"]
-
 
 class TeamMemberListPlayersParams(TypedDict, total=False):
     limit: int

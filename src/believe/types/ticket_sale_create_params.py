@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict, Required
 
 from .purchase_method import PurchaseMethod
 
-__all__ = ["TicketSaleCreateParams"]
+from typing import Optional
 
+__all__ = ["TicketSaleCreateParams"]
 
 class TicketSaleCreateParams(TypedDict, total=False):
     buyer_name: Required[str]

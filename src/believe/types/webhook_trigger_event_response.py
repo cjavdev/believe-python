@@ -1,16 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
-from typing_extensions import Literal
-
 from .._models import BaseModel
+
+from typing import Optional, List
+
+from typing_extensions import Literal
 
 __all__ = ["WebhookTriggerEventResponse", "Delivery"]
 
-
 class Delivery(BaseModel):
     """Result of delivering a webhook to a single endpoint."""
-
     success: bool
     """Whether delivery was successful"""
 
@@ -26,10 +25,8 @@ class Delivery(BaseModel):
     status_code: Optional[int] = None
     """HTTP status code from the endpoint"""
 
-
 class WebhookTriggerEventResponse(BaseModel):
     """Response after triggering webhook events."""
-
     deliveries: List[Delivery]
     """Results of webhook deliveries"""
 

@@ -1,6 +1,6 @@
 [project]
 name = "believe"
-version = "0.4.0"
+version = "0.0.1"
 description = "The official Python library for the believe API"
 dynamic = ["readme"]
 license = "MIT"

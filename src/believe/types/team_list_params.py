@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import TypedDict
+
+from typing import Optional
 
 from .league import League
 
 __all__ = ["TeamListParams"]
-
 
 class TeamListParams(TypedDict, total=False):
     league: Optional[League]

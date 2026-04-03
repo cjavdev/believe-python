@@ -2,19 +2,16 @@
 
 from __future__ import annotations
 
-from .ws import (
-    WsResource,
-    AsyncWsResource,
-    WsResourceWithRawResponse,
-    AsyncWsResourceWithRawResponse,
-    WsResourceWithStreamingResponse,
-    AsyncWsResourceWithStreamingResponse,
-)
-from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 
-__all__ = ["ClientResource", "AsyncClientResource"]
+from .ws import WsResource, AsyncWsResource, WsResourceWithRawResponse, AsyncWsResourceWithRawResponse, WsResourceWithStreamingResponse, AsyncWsResourceWithStreamingResponse
 
+from ..._compat import cached_property
+
+from typing_extensions import Literal, overload
+from ..._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+
+__all__ = ["ClientResource", "AsyncClientResource"]
 
 class ClientResource(SyncAPIResource):
     @cached_property
@@ -43,7 +40,6 @@ class ClientResource(SyncAPIResource):
         """
         return ClientResourceWithStreamingResponse(self)
 
-
 class AsyncClientResource(AsyncAPIResource):
     @cached_property
     def ws(self) -> AsyncWsResource:
@@ -71,7 +67,6 @@ class AsyncClientResource(AsyncAPIResource):
         """
         return AsyncClientResourceWithStreamingResponse(self)
 
-
 class ClientResourceWithRawResponse:
     def __init__(self, client: ClientResource) -> None:
         self._client = client
@@ -82,7 +77,6 @@ class ClientResourceWithRawResponse:
         WebSocket endpoints for real-time bidirectional communication - Live match simulation
         """
         return WsResourceWithRawResponse(self._client.ws)
-
 
 class AsyncClientResourceWithRawResponse:
     def __init__(self, client: AsyncClientResource) -> None:
@@ -95,7 +89,6 @@ class AsyncClientResourceWithRawResponse:
         """
         return AsyncWsResourceWithRawResponse(self._client.ws)
 
-
 class ClientResourceWithStreamingResponse:
     def __init__(self, client: ClientResource) -> None:
         self._client = client
@@ -106,7 +99,6 @@ class ClientResourceWithStreamingResponse:
         WebSocket endpoints for real-time bidirectional communication - Live match simulation
         """
         return WsResourceWithStreamingResponse(self._client.ws)
-
 
 class AsyncClientResourceWithStreamingResponse:
     def __init__(self, client: AsyncClientResource) -> None:

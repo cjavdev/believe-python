@@ -1,16 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
-
 from .._models import BaseModel
+
 from .purchase_method import PurchaseMethod
+
+from typing import Optional
 
 __all__ = ["TicketSale"]
 
-
 class TicketSale(BaseModel):
     """Full ticket sale model with ID."""
-
     id: str
     """Unique identifier"""
 

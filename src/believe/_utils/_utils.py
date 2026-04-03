@@ -21,7 +21,7 @@ from typing_extensions import TypeGuard
 
 import sniffio
 
-from .._types import Omit, NotGiven, FileTypes, HeadersLike
+from .._types import NotGiven, FileTypes, HeadersLike, Omit
 
 _T = TypeVar("_T")
 _TupleT = TypeVar("_TupleT", bound=Tuple[object, ...])

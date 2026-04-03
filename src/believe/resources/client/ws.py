@@ -4,25 +4,25 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import Body, Query, Headers, NoneType, NotGiven, not_given
-from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
+
+from ..._compat import cached_property
+
 from ..._base_client import make_request_options
 
-__all__ = ["WsResource", "AsyncWsResource"]
+from ..._types import NotGiven
 
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
+
+from typing_extensions import Literal, overload
+from ..._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+
+__all__ = ["WsResource", "AsyncWsResource"]
 
 class WsResource(SyncAPIResource):
     """
     WebSocket endpoints for real-time bidirectional communication - Live match simulation
     """
-
     @cached_property
     def with_raw_response(self) -> WsResourceWithRawResponse:
         """
@@ -42,16 +42,14 @@ class WsResource(SyncAPIResource):
         """
         return WsResourceWithStreamingResponse(self)
 
-    def test(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    def test(self,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Simple WebSocket test endpoint for connectivity testing.
 
@@ -71,18 +69,14 @@ class WsResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
             "/ws/test",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
-
 
 class AsyncWsResource(AsyncAPIResource):
     """
     WebSocket endpoints for real-time bidirectional communication - Live match simulation
     """
-
     @cached_property
     def with_raw_response(self) -> AsyncWsResourceWithRawResponse:
         """
@@ -102,16 +96,14 @@ class AsyncWsResource(AsyncAPIResource):
         """
         return AsyncWsResourceWithStreamingResponse(self)
 
-    async def test(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    async def test(self,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Simple WebSocket test endpoint for connectivity testing.
 
@@ -131,12 +123,9 @@ class AsyncWsResource(AsyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
             "/ws/test",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
-
 
 class WsResourceWithRawResponse:
     def __init__(self, ws: WsResource) -> None:
@@ -146,7 +135,6 @@ class WsResourceWithRawResponse:
             ws.test,
         )
 
-
 class AsyncWsResourceWithRawResponse:
     def __init__(self, ws: AsyncWsResource) -> None:
         self._ws = ws
@@ -155,7 +143,6 @@ class AsyncWsResourceWithRawResponse:
             ws.test,
         )
 
-
 class WsResourceWithStreamingResponse:
     def __init__(self, ws: WsResource) -> None:
         self._ws = ws
@@ -163,7 +150,6 @@ class WsResourceWithStreamingResponse:
         self.test = to_streamed_response_wrapper(
             ws.test,
         )
-
 
 class AsyncWsResourceWithStreamingResponse:
     def __init__(self, ws: AsyncWsResource) -> None:
