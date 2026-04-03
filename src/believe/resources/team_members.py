@@ -18,7 +18,7 @@ from ..types import (
     team_member_list_players_params,
 )
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -174,7 +174,7 @@ class TeamMembersResource(SyncAPIResource):
         return cast(
             TeamMemberRetrieveResponse,
             self._get(
-                f"/team-members/{member_id}",
+                path_template("/team-members/{member_id}", member_id=member_id),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -216,7 +216,7 @@ class TeamMembersResource(SyncAPIResource):
         return cast(
             TeamMemberUpdateResponse,
             self._patch(
-                f"/team-members/{member_id}",
+                path_template("/team-members/{member_id}", member_id=member_id),
                 body=maybe_transform(updates, team_member_update_params.TeamMemberUpdateParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -314,7 +314,7 @@ class TeamMembersResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `member_id` but received {member_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/team-members/{member_id}",
+            path_template("/team-members/{member_id}", member_id=member_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -620,7 +620,7 @@ class AsyncTeamMembersResource(AsyncAPIResource):
         return cast(
             TeamMemberRetrieveResponse,
             await self._get(
-                f"/team-members/{member_id}",
+                path_template("/team-members/{member_id}", member_id=member_id),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
                 ),
@@ -662,7 +662,7 @@ class AsyncTeamMembersResource(AsyncAPIResource):
         return cast(
             TeamMemberUpdateResponse,
             await self._patch(
-                f"/team-members/{member_id}",
+                path_template("/team-members/{member_id}", member_id=member_id),
                 body=await async_maybe_transform(updates, team_member_update_params.TeamMemberUpdateParams),
                 options=make_request_options(
                     extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -760,7 +760,7 @@ class AsyncTeamMembersResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `member_id` but received {member_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/team-members/{member_id}",
+            path_template("/team-members/{member_id}", member_id=member_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
