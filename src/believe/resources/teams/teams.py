@@ -2,45 +2,57 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-
 import httpx
 
-from .logo import (
-    LogoResource,
-    AsyncLogoResource,
-    LogoResourceWithRawResponse,
-    AsyncLogoResourceWithRawResponse,
-    LogoResourceWithStreamingResponse,
-    AsyncLogoResourceWithStreamingResponse,
-)
-from ...types import League, team_list_params, team_create_params, team_update_params
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
-from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from ...pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
+from .logo import LogoResource, AsyncLogoResource, LogoResourceWithRawResponse, AsyncLogoResourceWithRawResponse, LogoResourceWithStreamingResponse, AsyncLogoResourceWithStreamingResponse
+
+from ..._compat import cached_property
+
 from ...types.team import Team
-from ..._base_client import AsyncPaginator, make_request_options
+
+from ..._utils import maybe_transform, path_template, async_maybe_transform
+
+from ..._base_client import make_request_options, AsyncPaginator
+
 from ...types.league import League
+
 from ...types.team_values_param import TeamValuesParam
+
+from typing import Union, Optional
+
+from ..._types import Omit, omit, SequenceNotStr, NotGiven
+
 from ...types.geo_location_param import GeoLocationParam
-from ...types.team_get_rivals_response import TeamGetRivalsResponse
-from ...types.team_list_logos_response import TeamListLogosResponse
+
+from ...pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
 from ...types.team_get_culture_response import TeamGetCultureResponse
+
+from ...types.team_get_rivals_response import TeamGetRivalsResponse
+
+from ...types.team_list_logos_response import TeamListLogosResponse
+
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
+
+from typing_extensions import Literal, overload
+from ..._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+from ...types import team_create_params
+from ...types import team_update_params
+from ...types import team_list_params
+from ...types import League
+from ...types import TeamValues
+from ...types import GeoLocation
+from ...types import League
+from ...types import GeoLocation
+from ...types import TeamValues
+from ...types import League
 
 __all__ = ["TeamsResource", "AsyncTeamsResource"]
 
-
 class TeamsResource(SyncAPIResource):
     """Operations related to football teams"""
-
     @cached_property
     def logo(self) -> LogoResource:
         """Operations related to football teams"""
@@ -65,33 +77,31 @@ class TeamsResource(SyncAPIResource):
         """
         return TeamsResourceWithStreamingResponse(self)
 
-    def create(
-        self,
-        *,
-        culture_score: int,
-        founded_year: int,
-        league: League,
-        name: str,
-        stadium: str,
-        values: TeamValuesParam,
-        annual_budget_gbp: Union[float, str, None] | Omit = omit,
-        average_attendance: Optional[float] | Omit = omit,
-        contact_email: Optional[str] | Omit = omit,
-        is_active: bool | Omit = omit,
-        nickname: Optional[str] | Omit = omit,
-        primary_color: Optional[str] | Omit = omit,
-        rival_teams: SequenceNotStr[str] | Omit = omit,
-        secondary_color: Optional[str] | Omit = omit,
-        stadium_location: Optional[GeoLocationParam] | Omit = omit,
-        website: Optional[str] | Omit = omit,
-        win_percentage: Optional[float] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Team:
+    def create(self,
+    *,
+    culture_score: int,
+    founded_year: int,
+    league: League,
+    name: str,
+    stadium: str,
+    values: TeamValuesParam,
+    annual_budget_gbp: Union[float, str, None] | Omit = omit,
+    average_attendance: Optional[float] | Omit = omit,
+    contact_email: Optional[str] | Omit = omit,
+    is_active: bool | Omit = omit,
+    nickname: Optional[str] | Omit = omit,
+    primary_color: Optional[str] | Omit = omit,
+    rival_teams: SequenceNotStr[str] | Omit = omit,
+    secondary_color: Optional[str] | Omit = omit,
+    stadium_location: Optional[GeoLocationParam] | Omit = omit,
+    website: Optional[str] | Omit = omit,
+    win_percentage: Optional[float] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Team:
         """
         Add a new team to the league.
 
@@ -140,45 +150,38 @@ class TeamsResource(SyncAPIResource):
         """
         return self._post(
             "/teams",
-            body=maybe_transform(
-                {
-                    "culture_score": culture_score,
-                    "founded_year": founded_year,
-                    "league": league,
-                    "name": name,
-                    "stadium": stadium,
-                    "values": values,
-                    "annual_budget_gbp": annual_budget_gbp,
-                    "average_attendance": average_attendance,
-                    "contact_email": contact_email,
-                    "is_active": is_active,
-                    "nickname": nickname,
-                    "primary_color": primary_color,
-                    "rival_teams": rival_teams,
-                    "secondary_color": secondary_color,
-                    "stadium_location": stadium_location,
-                    "website": website,
-                    "win_percentage": win_percentage,
-                },
-                team_create_params.TeamCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "culture_score": culture_score,
+                "founded_year": founded_year,
+                "league": league,
+                "name": name,
+                "stadium": stadium,
+                "values": values,
+                "annual_budget_gbp": annual_budget_gbp,
+                "average_attendance": average_attendance,
+                "contact_email": contact_email,
+                "is_active": is_active,
+                "nickname": nickname,
+                "primary_color": primary_color,
+                "rival_teams": rival_teams,
+                "secondary_color": secondary_color,
+                "stadium_location": stadium_location,
+                "website": website,
+                "win_percentage": win_percentage,
+            }, team_create_params.TeamCreateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Team,
         )
 
-    def retrieve(
-        self,
-        team_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Team:
+    def retrieve(self,
+    team_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Team:
         """
         Retrieve detailed information about a specific team.
 
@@ -192,43 +195,41 @@ class TeamsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         return self._get(
             path_template("/teams/{team_id}", team_id=team_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Team,
         )
 
-    def update(
-        self,
-        team_id: str,
-        *,
-        annual_budget_gbp: Union[float, str, None] | Omit = omit,
-        average_attendance: Optional[float] | Omit = omit,
-        contact_email: Optional[str] | Omit = omit,
-        culture_score: Optional[int] | Omit = omit,
-        founded_year: Optional[int] | Omit = omit,
-        is_active: Optional[bool] | Omit = omit,
-        league: Optional[League] | Omit = omit,
-        name: Optional[str] | Omit = omit,
-        nickname: Optional[str] | Omit = omit,
-        primary_color: Optional[str] | Omit = omit,
-        rival_teams: Optional[SequenceNotStr[str]] | Omit = omit,
-        secondary_color: Optional[str] | Omit = omit,
-        stadium: Optional[str] | Omit = omit,
-        stadium_location: Optional[GeoLocationParam] | Omit = omit,
-        values: Optional[TeamValuesParam] | Omit = omit,
-        website: Optional[str] | Omit = omit,
-        win_percentage: Optional[float] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Team:
+    def update(self,
+    team_id: str,
+    *,
+    annual_budget_gbp: Union[float, str, None] | Omit = omit,
+    average_attendance: Optional[float] | Omit = omit,
+    contact_email: Optional[str] | Omit = omit,
+    culture_score: Optional[int] | Omit = omit,
+    founded_year: Optional[int] | Omit = omit,
+    is_active: Optional[bool] | Omit = omit,
+    league: Optional[League] | Omit = omit,
+    name: Optional[str] | Omit = omit,
+    nickname: Optional[str] | Omit = omit,
+    primary_color: Optional[str] | Omit = omit,
+    rival_teams: Optional[SequenceNotStr[str]] | Omit = omit,
+    secondary_color: Optional[str] | Omit = omit,
+    stadium: Optional[str] | Omit = omit,
+    stadium_location: Optional[GeoLocationParam] | Omit = omit,
+    values: Optional[TeamValuesParam] | Omit = omit,
+    website: Optional[str] | Omit = omit,
+    win_percentage: Optional[float] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Team:
         """
         Update specific fields of an existing team.
 
@@ -248,51 +249,46 @@ class TeamsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         return self._patch(
             path_template("/teams/{team_id}", team_id=team_id),
-            body=maybe_transform(
-                {
-                    "annual_budget_gbp": annual_budget_gbp,
-                    "average_attendance": average_attendance,
-                    "contact_email": contact_email,
-                    "culture_score": culture_score,
-                    "founded_year": founded_year,
-                    "is_active": is_active,
-                    "league": league,
-                    "name": name,
-                    "nickname": nickname,
-                    "primary_color": primary_color,
-                    "rival_teams": rival_teams,
-                    "secondary_color": secondary_color,
-                    "stadium": stadium,
-                    "stadium_location": stadium_location,
-                    "values": values,
-                    "website": website,
-                    "win_percentage": win_percentage,
-                },
-                team_update_params.TeamUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "annual_budget_gbp": annual_budget_gbp,
+                "average_attendance": average_attendance,
+                "contact_email": contact_email,
+                "culture_score": culture_score,
+                "founded_year": founded_year,
+                "is_active": is_active,
+                "league": league,
+                "name": name,
+                "nickname": nickname,
+                "primary_color": primary_color,
+                "rival_teams": rival_teams,
+                "secondary_color": secondary_color,
+                "stadium": stadium,
+                "stadium_location": stadium_location,
+                "values": values,
+                "website": website,
+                "win_percentage": win_percentage,
+            }, team_update_params.TeamUpdateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Team,
         )
 
-    def list(
-        self,
-        *,
-        league: Optional[League] | Omit = omit,
-        limit: int | Omit = omit,
-        min_culture_score: Optional[int] | Omit = omit,
-        skip: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[Team]:
+    def list(self,
+    *,
+    league: Optional[League] | Omit = omit,
+    limit: int | Omit = omit,
+    min_culture_score: Optional[int] | Omit = omit,
+    skip: int | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> SyncSkipLimitPage[Team]:
         """
         Get a paginated list of all teams with optional filtering by league or culture
         score.
@@ -316,36 +312,25 @@ class TeamsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/teams",
-            page=SyncSkipLimitPage[Team],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "league": league,
-                        "limit": limit,
-                        "min_culture_score": min_culture_score,
-                        "skip": skip,
-                    },
-                    team_list_params.TeamListParams,
-                ),
-            ),
+            page = SyncSkipLimitPage[Team],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "league": league,
+                "limit": limit,
+                "min_culture_score": min_culture_score,
+                "skip": skip,
+            }, team_list_params.TeamListParams)),
             model=Team,
         )
 
-    def delete(
-        self,
-        team_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    def delete(self,
+    team_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Remove a team from the database (relegation to oblivion).
 
@@ -359,27 +344,25 @@ class TeamsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             path_template("/teams/{team_id}", team_id=team_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    def get_culture(
-        self,
-        team_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamGetCultureResponse:
+    def get_culture(self,
+    team_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamGetCultureResponse:
         """
         Get detailed culture and values information for a team.
 
@@ -393,26 +376,24 @@ class TeamsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         return self._get(
             path_template("/teams/{team_id}/culture", team_id=team_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=TeamGetCultureResponse,
         )
 
-    def get_rivals(
-        self,
-        team_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamGetRivalsResponse:
+    def get_rivals(self,
+    team_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamGetRivalsResponse:
         """
         Get all rival teams for a specific team.
 
@@ -426,26 +407,24 @@ class TeamsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         return self._get(
             path_template("/teams/{team_id}/rivals", team_id=team_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=TeamGetRivalsResponse,
         )
 
-    def list_logos(
-        self,
-        team_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamListLogosResponse:
+    def list_logos(self,
+    team_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamListLogosResponse:
         """
         List all uploaded logos for a team.
 
@@ -459,19 +438,17 @@ class TeamsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         return self._get(
             path_template("/teams/{team_id}/logos", team_id=team_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=TeamListLogosResponse,
         )
 
-
 class AsyncTeamsResource(AsyncAPIResource):
     """Operations related to football teams"""
-
     @cached_property
     def logo(self) -> AsyncLogoResource:
         """Operations related to football teams"""
@@ -496,33 +473,31 @@ class AsyncTeamsResource(AsyncAPIResource):
         """
         return AsyncTeamsResourceWithStreamingResponse(self)
 
-    async def create(
-        self,
-        *,
-        culture_score: int,
-        founded_year: int,
-        league: League,
-        name: str,
-        stadium: str,
-        values: TeamValuesParam,
-        annual_budget_gbp: Union[float, str, None] | Omit = omit,
-        average_attendance: Optional[float] | Omit = omit,
-        contact_email: Optional[str] | Omit = omit,
-        is_active: bool | Omit = omit,
-        nickname: Optional[str] | Omit = omit,
-        primary_color: Optional[str] | Omit = omit,
-        rival_teams: SequenceNotStr[str] | Omit = omit,
-        secondary_color: Optional[str] | Omit = omit,
-        stadium_location: Optional[GeoLocationParam] | Omit = omit,
-        website: Optional[str] | Omit = omit,
-        win_percentage: Optional[float] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Team:
+    async def create(self,
+    *,
+    culture_score: int,
+    founded_year: int,
+    league: League,
+    name: str,
+    stadium: str,
+    values: TeamValuesParam,
+    annual_budget_gbp: Union[float, str, None] | Omit = omit,
+    average_attendance: Optional[float] | Omit = omit,
+    contact_email: Optional[str] | Omit = omit,
+    is_active: bool | Omit = omit,
+    nickname: Optional[str] | Omit = omit,
+    primary_color: Optional[str] | Omit = omit,
+    rival_teams: SequenceNotStr[str] | Omit = omit,
+    secondary_color: Optional[str] | Omit = omit,
+    stadium_location: Optional[GeoLocationParam] | Omit = omit,
+    website: Optional[str] | Omit = omit,
+    win_percentage: Optional[float] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Team:
         """
         Add a new team to the league.
 
@@ -571,45 +546,38 @@ class AsyncTeamsResource(AsyncAPIResource):
         """
         return await self._post(
             "/teams",
-            body=await async_maybe_transform(
-                {
-                    "culture_score": culture_score,
-                    "founded_year": founded_year,
-                    "league": league,
-                    "name": name,
-                    "stadium": stadium,
-                    "values": values,
-                    "annual_budget_gbp": annual_budget_gbp,
-                    "average_attendance": average_attendance,
-                    "contact_email": contact_email,
-                    "is_active": is_active,
-                    "nickname": nickname,
-                    "primary_color": primary_color,
-                    "rival_teams": rival_teams,
-                    "secondary_color": secondary_color,
-                    "stadium_location": stadium_location,
-                    "website": website,
-                    "win_percentage": win_percentage,
-                },
-                team_create_params.TeamCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "culture_score": culture_score,
+                "founded_year": founded_year,
+                "league": league,
+                "name": name,
+                "stadium": stadium,
+                "values": values,
+                "annual_budget_gbp": annual_budget_gbp,
+                "average_attendance": average_attendance,
+                "contact_email": contact_email,
+                "is_active": is_active,
+                "nickname": nickname,
+                "primary_color": primary_color,
+                "rival_teams": rival_teams,
+                "secondary_color": secondary_color,
+                "stadium_location": stadium_location,
+                "website": website,
+                "win_percentage": win_percentage,
+            }, team_create_params.TeamCreateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Team,
         )
 
-    async def retrieve(
-        self,
-        team_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Team:
+    async def retrieve(self,
+    team_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Team:
         """
         Retrieve detailed information about a specific team.
 
@@ -623,43 +591,41 @@ class AsyncTeamsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         return await self._get(
             path_template("/teams/{team_id}", team_id=team_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Team,
         )
 
-    async def update(
-        self,
-        team_id: str,
-        *,
-        annual_budget_gbp: Union[float, str, None] | Omit = omit,
-        average_attendance: Optional[float] | Omit = omit,
-        contact_email: Optional[str] | Omit = omit,
-        culture_score: Optional[int] | Omit = omit,
-        founded_year: Optional[int] | Omit = omit,
-        is_active: Optional[bool] | Omit = omit,
-        league: Optional[League] | Omit = omit,
-        name: Optional[str] | Omit = omit,
-        nickname: Optional[str] | Omit = omit,
-        primary_color: Optional[str] | Omit = omit,
-        rival_teams: Optional[SequenceNotStr[str]] | Omit = omit,
-        secondary_color: Optional[str] | Omit = omit,
-        stadium: Optional[str] | Omit = omit,
-        stadium_location: Optional[GeoLocationParam] | Omit = omit,
-        values: Optional[TeamValuesParam] | Omit = omit,
-        website: Optional[str] | Omit = omit,
-        win_percentage: Optional[float] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Team:
+    async def update(self,
+    team_id: str,
+    *,
+    annual_budget_gbp: Union[float, str, None] | Omit = omit,
+    average_attendance: Optional[float] | Omit = omit,
+    contact_email: Optional[str] | Omit = omit,
+    culture_score: Optional[int] | Omit = omit,
+    founded_year: Optional[int] | Omit = omit,
+    is_active: Optional[bool] | Omit = omit,
+    league: Optional[League] | Omit = omit,
+    name: Optional[str] | Omit = omit,
+    nickname: Optional[str] | Omit = omit,
+    primary_color: Optional[str] | Omit = omit,
+    rival_teams: Optional[SequenceNotStr[str]] | Omit = omit,
+    secondary_color: Optional[str] | Omit = omit,
+    stadium: Optional[str] | Omit = omit,
+    stadium_location: Optional[GeoLocationParam] | Omit = omit,
+    values: Optional[TeamValuesParam] | Omit = omit,
+    website: Optional[str] | Omit = omit,
+    win_percentage: Optional[float] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Team:
         """
         Update specific fields of an existing team.
 
@@ -679,51 +645,46 @@ class AsyncTeamsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         return await self._patch(
             path_template("/teams/{team_id}", team_id=team_id),
-            body=await async_maybe_transform(
-                {
-                    "annual_budget_gbp": annual_budget_gbp,
-                    "average_attendance": average_attendance,
-                    "contact_email": contact_email,
-                    "culture_score": culture_score,
-                    "founded_year": founded_year,
-                    "is_active": is_active,
-                    "league": league,
-                    "name": name,
-                    "nickname": nickname,
-                    "primary_color": primary_color,
-                    "rival_teams": rival_teams,
-                    "secondary_color": secondary_color,
-                    "stadium": stadium,
-                    "stadium_location": stadium_location,
-                    "values": values,
-                    "website": website,
-                    "win_percentage": win_percentage,
-                },
-                team_update_params.TeamUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "annual_budget_gbp": annual_budget_gbp,
+                "average_attendance": average_attendance,
+                "contact_email": contact_email,
+                "culture_score": culture_score,
+                "founded_year": founded_year,
+                "is_active": is_active,
+                "league": league,
+                "name": name,
+                "nickname": nickname,
+                "primary_color": primary_color,
+                "rival_teams": rival_teams,
+                "secondary_color": secondary_color,
+                "stadium": stadium,
+                "stadium_location": stadium_location,
+                "values": values,
+                "website": website,
+                "win_percentage": win_percentage,
+            }, team_update_params.TeamUpdateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Team,
         )
 
-    def list(
-        self,
-        *,
-        league: Optional[League] | Omit = omit,
-        limit: int | Omit = omit,
-        min_culture_score: Optional[int] | Omit = omit,
-        skip: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Team, AsyncSkipLimitPage[Team]]:
+    def list(self,
+    *,
+    league: Optional[League] | Omit = omit,
+    limit: int | Omit = omit,
+    min_culture_score: Optional[int] | Omit = omit,
+    skip: int | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> AsyncPaginator[Team, AsyncSkipLimitPage[Team]]:
         """
         Get a paginated list of all teams with optional filtering by league or culture
         score.
@@ -747,36 +708,25 @@ class AsyncTeamsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/teams",
-            page=AsyncSkipLimitPage[Team],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "league": league,
-                        "limit": limit,
-                        "min_culture_score": min_culture_score,
-                        "skip": skip,
-                    },
-                    team_list_params.TeamListParams,
-                ),
-            ),
+            page = AsyncSkipLimitPage[Team],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "league": league,
+                "limit": limit,
+                "min_culture_score": min_culture_score,
+                "skip": skip,
+            }, team_list_params.TeamListParams)),
             model=Team,
         )
 
-    async def delete(
-        self,
-        team_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    async def delete(self,
+    team_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Remove a team from the database (relegation to oblivion).
 
@@ -790,27 +740,25 @@ class AsyncTeamsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             path_template("/teams/{team_id}", team_id=team_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    async def get_culture(
-        self,
-        team_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamGetCultureResponse:
+    async def get_culture(self,
+    team_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamGetCultureResponse:
         """
         Get detailed culture and values information for a team.
 
@@ -824,26 +772,24 @@ class AsyncTeamsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         return await self._get(
             path_template("/teams/{team_id}/culture", team_id=team_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=TeamGetCultureResponse,
         )
 
-    async def get_rivals(
-        self,
-        team_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamGetRivalsResponse:
+    async def get_rivals(self,
+    team_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamGetRivalsResponse:
         """
         Get all rival teams for a specific team.
 
@@ -857,26 +803,24 @@ class AsyncTeamsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         return await self._get(
             path_template("/teams/{team_id}/rivals", team_id=team_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=TeamGetRivalsResponse,
         )
 
-    async def list_logos(
-        self,
-        team_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamListLogosResponse:
+    async def list_logos(self,
+    team_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamListLogosResponse:
         """
         List all uploaded logos for a team.
 
@@ -890,15 +834,14 @@ class AsyncTeamsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         return await self._get(
             path_template("/teams/{team_id}/logos", team_id=team_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=TeamListLogosResponse,
         )
-
 
 class TeamsResourceWithRawResponse:
     def __init__(self, teams: TeamsResource) -> None:
@@ -934,7 +877,6 @@ class TeamsResourceWithRawResponse:
         """Operations related to football teams"""
         return LogoResourceWithRawResponse(self._teams.logo)
 
-
 class AsyncTeamsResourceWithRawResponse:
     def __init__(self, teams: AsyncTeamsResource) -> None:
         self._teams = teams
@@ -969,7 +911,6 @@ class AsyncTeamsResourceWithRawResponse:
         """Operations related to football teams"""
         return AsyncLogoResourceWithRawResponse(self._teams.logo)
 
-
 class TeamsResourceWithStreamingResponse:
     def __init__(self, teams: TeamsResource) -> None:
         self._teams = teams
@@ -1003,7 +944,6 @@ class TeamsResourceWithStreamingResponse:
     def logo(self) -> LogoResourceWithStreamingResponse:
         """Operations related to football teams"""
         return LogoResourceWithStreamingResponse(self._teams.logo)
-
 
 class AsyncTeamsResourceWithStreamingResponse:
     def __init__(self, teams: AsyncTeamsResource) -> None:

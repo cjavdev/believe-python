@@ -4,10 +4,8 @@ from .._models import BaseModel
 
 __all__ = ["GrowthArc"]
 
-
 class GrowthArc(BaseModel):
     """Character development arc."""
-
     breakthrough: str
     """Key breakthrough moment"""
 

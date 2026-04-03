@@ -1,17 +1,17 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from .._models import BaseModel
+
 from datetime import datetime
+
 from typing_extensions import Literal
 
-from .._models import BaseModel
+from typing import Optional
 
 __all__ = ["MatchCompletedWebhookEvent", "Data"]
 
-
 class Data(BaseModel):
     """Data payload for a match completed event."""
-
     away_score: int
     """Final away team score"""
 
@@ -45,10 +45,8 @@ class Data(BaseModel):
     man_of_the_match: Optional[str] = None
     """Player of the match (if awarded)"""
 
-
 class MatchCompletedWebhookEvent(BaseModel):
     """Webhook event sent when a match completes."""
-
     created_at: datetime
     """When the event was created"""
 

@@ -2,17 +2,21 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
+from typing_extensions import TypedDict, Annotated
+
+from typing import Optional, Union, Iterable
+
 from datetime import datetime
-from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+
 from .match_type import MatchType
+
 from .match_result import MatchResult
+
 from .turning_point_param import TurningPointParam
 
 __all__ = ["MatchUpdateParams"]
-
 
 class MatchUpdateParams(TypedDict, total=False):
     attendance: Optional[int]
@@ -21,7 +25,7 @@ class MatchUpdateParams(TypedDict, total=False):
 
     away_team_id: Optional[str]
 
-    date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
+    date: Annotated[Union[str, datetime, None], PropertyInfo(format = "iso8601")]
 
     episode_id: Optional[str]
 

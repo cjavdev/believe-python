@@ -1,18 +1,19 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from .._models import BaseModel
 
 from .league import League
-from .._models import BaseModel
+
 from .team_values import TeamValues
+
+from typing import Optional, List
+
 from .geo_location import GeoLocation
 
 __all__ = ["Team"]
 
-
 class Team(BaseModel):
     """Full team model with ID."""
-
     id: str
     """Unique identifier"""
 

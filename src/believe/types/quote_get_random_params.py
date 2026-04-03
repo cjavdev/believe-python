@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import TypedDict
+
+from typing import Optional
 
 from .quote_theme import QuoteTheme
 
 __all__ = ["QuoteGetRandomParams"]
-
 
 class QuoteGetRandomParams(TypedDict, total=False):
     character_id: Optional[str]

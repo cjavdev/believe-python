@@ -2,26 +2,39 @@
 
 from __future__ import annotations
 
+from believe import Believe, AsyncBelieve
+
+from believe.types import Match, MatchGetLessonResponse, MatchGetTurningPointsResponse
+
+from believe._utils import parse_datetime
+
+from typing import cast, Any
+
+from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
 import os
-from typing import Any, cast
-
 import pytest
-
+import httpx
+from typing_extensions import get_args
+from respx import MockRouter
 from believe import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
-from believe.types import (
-    Match,
-    MatchGetLessonResponse,
-    MatchGetTurningPointsResponse,
-)
-from believe._utils import parse_datetime
-from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+from believe.types import match_create_params
+from believe.types import match_update_params
+from believe.types import match_list_params
+from believe.types import match_stream_live_params
+from believe.types import MatchType
+from believe.types import MatchResult
+from believe.types import MatchType
+from believe.types import MatchResult
+from believe.types import MatchType
+from believe.types import MatchResult
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
-
 class TestMatches:
-    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=['loose', 'strict'])
+
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -32,7 +45,7 @@ class TestMatches:
             home_team_id="afc-richmond",
             match_type="cup",
         )
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -51,21 +64,20 @@ class TestMatches:
             result="pending",
             ted_halftime_speech="You know what the happiest animal on Earth is? It's a goldfish. You know why? It's got a 10-second memory.",
             ticket_revenue_gbp="735000.00",
-            turning_points=[
-                {
-                    "description": "description",
-                    "emotional_impact": "Galvanized the team's fighting spirit",
-                    "minute": 0,
-                    "character_involved": "jamie-tartt",
-                }
-            ],
+            turning_points=[{
+                "description": "description",
+                "emotional_impact": "Galvanized the team's fighting spirit",
+                "minute": 0,
+                "character_involved": "jamie-tartt",
+            }],
             weather_temp_celsius=8.5,
         )
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Believe) -> None:
+
         response = client.matches.with_raw_response.create(
             away_team_id="tottenham",
             date=parse_datetime("2024-02-20T19:45:00Z"),
@@ -74,9 +86,9 @@ class TestMatches:
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = response.parse()
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -86,12 +98,12 @@ class TestMatches:
             date=parse_datetime("2024-02-20T19:45:00Z"),
             home_team_id="afc-richmond",
             match_type="cup",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = response.parse()
-            assert_matches_type(Match, match, path=["response"])
+            assert_matches_type(Match, match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -101,31 +113,32 @@ class TestMatches:
         match = client.matches.retrieve(
             "match_id",
         )
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Believe) -> None:
+
         response = client.matches.with_raw_response.retrieve(
             "match_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = response.parse()
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Believe) -> None:
         with client.matches.with_streaming_response.retrieve(
             "match_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = response.parse()
-            assert_matches_type(Match, match, path=["response"])
+            assert_matches_type(Match, match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -133,9 +146,9 @@ class TestMatches:
     @parametrize
     def test_path_params_retrieve(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `match_id` but received ''"):
-            client.matches.with_raw_response.retrieve(
-                "",
-            )
+          client.matches.with_raw_response.retrieve(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -143,7 +156,7 @@ class TestMatches:
         match = client.matches.update(
             match_id="match_id",
         )
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -163,41 +176,40 @@ class TestMatches:
             result="win",
             ted_halftime_speech="ted_halftime_speech",
             ticket_revenue_gbp=0,
-            turning_points=[
-                {
-                    "description": "description",
-                    "emotional_impact": "Galvanized the team's fighting spirit",
-                    "minute": 0,
-                    "character_involved": "jamie-tartt",
-                }
-            ],
+            turning_points=[{
+                "description": "description",
+                "emotional_impact": "Galvanized the team's fighting spirit",
+                "minute": 0,
+                "character_involved": "jamie-tartt",
+            }],
             weather_temp_celsius=-30,
         )
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Believe) -> None:
+
         response = client.matches.with_raw_response.update(
             match_id="match_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = response.parse()
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Believe) -> None:
         with client.matches.with_streaming_response.update(
             match_id="match_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = response.parse()
-            assert_matches_type(Match, match, path=["response"])
+            assert_matches_type(Match, match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -205,15 +217,15 @@ class TestMatches:
     @parametrize
     def test_path_params_update(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `match_id` but received ''"):
-            client.matches.with_raw_response.update(
-                match_id="",
-            )
+          client.matches.with_raw_response.update(
+              match_id="",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Believe) -> None:
         match = client.matches.list()
-        assert_matches_type(SyncSkipLimitPage[Match], match, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Match], match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -225,27 +237,28 @@ class TestMatches:
             skip=0,
             team_id="team_id",
         )
-        assert_matches_type(SyncSkipLimitPage[Match], match, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Match], match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Believe) -> None:
+
         response = client.matches.with_raw_response.list()
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = response.parse()
-        assert_matches_type(SyncSkipLimitPage[Match], match, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Match], match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Believe) -> None:
-        with client.matches.with_streaming_response.list() as response:
+        with client.matches.with_streaming_response.list() as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = response.parse()
-            assert_matches_type(SyncSkipLimitPage[Match], match, path=["response"])
+            assert_matches_type(SyncSkipLimitPage[Match], match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -260,12 +273,13 @@ class TestMatches:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Believe) -> None:
+
         response = client.matches.with_raw_response.delete(
             "match_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = response.parse()
         assert match is None
 
@@ -274,9 +288,9 @@ class TestMatches:
     def test_streaming_response_delete(self, client: Believe) -> None:
         with client.matches.with_streaming_response.delete(
             "match_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = response.parse()
             assert match is None
@@ -287,9 +301,9 @@ class TestMatches:
     @parametrize
     def test_path_params_delete(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `match_id` but received ''"):
-            client.matches.with_raw_response.delete(
-                "",
-            )
+          client.matches.with_raw_response.delete(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -297,31 +311,32 @@ class TestMatches:
         match = client.matches.get_lesson(
             "match_id",
         )
-        assert_matches_type(MatchGetLessonResponse, match, path=["response"])
+        assert_matches_type(MatchGetLessonResponse, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_lesson(self, client: Believe) -> None:
+
         response = client.matches.with_raw_response.get_lesson(
             "match_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = response.parse()
-        assert_matches_type(MatchGetLessonResponse, match, path=["response"])
+        assert_matches_type(MatchGetLessonResponse, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_lesson(self, client: Believe) -> None:
         with client.matches.with_streaming_response.get_lesson(
             "match_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = response.parse()
-            assert_matches_type(MatchGetLessonResponse, match, path=["response"])
+            assert_matches_type(MatchGetLessonResponse, match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -329,9 +344,9 @@ class TestMatches:
     @parametrize
     def test_path_params_get_lesson(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `match_id` but received ''"):
-            client.matches.with_raw_response.get_lesson(
-                "",
-            )
+          client.matches.with_raw_response.get_lesson(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -339,31 +354,32 @@ class TestMatches:
         match = client.matches.get_turning_points(
             "match_id",
         )
-        assert_matches_type(MatchGetTurningPointsResponse, match, path=["response"])
+        assert_matches_type(MatchGetTurningPointsResponse, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_turning_points(self, client: Believe) -> None:
+
         response = client.matches.with_raw_response.get_turning_points(
             "match_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = response.parse()
-        assert_matches_type(MatchGetTurningPointsResponse, match, path=["response"])
+        assert_matches_type(MatchGetTurningPointsResponse, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_turning_points(self, client: Believe) -> None:
         with client.matches.with_streaming_response.get_turning_points(
             "match_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = response.parse()
-            assert_matches_type(MatchGetTurningPointsResponse, match, path=["response"])
+            assert_matches_type(MatchGetTurningPointsResponse, match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -371,9 +387,9 @@ class TestMatches:
     @parametrize
     def test_path_params_get_turning_points(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `match_id` but received ''"):
-            client.matches.with_raw_response.get_turning_points(
-                "",
-            )
+          client.matches.with_raw_response.get_turning_points(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -395,30 +411,28 @@ class TestMatches:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_stream_live(self, client: Believe) -> None:
+
         response = client.matches.with_raw_response.stream_live()
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = response.parse()
         assert match is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_stream_live(self, client: Believe) -> None:
-        with client.matches.with_streaming_response.stream_live() as response:
+        with client.matches.with_streaming_response.stream_live() as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = response.parse()
             assert match is None
 
         assert cast(Any, response.is_closed) is True
-
-
 class TestAsyncMatches:
-    parametrize = pytest.mark.parametrize(
-        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
-    )
+    parametrize = pytest.mark.parametrize("async_client", [False, True, {'http_client': 'aiohttp'}], indirect=True, ids=['loose', 'strict', 'aiohttp'])
+
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -429,7 +443,7 @@ class TestAsyncMatches:
             home_team_id="afc-richmond",
             match_type="cup",
         )
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -448,21 +462,20 @@ class TestAsyncMatches:
             result="pending",
             ted_halftime_speech="You know what the happiest animal on Earth is? It's a goldfish. You know why? It's got a 10-second memory.",
             ticket_revenue_gbp="735000.00",
-            turning_points=[
-                {
-                    "description": "description",
-                    "emotional_impact": "Galvanized the team's fighting spirit",
-                    "minute": 0,
-                    "character_involved": "jamie-tartt",
-                }
-            ],
+            turning_points=[{
+                "description": "description",
+                "emotional_impact": "Galvanized the team's fighting spirit",
+                "minute": 0,
+                "character_involved": "jamie-tartt",
+            }],
             weather_temp_celsius=8.5,
         )
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.matches.with_raw_response.create(
             away_team_id="tottenham",
             date=parse_datetime("2024-02-20T19:45:00Z"),
@@ -471,9 +484,9 @@ class TestAsyncMatches:
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = await response.parse()
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -483,12 +496,12 @@ class TestAsyncMatches:
             date=parse_datetime("2024-02-20T19:45:00Z"),
             home_team_id="afc-richmond",
             match_type="cup",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = await response.parse()
-            assert_matches_type(Match, match, path=["response"])
+            assert_matches_type(Match, match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -498,31 +511,32 @@ class TestAsyncMatches:
         match = await async_client.matches.retrieve(
             "match_id",
         )
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.matches.with_raw_response.retrieve(
             "match_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = await response.parse()
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBelieve) -> None:
         async with async_client.matches.with_streaming_response.retrieve(
             "match_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = await response.parse()
-            assert_matches_type(Match, match, path=["response"])
+            assert_matches_type(Match, match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -530,9 +544,9 @@ class TestAsyncMatches:
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `match_id` but received ''"):
-            await async_client.matches.with_raw_response.retrieve(
-                "",
-            )
+          await async_client.matches.with_raw_response.retrieve(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -540,7 +554,7 @@ class TestAsyncMatches:
         match = await async_client.matches.update(
             match_id="match_id",
         )
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -560,41 +574,40 @@ class TestAsyncMatches:
             result="win",
             ted_halftime_speech="ted_halftime_speech",
             ticket_revenue_gbp=0,
-            turning_points=[
-                {
-                    "description": "description",
-                    "emotional_impact": "Galvanized the team's fighting spirit",
-                    "minute": 0,
-                    "character_involved": "jamie-tartt",
-                }
-            ],
+            turning_points=[{
+                "description": "description",
+                "emotional_impact": "Galvanized the team's fighting spirit",
+                "minute": 0,
+                "character_involved": "jamie-tartt",
+            }],
             weather_temp_celsius=-30,
         )
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.matches.with_raw_response.update(
             match_id="match_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = await response.parse()
-        assert_matches_type(Match, match, path=["response"])
+        assert_matches_type(Match, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncBelieve) -> None:
         async with async_client.matches.with_streaming_response.update(
             match_id="match_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = await response.parse()
-            assert_matches_type(Match, match, path=["response"])
+            assert_matches_type(Match, match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -602,15 +615,15 @@ class TestAsyncMatches:
     @parametrize
     async def test_path_params_update(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `match_id` but received ''"):
-            await async_client.matches.with_raw_response.update(
-                match_id="",
-            )
+          await async_client.matches.with_raw_response.update(
+              match_id="",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncBelieve) -> None:
         match = await async_client.matches.list()
-        assert_matches_type(AsyncSkipLimitPage[Match], match, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Match], match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -622,27 +635,28 @@ class TestAsyncMatches:
             skip=0,
             team_id="team_id",
         )
-        assert_matches_type(AsyncSkipLimitPage[Match], match, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Match], match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.matches.with_raw_response.list()
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = await response.parse()
-        assert_matches_type(AsyncSkipLimitPage[Match], match, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Match], match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncBelieve) -> None:
-        async with async_client.matches.with_streaming_response.list() as response:
+        async with async_client.matches.with_streaming_response.list() as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = await response.parse()
-            assert_matches_type(AsyncSkipLimitPage[Match], match, path=["response"])
+            assert_matches_type(AsyncSkipLimitPage[Match], match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -657,12 +671,13 @@ class TestAsyncMatches:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.matches.with_raw_response.delete(
             "match_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = await response.parse()
         assert match is None
 
@@ -671,9 +686,9 @@ class TestAsyncMatches:
     async def test_streaming_response_delete(self, async_client: AsyncBelieve) -> None:
         async with async_client.matches.with_streaming_response.delete(
             "match_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = await response.parse()
             assert match is None
@@ -684,9 +699,9 @@ class TestAsyncMatches:
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `match_id` but received ''"):
-            await async_client.matches.with_raw_response.delete(
-                "",
-            )
+          await async_client.matches.with_raw_response.delete(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -694,31 +709,32 @@ class TestAsyncMatches:
         match = await async_client.matches.get_lesson(
             "match_id",
         )
-        assert_matches_type(MatchGetLessonResponse, match, path=["response"])
+        assert_matches_type(MatchGetLessonResponse, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_lesson(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.matches.with_raw_response.get_lesson(
             "match_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = await response.parse()
-        assert_matches_type(MatchGetLessonResponse, match, path=["response"])
+        assert_matches_type(MatchGetLessonResponse, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_lesson(self, async_client: AsyncBelieve) -> None:
         async with async_client.matches.with_streaming_response.get_lesson(
             "match_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = await response.parse()
-            assert_matches_type(MatchGetLessonResponse, match, path=["response"])
+            assert_matches_type(MatchGetLessonResponse, match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -726,9 +742,9 @@ class TestAsyncMatches:
     @parametrize
     async def test_path_params_get_lesson(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `match_id` but received ''"):
-            await async_client.matches.with_raw_response.get_lesson(
-                "",
-            )
+          await async_client.matches.with_raw_response.get_lesson(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -736,31 +752,32 @@ class TestAsyncMatches:
         match = await async_client.matches.get_turning_points(
             "match_id",
         )
-        assert_matches_type(MatchGetTurningPointsResponse, match, path=["response"])
+        assert_matches_type(MatchGetTurningPointsResponse, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_turning_points(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.matches.with_raw_response.get_turning_points(
             "match_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = await response.parse()
-        assert_matches_type(MatchGetTurningPointsResponse, match, path=["response"])
+        assert_matches_type(MatchGetTurningPointsResponse, match, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_turning_points(self, async_client: AsyncBelieve) -> None:
         async with async_client.matches.with_streaming_response.get_turning_points(
             "match_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = await response.parse()
-            assert_matches_type(MatchGetTurningPointsResponse, match, path=["response"])
+            assert_matches_type(MatchGetTurningPointsResponse, match, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -768,9 +785,9 @@ class TestAsyncMatches:
     @parametrize
     async def test_path_params_get_turning_points(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `match_id` but received ''"):
-            await async_client.matches.with_raw_response.get_turning_points(
-                "",
-            )
+          await async_client.matches.with_raw_response.get_turning_points(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -792,19 +809,20 @@ class TestAsyncMatches:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_stream_live(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.matches.with_raw_response.stream_live()
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         match = await response.parse()
         assert match is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_stream_live(self, async_client: AsyncBelieve) -> None:
-        async with async_client.matches.with_streaming_response.stream_live() as response:
+        async with async_client.matches.with_streaming_response.stream_live() as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             match = await response.parse()
             assert match is None

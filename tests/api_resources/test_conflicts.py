@@ -2,20 +2,26 @@
 
 from __future__ import annotations
 
+from believe import Believe, AsyncBelieve
+
+from believe.types import ConflictResolveResponse
+
+from typing import cast, Any
+
 import os
-from typing import Any, cast
-
 import pytest
-
+import httpx
+from typing_extensions import get_args
+from respx import MockRouter
 from believe import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
-from believe.types import ConflictResolveResponse
+from believe.types import conflict_resolve_params
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
-
 class TestConflicts:
-    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=['loose', 'strict'])
+
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -25,7 +31,7 @@ class TestConflicts:
             description="Alex keeps taking credit for my ideas in meetings and I'm getting resentful.",
             parties_involved=["Me", "My teammate Alex"],
         )
-        assert_matches_type(ConflictResolveResponse, conflict, path=["response"])
+        assert_matches_type(ConflictResolveResponse, conflict, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -36,11 +42,12 @@ class TestConflicts:
             parties_involved=["Me", "My teammate Alex"],
             attempts_made=["Mentioned it casually", "Avoided them"],
         )
-        assert_matches_type(ConflictResolveResponse, conflict, path=["response"])
+        assert_matches_type(ConflictResolveResponse, conflict, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_resolve(self, client: Believe) -> None:
+
         response = client.conflicts.with_raw_response.resolve(
             conflict_type="interpersonal",
             description="Alex keeps taking credit for my ideas in meetings and I'm getting resentful.",
@@ -48,9 +55,9 @@ class TestConflicts:
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         conflict = response.parse()
-        assert_matches_type(ConflictResolveResponse, conflict, path=["response"])
+        assert_matches_type(ConflictResolveResponse, conflict, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -59,20 +66,17 @@ class TestConflicts:
             conflict_type="interpersonal",
             description="Alex keeps taking credit for my ideas in meetings and I'm getting resentful.",
             parties_involved=["Me", "My teammate Alex"],
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             conflict = response.parse()
-            assert_matches_type(ConflictResolveResponse, conflict, path=["response"])
+            assert_matches_type(ConflictResolveResponse, conflict, path=['response'])
 
         assert cast(Any, response.is_closed) is True
-
-
 class TestAsyncConflicts:
-    parametrize = pytest.mark.parametrize(
-        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
-    )
+    parametrize = pytest.mark.parametrize("async_client", [False, True, {'http_client': 'aiohttp'}], indirect=True, ids=['loose', 'strict', 'aiohttp'])
+
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -82,7 +86,7 @@ class TestAsyncConflicts:
             description="Alex keeps taking credit for my ideas in meetings and I'm getting resentful.",
             parties_involved=["Me", "My teammate Alex"],
         )
-        assert_matches_type(ConflictResolveResponse, conflict, path=["response"])
+        assert_matches_type(ConflictResolveResponse, conflict, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -93,11 +97,12 @@ class TestAsyncConflicts:
             parties_involved=["Me", "My teammate Alex"],
             attempts_made=["Mentioned it casually", "Avoided them"],
         )
-        assert_matches_type(ConflictResolveResponse, conflict, path=["response"])
+        assert_matches_type(ConflictResolveResponse, conflict, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_resolve(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.conflicts.with_raw_response.resolve(
             conflict_type="interpersonal",
             description="Alex keeps taking credit for my ideas in meetings and I'm getting resentful.",
@@ -105,9 +110,9 @@ class TestAsyncConflicts:
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         conflict = await response.parse()
-        assert_matches_type(ConflictResolveResponse, conflict, path=["response"])
+        assert_matches_type(ConflictResolveResponse, conflict, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -116,11 +121,11 @@ class TestAsyncConflicts:
             conflict_type="interpersonal",
             description="Alex keeps taking credit for my ideas in meetings and I'm getting resentful.",
             parties_involved=["Me", "My teammate Alex"],
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             conflict = await response.parse()
-            assert_matches_type(ConflictResolveResponse, conflict, path=["response"])
+            assert_matches_type(ConflictResolveResponse, conflict, path=['response'])
 
         assert cast(Any, response.is_closed) is True

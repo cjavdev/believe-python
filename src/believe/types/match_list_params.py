@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import TypedDict
 
+from typing import Optional
+
 from .match_type import MatchType
+
 from .match_result import MatchResult
 
 __all__ = ["MatchListParams"]
-
 
 class MatchListParams(TypedDict, total=False):
     limit: int

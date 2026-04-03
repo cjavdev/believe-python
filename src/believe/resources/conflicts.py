@@ -2,31 +2,34 @@
 
 from __future__ import annotations
 
-from typing import Optional
-from typing_extensions import Literal
-
 import httpx
 
-from ..types import conflict_resolve_params
-from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
-from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from .._base_client import make_request_options
+
+from .._compat import cached_property
+
 from ..types.conflict_resolve_response import ConflictResolveResponse
+
+from .._utils import maybe_transform, async_maybe_transform
+
+from .._base_client import make_request_options
+
+from typing_extensions import Literal
+
+from .._types import SequenceNotStr, Omit, omit, NotGiven
+
+from typing import Optional
+
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
+
+from typing_extensions import Literal, overload
+from .._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+from ..types import conflict_resolve_params
 
 __all__ = ["ConflictsResource", "AsyncConflictsResource"]
 
-
 class ConflictsResource(SyncAPIResource):
     """Interactive endpoints for motivation and guidance"""
-
     @cached_property
     def with_raw_response(self) -> ConflictsResourceWithRawResponse:
         """
@@ -46,22 +49,18 @@ class ConflictsResource(SyncAPIResource):
         """
         return ConflictsResourceWithStreamingResponse(self)
 
-    def resolve(
-        self,
-        *,
-        conflict_type: Literal[
-            "interpersonal", "team_dynamics", "leadership", "ego", "miscommunication", "competition"
-        ],
-        description: str,
-        parties_involved: SequenceNotStr[str],
-        attempts_made: Optional[SequenceNotStr[str]] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ConflictResolveResponse:
+    def resolve(self,
+    *,
+    conflict_type: Literal["interpersonal", "team_dynamics", "leadership", "ego", "miscommunication", "competition"],
+    description: str,
+    parties_involved: SequenceNotStr[str],
+    attempts_made: Optional[SequenceNotStr[str]] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> ConflictResolveResponse:
         """
         Get Ted Lasso-style advice for resolving conflicts.
 
@@ -84,25 +83,18 @@ class ConflictsResource(SyncAPIResource):
         """
         return self._post(
             "/conflicts/resolve",
-            body=maybe_transform(
-                {
-                    "conflict_type": conflict_type,
-                    "description": description,
-                    "parties_involved": parties_involved,
-                    "attempts_made": attempts_made,
-                },
-                conflict_resolve_params.ConflictResolveParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "conflict_type": conflict_type,
+                "description": description,
+                "parties_involved": parties_involved,
+                "attempts_made": attempts_made,
+            }, conflict_resolve_params.ConflictResolveParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=ConflictResolveResponse,
         )
 
-
 class AsyncConflictsResource(AsyncAPIResource):
     """Interactive endpoints for motivation and guidance"""
-
     @cached_property
     def with_raw_response(self) -> AsyncConflictsResourceWithRawResponse:
         """
@@ -122,22 +114,18 @@ class AsyncConflictsResource(AsyncAPIResource):
         """
         return AsyncConflictsResourceWithStreamingResponse(self)
 
-    async def resolve(
-        self,
-        *,
-        conflict_type: Literal[
-            "interpersonal", "team_dynamics", "leadership", "ego", "miscommunication", "competition"
-        ],
-        description: str,
-        parties_involved: SequenceNotStr[str],
-        attempts_made: Optional[SequenceNotStr[str]] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ConflictResolveResponse:
+    async def resolve(self,
+    *,
+    conflict_type: Literal["interpersonal", "team_dynamics", "leadership", "ego", "miscommunication", "competition"],
+    description: str,
+    parties_involved: SequenceNotStr[str],
+    attempts_made: Optional[SequenceNotStr[str]] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> ConflictResolveResponse:
         """
         Get Ted Lasso-style advice for resolving conflicts.
 
@@ -160,21 +148,15 @@ class AsyncConflictsResource(AsyncAPIResource):
         """
         return await self._post(
             "/conflicts/resolve",
-            body=await async_maybe_transform(
-                {
-                    "conflict_type": conflict_type,
-                    "description": description,
-                    "parties_involved": parties_involved,
-                    "attempts_made": attempts_made,
-                },
-                conflict_resolve_params.ConflictResolveParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "conflict_type": conflict_type,
+                "description": description,
+                "parties_involved": parties_involved,
+                "attempts_made": attempts_made,
+            }, conflict_resolve_params.ConflictResolveParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=ConflictResolveResponse,
         )
-
 
 class ConflictsResourceWithRawResponse:
     def __init__(self, conflicts: ConflictsResource) -> None:
@@ -184,7 +166,6 @@ class ConflictsResourceWithRawResponse:
             conflicts.resolve,
         )
 
-
 class AsyncConflictsResourceWithRawResponse:
     def __init__(self, conflicts: AsyncConflictsResource) -> None:
         self._conflicts = conflicts
@@ -193,7 +174,6 @@ class AsyncConflictsResourceWithRawResponse:
             conflicts.resolve,
         )
 
-
 class ConflictsResourceWithStreamingResponse:
     def __init__(self, conflicts: ConflictsResource) -> None:
         self._conflicts = conflicts
@@ -201,7 +181,6 @@ class ConflictsResourceWithStreamingResponse:
         self.resolve = to_streamed_response_wrapper(
             conflicts.resolve,
         )
-
 
 class AsyncConflictsResourceWithStreamingResponse:
     def __init__(self, conflicts: AsyncConflictsResource) -> None:
