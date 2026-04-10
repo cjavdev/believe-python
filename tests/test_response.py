@@ -6,7 +6,7 @@ import httpx
 import pytest
 import pydantic
 
-from believe import Believe, BaseModel, AsyncBelieve
+from believe import BaseModel, Believe, AsyncBelieve
 from believe._response import (
     APIResponse,
     BaseAPIResponse,

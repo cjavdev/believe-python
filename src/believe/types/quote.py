@@ -1,17 +1,17 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
-
 from .._models import BaseModel
-from .quote_theme import QuoteTheme
+
 from .quote_moment import QuoteMoment
+
+from .quote_theme import QuoteTheme
+
+from typing import Optional, List
 
 __all__ = ["Quote"]
 
-
 class Quote(BaseModel):
     """Full quote model with ID."""
-
     id: str
     """Unique identifier"""
 

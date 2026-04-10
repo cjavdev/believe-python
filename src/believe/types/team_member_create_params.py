@@ -2,32 +2,26 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing_extensions import TypedDict, Required, Literal, TypeAliasType, TypeAlias
+
+from .position import Position
+
+from .coach_specialty import CoachSpecialty
 
 from .._types import SequenceNotStr
-from .position import Position
-from .coach_specialty import CoachSpecialty
+
+from typing import Optional, Union
+
 from .medical_specialty import MedicalSpecialty
 
-__all__ = [
-    "TeamMemberCreateParams",
-    "Member",
-    "MemberPlayerBase",
-    "MemberCoachBase",
-    "MemberMedicalStaffBase",
-    "MemberEquipmentManagerBase",
-]
-
+__all__ = ["TeamMemberCreateParams", "Member", "MemberPlayerBase", "MemberCoachBase", "MemberMedicalStaffBase", "MemberEquipmentManagerBase"]
 
 class TeamMemberCreateParams(TypedDict, total=False):
     member: Required[Member]
     """A football player on the team."""
 
-
 class MemberPlayerBase(TypedDict, total=False):
     """A football player on the team."""
-
     character_id: Required[str]
     """ID of the character (references /characters/{id})"""
 
@@ -55,10 +49,8 @@ class MemberPlayerBase(TypedDict, total=False):
     member_type: Literal["player"]
     """Discriminator field indicating this is a player"""
 
-
 class MemberCoachBase(TypedDict, total=False):
     """A coach or coaching staff member."""
-
     character_id: Required[str]
     """ID of the character (references /characters/{id})"""
 
@@ -80,10 +72,8 @@ class MemberCoachBase(TypedDict, total=False):
     win_rate: Optional[float]
     """Career win rate (0.0 to 1.0)"""
 
-
 class MemberMedicalStaffBase(TypedDict, total=False):
     """Medical and wellness staff member."""
-
     character_id: Required[str]
     """ID of the character (references /characters/{id})"""
 
@@ -105,10 +95,8 @@ class MemberMedicalStaffBase(TypedDict, total=False):
     qualifications: SequenceNotStr[str]
     """Medical qualifications and degrees"""
 
-
 class MemberEquipmentManagerBase(TypedDict, total=False):
     """Equipment and kit management staff."""
-
     character_id: Required[str]
     """ID of the character (references /characters/{id})"""
 
@@ -126,6 +114,5 @@ class MemberEquipmentManagerBase(TypedDict, total=False):
 
     responsibilities: SequenceNotStr[str]
     """List of responsibilities"""
-
 
 Member: TypeAlias = Union[MemberPlayerBase, MemberCoachBase, MemberMedicalStaffBase, MemberEquipmentManagerBase]

@@ -6,7 +6,6 @@ from typing_extensions import TypedDict
 
 __all__ = ["QuoteListByCharacterParams"]
 
-
 class QuoteListByCharacterParams(TypedDict, total=False):
     limit: int
     """Maximum number of items to return (max: 100)"""

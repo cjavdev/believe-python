@@ -4,10 +4,8 @@ from ..._models import BaseModel
 
 __all__ = ["CoachingPrinciple"]
 
-
 class CoachingPrinciple(BaseModel):
     """A Ted Lasso coaching principle."""
-
     id: str
     """Principle identifier"""
 

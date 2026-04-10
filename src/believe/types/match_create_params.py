@@ -2,23 +2,27 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
+from typing_extensions import TypedDict, Required, Annotated
+
+from typing import Union, Optional, Iterable
+
 from datetime import datetime
-from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
+
 from .match_type import MatchType
+
 from .match_result import MatchResult
+
 from .turning_point_param import TurningPointParam
 
 __all__ = ["MatchCreateParams"]
-
 
 class MatchCreateParams(TypedDict, total=False):
     away_team_id: Required[str]
     """Away team ID"""
 
-    date: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
+    date: Required[Annotated[Union[str, datetime], PropertyInfo(format = "iso8601")]]
     """Match date and time"""
 
     home_team_id: Required[str]

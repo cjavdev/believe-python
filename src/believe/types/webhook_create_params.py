@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import TypedDict, Required, Literal
+
+from typing import Optional, List
 
 __all__ = ["WebhookCreateParams"]
-
 
 class WebhookCreateParams(TypedDict, total=False):
     url: Required[str]

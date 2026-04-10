@@ -2,18 +2,16 @@
 
 from __future__ import annotations
 
-from typing import Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import TypedDict, Literal, Required
 
 from .._types import SequenceNotStr
 
+from typing import Optional
+
 __all__ = ["ConflictResolveParams"]
 
-
 class ConflictResolveParams(TypedDict, total=False):
-    conflict_type: Required[
-        Literal["interpersonal", "team_dynamics", "leadership", "ego", "miscommunication", "competition"]
-    ]
+    conflict_type: Required[Literal["interpersonal", "team_dynamics", "leadership", "ego", "miscommunication", "competition"]]
     """Type of conflict"""
 
     description: Required[str]

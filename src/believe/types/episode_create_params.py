@@ -2,18 +2,20 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
+from typing_extensions import TypedDict, Annotated, Required
+
 from datetime import date
-from typing_extensions import Required, Annotated, TypedDict
+
+from typing import Union, Optional
+
+from .._utils import PropertyInfo
 
 from .._types import SequenceNotStr
-from .._utils import PropertyInfo
 
 __all__ = ["EpisodeCreateParams"]
 
-
 class EpisodeCreateParams(TypedDict, total=False):
-    air_date: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
+    air_date: Required[Annotated[Union[str, date], PropertyInfo(format = "iso8601")]]
     """Original air date"""
 
     character_focus: Required[SequenceNotStr[str]]

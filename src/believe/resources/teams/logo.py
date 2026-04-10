@@ -2,30 +2,32 @@
 
 from __future__ import annotations
 
-from typing import Mapping, cast
-
 import httpx
 
-from ..._types import Body, Query, Headers, NoneType, NotGiven, FileTypes, not_given
-from ..._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
-from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from ...types.teams import logo_upload_params
+
+from ..._compat import cached_property
+
+from ..._utils import path_template, deepcopy_minimal, extract_files, maybe_transform, async_maybe_transform
+
 from ..._base_client import make_request_options
+
+from ..._types import NotGiven, FileTypes
+
 from ...types.teams.file_upload import FileUpload
+
+from typing import cast, Mapping
+
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
+
+from typing_extensions import Literal, overload
+from ..._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+from ...types.teams import logo_upload_params
 
 __all__ = ["LogoResource", "AsyncLogoResource"]
 
-
 class LogoResource(SyncAPIResource):
     """Operations related to football teams"""
-
     @cached_property
     def with_raw_response(self) -> LogoResourceWithRawResponse:
         """
@@ -45,18 +47,16 @@ class LogoResource(SyncAPIResource):
         """
         return LogoResourceWithStreamingResponse(self)
 
-    def delete(
-        self,
-        file_id: str,
-        *,
-        team_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    def delete(self,
+    file_id: str,
+    *,
+    team_id: str,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Delete a team's logo.
 
@@ -70,30 +70,30 @@ class LogoResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         if not file_id:
-            raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `file_id` but received {file_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             path_template("/teams/{team_id}/logo/{file_id}", team_id=team_id, file_id=file_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    def download(
-        self,
-        file_id: str,
-        *,
-        team_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    def download(self,
+    file_id: str,
+    *,
+    team_id: str,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> object:
         """
         Download a team's logo by file ID.
 
@@ -107,29 +107,29 @@ class LogoResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         if not file_id:
-            raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `file_id` but received {file_id!r}'
+          )
         return self._get(
             path_template("/teams/{team_id}/logo/{file_id}", team_id=team_id, file_id=file_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=object,
         )
 
-    def upload(
-        self,
-        team_id: str,
-        *,
-        file: FileTypes,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FileUpload:
+    def upload(self,
+    team_id: str,
+    *,
+    file: FileTypes,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> FileUpload:
         """Upload a logo image for a team.
 
         Accepts image files (jpg, png, gif, webp).
@@ -146,9 +146,16 @@ class LogoResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
-        body = deepcopy_minimal({"file": file})
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
+        body = deepcopy_minimal({
+            "file": file
+        })
+        files = extract_files(
+          cast(Mapping[str, object], body),
+          paths=[["file"]]
+        )
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.
         # multipart/form-data; boundary=---abc--
@@ -157,16 +164,12 @@ class LogoResource(SyncAPIResource):
             path_template("/teams/{team_id}/logo", team_id=team_id),
             body=maybe_transform(body, logo_upload_params.LogoUploadParams),
             files=files,
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=FileUpload,
         )
 
-
 class AsyncLogoResource(AsyncAPIResource):
     """Operations related to football teams"""
-
     @cached_property
     def with_raw_response(self) -> AsyncLogoResourceWithRawResponse:
         """
@@ -186,18 +189,16 @@ class AsyncLogoResource(AsyncAPIResource):
         """
         return AsyncLogoResourceWithStreamingResponse(self)
 
-    async def delete(
-        self,
-        file_id: str,
-        *,
-        team_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    async def delete(self,
+    file_id: str,
+    *,
+    team_id: str,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Delete a team's logo.
 
@@ -211,30 +212,30 @@ class AsyncLogoResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         if not file_id:
-            raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `file_id` but received {file_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             path_template("/teams/{team_id}/logo/{file_id}", team_id=team_id, file_id=file_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    async def download(
-        self,
-        file_id: str,
-        *,
-        team_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    async def download(self,
+    file_id: str,
+    *,
+    team_id: str,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> object:
         """
         Download a team's logo by file ID.
 
@@ -248,29 +249,29 @@ class AsyncLogoResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
         if not file_id:
-            raise ValueError(f"Expected a non-empty value for `file_id` but received {file_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `file_id` but received {file_id!r}'
+          )
         return await self._get(
             path_template("/teams/{team_id}/logo/{file_id}", team_id=team_id, file_id=file_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=object,
         )
 
-    async def upload(
-        self,
-        team_id: str,
-        *,
-        file: FileTypes,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> FileUpload:
+    async def upload(self,
+    team_id: str,
+    *,
+    file: FileTypes,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> FileUpload:
         """Upload a logo image for a team.
 
         Accepts image files (jpg, png, gif, webp).
@@ -287,9 +288,16 @@ class AsyncLogoResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not team_id:
-            raise ValueError(f"Expected a non-empty value for `team_id` but received {team_id!r}")
-        body = deepcopy_minimal({"file": file})
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
+          raise ValueError(
+            f'Expected a non-empty value for `team_id` but received {team_id!r}'
+          )
+        body = deepcopy_minimal({
+            "file": file
+        })
+        files = extract_files(
+          cast(Mapping[str, object], body),
+          paths=[["file"]]
+        )
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.
         # multipart/form-data; boundary=---abc--
@@ -298,12 +306,9 @@ class AsyncLogoResource(AsyncAPIResource):
             path_template("/teams/{team_id}/logo", team_id=team_id),
             body=await async_maybe_transform(body, logo_upload_params.LogoUploadParams),
             files=files,
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=FileUpload,
         )
-
 
 class LogoResourceWithRawResponse:
     def __init__(self, logo: LogoResource) -> None:
@@ -319,7 +324,6 @@ class LogoResourceWithRawResponse:
             logo.upload,
         )
 
-
 class AsyncLogoResourceWithRawResponse:
     def __init__(self, logo: AsyncLogoResource) -> None:
         self._logo = logo
@@ -334,7 +338,6 @@ class AsyncLogoResourceWithRawResponse:
             logo.upload,
         )
 
-
 class LogoResourceWithStreamingResponse:
     def __init__(self, logo: LogoResource) -> None:
         self._logo = logo
@@ -348,7 +351,6 @@ class LogoResourceWithStreamingResponse:
         self.upload = to_streamed_response_wrapper(
             logo.upload,
         )
-
 
 class AsyncLogoResourceWithStreamingResponse:
     def __init__(self, logo: AsyncLogoResource) -> None:
