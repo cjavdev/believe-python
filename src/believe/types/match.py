@@ -1,19 +1,21 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from .._models import BaseModel
+
 from datetime import datetime
 
-from .._models import BaseModel
 from .match_type import MatchType
+
+from typing import Optional, List
+
 from .match_result import MatchResult
+
 from .turning_point import TurningPoint
 
 __all__ = ["Match"]
 
-
 class Match(BaseModel):
     """Full match model with ID."""
-
     id: str
     """Unique identifier"""
 

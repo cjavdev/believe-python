@@ -4,10 +4,8 @@ from .._models import BaseModel
 
 __all__ = ["GeoLocation"]
 
-
 class GeoLocation(BaseModel):
     """Geographic coordinates for a location."""
-
     latitude: float
     """Latitude in degrees"""
 

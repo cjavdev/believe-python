@@ -2,78 +2,81 @@
 
 from __future__ import annotations
 
+from believe import Believe, AsyncBelieve
+
+from typing import cast, Any
+
 import os
-from typing import Any, cast
-
 import pytest
-
+import httpx
+from typing_extensions import get_args
+from respx import MockRouter
 from believe import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
-
 class TestHealth:
-    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=['loose', 'strict'])
+
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_check(self, client: Believe) -> None:
         health = client.health.check()
-        assert_matches_type(object, health, path=["response"])
+        assert_matches_type(object, health, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_check(self, client: Believe) -> None:
+
         response = client.health.with_raw_response.check()
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         health = response.parse()
-        assert_matches_type(object, health, path=["response"])
+        assert_matches_type(object, health, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_check(self, client: Believe) -> None:
-        with client.health.with_streaming_response.check() as response:
+        with client.health.with_streaming_response.check() as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             health = response.parse()
-            assert_matches_type(object, health, path=["response"])
+            assert_matches_type(object, health, path=['response'])
 
         assert cast(Any, response.is_closed) is True
-
-
 class TestAsyncHealth:
-    parametrize = pytest.mark.parametrize(
-        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
-    )
+    parametrize = pytest.mark.parametrize("async_client", [False, True, {'http_client': 'aiohttp'}], indirect=True, ids=['loose', 'strict', 'aiohttp'])
+
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_check(self, async_client: AsyncBelieve) -> None:
         health = await async_client.health.check()
-        assert_matches_type(object, health, path=["response"])
+        assert_matches_type(object, health, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_check(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.health.with_raw_response.check()
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         health = await response.parse()
-        assert_matches_type(object, health, path=["response"])
+        assert_matches_type(object, health, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_check(self, async_client: AsyncBelieve) -> None:
-        async with async_client.health.with_streaming_response.check() as response:
+        async with async_client.health.with_streaming_response.check() as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             health = await response.parse()
-            assert_matches_type(object, health, path=["response"])
+            assert_matches_type(object, health, path=['response'])
 
         assert cast(Any, response.is_closed) is True

@@ -1,14 +1,21 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Generic, TypeVar, Optional
+from typing import TypeVar, Generic, List, Optional
+
 from typing_extensions import override
 
-from ._base_client import BasePage, PageInfo, BaseSyncPage, BaseAsyncPage
+import re
+from typing_extensions import TypedDict, Literal, Annotated, Protocol, runtime_checkable
+
+from httpx import URL, Response
+
+from ._models import BaseModel
+from ._utils import PropertyInfo, is_mapping
+from ._base_client import BasePage, BaseSyncPage, BaseAsyncPage, PageInfo
 
 __all__ = ["SyncSkipLimitPage", "AsyncSkipLimitPage"]
 
-_T = TypeVar("_T")
-
+_T = TypeVar('_T')
 
 class SyncSkipLimitPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
     data: List[_T]
@@ -26,7 +33,7 @@ class SyncSkipLimitPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
     def next_page_info(self) -> Optional[PageInfo]:
         skip = self.skip
         if skip is None:
-            return None  # type: ignore[unreachable]
+            return None # type: ignore[unreachable]
 
         length = len(self._get_page_items())
         current_count = skip + length
@@ -36,10 +43,11 @@ class SyncSkipLimitPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
             return None
 
         if current_count < total:
-            return PageInfo(params={"skip": current_count})
+            return PageInfo(params={
+                "skip": current_count
+            })
 
         return None
-
 
 class AsyncSkipLimitPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
     data: List[_T]
@@ -57,7 +65,7 @@ class AsyncSkipLimitPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
     def next_page_info(self) -> Optional[PageInfo]:
         skip = self.skip
         if skip is None:
-            return None  # type: ignore[unreachable]
+            return None # type: ignore[unreachable]
 
         length = len(self._get_page_items())
         current_count = skip + length
@@ -67,6 +75,8 @@ class AsyncSkipLimitPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
             return None
 
         if current_count < total:
-            return PageInfo(params={"skip": current_count})
+            return PageInfo(params={
+                "skip": current_count
+            })
 
         return None

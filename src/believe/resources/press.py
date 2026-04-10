@@ -2,30 +2,32 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 import httpx
 
-from ..types import press_simulate_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
-from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from .._base_client import make_request_options
+
+from .._compat import cached_property
+
 from ..types.press_simulate_response import PressSimulateResponse
+
+from .._utils import maybe_transform, async_maybe_transform
+
+from .._base_client import make_request_options
+
+from .._types import Omit, omit, NotGiven
+
+from typing import Optional
+
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
+
+from typing_extensions import Literal, overload
+from .._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+from ..types import press_simulate_params
 
 __all__ = ["PressResource", "AsyncPressResource"]
 
-
 class PressResource(SyncAPIResource):
     """Interactive endpoints for motivation and guidance"""
-
     @cached_property
     def with_raw_response(self) -> PressResourceWithRawResponse:
         """
@@ -45,19 +47,17 @@ class PressResource(SyncAPIResource):
         """
         return PressResourceWithStreamingResponse(self)
 
-    def simulate(
-        self,
-        *,
-        question: str,
-        hostile: bool | Omit = omit,
-        topic: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PressSimulateResponse:
+    def simulate(self,
+    *,
+    question: str,
+    hostile: bool | Omit = omit,
+    topic: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> PressSimulateResponse:
         """
         Get Ted's response to press conference questions.
 
@@ -78,24 +78,17 @@ class PressResource(SyncAPIResource):
         """
         return self._post(
             "/press",
-            body=maybe_transform(
-                {
-                    "question": question,
-                    "hostile": hostile,
-                    "topic": topic,
-                },
-                press_simulate_params.PressSimulateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "question": question,
+                "hostile": hostile,
+                "topic": topic,
+            }, press_simulate_params.PressSimulateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=PressSimulateResponse,
         )
 
-
 class AsyncPressResource(AsyncAPIResource):
     """Interactive endpoints for motivation and guidance"""
-
     @cached_property
     def with_raw_response(self) -> AsyncPressResourceWithRawResponse:
         """
@@ -115,19 +108,17 @@ class AsyncPressResource(AsyncAPIResource):
         """
         return AsyncPressResourceWithStreamingResponse(self)
 
-    async def simulate(
-        self,
-        *,
-        question: str,
-        hostile: bool | Omit = omit,
-        topic: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PressSimulateResponse:
+    async def simulate(self,
+    *,
+    question: str,
+    hostile: bool | Omit = omit,
+    topic: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> PressSimulateResponse:
         """
         Get Ted's response to press conference questions.
 
@@ -148,20 +139,14 @@ class AsyncPressResource(AsyncAPIResource):
         """
         return await self._post(
             "/press",
-            body=await async_maybe_transform(
-                {
-                    "question": question,
-                    "hostile": hostile,
-                    "topic": topic,
-                },
-                press_simulate_params.PressSimulateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "question": question,
+                "hostile": hostile,
+                "topic": topic,
+            }, press_simulate_params.PressSimulateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=PressSimulateResponse,
         )
-
 
 class PressResourceWithRawResponse:
     def __init__(self, press: PressResource) -> None:
@@ -171,7 +156,6 @@ class PressResourceWithRawResponse:
             press.simulate,
         )
 
-
 class AsyncPressResourceWithRawResponse:
     def __init__(self, press: AsyncPressResource) -> None:
         self._press = press
@@ -180,7 +164,6 @@ class AsyncPressResourceWithRawResponse:
             press.simulate,
         )
 
-
 class PressResourceWithStreamingResponse:
     def __init__(self, press: PressResource) -> None:
         self._press = press
@@ -188,7 +171,6 @@ class PressResourceWithStreamingResponse:
         self.simulate = to_streamed_response_wrapper(
             press.simulate,
         )
-
 
 class AsyncPressResourceWithStreamingResponse:
     def __init__(self, press: AsyncPressResource) -> None:

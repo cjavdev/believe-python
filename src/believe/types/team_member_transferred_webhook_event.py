@@ -1,17 +1,17 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
-from datetime import datetime
+from .._models import BaseModel
+
 from typing_extensions import Literal
 
-from .._models import BaseModel
+from typing import Optional
+
+from datetime import datetime
 
 __all__ = ["TeamMemberTransferredWebhookEvent", "Data"]
 
-
 class Data(BaseModel):
     """Data payload for a team member transfer event."""
-
     character_id: str
     """ID of the character (links to /characters)"""
 
@@ -48,12 +48,10 @@ class Data(BaseModel):
     years_with_previous_team: Optional[int] = None
     """Years spent with previous team"""
 
-
 class TeamMemberTransferredWebhookEvent(BaseModel):
     """
     Webhook event sent when a team member (player, coach, staff) transfers between teams.
     """
-
     created_at: datetime
     """When the event was created"""
 

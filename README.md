@@ -7,6 +7,8 @@ The Believe Python library provides convenient access to the Believe REST API fr
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
+
+
 It is generated with [Stainless](https://www.stainless.com/).
 
 ## MCP Server
@@ -20,7 +22,7 @@ Use the Believe MCP Server to enable AI assistants to interact with this API, al
 
 ## Documentation
 
-The full API of this library can be found in [api.md](api.md).
+ The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -28,7 +30,6 @@ The full API of this library can be found in [api.md](api.md).
 # install from the production repo
 pip install git+ssh://git@github.com/cjavdev/believe-python.git
 ```
-
 > [!NOTE]
 > Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install believe`
 
@@ -66,11 +67,9 @@ client = AsyncBelieve(
     api_key=os.environ.get("BELIEVE_API_KEY"),  # This is the default and can be omitted
 )
 
-
 async def main() -> None:
-    page = await client.characters.list()
-    print(page.data)
-
+  page = await client.characters.list()
+  print(page.data)
 
 asyncio.run(main())
 ```
@@ -96,18 +95,18 @@ import asyncio
 from believe import DefaultAioHttpClient
 from believe import AsyncBelieve
 
-
 async def main() -> None:
-    async with AsyncBelieve(
-        api_key=os.environ.get("BELIEVE_API_KEY"),  # This is the default and can be omitted
-        http_client=DefaultAioHttpClient(),
-    ) as client:
-        page = await client.characters.list()
-        print(page.data)
-
+  async with AsyncBelieve(
+    api_key=os.environ.get("BELIEVE_API_KEY"),  # This is the default and can be omitted
+    http_client=DefaultAioHttpClient(),
+) as client:
+    page = await client.characters.list()
+    print(page.data)
 
 asyncio.run(main())
 ```
+
+
 
 ## Using types
 
@@ -145,7 +144,6 @@ from believe import AsyncBelieve
 
 client = AsyncBelieve()
 
-
 async def main() -> None:
     all_characters = []
     # Iterate through items across all pages, issuing requests as needed.
@@ -153,11 +151,10 @@ async def main() -> None:
         all_characters.append(character)
     print(all_characters)
 
-
 asyncio.run(main())
 ```
 
-Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
+Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or  `.get_next_page()` methods for more granular control working with pages:
 
 ```python
 first_page = await client.characters.list()
@@ -174,9 +171,7 @@ Or just work directly with the returned data:
 ```python
 first_page = await client.characters.list()
 
-print(
-    f"the current start offset for this page: {first_page.skip}"
-)  # => "the current start offset for this page: 1"
+print(f"the current start offset for this page: {first_page.skip}") # => "the current start offset for this page: 1"
 for character in first_page.data:
     print(character.id)
 
@@ -245,7 +240,7 @@ try:
     client.characters.list()
 except believe.APIConnectionError as e:
     print("The server could not be reached")
-    print(e.__cause__)  # an underlying Exception, likely raised within httpx.
+    print(e.__cause__) # an underlying Exception, likely raised within httpx.
 except believe.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
 except believe.APIStatusError as e:
@@ -285,7 +280,7 @@ client = Believe(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).characters.list()
+client.with_options(max_retries = 5).characters.list()
 ```
 
 ### Timeouts
@@ -308,12 +303,14 @@ client = Believe(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).characters.list()
+client.with_options(timeout = 5.0).characters.list()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
 
 Note that requests that time out are [retried twice by default](#retries).
+
+
 
 ## Advanced
 
@@ -367,11 +364,11 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.characters.with_streaming_response.list() as response:
-    print(response.headers.get("X-My-Header"))
+with client.characters.with_streaming_response.list() as response :
+    print(response.headers.get('X-My-Header'))
 
     for line in response.iter_lines():
-        print(line)
+      print(line)
 ```
 
 The context manager is required so that the response will reliably be closed.
@@ -425,10 +422,7 @@ from believe import Believe, DefaultHttpxClient
 client = Believe(
     # Or use the `BELIEVE_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
-    http_client=DefaultHttpxClient(
-        proxy="http://my.test.proxy.example.com",
-        transport=httpx.HTTPTransport(local_address="0.0.0.0"),
-    ),
+    http_client=DefaultHttpxClient(proxy="http://my.test.proxy.example.com", transport=httpx.HTTPTransport(local_address="0.0.0.0")),
 )
 ```
 

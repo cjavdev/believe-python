@@ -2,32 +2,26 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from typing_extensions import Required, TypeAlias, TypedDict
+from typing_extensions import TypedDict, Required, TypeAliasType, TypeAlias
+
+from typing import Optional, Union
+
+from .position import Position
 
 from .._types import SequenceNotStr
-from .position import Position
+
 from .coach_specialty import CoachSpecialty
+
 from .medical_specialty import MedicalSpecialty
 
-__all__ = [
-    "TeamMemberUpdateParams",
-    "Updates",
-    "UpdatesPlayerUpdate",
-    "UpdatesCoachUpdate",
-    "UpdatesMedicalStaffUpdate",
-    "UpdatesEquipmentManagerUpdate",
-]
-
+__all__ = ["TeamMemberUpdateParams", "Updates", "UpdatesPlayerUpdate", "UpdatesCoachUpdate", "UpdatesMedicalStaffUpdate", "UpdatesEquipmentManagerUpdate"]
 
 class TeamMemberUpdateParams(TypedDict, total=False):
     updates: Required[Updates]
     """Update model for players."""
 
-
 class UpdatesPlayerUpdate(TypedDict, total=False):
     """Update model for players."""
-
     assists: Optional[int]
 
     goals_scored: Optional[int]
@@ -43,10 +37,8 @@ class UpdatesPlayerUpdate(TypedDict, total=False):
 
     years_with_team: Optional[int]
 
-
 class UpdatesCoachUpdate(TypedDict, total=False):
     """Update model for coaches."""
-
     certifications: Optional[SequenceNotStr[str]]
 
     specialty: Optional[CoachSpecialty]
@@ -58,10 +50,8 @@ class UpdatesCoachUpdate(TypedDict, total=False):
 
     years_with_team: Optional[int]
 
-
 class UpdatesMedicalStaffUpdate(TypedDict, total=False):
     """Update model for medical staff."""
-
     license_number: Optional[str]
 
     qualifications: Optional[SequenceNotStr[str]]
@@ -73,10 +63,8 @@ class UpdatesMedicalStaffUpdate(TypedDict, total=False):
 
     years_with_team: Optional[int]
 
-
 class UpdatesEquipmentManagerUpdate(TypedDict, total=False):
     """Update model for equipment managers."""
-
     is_head_kitman: Optional[bool]
 
     responsibilities: Optional[SequenceNotStr[str]]
@@ -85,7 +73,4 @@ class UpdatesEquipmentManagerUpdate(TypedDict, total=False):
 
     years_with_team: Optional[int]
 
-
-Updates: TypeAlias = Union[
-    UpdatesPlayerUpdate, UpdatesCoachUpdate, UpdatesMedicalStaffUpdate, UpdatesEquipmentManagerUpdate
-]
+Updates: TypeAlias = Union[UpdatesPlayerUpdate, UpdatesCoachUpdate, UpdatesMedicalStaffUpdate, UpdatesEquipmentManagerUpdate]

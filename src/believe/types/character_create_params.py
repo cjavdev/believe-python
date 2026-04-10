@@ -2,18 +2,23 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
-from datetime import date
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import TypedDict, Required, Annotated
 
-from .._types import SequenceNotStr
-from .._utils import PropertyInfo
-from .character_role import CharacterRole
-from .growth_arc_param import GrowthArcParam
 from .emotional_stats_param import EmotionalStatsParam
 
-__all__ = ["CharacterCreateParams"]
+from .._types import SequenceNotStr
 
+from .character_role import CharacterRole
+
+from datetime import date
+
+from typing import Union, Optional, Iterable
+
+from .._utils import PropertyInfo
+
+from .growth_arc_param import GrowthArcParam
+
+__all__ = ["CharacterCreateParams"]
 
 class CharacterCreateParams(TypedDict, total=False):
     background: Required[str]
@@ -31,7 +36,7 @@ class CharacterCreateParams(TypedDict, total=False):
     role: Required[CharacterRole]
     """Character's role"""
 
-    date_of_birth: Annotated[Union[str, date, None], PropertyInfo(format="iso8601")]
+    date_of_birth: Annotated[Union[str, date, None], PropertyInfo(format = "iso8601")]
     """Character's date of birth"""
 
     email: Optional[str]

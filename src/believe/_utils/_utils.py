@@ -21,7 +21,7 @@ from typing_extensions import TypeGuard
 
 import sniffio
 
-from .._types import Omit, NotGiven, FileTypes, HeadersLike
+from .._types import NotGiven, FileTypes, HeadersLike, Omit
 
 _T = TypeVar("_T")
 _TupleT = TypeVar("_TupleT", bound=Tuple[object, ...])
@@ -86,8 +86,9 @@ def _extract_items(
     index += 1
     if is_dict(obj):
         try:
-            # We are at the last entry in the path so we must remove the field
-            if (len(path)) == index:
+            # Remove the field if there are no more dict keys in the path,
+            # only "<array>" traversal markers or end.
+            if all(p == "<array>" for p in path[index:]):
                 item = obj.pop(key)
             else:
                 item = obj[key]

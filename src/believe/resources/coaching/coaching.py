@@ -2,19 +2,16 @@
 
 from __future__ import annotations
 
-from ..._compat import cached_property
-from .principles import (
-    PrinciplesResource,
-    AsyncPrinciplesResource,
-    PrinciplesResourceWithRawResponse,
-    AsyncPrinciplesResourceWithRawResponse,
-    PrinciplesResourceWithStreamingResponse,
-    AsyncPrinciplesResourceWithStreamingResponse,
-)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 
-__all__ = ["CoachingResource", "AsyncCoachingResource"]
+from .principles import PrinciplesResource, AsyncPrinciplesResource, PrinciplesResourceWithRawResponse, AsyncPrinciplesResourceWithRawResponse, PrinciplesResourceWithStreamingResponse, AsyncPrinciplesResourceWithStreamingResponse
 
+from ..._compat import cached_property
+
+from typing_extensions import Literal, overload
+from ..._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+
+__all__ = ["CoachingResource", "AsyncCoachingResource"]
 
 class CoachingResource(SyncAPIResource):
     @cached_property
@@ -41,7 +38,6 @@ class CoachingResource(SyncAPIResource):
         """
         return CoachingResourceWithStreamingResponse(self)
 
-
 class AsyncCoachingResource(AsyncAPIResource):
     @cached_property
     def principles(self) -> AsyncPrinciplesResource:
@@ -67,7 +63,6 @@ class AsyncCoachingResource(AsyncAPIResource):
         """
         return AsyncCoachingResourceWithStreamingResponse(self)
 
-
 class CoachingResourceWithRawResponse:
     def __init__(self, coaching: CoachingResource) -> None:
         self._coaching = coaching
@@ -76,7 +71,6 @@ class CoachingResourceWithRawResponse:
     def principles(self) -> PrinciplesResourceWithRawResponse:
         """Interactive endpoints for motivation and guidance"""
         return PrinciplesResourceWithRawResponse(self._coaching.principles)
-
 
 class AsyncCoachingResourceWithRawResponse:
     def __init__(self, coaching: AsyncCoachingResource) -> None:
@@ -87,7 +81,6 @@ class AsyncCoachingResourceWithRawResponse:
         """Interactive endpoints for motivation and guidance"""
         return AsyncPrinciplesResourceWithRawResponse(self._coaching.principles)
 
-
 class CoachingResourceWithStreamingResponse:
     def __init__(self, coaching: CoachingResource) -> None:
         self._coaching = coaching
@@ -96,7 +89,6 @@ class CoachingResourceWithStreamingResponse:
     def principles(self) -> PrinciplesResourceWithStreamingResponse:
         """Interactive endpoints for motivation and guidance"""
         return PrinciplesResourceWithStreamingResponse(self._coaching.principles)
-
 
 class AsyncCoachingResourceWithStreamingResponse:
     def __init__(self, coaching: AsyncCoachingResource) -> None:

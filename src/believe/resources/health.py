@@ -4,19 +4,20 @@ from __future__ import annotations
 
 import httpx
 
-from .._types import Body, Query, Headers, NotGiven, not_given
-from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
+
+from .._compat import cached_property
+
 from .._base_client import make_request_options
 
-__all__ = ["HealthResource", "AsyncHealthResource"]
+from .._types import NotGiven
 
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
+
+from typing_extensions import Literal, overload
+from .._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+
+__all__ = ["HealthResource", "AsyncHealthResource"]
 
 class HealthResource(SyncAPIResource):
     @cached_property
@@ -38,25 +39,20 @@ class HealthResource(SyncAPIResource):
         """
         return HealthResourceWithStreamingResponse(self)
 
-    def check(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    def check(self,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> object:
         """Check if the API is running and healthy."""
         return self._get(
             "/health",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=object,
         )
-
 
 class AsyncHealthResource(AsyncAPIResource):
     @cached_property
@@ -78,25 +74,20 @@ class AsyncHealthResource(AsyncAPIResource):
         """
         return AsyncHealthResourceWithStreamingResponse(self)
 
-    async def check(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    async def check(self,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> object:
         """Check if the API is running and healthy."""
         return await self._get(
             "/health",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=object,
         )
-
 
 class HealthResourceWithRawResponse:
     def __init__(self, health: HealthResource) -> None:
@@ -106,7 +97,6 @@ class HealthResourceWithRawResponse:
             health.check,
         )
 
-
 class AsyncHealthResourceWithRawResponse:
     def __init__(self, health: AsyncHealthResource) -> None:
         self._health = health
@@ -115,7 +105,6 @@ class AsyncHealthResourceWithRawResponse:
             health.check,
         )
 
-
 class HealthResourceWithStreamingResponse:
     def __init__(self, health: HealthResource) -> None:
         self._health = health
@@ -123,7 +112,6 @@ class HealthResourceWithStreamingResponse:
         self.check = to_streamed_response_wrapper(
             health.check,
         )
-
 
 class AsyncHealthResourceWithStreamingResponse:
     def __init__(self, health: AsyncHealthResource) -> None:
