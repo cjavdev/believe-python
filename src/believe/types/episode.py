@@ -1,16 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from .._models import BaseModel
+
 from datetime import date
 
-from .._models import BaseModel
+from typing import List, Optional
 
 __all__ = ["Episode"]
 
-
 class Episode(BaseModel):
     """Full episode model with ID."""
-
     id: str
     """Unique identifier (format: s##e##)"""
 

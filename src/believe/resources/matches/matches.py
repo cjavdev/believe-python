@@ -2,48 +2,54 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
-from datetime import datetime
-
 import httpx
 
-from ...types import (
-    MatchType,
-    MatchResult,
-    match_list_params,
-    match_create_params,
-    match_update_params,
-    match_stream_live_params,
-)
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
-from ..._compat import cached_property
-from .commentary import (
-    CommentaryResource,
-    AsyncCommentaryResource,
-    CommentaryResourceWithRawResponse,
-    AsyncCommentaryResourceWithRawResponse,
-    CommentaryResourceWithStreamingResponse,
-    AsyncCommentaryResourceWithStreamingResponse,
-)
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from ...pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
+from .commentary import CommentaryResource, AsyncCommentaryResource, CommentaryResourceWithRawResponse, AsyncCommentaryResourceWithRawResponse, CommentaryResourceWithStreamingResponse, AsyncCommentaryResourceWithStreamingResponse
+
+from ..._compat import cached_property
+
 from ...types.match import Match
-from ..._base_client import AsyncPaginator, make_request_options
+
+from ..._utils import maybe_transform, path_template, async_maybe_transform
+
+from ..._base_client import make_request_options, AsyncPaginator
+
+from typing import Union, Optional, Iterable
+
+from datetime import datetime
+
 from ...types.match_type import MatchType
+
+from ..._types import Omit, omit, NotGiven
+
 from ...types.match_result import MatchResult
+
 from ...types.turning_point_param import TurningPointParam
+
+from ...pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
 from ...types.match_get_lesson_response import MatchGetLessonResponse
+
 from ...types.match_get_turning_points_response import MatchGetTurningPointsResponse
 
-__all__ = ["MatchesResource", "AsyncMatchesResource"]
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
 
+from typing_extensions import Literal, overload
+from ..._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+from ...types import match_create_params
+from ...types import match_update_params
+from ...types import match_list_params
+from ...types import match_stream_live_params
+from ...types import MatchType
+from ...types import MatchResult
+from ...types import MatchType
+from ...types import MatchResult
+from ...types import MatchType
+from ...types import MatchResult
+
+__all__ = ["MatchesResource", "AsyncMatchesResource"]
 
 class MatchesResource(SyncAPIResource):
     @cached_property
@@ -70,31 +76,29 @@ class MatchesResource(SyncAPIResource):
         """
         return MatchesResourceWithStreamingResponse(self)
 
-    def create(
-        self,
-        *,
-        away_team_id: str,
-        date: Union[str, datetime],
-        home_team_id: str,
-        match_type: MatchType,
-        attendance: Optional[int] | Omit = omit,
-        away_score: int | Omit = omit,
-        episode_id: Optional[str] | Omit = omit,
-        home_score: int | Omit = omit,
-        lesson_learned: Optional[str] | Omit = omit,
-        possession_percentage: Optional[float] | Omit = omit,
-        result: MatchResult | Omit = omit,
-        ted_halftime_speech: Optional[str] | Omit = omit,
-        ticket_revenue_gbp: Union[float, str, None] | Omit = omit,
-        turning_points: Iterable[TurningPointParam] | Omit = omit,
-        weather_temp_celsius: Optional[float] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Match:
+    def create(self,
+    *,
+    away_team_id: str,
+    date: Union[str, datetime],
+    home_team_id: str,
+    match_type: MatchType,
+    attendance: Optional[int] | Omit = omit,
+    away_score: int | Omit = omit,
+    episode_id: Optional[str] | Omit = omit,
+    home_score: int | Omit = omit,
+    lesson_learned: Optional[str] | Omit = omit,
+    possession_percentage: Optional[float] | Omit = omit,
+    result: MatchResult | Omit = omit,
+    ted_halftime_speech: Optional[str] | Omit = omit,
+    ticket_revenue_gbp: Union[float, str, None] | Omit = omit,
+    turning_points: Iterable[TurningPointParam] | Omit = omit,
+    weather_temp_celsius: Optional[float] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Match:
         """
         Schedule a new match.
 
@@ -139,43 +143,36 @@ class MatchesResource(SyncAPIResource):
         """
         return self._post(
             "/matches",
-            body=maybe_transform(
-                {
-                    "away_team_id": away_team_id,
-                    "date": date,
-                    "home_team_id": home_team_id,
-                    "match_type": match_type,
-                    "attendance": attendance,
-                    "away_score": away_score,
-                    "episode_id": episode_id,
-                    "home_score": home_score,
-                    "lesson_learned": lesson_learned,
-                    "possession_percentage": possession_percentage,
-                    "result": result,
-                    "ted_halftime_speech": ted_halftime_speech,
-                    "ticket_revenue_gbp": ticket_revenue_gbp,
-                    "turning_points": turning_points,
-                    "weather_temp_celsius": weather_temp_celsius,
-                },
-                match_create_params.MatchCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "away_team_id": away_team_id,
+                "date": date,
+                "home_team_id": home_team_id,
+                "match_type": match_type,
+                "attendance": attendance,
+                "away_score": away_score,
+                "episode_id": episode_id,
+                "home_score": home_score,
+                "lesson_learned": lesson_learned,
+                "possession_percentage": possession_percentage,
+                "result": result,
+                "ted_halftime_speech": ted_halftime_speech,
+                "ticket_revenue_gbp": ticket_revenue_gbp,
+                "turning_points": turning_points,
+                "weather_temp_celsius": weather_temp_celsius,
+            }, match_create_params.MatchCreateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Match,
         )
 
-    def retrieve(
-        self,
-        match_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Match:
+    def retrieve(self,
+    match_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Match:
         """
         Retrieve detailed information about a specific match.
 
@@ -189,41 +186,39 @@ class MatchesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not match_id:
-            raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `match_id` but received {match_id!r}'
+          )
         return self._get(
             path_template("/matches/{match_id}", match_id=match_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Match,
         )
 
-    def update(
-        self,
-        match_id: str,
-        *,
-        attendance: Optional[int] | Omit = omit,
-        away_score: Optional[int] | Omit = omit,
-        away_team_id: Optional[str] | Omit = omit,
-        date: Union[str, datetime, None] | Omit = omit,
-        episode_id: Optional[str] | Omit = omit,
-        home_score: Optional[int] | Omit = omit,
-        home_team_id: Optional[str] | Omit = omit,
-        lesson_learned: Optional[str] | Omit = omit,
-        match_type: Optional[MatchType] | Omit = omit,
-        possession_percentage: Optional[float] | Omit = omit,
-        result: Optional[MatchResult] | Omit = omit,
-        ted_halftime_speech: Optional[str] | Omit = omit,
-        ticket_revenue_gbp: Union[float, str, None] | Omit = omit,
-        turning_points: Optional[Iterable[TurningPointParam]] | Omit = omit,
-        weather_temp_celsius: Optional[float] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Match:
+    def update(self,
+    match_id: str,
+    *,
+    attendance: Optional[int] | Omit = omit,
+    away_score: Optional[int] | Omit = omit,
+    away_team_id: Optional[str] | Omit = omit,
+    date: Union[str, datetime, None] | Omit = omit,
+    episode_id: Optional[str] | Omit = omit,
+    home_score: Optional[int] | Omit = omit,
+    home_team_id: Optional[str] | Omit = omit,
+    lesson_learned: Optional[str] | Omit = omit,
+    match_type: Optional[MatchType] | Omit = omit,
+    possession_percentage: Optional[float] | Omit = omit,
+    result: Optional[MatchResult] | Omit = omit,
+    ted_halftime_speech: Optional[str] | Omit = omit,
+    ticket_revenue_gbp: Union[float, str, None] | Omit = omit,
+    turning_points: Optional[Iterable[TurningPointParam]] | Omit = omit,
+    weather_temp_celsius: Optional[float] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Match:
         """
         Update specific fields of an existing match (e.g., update score).
 
@@ -241,50 +236,45 @@ class MatchesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not match_id:
-            raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `match_id` but received {match_id!r}'
+          )
         return self._patch(
             path_template("/matches/{match_id}", match_id=match_id),
-            body=maybe_transform(
-                {
-                    "attendance": attendance,
-                    "away_score": away_score,
-                    "away_team_id": away_team_id,
-                    "date": date,
-                    "episode_id": episode_id,
-                    "home_score": home_score,
-                    "home_team_id": home_team_id,
-                    "lesson_learned": lesson_learned,
-                    "match_type": match_type,
-                    "possession_percentage": possession_percentage,
-                    "result": result,
-                    "ted_halftime_speech": ted_halftime_speech,
-                    "ticket_revenue_gbp": ticket_revenue_gbp,
-                    "turning_points": turning_points,
-                    "weather_temp_celsius": weather_temp_celsius,
-                },
-                match_update_params.MatchUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "attendance": attendance,
+                "away_score": away_score,
+                "away_team_id": away_team_id,
+                "date": date,
+                "episode_id": episode_id,
+                "home_score": home_score,
+                "home_team_id": home_team_id,
+                "lesson_learned": lesson_learned,
+                "match_type": match_type,
+                "possession_percentage": possession_percentage,
+                "result": result,
+                "ted_halftime_speech": ted_halftime_speech,
+                "ticket_revenue_gbp": ticket_revenue_gbp,
+                "turning_points": turning_points,
+                "weather_temp_celsius": weather_temp_celsius,
+            }, match_update_params.MatchUpdateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Match,
         )
 
-    def list(
-        self,
-        *,
-        limit: int | Omit = omit,
-        match_type: Optional[MatchType] | Omit = omit,
-        result: Optional[MatchResult] | Omit = omit,
-        skip: int | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[Match]:
+    def list(self,
+    *,
+    limit: int | Omit = omit,
+    match_type: Optional[MatchType] | Omit = omit,
+    result: Optional[MatchResult] | Omit = omit,
+    skip: int | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> SyncSkipLimitPage[Match]:
         """
         Get a paginated list of all matches with optional filtering.
 
@@ -309,37 +299,26 @@ class MatchesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/matches",
-            page=SyncSkipLimitPage[Match],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "match_type": match_type,
-                        "result": result,
-                        "skip": skip,
-                        "team_id": team_id,
-                    },
-                    match_list_params.MatchListParams,
-                ),
-            ),
+            page = SyncSkipLimitPage[Match],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "match_type": match_type,
+                "result": result,
+                "skip": skip,
+                "team_id": team_id,
+            }, match_list_params.MatchListParams)),
             model=Match,
         )
 
-    def delete(
-        self,
-        match_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    def delete(self,
+    match_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Remove a match from the database.
 
@@ -353,27 +332,25 @@ class MatchesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not match_id:
-            raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `match_id` but received {match_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             path_template("/matches/{match_id}", match_id=match_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    def get_lesson(
-        self,
-        match_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MatchGetLessonResponse:
+    def get_lesson(self,
+    match_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> MatchGetLessonResponse:
         """
         Get the life lesson learned from a specific match.
 
@@ -387,26 +364,24 @@ class MatchesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not match_id:
-            raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `match_id` but received {match_id!r}'
+          )
         return self._get(
             path_template("/matches/{match_id}/lesson", match_id=match_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=MatchGetLessonResponse,
         )
 
-    def get_turning_points(
-        self,
-        match_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MatchGetTurningPointsResponse:
+    def get_turning_points(self,
+    match_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> MatchGetTurningPointsResponse:
         """
         Get all turning points from a specific match.
 
@@ -420,29 +395,27 @@ class MatchesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not match_id:
-            raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `match_id` but received {match_id!r}'
+          )
         return self._get(
             path_template("/matches/{match_id}/turning-points", match_id=match_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=MatchGetTurningPointsResponse,
         )
 
-    def stream_live(
-        self,
-        *,
-        away_team: str | Omit = omit,
-        excitement_level: int | Omit = omit,
-        home_team: str | Omit = omit,
-        speed: float | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    def stream_live(self,
+    *,
+    away_team: str | Omit = omit,
+    excitement_level: int | Omit = omit,
+    home_team: str | Omit = omit,
+    speed: float | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         WebSocket endpoint for real-time live match simulation.
 
@@ -500,24 +473,14 @@ class MatchesResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
             "/matches/live",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "away_team": away_team,
-                        "excitement_level": excitement_level,
-                        "home_team": home_team,
-                        "speed": speed,
-                    },
-                    match_stream_live_params.MatchStreamLiveParams,
-                ),
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "away_team": away_team,
+                "excitement_level": excitement_level,
+                "home_team": home_team,
+                "speed": speed,
+            }, match_stream_live_params.MatchStreamLiveParams)),
             cast_to=NoneType,
         )
-
 
 class AsyncMatchesResource(AsyncAPIResource):
     @cached_property
@@ -544,31 +507,29 @@ class AsyncMatchesResource(AsyncAPIResource):
         """
         return AsyncMatchesResourceWithStreamingResponse(self)
 
-    async def create(
-        self,
-        *,
-        away_team_id: str,
-        date: Union[str, datetime],
-        home_team_id: str,
-        match_type: MatchType,
-        attendance: Optional[int] | Omit = omit,
-        away_score: int | Omit = omit,
-        episode_id: Optional[str] | Omit = omit,
-        home_score: int | Omit = omit,
-        lesson_learned: Optional[str] | Omit = omit,
-        possession_percentage: Optional[float] | Omit = omit,
-        result: MatchResult | Omit = omit,
-        ted_halftime_speech: Optional[str] | Omit = omit,
-        ticket_revenue_gbp: Union[float, str, None] | Omit = omit,
-        turning_points: Iterable[TurningPointParam] | Omit = omit,
-        weather_temp_celsius: Optional[float] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Match:
+    async def create(self,
+    *,
+    away_team_id: str,
+    date: Union[str, datetime],
+    home_team_id: str,
+    match_type: MatchType,
+    attendance: Optional[int] | Omit = omit,
+    away_score: int | Omit = omit,
+    episode_id: Optional[str] | Omit = omit,
+    home_score: int | Omit = omit,
+    lesson_learned: Optional[str] | Omit = omit,
+    possession_percentage: Optional[float] | Omit = omit,
+    result: MatchResult | Omit = omit,
+    ted_halftime_speech: Optional[str] | Omit = omit,
+    ticket_revenue_gbp: Union[float, str, None] | Omit = omit,
+    turning_points: Iterable[TurningPointParam] | Omit = omit,
+    weather_temp_celsius: Optional[float] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Match:
         """
         Schedule a new match.
 
@@ -613,43 +574,36 @@ class AsyncMatchesResource(AsyncAPIResource):
         """
         return await self._post(
             "/matches",
-            body=await async_maybe_transform(
-                {
-                    "away_team_id": away_team_id,
-                    "date": date,
-                    "home_team_id": home_team_id,
-                    "match_type": match_type,
-                    "attendance": attendance,
-                    "away_score": away_score,
-                    "episode_id": episode_id,
-                    "home_score": home_score,
-                    "lesson_learned": lesson_learned,
-                    "possession_percentage": possession_percentage,
-                    "result": result,
-                    "ted_halftime_speech": ted_halftime_speech,
-                    "ticket_revenue_gbp": ticket_revenue_gbp,
-                    "turning_points": turning_points,
-                    "weather_temp_celsius": weather_temp_celsius,
-                },
-                match_create_params.MatchCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "away_team_id": away_team_id,
+                "date": date,
+                "home_team_id": home_team_id,
+                "match_type": match_type,
+                "attendance": attendance,
+                "away_score": away_score,
+                "episode_id": episode_id,
+                "home_score": home_score,
+                "lesson_learned": lesson_learned,
+                "possession_percentage": possession_percentage,
+                "result": result,
+                "ted_halftime_speech": ted_halftime_speech,
+                "ticket_revenue_gbp": ticket_revenue_gbp,
+                "turning_points": turning_points,
+                "weather_temp_celsius": weather_temp_celsius,
+            }, match_create_params.MatchCreateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Match,
         )
 
-    async def retrieve(
-        self,
-        match_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Match:
+    async def retrieve(self,
+    match_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Match:
         """
         Retrieve detailed information about a specific match.
 
@@ -663,41 +617,39 @@ class AsyncMatchesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not match_id:
-            raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `match_id` but received {match_id!r}'
+          )
         return await self._get(
             path_template("/matches/{match_id}", match_id=match_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Match,
         )
 
-    async def update(
-        self,
-        match_id: str,
-        *,
-        attendance: Optional[int] | Omit = omit,
-        away_score: Optional[int] | Omit = omit,
-        away_team_id: Optional[str] | Omit = omit,
-        date: Union[str, datetime, None] | Omit = omit,
-        episode_id: Optional[str] | Omit = omit,
-        home_score: Optional[int] | Omit = omit,
-        home_team_id: Optional[str] | Omit = omit,
-        lesson_learned: Optional[str] | Omit = omit,
-        match_type: Optional[MatchType] | Omit = omit,
-        possession_percentage: Optional[float] | Omit = omit,
-        result: Optional[MatchResult] | Omit = omit,
-        ted_halftime_speech: Optional[str] | Omit = omit,
-        ticket_revenue_gbp: Union[float, str, None] | Omit = omit,
-        turning_points: Optional[Iterable[TurningPointParam]] | Omit = omit,
-        weather_temp_celsius: Optional[float] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Match:
+    async def update(self,
+    match_id: str,
+    *,
+    attendance: Optional[int] | Omit = omit,
+    away_score: Optional[int] | Omit = omit,
+    away_team_id: Optional[str] | Omit = omit,
+    date: Union[str, datetime, None] | Omit = omit,
+    episode_id: Optional[str] | Omit = omit,
+    home_score: Optional[int] | Omit = omit,
+    home_team_id: Optional[str] | Omit = omit,
+    lesson_learned: Optional[str] | Omit = omit,
+    match_type: Optional[MatchType] | Omit = omit,
+    possession_percentage: Optional[float] | Omit = omit,
+    result: Optional[MatchResult] | Omit = omit,
+    ted_halftime_speech: Optional[str] | Omit = omit,
+    ticket_revenue_gbp: Union[float, str, None] | Omit = omit,
+    turning_points: Optional[Iterable[TurningPointParam]] | Omit = omit,
+    weather_temp_celsius: Optional[float] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Match:
         """
         Update specific fields of an existing match (e.g., update score).
 
@@ -715,50 +667,45 @@ class AsyncMatchesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not match_id:
-            raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `match_id` but received {match_id!r}'
+          )
         return await self._patch(
             path_template("/matches/{match_id}", match_id=match_id),
-            body=await async_maybe_transform(
-                {
-                    "attendance": attendance,
-                    "away_score": away_score,
-                    "away_team_id": away_team_id,
-                    "date": date,
-                    "episode_id": episode_id,
-                    "home_score": home_score,
-                    "home_team_id": home_team_id,
-                    "lesson_learned": lesson_learned,
-                    "match_type": match_type,
-                    "possession_percentage": possession_percentage,
-                    "result": result,
-                    "ted_halftime_speech": ted_halftime_speech,
-                    "ticket_revenue_gbp": ticket_revenue_gbp,
-                    "turning_points": turning_points,
-                    "weather_temp_celsius": weather_temp_celsius,
-                },
-                match_update_params.MatchUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "attendance": attendance,
+                "away_score": away_score,
+                "away_team_id": away_team_id,
+                "date": date,
+                "episode_id": episode_id,
+                "home_score": home_score,
+                "home_team_id": home_team_id,
+                "lesson_learned": lesson_learned,
+                "match_type": match_type,
+                "possession_percentage": possession_percentage,
+                "result": result,
+                "ted_halftime_speech": ted_halftime_speech,
+                "ticket_revenue_gbp": ticket_revenue_gbp,
+                "turning_points": turning_points,
+                "weather_temp_celsius": weather_temp_celsius,
+            }, match_update_params.MatchUpdateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Match,
         )
 
-    def list(
-        self,
-        *,
-        limit: int | Omit = omit,
-        match_type: Optional[MatchType] | Omit = omit,
-        result: Optional[MatchResult] | Omit = omit,
-        skip: int | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Match, AsyncSkipLimitPage[Match]]:
+    def list(self,
+    *,
+    limit: int | Omit = omit,
+    match_type: Optional[MatchType] | Omit = omit,
+    result: Optional[MatchResult] | Omit = omit,
+    skip: int | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> AsyncPaginator[Match, AsyncSkipLimitPage[Match]]:
         """
         Get a paginated list of all matches with optional filtering.
 
@@ -783,37 +730,26 @@ class AsyncMatchesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/matches",
-            page=AsyncSkipLimitPage[Match],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "match_type": match_type,
-                        "result": result,
-                        "skip": skip,
-                        "team_id": team_id,
-                    },
-                    match_list_params.MatchListParams,
-                ),
-            ),
+            page = AsyncSkipLimitPage[Match],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "match_type": match_type,
+                "result": result,
+                "skip": skip,
+                "team_id": team_id,
+            }, match_list_params.MatchListParams)),
             model=Match,
         )
 
-    async def delete(
-        self,
-        match_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    async def delete(self,
+    match_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Remove a match from the database.
 
@@ -827,27 +763,25 @@ class AsyncMatchesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not match_id:
-            raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `match_id` but received {match_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             path_template("/matches/{match_id}", match_id=match_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    async def get_lesson(
-        self,
-        match_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MatchGetLessonResponse:
+    async def get_lesson(self,
+    match_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> MatchGetLessonResponse:
         """
         Get the life lesson learned from a specific match.
 
@@ -861,26 +795,24 @@ class AsyncMatchesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not match_id:
-            raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `match_id` but received {match_id!r}'
+          )
         return await self._get(
             path_template("/matches/{match_id}/lesson", match_id=match_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=MatchGetLessonResponse,
         )
 
-    async def get_turning_points(
-        self,
-        match_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MatchGetTurningPointsResponse:
+    async def get_turning_points(self,
+    match_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> MatchGetTurningPointsResponse:
         """
         Get all turning points from a specific match.
 
@@ -894,29 +826,27 @@ class AsyncMatchesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not match_id:
-            raise ValueError(f"Expected a non-empty value for `match_id` but received {match_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `match_id` but received {match_id!r}'
+          )
         return await self._get(
             path_template("/matches/{match_id}/turning-points", match_id=match_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=MatchGetTurningPointsResponse,
         )
 
-    async def stream_live(
-        self,
-        *,
-        away_team: str | Omit = omit,
-        excitement_level: int | Omit = omit,
-        home_team: str | Omit = omit,
-        speed: float | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    async def stream_live(self,
+    *,
+    away_team: str | Omit = omit,
+    excitement_level: int | Omit = omit,
+    home_team: str | Omit = omit,
+    speed: float | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         WebSocket endpoint for real-time live match simulation.
 
@@ -974,24 +904,14 @@ class AsyncMatchesResource(AsyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
             "/matches/live",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "away_team": away_team,
-                        "excitement_level": excitement_level,
-                        "home_team": home_team,
-                        "speed": speed,
-                    },
-                    match_stream_live_params.MatchStreamLiveParams,
-                ),
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=await async_maybe_transform({
+                "away_team": away_team,
+                "excitement_level": excitement_level,
+                "home_team": home_team,
+                "speed": speed,
+            }, match_stream_live_params.MatchStreamLiveParams)),
             cast_to=NoneType,
         )
-
 
 class MatchesResourceWithRawResponse:
     def __init__(self, matches: MatchesResource) -> None:
@@ -1027,7 +947,6 @@ class MatchesResourceWithRawResponse:
         """Server-Sent Events (SSE) streaming endpoints"""
         return CommentaryResourceWithRawResponse(self._matches.commentary)
 
-
 class AsyncMatchesResourceWithRawResponse:
     def __init__(self, matches: AsyncMatchesResource) -> None:
         self._matches = matches
@@ -1062,7 +981,6 @@ class AsyncMatchesResourceWithRawResponse:
         """Server-Sent Events (SSE) streaming endpoints"""
         return AsyncCommentaryResourceWithRawResponse(self._matches.commentary)
 
-
 class MatchesResourceWithStreamingResponse:
     def __init__(self, matches: MatchesResource) -> None:
         self._matches = matches
@@ -1096,7 +1014,6 @@ class MatchesResourceWithStreamingResponse:
     def commentary(self) -> CommentaryResourceWithStreamingResponse:
         """Server-Sent Events (SSE) streaming endpoints"""
         return CommentaryResourceWithStreamingResponse(self._matches.commentary)
-
 
 class AsyncMatchesResourceWithStreamingResponse:
     def __init__(self, matches: AsyncMatchesResource) -> None:

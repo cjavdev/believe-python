@@ -2,26 +2,37 @@
 
 from __future__ import annotations
 
+from believe import Believe, AsyncBelieve
+
+from believe.types import Team, TeamGetCultureResponse, TeamGetRivalsResponse, TeamListLogosResponse
+
+from typing import cast, Any
+
+from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
 import os
-from typing import Any, cast
-
 import pytest
-
+import httpx
+from typing_extensions import get_args
+from respx import MockRouter
 from believe import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
-from believe.types import (
-    Team,
-    TeamGetRivalsResponse,
-    TeamListLogosResponse,
-    TeamGetCultureResponse,
-)
-from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+from believe.types import team_create_params
+from believe.types import team_update_params
+from believe.types import team_list_params
+from believe.types import League
+from believe.types import TeamValues
+from believe.types import GeoLocation
+from believe.types import League
+from believe.types import GeoLocation
+from believe.types import TeamValues
+from believe.types import League
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
-
 class TestTeams:
-    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=['loose', 'strict'])
+
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -38,7 +49,7 @@ class TestTeams:
                 "team_motto": "Forever Blowing Bubbles",
             },
         )
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -69,11 +80,12 @@ class TestTeams:
             website="https://www.whufc.com",
             win_percentage=52.3,
         )
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Believe) -> None:
+
         response = client.teams.with_raw_response.create(
             culture_score=70,
             founded_year=1895,
@@ -88,9 +100,9 @@ class TestTeams:
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = response.parse()
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -106,12 +118,12 @@ class TestTeams:
                 "secondary_values": ["History", "Community", "Passion"],
                 "team_motto": "Forever Blowing Bubbles",
             },
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = response.parse()
-            assert_matches_type(Team, team, path=["response"])
+            assert_matches_type(Team, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -121,31 +133,32 @@ class TestTeams:
         team = client.teams.retrieve(
             "team_id",
         )
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Believe) -> None:
+
         response = client.teams.with_raw_response.retrieve(
             "team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = response.parse()
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Believe) -> None:
         with client.teams.with_streaming_response.retrieve(
             "team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = response.parse()
-            assert_matches_type(Team, team, path=["response"])
+            assert_matches_type(Team, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -153,9 +166,9 @@ class TestTeams:
     @parametrize
     def test_path_params_retrieve(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            client.teams.with_raw_response.retrieve(
-                "",
-            )
+          client.teams.with_raw_response.retrieve(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -163,7 +176,7 @@ class TestTeams:
         team = client.teams.update(
             team_id="team_id",
         )
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -195,31 +208,32 @@ class TestTeams:
             website="https://example.com",
             win_percentage=0,
         )
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Believe) -> None:
+
         response = client.teams.with_raw_response.update(
             team_id="team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = response.parse()
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Believe) -> None:
         with client.teams.with_streaming_response.update(
             team_id="team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = response.parse()
-            assert_matches_type(Team, team, path=["response"])
+            assert_matches_type(Team, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -227,15 +241,15 @@ class TestTeams:
     @parametrize
     def test_path_params_update(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            client.teams.with_raw_response.update(
-                team_id="",
-            )
+          client.teams.with_raw_response.update(
+              team_id="",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Believe) -> None:
         team = client.teams.list()
-        assert_matches_type(SyncSkipLimitPage[Team], team, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Team], team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -246,27 +260,28 @@ class TestTeams:
             min_culture_score=0,
             skip=0,
         )
-        assert_matches_type(SyncSkipLimitPage[Team], team, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Team], team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Believe) -> None:
+
         response = client.teams.with_raw_response.list()
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = response.parse()
-        assert_matches_type(SyncSkipLimitPage[Team], team, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Team], team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Believe) -> None:
-        with client.teams.with_streaming_response.list() as response:
+        with client.teams.with_streaming_response.list() as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = response.parse()
-            assert_matches_type(SyncSkipLimitPage[Team], team, path=["response"])
+            assert_matches_type(SyncSkipLimitPage[Team], team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -281,12 +296,13 @@ class TestTeams:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Believe) -> None:
+
         response = client.teams.with_raw_response.delete(
             "team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = response.parse()
         assert team is None
 
@@ -295,9 +311,9 @@ class TestTeams:
     def test_streaming_response_delete(self, client: Believe) -> None:
         with client.teams.with_streaming_response.delete(
             "team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = response.parse()
             assert team is None
@@ -308,9 +324,9 @@ class TestTeams:
     @parametrize
     def test_path_params_delete(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            client.teams.with_raw_response.delete(
-                "",
-            )
+          client.teams.with_raw_response.delete(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -318,31 +334,32 @@ class TestTeams:
         team = client.teams.get_culture(
             "team_id",
         )
-        assert_matches_type(TeamGetCultureResponse, team, path=["response"])
+        assert_matches_type(TeamGetCultureResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_culture(self, client: Believe) -> None:
+
         response = client.teams.with_raw_response.get_culture(
             "team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = response.parse()
-        assert_matches_type(TeamGetCultureResponse, team, path=["response"])
+        assert_matches_type(TeamGetCultureResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_culture(self, client: Believe) -> None:
         with client.teams.with_streaming_response.get_culture(
             "team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = response.parse()
-            assert_matches_type(TeamGetCultureResponse, team, path=["response"])
+            assert_matches_type(TeamGetCultureResponse, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -350,9 +367,9 @@ class TestTeams:
     @parametrize
     def test_path_params_get_culture(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            client.teams.with_raw_response.get_culture(
-                "",
-            )
+          client.teams.with_raw_response.get_culture(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -360,31 +377,32 @@ class TestTeams:
         team = client.teams.get_rivals(
             "team_id",
         )
-        assert_matches_type(TeamGetRivalsResponse, team, path=["response"])
+        assert_matches_type(TeamGetRivalsResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_rivals(self, client: Believe) -> None:
+
         response = client.teams.with_raw_response.get_rivals(
             "team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = response.parse()
-        assert_matches_type(TeamGetRivalsResponse, team, path=["response"])
+        assert_matches_type(TeamGetRivalsResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_rivals(self, client: Believe) -> None:
         with client.teams.with_streaming_response.get_rivals(
             "team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = response.parse()
-            assert_matches_type(TeamGetRivalsResponse, team, path=["response"])
+            assert_matches_type(TeamGetRivalsResponse, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -392,9 +410,9 @@ class TestTeams:
     @parametrize
     def test_path_params_get_rivals(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            client.teams.with_raw_response.get_rivals(
-                "",
-            )
+          client.teams.with_raw_response.get_rivals(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -402,31 +420,32 @@ class TestTeams:
         team = client.teams.list_logos(
             "team_id",
         )
-        assert_matches_type(TeamListLogosResponse, team, path=["response"])
+        assert_matches_type(TeamListLogosResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list_logos(self, client: Believe) -> None:
+
         response = client.teams.with_raw_response.list_logos(
             "team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = response.parse()
-        assert_matches_type(TeamListLogosResponse, team, path=["response"])
+        assert_matches_type(TeamListLogosResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list_logos(self, client: Believe) -> None:
         with client.teams.with_streaming_response.list_logos(
             "team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = response.parse()
-            assert_matches_type(TeamListLogosResponse, team, path=["response"])
+            assert_matches_type(TeamListLogosResponse, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -434,15 +453,12 @@ class TestTeams:
     @parametrize
     def test_path_params_list_logos(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            client.teams.with_raw_response.list_logos(
-                "",
-            )
-
-
+          client.teams.with_raw_response.list_logos(
+              "",
+          )
 class TestAsyncTeams:
-    parametrize = pytest.mark.parametrize(
-        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
-    )
+    parametrize = pytest.mark.parametrize("async_client", [False, True, {'http_client': 'aiohttp'}], indirect=True, ids=['loose', 'strict', 'aiohttp'])
+
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -459,7 +475,7 @@ class TestAsyncTeams:
                 "team_motto": "Forever Blowing Bubbles",
             },
         )
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -490,11 +506,12 @@ class TestAsyncTeams:
             website="https://www.whufc.com",
             win_percentage=52.3,
         )
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.teams.with_raw_response.create(
             culture_score=70,
             founded_year=1895,
@@ -509,9 +526,9 @@ class TestAsyncTeams:
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = await response.parse()
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -527,12 +544,12 @@ class TestAsyncTeams:
                 "secondary_values": ["History", "Community", "Passion"],
                 "team_motto": "Forever Blowing Bubbles",
             },
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = await response.parse()
-            assert_matches_type(Team, team, path=["response"])
+            assert_matches_type(Team, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -542,31 +559,32 @@ class TestAsyncTeams:
         team = await async_client.teams.retrieve(
             "team_id",
         )
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.teams.with_raw_response.retrieve(
             "team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = await response.parse()
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBelieve) -> None:
         async with async_client.teams.with_streaming_response.retrieve(
             "team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = await response.parse()
-            assert_matches_type(Team, team, path=["response"])
+            assert_matches_type(Team, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -574,9 +592,9 @@ class TestAsyncTeams:
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            await async_client.teams.with_raw_response.retrieve(
-                "",
-            )
+          await async_client.teams.with_raw_response.retrieve(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -584,7 +602,7 @@ class TestAsyncTeams:
         team = await async_client.teams.update(
             team_id="team_id",
         )
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -616,31 +634,32 @@ class TestAsyncTeams:
             website="https://example.com",
             win_percentage=0,
         )
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.teams.with_raw_response.update(
             team_id="team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = await response.parse()
-        assert_matches_type(Team, team, path=["response"])
+        assert_matches_type(Team, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncBelieve) -> None:
         async with async_client.teams.with_streaming_response.update(
             team_id="team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = await response.parse()
-            assert_matches_type(Team, team, path=["response"])
+            assert_matches_type(Team, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -648,15 +667,15 @@ class TestAsyncTeams:
     @parametrize
     async def test_path_params_update(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            await async_client.teams.with_raw_response.update(
-                team_id="",
-            )
+          await async_client.teams.with_raw_response.update(
+              team_id="",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncBelieve) -> None:
         team = await async_client.teams.list()
-        assert_matches_type(AsyncSkipLimitPage[Team], team, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Team], team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -667,27 +686,28 @@ class TestAsyncTeams:
             min_culture_score=0,
             skip=0,
         )
-        assert_matches_type(AsyncSkipLimitPage[Team], team, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Team], team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.teams.with_raw_response.list()
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = await response.parse()
-        assert_matches_type(AsyncSkipLimitPage[Team], team, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Team], team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncBelieve) -> None:
-        async with async_client.teams.with_streaming_response.list() as response:
+        async with async_client.teams.with_streaming_response.list() as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = await response.parse()
-            assert_matches_type(AsyncSkipLimitPage[Team], team, path=["response"])
+            assert_matches_type(AsyncSkipLimitPage[Team], team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -702,12 +722,13 @@ class TestAsyncTeams:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.teams.with_raw_response.delete(
             "team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = await response.parse()
         assert team is None
 
@@ -716,9 +737,9 @@ class TestAsyncTeams:
     async def test_streaming_response_delete(self, async_client: AsyncBelieve) -> None:
         async with async_client.teams.with_streaming_response.delete(
             "team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = await response.parse()
             assert team is None
@@ -729,9 +750,9 @@ class TestAsyncTeams:
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            await async_client.teams.with_raw_response.delete(
-                "",
-            )
+          await async_client.teams.with_raw_response.delete(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -739,31 +760,32 @@ class TestAsyncTeams:
         team = await async_client.teams.get_culture(
             "team_id",
         )
-        assert_matches_type(TeamGetCultureResponse, team, path=["response"])
+        assert_matches_type(TeamGetCultureResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_culture(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.teams.with_raw_response.get_culture(
             "team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = await response.parse()
-        assert_matches_type(TeamGetCultureResponse, team, path=["response"])
+        assert_matches_type(TeamGetCultureResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_culture(self, async_client: AsyncBelieve) -> None:
         async with async_client.teams.with_streaming_response.get_culture(
             "team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = await response.parse()
-            assert_matches_type(TeamGetCultureResponse, team, path=["response"])
+            assert_matches_type(TeamGetCultureResponse, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -771,9 +793,9 @@ class TestAsyncTeams:
     @parametrize
     async def test_path_params_get_culture(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            await async_client.teams.with_raw_response.get_culture(
-                "",
-            )
+          await async_client.teams.with_raw_response.get_culture(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -781,31 +803,32 @@ class TestAsyncTeams:
         team = await async_client.teams.get_rivals(
             "team_id",
         )
-        assert_matches_type(TeamGetRivalsResponse, team, path=["response"])
+        assert_matches_type(TeamGetRivalsResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_rivals(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.teams.with_raw_response.get_rivals(
             "team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = await response.parse()
-        assert_matches_type(TeamGetRivalsResponse, team, path=["response"])
+        assert_matches_type(TeamGetRivalsResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_rivals(self, async_client: AsyncBelieve) -> None:
         async with async_client.teams.with_streaming_response.get_rivals(
             "team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = await response.parse()
-            assert_matches_type(TeamGetRivalsResponse, team, path=["response"])
+            assert_matches_type(TeamGetRivalsResponse, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -813,9 +836,9 @@ class TestAsyncTeams:
     @parametrize
     async def test_path_params_get_rivals(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            await async_client.teams.with_raw_response.get_rivals(
-                "",
-            )
+          await async_client.teams.with_raw_response.get_rivals(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -823,31 +846,32 @@ class TestAsyncTeams:
         team = await async_client.teams.list_logos(
             "team_id",
         )
-        assert_matches_type(TeamListLogosResponse, team, path=["response"])
+        assert_matches_type(TeamListLogosResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list_logos(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.teams.with_raw_response.list_logos(
             "team_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         team = await response.parse()
-        assert_matches_type(TeamListLogosResponse, team, path=["response"])
+        assert_matches_type(TeamListLogosResponse, team, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list_logos(self, async_client: AsyncBelieve) -> None:
         async with async_client.teams.with_streaming_response.list_logos(
             "team_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             team = await response.parse()
-            assert_matches_type(TeamListLogosResponse, team, path=["response"])
+            assert_matches_type(TeamListLogosResponse, team, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -855,6 +879,6 @@ class TestAsyncTeams:
     @parametrize
     async def test_path_params_list_logos(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `team_id` but received ''"):
-            await async_client.teams.with_raw_response.list_logos(
-                "",
-            )
+          await async_client.teams.with_raw_response.list_logos(
+              "",
+          )

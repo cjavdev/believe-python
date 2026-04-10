@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict, Required
 
 __all__ = ["GeoLocationParam"]
 
-
 class GeoLocationParam(TypedDict, total=False):
     """Geographic coordinates for a location."""
-
     latitude: Required[float]
     """Latitude in degrees"""
 

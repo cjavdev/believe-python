@@ -2,41 +2,51 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
-from datetime import date
-
 import httpx
 
-from ..types import (
-    CharacterRole,
-    character_list_params,
-    character_create_params,
-    character_update_params,
-)
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import path_template, maybe_transform, async_maybe_transform
-from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from ..pagination import SyncSkipLimitPage, AsyncSkipLimitPage
-from .._base_client import AsyncPaginator, make_request_options
+
+from .._compat import cached_property
+
 from ..types.character import Character
-from ..types.character_role import CharacterRole
-from ..types.growth_arc_param import GrowthArcParam
+
+from .._utils import maybe_transform, path_template, async_maybe_transform
+
+from .._base_client import make_request_options, AsyncPaginator
+
 from ..types.emotional_stats_param import EmotionalStatsParam
+
+from .._types import SequenceNotStr, Omit, omit, NotGiven
+
+from ..types.character_role import CharacterRole
+
+from datetime import date
+
+from typing import Union, Optional, Iterable
+
+from ..types.growth_arc_param import GrowthArcParam
+
+from ..pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
 from ..types.character_get_quotes_response import CharacterGetQuotesResponse
+
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
+
+from typing_extensions import Literal, overload
+from .._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+from ..types import character_create_params
+from ..types import character_update_params
+from ..types import character_list_params
+from ..types import EmotionalStats
+from ..types import CharacterRole
+from ..types import EmotionalStats
+from ..types import CharacterRole
+from ..types import CharacterRole
 
 __all__ = ["CharactersResource", "AsyncCharactersResource"]
 
-
 class CharactersResource(SyncAPIResource):
     """Operations related to Ted Lasso characters"""
-
     @cached_property
     def with_raw_response(self) -> CharactersResourceWithRawResponse:
         """
@@ -56,29 +66,27 @@ class CharactersResource(SyncAPIResource):
         """
         return CharactersResourceWithStreamingResponse(self)
 
-    def create(
-        self,
-        *,
-        background: str,
-        emotional_stats: EmotionalStatsParam,
-        name: str,
-        personality_traits: SequenceNotStr[str],
-        role: CharacterRole,
-        date_of_birth: Union[str, date, None] | Omit = omit,
-        email: Optional[str] | Omit = omit,
-        growth_arcs: Iterable[GrowthArcParam] | Omit = omit,
-        height_meters: Optional[float] | Omit = omit,
-        profile_image_url: Optional[str] | Omit = omit,
-        salary_gbp: Union[float, str, None] | Omit = omit,
-        signature_quotes: SequenceNotStr[str] | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Character:
+    def create(self,
+    *,
+    background: str,
+    emotional_stats: EmotionalStatsParam,
+    name: str,
+    personality_traits: SequenceNotStr[str],
+    role: CharacterRole,
+    date_of_birth: Union[str, date, None] | Omit = omit,
+    email: Optional[str] | Omit = omit,
+    growth_arcs: Iterable[GrowthArcParam] | Omit = omit,
+    height_meters: Optional[float] | Omit = omit,
+    profile_image_url: Optional[str] | Omit = omit,
+    salary_gbp: Union[float, str, None] | Omit = omit,
+    signature_quotes: SequenceNotStr[str] | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Character:
         """
         Add a new character to the Ted Lasso universe.
 
@@ -119,41 +127,34 @@ class CharactersResource(SyncAPIResource):
         """
         return self._post(
             "/characters",
-            body=maybe_transform(
-                {
-                    "background": background,
-                    "emotional_stats": emotional_stats,
-                    "name": name,
-                    "personality_traits": personality_traits,
-                    "role": role,
-                    "date_of_birth": date_of_birth,
-                    "email": email,
-                    "growth_arcs": growth_arcs,
-                    "height_meters": height_meters,
-                    "profile_image_url": profile_image_url,
-                    "salary_gbp": salary_gbp,
-                    "signature_quotes": signature_quotes,
-                    "team_id": team_id,
-                },
-                character_create_params.CharacterCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "background": background,
+                "emotional_stats": emotional_stats,
+                "name": name,
+                "personality_traits": personality_traits,
+                "role": role,
+                "date_of_birth": date_of_birth,
+                "email": email,
+                "growth_arcs": growth_arcs,
+                "height_meters": height_meters,
+                "profile_image_url": profile_image_url,
+                "salary_gbp": salary_gbp,
+                "signature_quotes": signature_quotes,
+                "team_id": team_id,
+            }, character_create_params.CharacterCreateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Character,
         )
 
-    def retrieve(
-        self,
-        character_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Character:
+    def retrieve(self,
+    character_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Character:
         """
         Retrieve detailed information about a specific character.
 
@@ -167,39 +168,37 @@ class CharactersResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not character_id:
-            raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `character_id` but received {character_id!r}'
+          )
         return self._get(
             path_template("/characters/{character_id}", character_id=character_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Character,
         )
 
-    def update(
-        self,
-        character_id: str,
-        *,
-        background: Optional[str] | Omit = omit,
-        date_of_birth: Union[str, date, None] | Omit = omit,
-        email: Optional[str] | Omit = omit,
-        emotional_stats: Optional[EmotionalStatsParam] | Omit = omit,
-        growth_arcs: Optional[Iterable[GrowthArcParam]] | Omit = omit,
-        height_meters: Optional[float] | Omit = omit,
-        name: Optional[str] | Omit = omit,
-        personality_traits: Optional[SequenceNotStr[str]] | Omit = omit,
-        profile_image_url: Optional[str] | Omit = omit,
-        role: Optional[CharacterRole] | Omit = omit,
-        salary_gbp: Union[float, str, None] | Omit = omit,
-        signature_quotes: Optional[SequenceNotStr[str]] | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Character:
+    def update(self,
+    character_id: str,
+    *,
+    background: Optional[str] | Omit = omit,
+    date_of_birth: Union[str, date, None] | Omit = omit,
+    email: Optional[str] | Omit = omit,
+    emotional_stats: Optional[EmotionalStatsParam] | Omit = omit,
+    growth_arcs: Optional[Iterable[GrowthArcParam]] | Omit = omit,
+    height_meters: Optional[float] | Omit = omit,
+    name: Optional[str] | Omit = omit,
+    personality_traits: Optional[SequenceNotStr[str]] | Omit = omit,
+    profile_image_url: Optional[str] | Omit = omit,
+    role: Optional[CharacterRole] | Omit = omit,
+    salary_gbp: Union[float, str, None] | Omit = omit,
+    signature_quotes: Optional[SequenceNotStr[str]] | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Character:
         """
         Update specific fields of an existing character.
 
@@ -217,48 +216,43 @@ class CharactersResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not character_id:
-            raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `character_id` but received {character_id!r}'
+          )
         return self._patch(
             path_template("/characters/{character_id}", character_id=character_id),
-            body=maybe_transform(
-                {
-                    "background": background,
-                    "date_of_birth": date_of_birth,
-                    "email": email,
-                    "emotional_stats": emotional_stats,
-                    "growth_arcs": growth_arcs,
-                    "height_meters": height_meters,
-                    "name": name,
-                    "personality_traits": personality_traits,
-                    "profile_image_url": profile_image_url,
-                    "role": role,
-                    "salary_gbp": salary_gbp,
-                    "signature_quotes": signature_quotes,
-                    "team_id": team_id,
-                },
-                character_update_params.CharacterUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "background": background,
+                "date_of_birth": date_of_birth,
+                "email": email,
+                "emotional_stats": emotional_stats,
+                "growth_arcs": growth_arcs,
+                "height_meters": height_meters,
+                "name": name,
+                "personality_traits": personality_traits,
+                "profile_image_url": profile_image_url,
+                "role": role,
+                "salary_gbp": salary_gbp,
+                "signature_quotes": signature_quotes,
+                "team_id": team_id,
+            }, character_update_params.CharacterUpdateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Character,
         )
 
-    def list(
-        self,
-        *,
-        limit: int | Omit = omit,
-        min_optimism: Optional[int] | Omit = omit,
-        role: Optional[CharacterRole] | Omit = omit,
-        skip: int | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[Character]:
+    def list(self,
+    *,
+    limit: int | Omit = omit,
+    min_optimism: Optional[int] | Omit = omit,
+    role: Optional[CharacterRole] | Omit = omit,
+    skip: int | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> SyncSkipLimitPage[Character]:
         """
         Get a paginated list of Ted Lasso characters.
 
@@ -283,37 +277,26 @@ class CharactersResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/characters",
-            page=SyncSkipLimitPage[Character],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "min_optimism": min_optimism,
-                        "role": role,
-                        "skip": skip,
-                        "team_id": team_id,
-                    },
-                    character_list_params.CharacterListParams,
-                ),
-            ),
+            page = SyncSkipLimitPage[Character],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "min_optimism": min_optimism,
+                "role": role,
+                "skip": skip,
+                "team_id": team_id,
+            }, character_list_params.CharacterListParams)),
             model=Character,
         )
 
-    def delete(
-        self,
-        character_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    def delete(self,
+    character_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Remove a character from the database.
 
@@ -327,27 +310,25 @@ class CharactersResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not character_id:
-            raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `character_id` but received {character_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             path_template("/characters/{character_id}", character_id=character_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    def get_quotes(
-        self,
-        character_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CharacterGetQuotesResponse:
+    def get_quotes(self,
+    character_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> CharacterGetQuotesResponse:
         """
         Get all signature quotes from a specific character.
 
@@ -361,19 +342,17 @@ class CharactersResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not character_id:
-            raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `character_id` but received {character_id!r}'
+          )
         return self._get(
             path_template("/characters/{character_id}/quotes", character_id=character_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=CharacterGetQuotesResponse,
         )
 
-
 class AsyncCharactersResource(AsyncAPIResource):
     """Operations related to Ted Lasso characters"""
-
     @cached_property
     def with_raw_response(self) -> AsyncCharactersResourceWithRawResponse:
         """
@@ -393,29 +372,27 @@ class AsyncCharactersResource(AsyncAPIResource):
         """
         return AsyncCharactersResourceWithStreamingResponse(self)
 
-    async def create(
-        self,
-        *,
-        background: str,
-        emotional_stats: EmotionalStatsParam,
-        name: str,
-        personality_traits: SequenceNotStr[str],
-        role: CharacterRole,
-        date_of_birth: Union[str, date, None] | Omit = omit,
-        email: Optional[str] | Omit = omit,
-        growth_arcs: Iterable[GrowthArcParam] | Omit = omit,
-        height_meters: Optional[float] | Omit = omit,
-        profile_image_url: Optional[str] | Omit = omit,
-        salary_gbp: Union[float, str, None] | Omit = omit,
-        signature_quotes: SequenceNotStr[str] | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Character:
+    async def create(self,
+    *,
+    background: str,
+    emotional_stats: EmotionalStatsParam,
+    name: str,
+    personality_traits: SequenceNotStr[str],
+    role: CharacterRole,
+    date_of_birth: Union[str, date, None] | Omit = omit,
+    email: Optional[str] | Omit = omit,
+    growth_arcs: Iterable[GrowthArcParam] | Omit = omit,
+    height_meters: Optional[float] | Omit = omit,
+    profile_image_url: Optional[str] | Omit = omit,
+    salary_gbp: Union[float, str, None] | Omit = omit,
+    signature_quotes: SequenceNotStr[str] | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Character:
         """
         Add a new character to the Ted Lasso universe.
 
@@ -456,41 +433,34 @@ class AsyncCharactersResource(AsyncAPIResource):
         """
         return await self._post(
             "/characters",
-            body=await async_maybe_transform(
-                {
-                    "background": background,
-                    "emotional_stats": emotional_stats,
-                    "name": name,
-                    "personality_traits": personality_traits,
-                    "role": role,
-                    "date_of_birth": date_of_birth,
-                    "email": email,
-                    "growth_arcs": growth_arcs,
-                    "height_meters": height_meters,
-                    "profile_image_url": profile_image_url,
-                    "salary_gbp": salary_gbp,
-                    "signature_quotes": signature_quotes,
-                    "team_id": team_id,
-                },
-                character_create_params.CharacterCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "background": background,
+                "emotional_stats": emotional_stats,
+                "name": name,
+                "personality_traits": personality_traits,
+                "role": role,
+                "date_of_birth": date_of_birth,
+                "email": email,
+                "growth_arcs": growth_arcs,
+                "height_meters": height_meters,
+                "profile_image_url": profile_image_url,
+                "salary_gbp": salary_gbp,
+                "signature_quotes": signature_quotes,
+                "team_id": team_id,
+            }, character_create_params.CharacterCreateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Character,
         )
 
-    async def retrieve(
-        self,
-        character_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Character:
+    async def retrieve(self,
+    character_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Character:
         """
         Retrieve detailed information about a specific character.
 
@@ -504,39 +474,37 @@ class AsyncCharactersResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not character_id:
-            raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `character_id` but received {character_id!r}'
+          )
         return await self._get(
             path_template("/characters/{character_id}", character_id=character_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Character,
         )
 
-    async def update(
-        self,
-        character_id: str,
-        *,
-        background: Optional[str] | Omit = omit,
-        date_of_birth: Union[str, date, None] | Omit = omit,
-        email: Optional[str] | Omit = omit,
-        emotional_stats: Optional[EmotionalStatsParam] | Omit = omit,
-        growth_arcs: Optional[Iterable[GrowthArcParam]] | Omit = omit,
-        height_meters: Optional[float] | Omit = omit,
-        name: Optional[str] | Omit = omit,
-        personality_traits: Optional[SequenceNotStr[str]] | Omit = omit,
-        profile_image_url: Optional[str] | Omit = omit,
-        role: Optional[CharacterRole] | Omit = omit,
-        salary_gbp: Union[float, str, None] | Omit = omit,
-        signature_quotes: Optional[SequenceNotStr[str]] | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Character:
+    async def update(self,
+    character_id: str,
+    *,
+    background: Optional[str] | Omit = omit,
+    date_of_birth: Union[str, date, None] | Omit = omit,
+    email: Optional[str] | Omit = omit,
+    emotional_stats: Optional[EmotionalStatsParam] | Omit = omit,
+    growth_arcs: Optional[Iterable[GrowthArcParam]] | Omit = omit,
+    height_meters: Optional[float] | Omit = omit,
+    name: Optional[str] | Omit = omit,
+    personality_traits: Optional[SequenceNotStr[str]] | Omit = omit,
+    profile_image_url: Optional[str] | Omit = omit,
+    role: Optional[CharacterRole] | Omit = omit,
+    salary_gbp: Union[float, str, None] | Omit = omit,
+    signature_quotes: Optional[SequenceNotStr[str]] | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Character:
         """
         Update specific fields of an existing character.
 
@@ -554,48 +522,43 @@ class AsyncCharactersResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not character_id:
-            raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `character_id` but received {character_id!r}'
+          )
         return await self._patch(
             path_template("/characters/{character_id}", character_id=character_id),
-            body=await async_maybe_transform(
-                {
-                    "background": background,
-                    "date_of_birth": date_of_birth,
-                    "email": email,
-                    "emotional_stats": emotional_stats,
-                    "growth_arcs": growth_arcs,
-                    "height_meters": height_meters,
-                    "name": name,
-                    "personality_traits": personality_traits,
-                    "profile_image_url": profile_image_url,
-                    "role": role,
-                    "salary_gbp": salary_gbp,
-                    "signature_quotes": signature_quotes,
-                    "team_id": team_id,
-                },
-                character_update_params.CharacterUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "background": background,
+                "date_of_birth": date_of_birth,
+                "email": email,
+                "emotional_stats": emotional_stats,
+                "growth_arcs": growth_arcs,
+                "height_meters": height_meters,
+                "name": name,
+                "personality_traits": personality_traits,
+                "profile_image_url": profile_image_url,
+                "role": role,
+                "salary_gbp": salary_gbp,
+                "signature_quotes": signature_quotes,
+                "team_id": team_id,
+            }, character_update_params.CharacterUpdateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Character,
         )
 
-    def list(
-        self,
-        *,
-        limit: int | Omit = omit,
-        min_optimism: Optional[int] | Omit = omit,
-        role: Optional[CharacterRole] | Omit = omit,
-        skip: int | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Character, AsyncSkipLimitPage[Character]]:
+    def list(self,
+    *,
+    limit: int | Omit = omit,
+    min_optimism: Optional[int] | Omit = omit,
+    role: Optional[CharacterRole] | Omit = omit,
+    skip: int | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> AsyncPaginator[Character, AsyncSkipLimitPage[Character]]:
         """
         Get a paginated list of Ted Lasso characters.
 
@@ -620,37 +583,26 @@ class AsyncCharactersResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/characters",
-            page=AsyncSkipLimitPage[Character],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "min_optimism": min_optimism,
-                        "role": role,
-                        "skip": skip,
-                        "team_id": team_id,
-                    },
-                    character_list_params.CharacterListParams,
-                ),
-            ),
+            page = AsyncSkipLimitPage[Character],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "min_optimism": min_optimism,
+                "role": role,
+                "skip": skip,
+                "team_id": team_id,
+            }, character_list_params.CharacterListParams)),
             model=Character,
         )
 
-    async def delete(
-        self,
-        character_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    async def delete(self,
+    character_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Remove a character from the database.
 
@@ -664,27 +616,25 @@ class AsyncCharactersResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not character_id:
-            raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `character_id` but received {character_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             path_template("/characters/{character_id}", character_id=character_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    async def get_quotes(
-        self,
-        character_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CharacterGetQuotesResponse:
+    async def get_quotes(self,
+    character_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> CharacterGetQuotesResponse:
         """
         Get all signature quotes from a specific character.
 
@@ -698,15 +648,14 @@ class AsyncCharactersResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not character_id:
-            raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `character_id` but received {character_id!r}'
+          )
         return await self._get(
             path_template("/characters/{character_id}/quotes", character_id=character_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=CharacterGetQuotesResponse,
         )
-
 
 class CharactersResourceWithRawResponse:
     def __init__(self, characters: CharactersResource) -> None:
@@ -731,7 +680,6 @@ class CharactersResourceWithRawResponse:
             characters.get_quotes,
         )
 
-
 class AsyncCharactersResourceWithRawResponse:
     def __init__(self, characters: AsyncCharactersResource) -> None:
         self._characters = characters
@@ -755,7 +703,6 @@ class AsyncCharactersResourceWithRawResponse:
             characters.get_quotes,
         )
 
-
 class CharactersResourceWithStreamingResponse:
     def __init__(self, characters: CharactersResource) -> None:
         self._characters = characters
@@ -778,7 +725,6 @@ class CharactersResourceWithStreamingResponse:
         self.get_quotes = to_streamed_response_wrapper(
             characters.get_quotes,
         )
-
 
 class AsyncCharactersResourceWithStreamingResponse:
     def __init__(self, characters: AsyncCharactersResource) -> None:

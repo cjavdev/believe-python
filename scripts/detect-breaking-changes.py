@@ -9,7 +9,6 @@ import griffe
 from rich.text import Text
 from rich.style import Style
 
-
 def public_members(obj: griffe.Object | griffe.Alias) -> dict[str, griffe.Object | griffe.Alias]:
     if isinstance(obj, griffe.Alias):
         # ignore imports for now, they're technically part of the public API
@@ -51,7 +50,7 @@ def main() -> None:
     try:
         against_ref = sys.argv[1]
     except IndexError as err:
-        raise RuntimeError("You must specify a base ref to run breaking change detection against") from err
+        raise RuntimeError('You must specify a base ref to run breaking change detection against') from err
 
     package = griffe.load(
         "believe",

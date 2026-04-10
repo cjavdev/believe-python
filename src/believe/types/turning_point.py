@@ -1,15 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
-
 from .._models import BaseModel
+
+from typing import Optional
 
 __all__ = ["TurningPoint"]
 
-
 class TurningPoint(BaseModel):
     """A pivotal moment in a match."""
-
     description: str
     """What happened"""
 

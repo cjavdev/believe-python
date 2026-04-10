@@ -2,16 +2,19 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict, Required
 
 from .league import League
-from .._types import SequenceNotStr
+
 from .team_values_param import TeamValuesParam
+
+from typing import Union, Optional
+
+from .._types import SequenceNotStr
+
 from .geo_location_param import GeoLocationParam
 
 __all__ = ["TeamCreateParams"]
-
 
 class TeamCreateParams(TypedDict, total=False):
     culture_score: Required[int]

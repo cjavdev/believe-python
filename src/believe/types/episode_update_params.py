@@ -2,18 +2,20 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
+from typing_extensions import TypedDict, Annotated
+
 from datetime import date
-from typing_extensions import Annotated, TypedDict
+
+from typing import Union, Optional
+
+from .._utils import PropertyInfo
 
 from .._types import SequenceNotStr
-from .._utils import PropertyInfo
 
 __all__ = ["EpisodeUpdateParams"]
 
-
 class EpisodeUpdateParams(TypedDict, total=False):
-    air_date: Annotated[Union[str, date, None], PropertyInfo(format="iso8601")]
+    air_date: Annotated[Union[str, date, None], PropertyInfo(format = "iso8601")]
 
     biscuits_with_boss_moment: Optional[str]
 

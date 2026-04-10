@@ -4,27 +4,30 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform
-from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from ...pagination import SyncSkipLimitPage, AsyncSkipLimitPage
-from ..._base_client import AsyncPaginator, make_request_options
-from ...types.coaching import principle_list_params
+
+from ..._compat import cached_property
+
+from ..._utils import path_template, maybe_transform
+
 from ...types.coaching.coaching_principle import CoachingPrinciple
+
+from ..._base_client import make_request_options, AsyncPaginator
+
+from ..._types import NotGiven, Omit, omit
+
+from ...pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
+from ..._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
+
+from typing_extensions import Literal, overload
+from ..._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+from ...types.coaching import principle_list_params
 
 __all__ = ["PrinciplesResource", "AsyncPrinciplesResource"]
 
-
 class PrinciplesResource(SyncAPIResource):
     """Interactive endpoints for motivation and guidance"""
-
     @cached_property
     def with_raw_response(self) -> PrinciplesResourceWithRawResponse:
         """
@@ -44,17 +47,15 @@ class PrinciplesResource(SyncAPIResource):
         """
         return PrinciplesResourceWithStreamingResponse(self)
 
-    def retrieve(
-        self,
-        principle_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CoachingPrinciple:
+    def retrieve(self,
+    principle_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> CoachingPrinciple:
         """
         Get details about a specific coaching principle.
 
@@ -68,27 +69,25 @@ class PrinciplesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not principle_id:
-            raise ValueError(f"Expected a non-empty value for `principle_id` but received {principle_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `principle_id` but received {principle_id!r}'
+          )
         return self._get(
             path_template("/coaching/principles/{principle_id}", principle_id=principle_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=CoachingPrinciple,
         )
 
-    def list(
-        self,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[CoachingPrinciple]:
+    def list(self,
+    *,
+    limit: int | Omit = omit,
+    skip: int | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> SyncSkipLimitPage[CoachingPrinciple]:
         """
         Get a paginated list of Ted Lasso's core coaching principles and philosophy.
 
@@ -107,46 +106,31 @@ class PrinciplesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/coaching/principles",
-            page=SyncSkipLimitPage[CoachingPrinciple],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                    },
-                    principle_list_params.PrincipleListParams,
-                ),
-            ),
+            page = SyncSkipLimitPage[CoachingPrinciple],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "skip": skip,
+            }, principle_list_params.PrincipleListParams)),
             model=CoachingPrinciple,
         )
 
-    def get_random(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CoachingPrinciple:
+    def get_random(self,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> CoachingPrinciple:
         """Get a random coaching principle to inspire your day."""
         return self._get(
             "/coaching/principles/random",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=CoachingPrinciple,
         )
 
-
 class AsyncPrinciplesResource(AsyncAPIResource):
     """Interactive endpoints for motivation and guidance"""
-
     @cached_property
     def with_raw_response(self) -> AsyncPrinciplesResourceWithRawResponse:
         """
@@ -166,17 +150,15 @@ class AsyncPrinciplesResource(AsyncAPIResource):
         """
         return AsyncPrinciplesResourceWithStreamingResponse(self)
 
-    async def retrieve(
-        self,
-        principle_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CoachingPrinciple:
+    async def retrieve(self,
+    principle_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> CoachingPrinciple:
         """
         Get details about a specific coaching principle.
 
@@ -190,27 +172,25 @@ class AsyncPrinciplesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not principle_id:
-            raise ValueError(f"Expected a non-empty value for `principle_id` but received {principle_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `principle_id` but received {principle_id!r}'
+          )
         return await self._get(
             path_template("/coaching/principles/{principle_id}", principle_id=principle_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=CoachingPrinciple,
         )
 
-    def list(
-        self,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[CoachingPrinciple, AsyncSkipLimitPage[CoachingPrinciple]]:
+    def list(self,
+    *,
+    limit: int | Omit = omit,
+    skip: int | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> AsyncPaginator[CoachingPrinciple, AsyncSkipLimitPage[CoachingPrinciple]]:
         """
         Get a paginated list of Ted Lasso's core coaching principles and philosophy.
 
@@ -229,42 +209,28 @@ class AsyncPrinciplesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/coaching/principles",
-            page=AsyncSkipLimitPage[CoachingPrinciple],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                    },
-                    principle_list_params.PrincipleListParams,
-                ),
-            ),
+            page = AsyncSkipLimitPage[CoachingPrinciple],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "skip": skip,
+            }, principle_list_params.PrincipleListParams)),
             model=CoachingPrinciple,
         )
 
-    async def get_random(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CoachingPrinciple:
+    async def get_random(self,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> CoachingPrinciple:
         """Get a random coaching principle to inspire your day."""
         return await self._get(
             "/coaching/principles/random",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=CoachingPrinciple,
         )
-
 
 class PrinciplesResourceWithRawResponse:
     def __init__(self, principles: PrinciplesResource) -> None:
@@ -280,7 +246,6 @@ class PrinciplesResourceWithRawResponse:
             principles.get_random,
         )
 
-
 class AsyncPrinciplesResourceWithRawResponse:
     def __init__(self, principles: AsyncPrinciplesResource) -> None:
         self._principles = principles
@@ -295,7 +260,6 @@ class AsyncPrinciplesResourceWithRawResponse:
             principles.get_random,
         )
 
-
 class PrinciplesResourceWithStreamingResponse:
     def __init__(self, principles: PrinciplesResource) -> None:
         self._principles = principles
@@ -309,7 +273,6 @@ class PrinciplesResourceWithStreamingResponse:
         self.get_random = to_streamed_response_wrapper(
             principles.get_random,
         )
-
 
 class AsyncPrinciplesResourceWithStreamingResponse:
     def __init__(self, principles: AsyncPrinciplesResource) -> None:

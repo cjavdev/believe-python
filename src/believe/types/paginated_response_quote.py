@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .._models import BaseModel
+
 from typing import List
 
 from .quote import Quote
-from .._models import BaseModel
 
 __all__ = ["PaginatedResponseQuote"]
-
 
 class PaginatedResponseQuote(BaseModel):
     data: List[Quote]

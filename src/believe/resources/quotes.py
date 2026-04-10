@@ -2,42 +2,51 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
-
 import httpx
 
-from ..types import (
-    QuoteTheme,
-    QuoteMoment,
-    quote_list_params,
-    quote_create_params,
-    quote_update_params,
-    quote_get_random_params,
-    quote_list_by_theme_params,
-    quote_list_by_character_params,
-)
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import path_template, maybe_transform, async_maybe_transform
-from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from ..pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
+from .._compat import cached_property
+
 from ..types.quote import Quote
-from .._base_client import AsyncPaginator, make_request_options
-from ..types.quote_theme import QuoteTheme
+
+from .._utils import maybe_transform, path_template, async_maybe_transform
+
+from .._base_client import make_request_options, AsyncPaginator
+
 from ..types.quote_moment import QuoteMoment
+
+from ..types.quote_theme import QuoteTheme
+
+from typing import Optional, List
+
+from .._types import Omit, omit, NotGiven
+
+from ..pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
+
+from typing_extensions import Literal, overload
+from .._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+from ..types import quote_create_params
+from ..types import quote_update_params
+from ..types import quote_list_params
+from ..types import quote_get_random_params
+from ..types import quote_list_by_character_params
+from ..types import quote_list_by_theme_params
+from ..types import QuoteMoment
+from ..types import QuoteTheme
+from ..types import QuoteMoment
+from ..types import QuoteTheme
+from ..types import QuoteMoment
+from ..types import QuoteTheme
+from ..types import QuoteTheme
+from ..types import QuoteTheme
 
 __all__ = ["QuotesResource", "AsyncQuotesResource"]
 
-
 class QuotesResource(SyncAPIResource):
     """Memorable quotes from the show"""
-
     @cached_property
     def with_raw_response(self) -> QuotesResourceWithRawResponse:
         """
@@ -57,27 +66,25 @@ class QuotesResource(SyncAPIResource):
         """
         return QuotesResourceWithStreamingResponse(self)
 
-    def create(
-        self,
-        *,
-        character_id: str,
-        context: str,
-        moment_type: QuoteMoment,
-        text: str,
-        theme: QuoteTheme,
-        episode_id: Optional[str] | Omit = omit,
-        is_funny: bool | Omit = omit,
-        is_inspirational: bool | Omit = omit,
-        popularity_score: Optional[float] | Omit = omit,
-        secondary_themes: List[QuoteTheme] | Omit = omit,
-        times_shared: Optional[int] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Quote:
+    def create(self,
+    *,
+    character_id: str,
+    context: str,
+    moment_type: QuoteMoment,
+    text: str,
+    theme: QuoteTheme,
+    episode_id: Optional[str] | Omit = omit,
+    is_funny: bool | Omit = omit,
+    is_inspirational: bool | Omit = omit,
+    popularity_score: Optional[float] | Omit = omit,
+    secondary_themes: List[QuoteTheme] | Omit = omit,
+    times_shared: Optional[int] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Quote:
         """
         Add a new memorable quote to the collection.
 
@@ -114,39 +121,32 @@ class QuotesResource(SyncAPIResource):
         """
         return self._post(
             "/quotes",
-            body=maybe_transform(
-                {
-                    "character_id": character_id,
-                    "context": context,
-                    "moment_type": moment_type,
-                    "text": text,
-                    "theme": theme,
-                    "episode_id": episode_id,
-                    "is_funny": is_funny,
-                    "is_inspirational": is_inspirational,
-                    "popularity_score": popularity_score,
-                    "secondary_themes": secondary_themes,
-                    "times_shared": times_shared,
-                },
-                quote_create_params.QuoteCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "character_id": character_id,
+                "context": context,
+                "moment_type": moment_type,
+                "text": text,
+                "theme": theme,
+                "episode_id": episode_id,
+                "is_funny": is_funny,
+                "is_inspirational": is_inspirational,
+                "popularity_score": popularity_score,
+                "secondary_themes": secondary_themes,
+                "times_shared": times_shared,
+            }, quote_create_params.QuoteCreateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Quote,
         )
 
-    def retrieve(
-        self,
-        quote_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Quote:
+    def retrieve(self,
+    quote_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Quote:
         """
         Retrieve a specific quote by its ID.
 
@@ -160,37 +160,35 @@ class QuotesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not quote_id:
-            raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `quote_id` but received {quote_id!r}'
+          )
         return self._get(
             path_template("/quotes/{quote_id}", quote_id=quote_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Quote,
         )
 
-    def update(
-        self,
-        quote_id: str,
-        *,
-        character_id: Optional[str] | Omit = omit,
-        context: Optional[str] | Omit = omit,
-        episode_id: Optional[str] | Omit = omit,
-        is_funny: Optional[bool] | Omit = omit,
-        is_inspirational: Optional[bool] | Omit = omit,
-        moment_type: Optional[QuoteMoment] | Omit = omit,
-        popularity_score: Optional[float] | Omit = omit,
-        secondary_themes: Optional[List[QuoteTheme]] | Omit = omit,
-        text: Optional[str] | Omit = omit,
-        theme: Optional[QuoteTheme] | Omit = omit,
-        times_shared: Optional[int] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Quote:
+    def update(self,
+    quote_id: str,
+    *,
+    character_id: Optional[str] | Omit = omit,
+    context: Optional[str] | Omit = omit,
+    episode_id: Optional[str] | Omit = omit,
+    is_funny: Optional[bool] | Omit = omit,
+    is_inspirational: Optional[bool] | Omit = omit,
+    moment_type: Optional[QuoteMoment] | Omit = omit,
+    popularity_score: Optional[float] | Omit = omit,
+    secondary_themes: Optional[List[QuoteTheme]] | Omit = omit,
+    text: Optional[str] | Omit = omit,
+    theme: Optional[QuoteTheme] | Omit = omit,
+    times_shared: Optional[int] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Quote:
         """
         Update specific fields of an existing quote.
 
@@ -208,48 +206,43 @@ class QuotesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not quote_id:
-            raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `quote_id` but received {quote_id!r}'
+          )
         return self._patch(
             path_template("/quotes/{quote_id}", quote_id=quote_id),
-            body=maybe_transform(
-                {
-                    "character_id": character_id,
-                    "context": context,
-                    "episode_id": episode_id,
-                    "is_funny": is_funny,
-                    "is_inspirational": is_inspirational,
-                    "moment_type": moment_type,
-                    "popularity_score": popularity_score,
-                    "secondary_themes": secondary_themes,
-                    "text": text,
-                    "theme": theme,
-                    "times_shared": times_shared,
-                },
-                quote_update_params.QuoteUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "character_id": character_id,
+                "context": context,
+                "episode_id": episode_id,
+                "is_funny": is_funny,
+                "is_inspirational": is_inspirational,
+                "moment_type": moment_type,
+                "popularity_score": popularity_score,
+                "secondary_themes": secondary_themes,
+                "text": text,
+                "theme": theme,
+                "times_shared": times_shared,
+            }, quote_update_params.QuoteUpdateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Quote,
         )
 
-    def list(
-        self,
-        *,
-        character_id: Optional[str] | Omit = omit,
-        funny: Optional[bool] | Omit = omit,
-        inspirational: Optional[bool] | Omit = omit,
-        limit: int | Omit = omit,
-        moment_type: Optional[QuoteMoment] | Omit = omit,
-        skip: int | Omit = omit,
-        theme: Optional[QuoteTheme] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[Quote]:
+    def list(self,
+    *,
+    character_id: Optional[str] | Omit = omit,
+    funny: Optional[bool] | Omit = omit,
+    inspirational: Optional[bool] | Omit = omit,
+    limit: int | Omit = omit,
+    moment_type: Optional[QuoteMoment] | Omit = omit,
+    skip: int | Omit = omit,
+    theme: Optional[QuoteTheme] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> SyncSkipLimitPage[Quote]:
         """
         Get a paginated list of all memorable Ted Lasso quotes with optional filtering.
 
@@ -278,39 +271,28 @@ class QuotesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/quotes",
-            page=SyncSkipLimitPage[Quote],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "character_id": character_id,
-                        "funny": funny,
-                        "inspirational": inspirational,
-                        "limit": limit,
-                        "moment_type": moment_type,
-                        "skip": skip,
-                        "theme": theme,
-                    },
-                    quote_list_params.QuoteListParams,
-                ),
-            ),
+            page = SyncSkipLimitPage[Quote],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "character_id": character_id,
+                "funny": funny,
+                "inspirational": inspirational,
+                "limit": limit,
+                "moment_type": moment_type,
+                "skip": skip,
+                "theme": theme,
+            }, quote_list_params.QuoteListParams)),
             model=Quote,
         )
 
-    def delete(
-        self,
-        quote_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    def delete(self,
+    quote_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Remove a quote from the collection.
 
@@ -324,29 +306,27 @@ class QuotesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not quote_id:
-            raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `quote_id` but received {quote_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             path_template("/quotes/{quote_id}", quote_id=quote_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    def get_random(
-        self,
-        *,
-        character_id: Optional[str] | Omit = omit,
-        inspirational: Optional[bool] | Omit = omit,
-        theme: Optional[QuoteTheme] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Quote:
+    def get_random(self,
+    *,
+    character_id: Optional[str] | Omit = omit,
+    inspirational: Optional[bool] | Omit = omit,
+    theme: Optional[QuoteTheme] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Quote:
         """
         Get a random Ted Lasso quote, optionally filtered.
 
@@ -367,36 +347,25 @@ class QuotesResource(SyncAPIResource):
         """
         return self._get(
             "/quotes/random",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "character_id": character_id,
-                        "inspirational": inspirational,
-                        "theme": theme,
-                    },
-                    quote_get_random_params.QuoteGetRandomParams,
-                ),
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "character_id": character_id,
+                "inspirational": inspirational,
+                "theme": theme,
+            }, quote_get_random_params.QuoteGetRandomParams)),
             cast_to=Quote,
         )
 
-    def list_by_character(
-        self,
-        character_id: str,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[Quote]:
+    def list_by_character(self,
+    character_id: str,
+    *,
+    limit: int | Omit = omit,
+    skip: int | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> SyncSkipLimitPage[Quote]:
         """
         Get a paginated list of quotes from a specific character.
 
@@ -414,39 +383,30 @@ class QuotesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not character_id:
-            raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `character_id` but received {character_id!r}'
+          )
         return self._get_api_list(
             path_template("/quotes/characters/{character_id}", character_id=character_id),
-            page=SyncSkipLimitPage[Quote],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                    },
-                    quote_list_by_character_params.QuoteListByCharacterParams,
-                ),
-            ),
+            page = SyncSkipLimitPage[Quote],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "skip": skip,
+            }, quote_list_by_character_params.QuoteListByCharacterParams)),
             model=Quote,
         )
 
-    def list_by_theme(
-        self,
-        theme: QuoteTheme,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[Quote]:
+    def list_by_theme(self,
+    theme: QuoteTheme,
+    *,
+    limit: int | Omit = omit,
+    skip: int | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> SyncSkipLimitPage[Quote]:
         """
         Get a paginated list of quotes related to a specific theme.
 
@@ -466,30 +426,21 @@ class QuotesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not theme:
-            raise ValueError(f"Expected a non-empty value for `theme` but received {theme!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `theme` but received {theme!r}'
+          )
         return self._get_api_list(
             path_template("/quotes/themes/{theme}", theme=theme),
-            page=SyncSkipLimitPage[Quote],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                    },
-                    quote_list_by_theme_params.QuoteListByThemeParams,
-                ),
-            ),
+            page = SyncSkipLimitPage[Quote],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "skip": skip,
+            }, quote_list_by_theme_params.QuoteListByThemeParams)),
             model=Quote,
         )
 
-
 class AsyncQuotesResource(AsyncAPIResource):
     """Memorable quotes from the show"""
-
     @cached_property
     def with_raw_response(self) -> AsyncQuotesResourceWithRawResponse:
         """
@@ -509,27 +460,25 @@ class AsyncQuotesResource(AsyncAPIResource):
         """
         return AsyncQuotesResourceWithStreamingResponse(self)
 
-    async def create(
-        self,
-        *,
-        character_id: str,
-        context: str,
-        moment_type: QuoteMoment,
-        text: str,
-        theme: QuoteTheme,
-        episode_id: Optional[str] | Omit = omit,
-        is_funny: bool | Omit = omit,
-        is_inspirational: bool | Omit = omit,
-        popularity_score: Optional[float] | Omit = omit,
-        secondary_themes: List[QuoteTheme] | Omit = omit,
-        times_shared: Optional[int] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Quote:
+    async def create(self,
+    *,
+    character_id: str,
+    context: str,
+    moment_type: QuoteMoment,
+    text: str,
+    theme: QuoteTheme,
+    episode_id: Optional[str] | Omit = omit,
+    is_funny: bool | Omit = omit,
+    is_inspirational: bool | Omit = omit,
+    popularity_score: Optional[float] | Omit = omit,
+    secondary_themes: List[QuoteTheme] | Omit = omit,
+    times_shared: Optional[int] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Quote:
         """
         Add a new memorable quote to the collection.
 
@@ -566,39 +515,32 @@ class AsyncQuotesResource(AsyncAPIResource):
         """
         return await self._post(
             "/quotes",
-            body=await async_maybe_transform(
-                {
-                    "character_id": character_id,
-                    "context": context,
-                    "moment_type": moment_type,
-                    "text": text,
-                    "theme": theme,
-                    "episode_id": episode_id,
-                    "is_funny": is_funny,
-                    "is_inspirational": is_inspirational,
-                    "popularity_score": popularity_score,
-                    "secondary_themes": secondary_themes,
-                    "times_shared": times_shared,
-                },
-                quote_create_params.QuoteCreateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "character_id": character_id,
+                "context": context,
+                "moment_type": moment_type,
+                "text": text,
+                "theme": theme,
+                "episode_id": episode_id,
+                "is_funny": is_funny,
+                "is_inspirational": is_inspirational,
+                "popularity_score": popularity_score,
+                "secondary_themes": secondary_themes,
+                "times_shared": times_shared,
+            }, quote_create_params.QuoteCreateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Quote,
         )
 
-    async def retrieve(
-        self,
-        quote_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Quote:
+    async def retrieve(self,
+    quote_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Quote:
         """
         Retrieve a specific quote by its ID.
 
@@ -612,37 +554,35 @@ class AsyncQuotesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not quote_id:
-            raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `quote_id` but received {quote_id!r}'
+          )
         return await self._get(
             path_template("/quotes/{quote_id}", quote_id=quote_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Quote,
         )
 
-    async def update(
-        self,
-        quote_id: str,
-        *,
-        character_id: Optional[str] | Omit = omit,
-        context: Optional[str] | Omit = omit,
-        episode_id: Optional[str] | Omit = omit,
-        is_funny: Optional[bool] | Omit = omit,
-        is_inspirational: Optional[bool] | Omit = omit,
-        moment_type: Optional[QuoteMoment] | Omit = omit,
-        popularity_score: Optional[float] | Omit = omit,
-        secondary_themes: Optional[List[QuoteTheme]] | Omit = omit,
-        text: Optional[str] | Omit = omit,
-        theme: Optional[QuoteTheme] | Omit = omit,
-        times_shared: Optional[int] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Quote:
+    async def update(self,
+    quote_id: str,
+    *,
+    character_id: Optional[str] | Omit = omit,
+    context: Optional[str] | Omit = omit,
+    episode_id: Optional[str] | Omit = omit,
+    is_funny: Optional[bool] | Omit = omit,
+    is_inspirational: Optional[bool] | Omit = omit,
+    moment_type: Optional[QuoteMoment] | Omit = omit,
+    popularity_score: Optional[float] | Omit = omit,
+    secondary_themes: Optional[List[QuoteTheme]] | Omit = omit,
+    text: Optional[str] | Omit = omit,
+    theme: Optional[QuoteTheme] | Omit = omit,
+    times_shared: Optional[int] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Quote:
         """
         Update specific fields of an existing quote.
 
@@ -660,48 +600,43 @@ class AsyncQuotesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not quote_id:
-            raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `quote_id` but received {quote_id!r}'
+          )
         return await self._patch(
             path_template("/quotes/{quote_id}", quote_id=quote_id),
-            body=await async_maybe_transform(
-                {
-                    "character_id": character_id,
-                    "context": context,
-                    "episode_id": episode_id,
-                    "is_funny": is_funny,
-                    "is_inspirational": is_inspirational,
-                    "moment_type": moment_type,
-                    "popularity_score": popularity_score,
-                    "secondary_themes": secondary_themes,
-                    "text": text,
-                    "theme": theme,
-                    "times_shared": times_shared,
-                },
-                quote_update_params.QuoteUpdateParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "character_id": character_id,
+                "context": context,
+                "episode_id": episode_id,
+                "is_funny": is_funny,
+                "is_inspirational": is_inspirational,
+                "moment_type": moment_type,
+                "popularity_score": popularity_score,
+                "secondary_themes": secondary_themes,
+                "text": text,
+                "theme": theme,
+                "times_shared": times_shared,
+            }, quote_update_params.QuoteUpdateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=Quote,
         )
 
-    def list(
-        self,
-        *,
-        character_id: Optional[str] | Omit = omit,
-        funny: Optional[bool] | Omit = omit,
-        inspirational: Optional[bool] | Omit = omit,
-        limit: int | Omit = omit,
-        moment_type: Optional[QuoteMoment] | Omit = omit,
-        skip: int | Omit = omit,
-        theme: Optional[QuoteTheme] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Quote, AsyncSkipLimitPage[Quote]]:
+    def list(self,
+    *,
+    character_id: Optional[str] | Omit = omit,
+    funny: Optional[bool] | Omit = omit,
+    inspirational: Optional[bool] | Omit = omit,
+    limit: int | Omit = omit,
+    moment_type: Optional[QuoteMoment] | Omit = omit,
+    skip: int | Omit = omit,
+    theme: Optional[QuoteTheme] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> AsyncPaginator[Quote, AsyncSkipLimitPage[Quote]]:
         """
         Get a paginated list of all memorable Ted Lasso quotes with optional filtering.
 
@@ -730,39 +665,28 @@ class AsyncQuotesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/quotes",
-            page=AsyncSkipLimitPage[Quote],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "character_id": character_id,
-                        "funny": funny,
-                        "inspirational": inspirational,
-                        "limit": limit,
-                        "moment_type": moment_type,
-                        "skip": skip,
-                        "theme": theme,
-                    },
-                    quote_list_params.QuoteListParams,
-                ),
-            ),
+            page = AsyncSkipLimitPage[Quote],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "character_id": character_id,
+                "funny": funny,
+                "inspirational": inspirational,
+                "limit": limit,
+                "moment_type": moment_type,
+                "skip": skip,
+                "theme": theme,
+            }, quote_list_params.QuoteListParams)),
             model=Quote,
         )
 
-    async def delete(
-        self,
-        quote_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    async def delete(self,
+    quote_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Remove a quote from the collection.
 
@@ -776,29 +700,27 @@ class AsyncQuotesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not quote_id:
-            raise ValueError(f"Expected a non-empty value for `quote_id` but received {quote_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `quote_id` but received {quote_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             path_template("/quotes/{quote_id}", quote_id=quote_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    async def get_random(
-        self,
-        *,
-        character_id: Optional[str] | Omit = omit,
-        inspirational: Optional[bool] | Omit = omit,
-        theme: Optional[QuoteTheme] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Quote:
+    async def get_random(self,
+    *,
+    character_id: Optional[str] | Omit = omit,
+    inspirational: Optional[bool] | Omit = omit,
+    theme: Optional[QuoteTheme] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> Quote:
         """
         Get a random Ted Lasso quote, optionally filtered.
 
@@ -819,36 +741,25 @@ class AsyncQuotesResource(AsyncAPIResource):
         """
         return await self._get(
             "/quotes/random",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "character_id": character_id,
-                        "inspirational": inspirational,
-                        "theme": theme,
-                    },
-                    quote_get_random_params.QuoteGetRandomParams,
-                ),
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=await async_maybe_transform({
+                "character_id": character_id,
+                "inspirational": inspirational,
+                "theme": theme,
+            }, quote_get_random_params.QuoteGetRandomParams)),
             cast_to=Quote,
         )
 
-    def list_by_character(
-        self,
-        character_id: str,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Quote, AsyncSkipLimitPage[Quote]]:
+    def list_by_character(self,
+    character_id: str,
+    *,
+    limit: int | Omit = omit,
+    skip: int | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> AsyncPaginator[Quote, AsyncSkipLimitPage[Quote]]:
         """
         Get a paginated list of quotes from a specific character.
 
@@ -866,39 +777,30 @@ class AsyncQuotesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not character_id:
-            raise ValueError(f"Expected a non-empty value for `character_id` but received {character_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `character_id` but received {character_id!r}'
+          )
         return self._get_api_list(
             path_template("/quotes/characters/{character_id}", character_id=character_id),
-            page=AsyncSkipLimitPage[Quote],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                    },
-                    quote_list_by_character_params.QuoteListByCharacterParams,
-                ),
-            ),
+            page = AsyncSkipLimitPage[Quote],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "skip": skip,
+            }, quote_list_by_character_params.QuoteListByCharacterParams)),
             model=Quote,
         )
 
-    def list_by_theme(
-        self,
-        theme: QuoteTheme,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Quote, AsyncSkipLimitPage[Quote]]:
+    def list_by_theme(self,
+    theme: QuoteTheme,
+    *,
+    limit: int | Omit = omit,
+    skip: int | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> AsyncPaginator[Quote, AsyncSkipLimitPage[Quote]]:
         """
         Get a paginated list of quotes related to a specific theme.
 
@@ -918,26 +820,18 @@ class AsyncQuotesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not theme:
-            raise ValueError(f"Expected a non-empty value for `theme` but received {theme!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `theme` but received {theme!r}'
+          )
         return self._get_api_list(
             path_template("/quotes/themes/{theme}", theme=theme),
-            page=AsyncSkipLimitPage[Quote],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                    },
-                    quote_list_by_theme_params.QuoteListByThemeParams,
-                ),
-            ),
+            page = AsyncSkipLimitPage[Quote],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "skip": skip,
+            }, quote_list_by_theme_params.QuoteListByThemeParams)),
             model=Quote,
         )
-
 
 class QuotesResourceWithRawResponse:
     def __init__(self, quotes: QuotesResource) -> None:
@@ -968,7 +862,6 @@ class QuotesResourceWithRawResponse:
             quotes.list_by_theme,
         )
 
-
 class AsyncQuotesResourceWithRawResponse:
     def __init__(self, quotes: AsyncQuotesResource) -> None:
         self._quotes = quotes
@@ -998,7 +891,6 @@ class AsyncQuotesResourceWithRawResponse:
             quotes.list_by_theme,
         )
 
-
 class QuotesResourceWithStreamingResponse:
     def __init__(self, quotes: QuotesResource) -> None:
         self._quotes = quotes
@@ -1027,7 +919,6 @@ class QuotesResourceWithStreamingResponse:
         self.list_by_theme = to_streamed_response_wrapper(
             quotes.list_by_theme,
         )
-
 
 class AsyncQuotesResourceWithStreamingResponse:
     def __init__(self, quotes: AsyncQuotesResource) -> None:

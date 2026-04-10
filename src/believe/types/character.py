@@ -1,19 +1,21 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .._models import BaseModel
+
+from .emotional_stats import EmotionalStats
+
 from typing import List, Optional
+
+from .character_role import CharacterRole
+
 from datetime import date
 
-from .._models import BaseModel
 from .growth_arc import GrowthArc
-from .character_role import CharacterRole
-from .emotional_stats import EmotionalStats
 
 __all__ = ["Character"]
 
-
 class Character(BaseModel):
     """Full character model with ID."""
-
     id: str
     """Unique identifier"""
 

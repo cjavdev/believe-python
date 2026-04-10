@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict, Required
 
-from .quote_theme import QuoteTheme
 from .quote_moment import QuoteMoment
 
-__all__ = ["QuoteCreateParams"]
+from .quote_theme import QuoteTheme
 
+from typing import Optional, List
+
+__all__ = ["QuoteCreateParams"]
 
 class QuoteCreateParams(TypedDict, total=False):
     character_id: Required[str]

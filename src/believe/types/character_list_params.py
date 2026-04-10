@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import TypedDict
+
+from typing import Optional
 
 from .character_role import CharacterRole
 
 __all__ = ["CharacterListParams"]
-
 
 class CharacterListParams(TypedDict, total=False):
     limit: int

@@ -4,10 +4,8 @@ from .._models import BaseModel
 
 __all__ = ["EmotionalStats"]
 
-
 class EmotionalStats(BaseModel):
     """Emotional intelligence statistics for a character."""
-
     curiosity: int
     """Level of curiosity over judgment (0-100)"""
 

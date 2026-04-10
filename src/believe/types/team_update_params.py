@@ -2,16 +2,19 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
 from typing_extensions import TypedDict
 
+from typing import Union, Optional
+
 from .league import League
+
 from .._types import SequenceNotStr
-from .team_values_param import TeamValuesParam
+
 from .geo_location_param import GeoLocationParam
 
-__all__ = ["TeamUpdateParams"]
+from .team_values_param import TeamValuesParam
 
+__all__ = ["TeamUpdateParams"]
 
 class TeamUpdateParams(TypedDict, total=False):
     annual_budget_gbp: Union[float, str, None]

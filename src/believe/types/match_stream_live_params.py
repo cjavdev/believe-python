@@ -6,7 +6,6 @@ from typing_extensions import TypedDict
 
 __all__ = ["MatchStreamLiveParams"]
 
-
 class MatchStreamLiveParams(TypedDict, total=False):
     away_team: str
     """Away team name"""
