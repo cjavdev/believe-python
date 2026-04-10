@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1 (2026-04-08)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/cjavdev/believe-python/compare/v0.4.0...v0.4.1)
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([a716be7](https://github.com/cjavdev/believe-python/commit/a716be7aa13cf41efafa65a48f8b028e5f403fe4))
+
 ## 0.4.0 (2026-04-03)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/cjavdev/believe-python/compare/v0.3.0...v0.4.0)
