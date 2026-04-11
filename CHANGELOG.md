@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.2 (2026-04-11)
+
+Full Changelog: [v0.4.1...v0.4.2](https://github.com/cjavdev/believe-python/compare/v0.4.1...v0.4.2)
+
+### Bug Fixes
+
+* ensure file data are only sent as 1 parameter ([1a95b51](https://github.com/cjavdev/believe-python/commit/1a95b51d30ab5c574a25295d1b56f2a41ffb8089))
+
 ## 0.4.1 (2026-04-08)
 
 Full Changelog: [v0.4.0...v0.4.1](https://github.com/cjavdev/believe-python/compare/v0.4.0...v0.4.1)
