@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict, Required
 
 __all__ = ["GrowthArcParam"]
 
-
 class GrowthArcParam(TypedDict, total=False):
     """Character development arc."""
-
     breakthrough: Required[str]
     """Key breakthrough moment"""
 

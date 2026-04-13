@@ -2,25 +2,32 @@
 
 from __future__ import annotations
 
+from believe import Believe, AsyncBelieve
+
+from believe.types import Episode, EpisodeGetWisdomResponse
+
+from believe._utils import parse_date
+
+from typing import cast, Any
+
+from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
 import os
-from typing import Any, cast
-
 import pytest
-
+import httpx
+from typing_extensions import get_args
+from respx import MockRouter
 from believe import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
-from believe.types import (
-    Episode,
-    EpisodeGetWisdomResponse,
-)
-from believe._utils import parse_date
-from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+from believe.types import episode_create_params
+from believe.types import episode_update_params
+from believe.types import episode_list_params
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
-
 class TestEpisodes:
-    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=['loose', 'strict'])
+
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -38,7 +45,7 @@ class TestEpisodes:
             title="The Diamond Dogs",
             writer="Jason Sudeikis, Brendan Hunt, Joe Kelly",
         )
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -56,19 +63,16 @@ class TestEpisodes:
             title="The Diamond Dogs",
             writer="Jason Sudeikis, Brendan Hunt, Joe Kelly",
             biscuits_with_boss_moment="Ted and Rebecca have an honest conversation about trust.",
-            memorable_moments=[
-                "First Diamond Dogs meeting",
-                "The famous dart scene with Rupert",
-                "Be curious, not judgmental speech",
-            ],
+            memorable_moments=["First Diamond Dogs meeting", "The famous dart scene with Rupert", "Be curious, not judgmental speech"],
             us_viewers_millions=1.42,
             viewer_rating=9.1,
         )
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Believe) -> None:
+
         response = client.episodes.with_raw_response.create(
             air_date=parse_date("2020-10-02"),
             character_focus=["ted-lasso", "coach-beard", "higgins", "nate"],
@@ -84,9 +88,9 @@ class TestEpisodes:
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = response.parse()
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -103,12 +107,12 @@ class TestEpisodes:
             ted_wisdom="There's two buttons I never like to hit: that's panic and snooze.",
             title="The Diamond Dogs",
             writer="Jason Sudeikis, Brendan Hunt, Joe Kelly",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = response.parse()
-            assert_matches_type(Episode, episode, path=["response"])
+            assert_matches_type(Episode, episode, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -118,31 +122,32 @@ class TestEpisodes:
         episode = client.episodes.retrieve(
             "episode_id",
         )
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Believe) -> None:
+
         response = client.episodes.with_raw_response.retrieve(
             "episode_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = response.parse()
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Believe) -> None:
         with client.episodes.with_streaming_response.retrieve(
             "episode_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = response.parse()
-            assert_matches_type(Episode, episode, path=["response"])
+            assert_matches_type(Episode, episode, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -150,9 +155,9 @@ class TestEpisodes:
     @parametrize
     def test_path_params_retrieve(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
-            client.episodes.with_raw_response.retrieve(
-                "",
-            )
+          client.episodes.with_raw_response.retrieve(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -160,7 +165,7 @@ class TestEpisodes:
         episode = client.episodes.update(
             episode_id="episode_id",
         )
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -183,31 +188,32 @@ class TestEpisodes:
             viewer_rating=0,
             writer="writer",
         )
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Believe) -> None:
+
         response = client.episodes.with_raw_response.update(
             episode_id="episode_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = response.parse()
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Believe) -> None:
         with client.episodes.with_streaming_response.update(
             episode_id="episode_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = response.parse()
-            assert_matches_type(Episode, episode, path=["response"])
+            assert_matches_type(Episode, episode, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -215,15 +221,15 @@ class TestEpisodes:
     @parametrize
     def test_path_params_update(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
-            client.episodes.with_raw_response.update(
-                episode_id="",
-            )
+          client.episodes.with_raw_response.update(
+              episode_id="",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Believe) -> None:
         episode = client.episodes.list()
-        assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Episode], episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -234,27 +240,28 @@ class TestEpisodes:
             season=1,
             skip=0,
         )
-        assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Episode], episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Believe) -> None:
+
         response = client.episodes.with_raw_response.list()
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = response.parse()
-        assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Episode], episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Believe) -> None:
-        with client.episodes.with_streaming_response.list() as response:
+        with client.episodes.with_streaming_response.list() as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = response.parse()
-            assert_matches_type(SyncSkipLimitPage[Episode], episode, path=["response"])
+            assert_matches_type(SyncSkipLimitPage[Episode], episode, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -269,12 +276,13 @@ class TestEpisodes:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Believe) -> None:
+
         response = client.episodes.with_raw_response.delete(
             "episode_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = response.parse()
         assert episode is None
 
@@ -283,9 +291,9 @@ class TestEpisodes:
     def test_streaming_response_delete(self, client: Believe) -> None:
         with client.episodes.with_streaming_response.delete(
             "episode_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = response.parse()
             assert episode is None
@@ -296,9 +304,9 @@ class TestEpisodes:
     @parametrize
     def test_path_params_delete(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
-            client.episodes.with_raw_response.delete(
-                "",
-            )
+          client.episodes.with_raw_response.delete(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -306,31 +314,32 @@ class TestEpisodes:
         episode = client.episodes.get_wisdom(
             "episode_id",
         )
-        assert_matches_type(EpisodeGetWisdomResponse, episode, path=["response"])
+        assert_matches_type(EpisodeGetWisdomResponse, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_wisdom(self, client: Believe) -> None:
+
         response = client.episodes.with_raw_response.get_wisdom(
             "episode_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = response.parse()
-        assert_matches_type(EpisodeGetWisdomResponse, episode, path=["response"])
+        assert_matches_type(EpisodeGetWisdomResponse, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_wisdom(self, client: Believe) -> None:
         with client.episodes.with_streaming_response.get_wisdom(
             "episode_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = response.parse()
-            assert_matches_type(EpisodeGetWisdomResponse, episode, path=["response"])
+            assert_matches_type(EpisodeGetWisdomResponse, episode, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -338,15 +347,12 @@ class TestEpisodes:
     @parametrize
     def test_path_params_get_wisdom(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
-            client.episodes.with_raw_response.get_wisdom(
-                "",
-            )
-
-
+          client.episodes.with_raw_response.get_wisdom(
+              "",
+          )
 class TestAsyncEpisodes:
-    parametrize = pytest.mark.parametrize(
-        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
-    )
+    parametrize = pytest.mark.parametrize("async_client", [False, True, {'http_client': 'aiohttp'}], indirect=True, ids=['loose', 'strict', 'aiohttp'])
+
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -364,7 +370,7 @@ class TestAsyncEpisodes:
             title="The Diamond Dogs",
             writer="Jason Sudeikis, Brendan Hunt, Joe Kelly",
         )
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -382,19 +388,16 @@ class TestAsyncEpisodes:
             title="The Diamond Dogs",
             writer="Jason Sudeikis, Brendan Hunt, Joe Kelly",
             biscuits_with_boss_moment="Ted and Rebecca have an honest conversation about trust.",
-            memorable_moments=[
-                "First Diamond Dogs meeting",
-                "The famous dart scene with Rupert",
-                "Be curious, not judgmental speech",
-            ],
+            memorable_moments=["First Diamond Dogs meeting", "The famous dart scene with Rupert", "Be curious, not judgmental speech"],
             us_viewers_millions=1.42,
             viewer_rating=9.1,
         )
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.episodes.with_raw_response.create(
             air_date=parse_date("2020-10-02"),
             character_focus=["ted-lasso", "coach-beard", "higgins", "nate"],
@@ -410,9 +413,9 @@ class TestAsyncEpisodes:
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = await response.parse()
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -429,12 +432,12 @@ class TestAsyncEpisodes:
             ted_wisdom="There's two buttons I never like to hit: that's panic and snooze.",
             title="The Diamond Dogs",
             writer="Jason Sudeikis, Brendan Hunt, Joe Kelly",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = await response.parse()
-            assert_matches_type(Episode, episode, path=["response"])
+            assert_matches_type(Episode, episode, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -444,31 +447,32 @@ class TestAsyncEpisodes:
         episode = await async_client.episodes.retrieve(
             "episode_id",
         )
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.episodes.with_raw_response.retrieve(
             "episode_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = await response.parse()
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBelieve) -> None:
         async with async_client.episodes.with_streaming_response.retrieve(
             "episode_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = await response.parse()
-            assert_matches_type(Episode, episode, path=["response"])
+            assert_matches_type(Episode, episode, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -476,9 +480,9 @@ class TestAsyncEpisodes:
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
-            await async_client.episodes.with_raw_response.retrieve(
-                "",
-            )
+          await async_client.episodes.with_raw_response.retrieve(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -486,7 +490,7 @@ class TestAsyncEpisodes:
         episode = await async_client.episodes.update(
             episode_id="episode_id",
         )
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -509,31 +513,32 @@ class TestAsyncEpisodes:
             viewer_rating=0,
             writer="writer",
         )
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.episodes.with_raw_response.update(
             episode_id="episode_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = await response.parse()
-        assert_matches_type(Episode, episode, path=["response"])
+        assert_matches_type(Episode, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncBelieve) -> None:
         async with async_client.episodes.with_streaming_response.update(
             episode_id="episode_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = await response.parse()
-            assert_matches_type(Episode, episode, path=["response"])
+            assert_matches_type(Episode, episode, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -541,15 +546,15 @@ class TestAsyncEpisodes:
     @parametrize
     async def test_path_params_update(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
-            await async_client.episodes.with_raw_response.update(
-                episode_id="",
-            )
+          await async_client.episodes.with_raw_response.update(
+              episode_id="",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncBelieve) -> None:
         episode = await async_client.episodes.list()
-        assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -560,27 +565,28 @@ class TestAsyncEpisodes:
             season=1,
             skip=0,
         )
-        assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.episodes.with_raw_response.list()
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = await response.parse()
-        assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncBelieve) -> None:
-        async with async_client.episodes.with_streaming_response.list() as response:
+        async with async_client.episodes.with_streaming_response.list() as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = await response.parse()
-            assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=["response"])
+            assert_matches_type(AsyncSkipLimitPage[Episode], episode, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -595,12 +601,13 @@ class TestAsyncEpisodes:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.episodes.with_raw_response.delete(
             "episode_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = await response.parse()
         assert episode is None
 
@@ -609,9 +616,9 @@ class TestAsyncEpisodes:
     async def test_streaming_response_delete(self, async_client: AsyncBelieve) -> None:
         async with async_client.episodes.with_streaming_response.delete(
             "episode_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = await response.parse()
             assert episode is None
@@ -622,9 +629,9 @@ class TestAsyncEpisodes:
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
-            await async_client.episodes.with_raw_response.delete(
-                "",
-            )
+          await async_client.episodes.with_raw_response.delete(
+              "",
+          )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -632,31 +639,32 @@ class TestAsyncEpisodes:
         episode = await async_client.episodes.get_wisdom(
             "episode_id",
         )
-        assert_matches_type(EpisodeGetWisdomResponse, episode, path=["response"])
+        assert_matches_type(EpisodeGetWisdomResponse, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_wisdom(self, async_client: AsyncBelieve) -> None:
+
         response = await async_client.episodes.with_raw_response.get_wisdom(
             "episode_id",
         )
 
         assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
         episode = await response.parse()
-        assert_matches_type(EpisodeGetWisdomResponse, episode, path=["response"])
+        assert_matches_type(EpisodeGetWisdomResponse, episode, path=['response'])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_wisdom(self, async_client: AsyncBelieve) -> None:
         async with async_client.episodes.with_streaming_response.get_wisdom(
             "episode_id",
-        ) as response:
+        ) as response :
             assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+            assert response.http_request.headers.get('X-Stainless-Lang') == 'python'
 
             episode = await response.parse()
-            assert_matches_type(EpisodeGetWisdomResponse, episode, path=["response"])
+            assert_matches_type(EpisodeGetWisdomResponse, episode, path=['response'])
 
         assert cast(Any, response.is_closed) is True
 
@@ -664,6 +672,6 @@ class TestAsyncEpisodes:
     @parametrize
     async def test_path_params_get_wisdom(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `episode_id` but received ''"):
-            await async_client.episodes.with_raw_response.get_wisdom(
-                "",
-            )
+          await async_client.episodes.with_raw_response.get_wisdom(
+              "",
+          )

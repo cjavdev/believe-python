@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import TypedDict
+
+from typing import Optional
 
 from .purchase_method import PurchaseMethod
 
 __all__ = ["TicketSaleListParams"]
-
 
 class TicketSaleListParams(TypedDict, total=False):
     coupon_code: Optional[str]

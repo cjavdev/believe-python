@@ -2,51 +2,63 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, cast
-from typing_extensions import Literal
-
 import httpx
 
-from ..types import (
-    Position,
-    CoachSpecialty,
-    team_member_list_params,
-    team_member_create_params,
-    team_member_update_params,
-    team_member_list_staff_params,
-    team_member_list_coaches_params,
-    team_member_list_players_params,
-)
-from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import path_template, maybe_transform, async_maybe_transform
-from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from ..pagination import SyncSkipLimitPage, AsyncSkipLimitPage
-from ..types.coach import Coach
-from .._base_client import AsyncPaginator, make_request_options
-from ..types.player import Player
-from ..types.position import Position
-from ..types.coach_specialty import CoachSpecialty
-from ..types.team_member_list_response import TeamMemberListResponse
+
+from .._compat import cached_property
+
 from ..types.team_member_create_response import TeamMemberCreateResponse
-from ..types.team_member_update_response import TeamMemberUpdateResponse
+
+from .._utils import maybe_transform, path_template, async_maybe_transform
+
+from .._base_client import make_request_options, AsyncPaginator
+
+from typing import Any, cast, Optional
+
+from .._types import NotGiven, Omit, omit
+
 from ..types.team_member_retrieve_response import TeamMemberRetrieveResponse
+
+from ..types.team_member_update_response import TeamMemberUpdateResponse
+
+from ..types.team_member_list_response import TeamMemberListResponse
+
+from ..pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+
+from typing_extensions import Literal
+
+from ..types.coach import Coach
+
+from ..types.coach_specialty import CoachSpecialty
+
+from ..types.player import Player
+
+from ..types.position import Position
+
 from ..types.team_member_list_staff_response import TeamMemberListStaffResponse
 
-__all__ = ["TeamMembersResource", "AsyncTeamMembersResource"]
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
 
+from ..types import team_member_create_params, team_member_update_params
+
+from typing_extensions import Literal, overload
+from .._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+from ..types import team_member_create_params
+from ..types import team_member_update_params
+from ..types import team_member_list_params
+from ..types import team_member_list_coaches_params
+from ..types import team_member_list_players_params
+from ..types import team_member_list_staff_params
+from ..types import CoachSpecialty
+from ..types import Position
+
+__all__ = ["TeamMembersResource", "AsyncTeamMembersResource"]
 
 class TeamMembersResource(SyncAPIResource):
     """
     Team members with union types (oneOf) - Players, Coaches, Medical Staff, Equipment Managers
     """
-
     @cached_property
     def with_raw_response(self) -> TeamMembersResourceWithRawResponse:
         """
@@ -66,17 +78,15 @@ class TeamMembersResource(SyncAPIResource):
         """
         return TeamMembersResourceWithStreamingResponse(self)
 
-    def create(
-        self,
-        *,
-        member: team_member_create_params.Member,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamMemberCreateResponse:
+    def create(self,
+    *,
+    member: team_member_create_params.Member,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamMemberCreateResponse:
         """
         Add a new team member to a team.
 
@@ -120,31 +130,22 @@ class TeamMembersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            TeamMemberCreateResponse,
-            self._post(
-                "/team-members",
-                body=maybe_transform(member, team_member_create_params.TeamMemberCreateParams),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, TeamMemberCreateResponse
-                ),  # Union types cannot be passed in as arguments in the type system
-            ),
-        )
+        return cast(TeamMemberCreateResponse, self._post(
+            "/team-members",
+            body=maybe_transform(member, team_member_create_params.TeamMemberCreateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            cast_to=cast(Any, TeamMemberCreateResponse),  # Union types cannot be passed in as arguments in the type system
+        ))
 
-    def retrieve(
-        self,
-        member_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamMemberRetrieveResponse:
+    def retrieve(self,
+    member_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamMemberRetrieveResponse:
         """
         Retrieve detailed information about a specific team member.
 
@@ -170,32 +171,25 @@ class TeamMembersResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not member_id:
-            raise ValueError(f"Expected a non-empty value for `member_id` but received {member_id!r}")
-        return cast(
-            TeamMemberRetrieveResponse,
-            self._get(
-                path_template("/team-members/{member_id}", member_id=member_id),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, TeamMemberRetrieveResponse
-                ),  # Union types cannot be passed in as arguments in the type system
-            ),
-        )
+          raise ValueError(
+            f'Expected a non-empty value for `member_id` but received {member_id!r}'
+          )
+        return cast(TeamMemberRetrieveResponse, self._get(
+            path_template("/team-members/{member_id}", member_id=member_id),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            cast_to=cast(Any, TeamMemberRetrieveResponse),  # Union types cannot be passed in as arguments in the type system
+        ))
 
-    def update(
-        self,
-        member_id: str,
-        *,
-        updates: team_member_update_params.Updates,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamMemberUpdateResponse:
+    def update(self,
+    member_id: str,
+    *,
+    updates: team_member_update_params.Updates,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamMemberUpdateResponse:
         """Update specific fields of an existing team member.
 
         Fields vary by member type.
@@ -212,35 +206,28 @@ class TeamMembersResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not member_id:
-            raise ValueError(f"Expected a non-empty value for `member_id` but received {member_id!r}")
-        return cast(
-            TeamMemberUpdateResponse,
-            self._patch(
-                path_template("/team-members/{member_id}", member_id=member_id),
-                body=maybe_transform(updates, team_member_update_params.TeamMemberUpdateParams),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, TeamMemberUpdateResponse
-                ),  # Union types cannot be passed in as arguments in the type system
-            ),
-        )
+          raise ValueError(
+            f'Expected a non-empty value for `member_id` but received {member_id!r}'
+          )
+        return cast(TeamMemberUpdateResponse, self._patch(
+            path_template("/team-members/{member_id}", member_id=member_id),
+            body=maybe_transform(updates, team_member_update_params.TeamMemberUpdateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            cast_to=cast(Any, TeamMemberUpdateResponse),  # Union types cannot be passed in as arguments in the type system
+        ))
 
-    def list(
-        self,
-        *,
-        limit: int | Omit = omit,
-        member_type: Optional[Literal["player", "coach", "medical_staff", "equipment_manager"]] | Omit = omit,
-        skip: int | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[TeamMemberListResponse]:
+    def list(self,
+    *,
+    limit: int | Omit = omit,
+    member_type: Optional[Literal["player", "coach", "medical_staff", "equipment_manager"]] | Omit = omit,
+    skip: int | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> SyncSkipLimitPage[TeamMemberListResponse]:
         """
         Get a paginated list of all team members.
 
@@ -268,36 +255,25 @@ class TeamMembersResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/team-members",
-            page=SyncSkipLimitPage[TeamMemberListResponse],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "member_type": member_type,
-                        "skip": skip,
-                        "team_id": team_id,
-                    },
-                    team_member_list_params.TeamMemberListParams,
-                ),
-            ),
+            page = SyncSkipLimitPage[TeamMemberListResponse],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "member_type": member_type,
+                "skip": skip,
+                "team_id": team_id,
+            }, team_member_list_params.TeamMemberListParams)),
             model=cast(Any, TeamMemberListResponse),  # Union types cannot be passed in as arguments in the type system
         )
 
-    def delete(
-        self,
-        member_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    def delete(self,
+    member_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Remove a team member from the roster.
 
@@ -311,30 +287,28 @@ class TeamMembersResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not member_id:
-            raise ValueError(f"Expected a non-empty value for `member_id` but received {member_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `member_id` but received {member_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             path_template("/team-members/{member_id}", member_id=member_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    def list_coaches(
-        self,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        specialty: Optional[CoachSpecialty] | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[Coach]:
+    def list_coaches(self,
+    *,
+    limit: int | Omit = omit,
+    skip: int | Omit = omit,
+    specialty: Optional[CoachSpecialty] | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> SyncSkipLimitPage[Coach]:
         """
         Get only coaches (filtered subset of team members).
 
@@ -357,39 +331,28 @@ class TeamMembersResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/team-members/coaches/",
-            page=SyncSkipLimitPage[Coach],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                        "specialty": specialty,
-                        "team_id": team_id,
-                    },
-                    team_member_list_coaches_params.TeamMemberListCoachesParams,
-                ),
-            ),
+            page = SyncSkipLimitPage[Coach],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "skip": skip,
+                "specialty": specialty,
+                "team_id": team_id,
+            }, team_member_list_coaches_params.TeamMemberListCoachesParams)),
             model=Coach,
         )
 
-    def list_players(
-        self,
-        *,
-        limit: int | Omit = omit,
-        position: Optional[Position] | Omit = omit,
-        skip: int | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[Player]:
+    def list_players(self,
+    *,
+    limit: int | Omit = omit,
+    position: Optional[Position] | Omit = omit,
+    skip: int | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> SyncSkipLimitPage[Player]:
         """
         Get only players (filtered subset of team members).
 
@@ -412,38 +375,27 @@ class TeamMembersResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/team-members/players/",
-            page=SyncSkipLimitPage[Player],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "position": position,
-                        "skip": skip,
-                        "team_id": team_id,
-                    },
-                    team_member_list_players_params.TeamMemberListPlayersParams,
-                ),
-            ),
+            page = SyncSkipLimitPage[Player],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "position": position,
+                "skip": skip,
+                "team_id": team_id,
+            }, team_member_list_players_params.TeamMemberListPlayersParams)),
             model=Player,
         )
 
-    def list_staff(
-        self,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[TeamMemberListStaffResponse]:
+    def list_staff(self,
+    *,
+    limit: int | Omit = omit,
+    skip: int | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> SyncSkipLimitPage[TeamMemberListStaffResponse]:
         """
         Get all staff members (medical staff and equipment managers).
 
@@ -467,32 +419,19 @@ class TeamMembersResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/team-members/staff/",
-            page=SyncSkipLimitPage[TeamMemberListStaffResponse],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                        "team_id": team_id,
-                    },
-                    team_member_list_staff_params.TeamMemberListStaffParams,
-                ),
-            ),
-            model=cast(
-                Any, TeamMemberListStaffResponse
-            ),  # Union types cannot be passed in as arguments in the type system
+            page = SyncSkipLimitPage[TeamMemberListStaffResponse],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "skip": skip,
+                "team_id": team_id,
+            }, team_member_list_staff_params.TeamMemberListStaffParams)),
+            model=cast(Any, TeamMemberListStaffResponse),  # Union types cannot be passed in as arguments in the type system
         )
-
 
 class AsyncTeamMembersResource(AsyncAPIResource):
     """
     Team members with union types (oneOf) - Players, Coaches, Medical Staff, Equipment Managers
     """
-
     @cached_property
     def with_raw_response(self) -> AsyncTeamMembersResourceWithRawResponse:
         """
@@ -512,17 +451,15 @@ class AsyncTeamMembersResource(AsyncAPIResource):
         """
         return AsyncTeamMembersResourceWithStreamingResponse(self)
 
-    async def create(
-        self,
-        *,
-        member: team_member_create_params.Member,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamMemberCreateResponse:
+    async def create(self,
+    *,
+    member: team_member_create_params.Member,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamMemberCreateResponse:
         """
         Add a new team member to a team.
 
@@ -566,31 +503,22 @@ class AsyncTeamMembersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return cast(
-            TeamMemberCreateResponse,
-            await self._post(
-                "/team-members",
-                body=await async_maybe_transform(member, team_member_create_params.TeamMemberCreateParams),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, TeamMemberCreateResponse
-                ),  # Union types cannot be passed in as arguments in the type system
-            ),
-        )
+        return cast(TeamMemberCreateResponse, await self._post(
+            "/team-members",
+            body=await async_maybe_transform(member, team_member_create_params.TeamMemberCreateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            cast_to=cast(Any, TeamMemberCreateResponse),  # Union types cannot be passed in as arguments in the type system
+        ))
 
-    async def retrieve(
-        self,
-        member_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamMemberRetrieveResponse:
+    async def retrieve(self,
+    member_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamMemberRetrieveResponse:
         """
         Retrieve detailed information about a specific team member.
 
@@ -616,32 +544,25 @@ class AsyncTeamMembersResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not member_id:
-            raise ValueError(f"Expected a non-empty value for `member_id` but received {member_id!r}")
-        return cast(
-            TeamMemberRetrieveResponse,
-            await self._get(
-                path_template("/team-members/{member_id}", member_id=member_id),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, TeamMemberRetrieveResponse
-                ),  # Union types cannot be passed in as arguments in the type system
-            ),
-        )
+          raise ValueError(
+            f'Expected a non-empty value for `member_id` but received {member_id!r}'
+          )
+        return cast(TeamMemberRetrieveResponse, await self._get(
+            path_template("/team-members/{member_id}", member_id=member_id),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            cast_to=cast(Any, TeamMemberRetrieveResponse),  # Union types cannot be passed in as arguments in the type system
+        ))
 
-    async def update(
-        self,
-        member_id: str,
-        *,
-        updates: team_member_update_params.Updates,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TeamMemberUpdateResponse:
+    async def update(self,
+    member_id: str,
+    *,
+    updates: team_member_update_params.Updates,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> TeamMemberUpdateResponse:
         """Update specific fields of an existing team member.
 
         Fields vary by member type.
@@ -658,35 +579,28 @@ class AsyncTeamMembersResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not member_id:
-            raise ValueError(f"Expected a non-empty value for `member_id` but received {member_id!r}")
-        return cast(
-            TeamMemberUpdateResponse,
-            await self._patch(
-                path_template("/team-members/{member_id}", member_id=member_id),
-                body=await async_maybe_transform(updates, team_member_update_params.TeamMemberUpdateParams),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, TeamMemberUpdateResponse
-                ),  # Union types cannot be passed in as arguments in the type system
-            ),
-        )
+          raise ValueError(
+            f'Expected a non-empty value for `member_id` but received {member_id!r}'
+          )
+        return cast(TeamMemberUpdateResponse, await self._patch(
+            path_template("/team-members/{member_id}", member_id=member_id),
+            body=await async_maybe_transform(updates, team_member_update_params.TeamMemberUpdateParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            cast_to=cast(Any, TeamMemberUpdateResponse),  # Union types cannot be passed in as arguments in the type system
+        ))
 
-    def list(
-        self,
-        *,
-        limit: int | Omit = omit,
-        member_type: Optional[Literal["player", "coach", "medical_staff", "equipment_manager"]] | Omit = omit,
-        skip: int | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[TeamMemberListResponse, AsyncSkipLimitPage[TeamMemberListResponse]]:
+    def list(self,
+    *,
+    limit: int | Omit = omit,
+    member_type: Optional[Literal["player", "coach", "medical_staff", "equipment_manager"]] | Omit = omit,
+    skip: int | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> AsyncPaginator[TeamMemberListResponse, AsyncSkipLimitPage[TeamMemberListResponse]]:
         """
         Get a paginated list of all team members.
 
@@ -714,36 +628,25 @@ class AsyncTeamMembersResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/team-members",
-            page=AsyncSkipLimitPage[TeamMemberListResponse],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "member_type": member_type,
-                        "skip": skip,
-                        "team_id": team_id,
-                    },
-                    team_member_list_params.TeamMemberListParams,
-                ),
-            ),
+            page = AsyncSkipLimitPage[TeamMemberListResponse],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "member_type": member_type,
+                "skip": skip,
+                "team_id": team_id,
+            }, team_member_list_params.TeamMemberListParams)),
             model=cast(Any, TeamMemberListResponse),  # Union types cannot be passed in as arguments in the type system
         )
 
-    async def delete(
-        self,
-        member_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    async def delete(self,
+    member_id: str,
+    *,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> None:
         """
         Remove a team member from the roster.
 
@@ -757,30 +660,28 @@ class AsyncTeamMembersResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         if not member_id:
-            raise ValueError(f"Expected a non-empty value for `member_id` but received {member_id!r}")
+          raise ValueError(
+            f'Expected a non-empty value for `member_id` but received {member_id!r}'
+          )
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             path_template("/team-members/{member_id}", member_id=member_id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=NoneType,
         )
 
-    def list_coaches(
-        self,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        specialty: Optional[CoachSpecialty] | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Coach, AsyncSkipLimitPage[Coach]]:
+    def list_coaches(self,
+    *,
+    limit: int | Omit = omit,
+    skip: int | Omit = omit,
+    specialty: Optional[CoachSpecialty] | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> AsyncPaginator[Coach, AsyncSkipLimitPage[Coach]]:
         """
         Get only coaches (filtered subset of team members).
 
@@ -803,39 +704,28 @@ class AsyncTeamMembersResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/team-members/coaches/",
-            page=AsyncSkipLimitPage[Coach],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                        "specialty": specialty,
-                        "team_id": team_id,
-                    },
-                    team_member_list_coaches_params.TeamMemberListCoachesParams,
-                ),
-            ),
+            page = AsyncSkipLimitPage[Coach],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "skip": skip,
+                "specialty": specialty,
+                "team_id": team_id,
+            }, team_member_list_coaches_params.TeamMemberListCoachesParams)),
             model=Coach,
         )
 
-    def list_players(
-        self,
-        *,
-        limit: int | Omit = omit,
-        position: Optional[Position] | Omit = omit,
-        skip: int | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Player, AsyncSkipLimitPage[Player]]:
+    def list_players(self,
+    *,
+    limit: int | Omit = omit,
+    position: Optional[Position] | Omit = omit,
+    skip: int | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> AsyncPaginator[Player, AsyncSkipLimitPage[Player]]:
         """
         Get only players (filtered subset of team members).
 
@@ -858,38 +748,27 @@ class AsyncTeamMembersResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/team-members/players/",
-            page=AsyncSkipLimitPage[Player],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "position": position,
-                        "skip": skip,
-                        "team_id": team_id,
-                    },
-                    team_member_list_players_params.TeamMemberListPlayersParams,
-                ),
-            ),
+            page = AsyncSkipLimitPage[Player],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "position": position,
+                "skip": skip,
+                "team_id": team_id,
+            }, team_member_list_players_params.TeamMemberListPlayersParams)),
             model=Player,
         )
 
-    def list_staff(
-        self,
-        *,
-        limit: int | Omit = omit,
-        skip: int | Omit = omit,
-        team_id: Optional[str] | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[TeamMemberListStaffResponse, AsyncSkipLimitPage[TeamMemberListStaffResponse]]:
+    def list_staff(self,
+    *,
+    limit: int | Omit = omit,
+    skip: int | Omit = omit,
+    team_id: Optional[str] | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> AsyncPaginator[TeamMemberListStaffResponse, AsyncSkipLimitPage[TeamMemberListStaffResponse]]:
         """
         Get all staff members (medical staff and equipment managers).
 
@@ -913,26 +792,14 @@ class AsyncTeamMembersResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/team-members/staff/",
-            page=AsyncSkipLimitPage[TeamMemberListStaffResponse],
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "limit": limit,
-                        "skip": skip,
-                        "team_id": team_id,
-                    },
-                    team_member_list_staff_params.TeamMemberListStaffParams,
-                ),
-            ),
-            model=cast(
-                Any, TeamMemberListStaffResponse
-            ),  # Union types cannot be passed in as arguments in the type system
+            page = AsyncSkipLimitPage[TeamMemberListStaffResponse],
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({
+                "limit": limit,
+                "skip": skip,
+                "team_id": team_id,
+            }, team_member_list_staff_params.TeamMemberListStaffParams)),
+            model=cast(Any, TeamMemberListStaffResponse),  # Union types cannot be passed in as arguments in the type system
         )
-
 
 class TeamMembersResourceWithRawResponse:
     def __init__(self, team_members: TeamMembersResource) -> None:
@@ -963,7 +830,6 @@ class TeamMembersResourceWithRawResponse:
             team_members.list_staff,
         )
 
-
 class AsyncTeamMembersResourceWithRawResponse:
     def __init__(self, team_members: AsyncTeamMembersResource) -> None:
         self._team_members = team_members
@@ -993,7 +859,6 @@ class AsyncTeamMembersResourceWithRawResponse:
             team_members.list_staff,
         )
 
-
 class TeamMembersResourceWithStreamingResponse:
     def __init__(self, team_members: TeamMembersResource) -> None:
         self._team_members = team_members
@@ -1022,7 +887,6 @@ class TeamMembersResourceWithStreamingResponse:
         self.list_staff = to_streamed_response_wrapper(
             team_members.list_staff,
         )
-
 
 class AsyncTeamMembersResourceWithStreamingResponse:
     def __init__(self, team_members: AsyncTeamMembersResource) -> None:

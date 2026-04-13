@@ -2,31 +2,34 @@
 
 from __future__ import annotations
 
-from typing import Optional
-from typing_extensions import Literal
-
 import httpx
 
-from ..types import believe_submit_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
-from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from .._base_client import make_request_options
+
+from .._compat import cached_property
+
 from ..types.believe_submit_response import BelieveSubmitResponse
+
+from .._utils import maybe_transform, async_maybe_transform
+
+from .._base_client import make_request_options
+
+from typing_extensions import Literal
+
+from typing import Optional
+
+from .._types import Omit, omit, NotGiven
+
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
+
+from typing_extensions import Literal, overload
+from .._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+from ..types import believe_submit_params
 
 __all__ = ["BelieveResource", "AsyncBelieveResource"]
 
-
 class BelieveResource(SyncAPIResource):
     """Interactive endpoints for motivation and guidance"""
-
     @cached_property
     def with_raw_response(self) -> BelieveResourceWithRawResponse:
         """
@@ -46,29 +49,18 @@ class BelieveResource(SyncAPIResource):
         """
         return BelieveResourceWithStreamingResponse(self)
 
-    def submit(
-        self,
-        *,
-        situation: str,
-        situation_type: Literal[
-            "work_challenge",
-            "personal_setback",
-            "team_conflict",
-            "self_doubt",
-            "big_decision",
-            "failure",
-            "new_beginning",
-            "relationship",
-        ],
-        context: Optional[str] | Omit = omit,
-        intensity: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BelieveSubmitResponse:
+    def submit(self,
+    *,
+    situation: str,
+    situation_type: Literal["work_challenge", "personal_setback", "team_conflict", "self_doubt", "big_decision", "failure", "new_beginning", "relationship"],
+    context: Optional[str] | Omit = omit,
+    intensity: int | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> BelieveSubmitResponse:
         """
         Submit your situation and receive Ted Lasso-style motivational guidance.
 
@@ -91,25 +83,18 @@ class BelieveResource(SyncAPIResource):
         """
         return self._post(
             "/believe",
-            body=maybe_transform(
-                {
-                    "situation": situation,
-                    "situation_type": situation_type,
-                    "context": context,
-                    "intensity": intensity,
-                },
-                believe_submit_params.BelieveSubmitParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "situation": situation,
+                "situation_type": situation_type,
+                "context": context,
+                "intensity": intensity,
+            }, believe_submit_params.BelieveSubmitParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=BelieveSubmitResponse,
         )
 
-
 class AsyncBelieveResource(AsyncAPIResource):
     """Interactive endpoints for motivation and guidance"""
-
     @cached_property
     def with_raw_response(self) -> AsyncBelieveResourceWithRawResponse:
         """
@@ -129,29 +114,18 @@ class AsyncBelieveResource(AsyncAPIResource):
         """
         return AsyncBelieveResourceWithStreamingResponse(self)
 
-    async def submit(
-        self,
-        *,
-        situation: str,
-        situation_type: Literal[
-            "work_challenge",
-            "personal_setback",
-            "team_conflict",
-            "self_doubt",
-            "big_decision",
-            "failure",
-            "new_beginning",
-            "relationship",
-        ],
-        context: Optional[str] | Omit = omit,
-        intensity: int | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> BelieveSubmitResponse:
+    async def submit(self,
+    *,
+    situation: str,
+    situation_type: Literal["work_challenge", "personal_setback", "team_conflict", "self_doubt", "big_decision", "failure", "new_beginning", "relationship"],
+    context: Optional[str] | Omit = omit,
+    intensity: int | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> BelieveSubmitResponse:
         """
         Submit your situation and receive Ted Lasso-style motivational guidance.
 
@@ -174,21 +148,15 @@ class AsyncBelieveResource(AsyncAPIResource):
         """
         return await self._post(
             "/believe",
-            body=await async_maybe_transform(
-                {
-                    "situation": situation,
-                    "situation_type": situation_type,
-                    "context": context,
-                    "intensity": intensity,
-                },
-                believe_submit_params.BelieveSubmitParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "situation": situation,
+                "situation_type": situation_type,
+                "context": context,
+                "intensity": intensity,
+            }, believe_submit_params.BelieveSubmitParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=BelieveSubmitResponse,
         )
-
 
 class BelieveResourceWithRawResponse:
     def __init__(self, believe: BelieveResource) -> None:
@@ -198,7 +166,6 @@ class BelieveResourceWithRawResponse:
             believe.submit,
         )
 
-
 class AsyncBelieveResourceWithRawResponse:
     def __init__(self, believe: AsyncBelieveResource) -> None:
         self._believe = believe
@@ -207,7 +174,6 @@ class AsyncBelieveResourceWithRawResponse:
             believe.submit,
         )
 
-
 class BelieveResourceWithStreamingResponse:
     def __init__(self, believe: BelieveResource) -> None:
         self._believe = believe
@@ -215,7 +181,6 @@ class BelieveResourceWithStreamingResponse:
         self.submit = to_streamed_response_wrapper(
             believe.submit,
         )
-
 
 class AsyncBelieveResourceWithStreamingResponse:
     def __init__(self, believe: AsyncBelieveResource) -> None:

@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict, Required
 
 __all__ = ["EmotionalStatsParam"]
 
-
 class EmotionalStatsParam(TypedDict, total=False):
     """Emotional intelligence statistics for a character."""
-
     curiosity: Required[int]
     """Level of curiosity over judgment (0-100)"""
 

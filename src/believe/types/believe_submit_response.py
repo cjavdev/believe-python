@@ -4,10 +4,8 @@ from .._models import BaseModel
 
 __all__ = ["BelieveSubmitResponse"]
 
-
 class BelieveSubmitResponse(BaseModel):
     """Response from the Believe Engine."""
-
     action_suggestion: str
     """Suggested action to take"""
 

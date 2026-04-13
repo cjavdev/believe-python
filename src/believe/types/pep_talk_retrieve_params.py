@@ -6,7 +6,6 @@ from typing_extensions import TypedDict
 
 __all__ = ["PepTalkRetrieveParams"]
 
-
 class PepTalkRetrieveParams(TypedDict, total=False):
     stream: bool
     """If true, returns SSE stream instead of full response"""

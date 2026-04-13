@@ -2,28 +2,17 @@
 
 from __future__ import annotations
 
+from typing_extensions import TypedDict, Required, Literal
+
 from typing import Optional
-from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["BelieveSubmitParams"]
-
 
 class BelieveSubmitParams(TypedDict, total=False):
     situation: Required[str]
     """Describe your situation"""
 
-    situation_type: Required[
-        Literal[
-            "work_challenge",
-            "personal_setback",
-            "team_conflict",
-            "self_doubt",
-            "big_decision",
-            "failure",
-            "new_beginning",
-            "relationship",
-        ]
-    ]
+    situation_type: Required[Literal["work_challenge", "personal_setback", "team_conflict", "self_doubt", "big_decision", "failure", "new_beginning", "relationship"]]
     """Type of situation"""
 
     context: Optional[str]

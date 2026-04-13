@@ -4,26 +4,28 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import reframe_transform_negative_thoughts_params
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
-from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from .._base_client import make_request_options
+
+from .._compat import cached_property
+
 from ..types.reframe_transform_negative_thoughts_response import ReframeTransformNegativeThoughtsResponse
+
+from .._utils import maybe_transform, async_maybe_transform
+
+from .._base_client import make_request_options
+
+from .._types import Omit, omit, NotGiven
+
+from .._response import to_raw_response_wrapper, async_to_raw_response_wrapper, to_streamed_response_wrapper, async_to_streamed_response_wrapper
+
+from typing_extensions import Literal, overload
+from .._types import Timeout, Headers, NotGiven, not_given, Omit, omit, NoneType, Query, Body
+from ..types import reframe_transform_negative_thoughts_params
 
 __all__ = ["ReframeResource", "AsyncReframeResource"]
 
-
 class ReframeResource(SyncAPIResource):
     """Interactive endpoints for motivation and guidance"""
-
     @cached_property
     def with_raw_response(self) -> ReframeResourceWithRawResponse:
         """
@@ -43,18 +45,16 @@ class ReframeResource(SyncAPIResource):
         """
         return ReframeResourceWithStreamingResponse(self)
 
-    def transform_negative_thoughts(
-        self,
-        *,
-        negative_thought: str,
-        recurring: bool | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ReframeTransformNegativeThoughtsResponse:
+    def transform_negative_thoughts(self,
+    *,
+    negative_thought: str,
+    recurring: bool | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> ReframeTransformNegativeThoughtsResponse:
         """
         Transform negative thoughts into positive perspectives with Ted's help.
 
@@ -73,23 +73,16 @@ class ReframeResource(SyncAPIResource):
         """
         return self._post(
             "/reframe",
-            body=maybe_transform(
-                {
-                    "negative_thought": negative_thought,
-                    "recurring": recurring,
-                },
-                reframe_transform_negative_thoughts_params.ReframeTransformNegativeThoughtsParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=maybe_transform({
+                "negative_thought": negative_thought,
+                "recurring": recurring,
+            }, reframe_transform_negative_thoughts_params.ReframeTransformNegativeThoughtsParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=ReframeTransformNegativeThoughtsResponse,
         )
 
-
 class AsyncReframeResource(AsyncAPIResource):
     """Interactive endpoints for motivation and guidance"""
-
     @cached_property
     def with_raw_response(self) -> AsyncReframeResourceWithRawResponse:
         """
@@ -109,18 +102,16 @@ class AsyncReframeResource(AsyncAPIResource):
         """
         return AsyncReframeResourceWithStreamingResponse(self)
 
-    async def transform_negative_thoughts(
-        self,
-        *,
-        negative_thought: str,
-        recurring: bool | Omit = omit,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ReframeTransformNegativeThoughtsResponse:
+    async def transform_negative_thoughts(self,
+    *,
+    negative_thought: str,
+    recurring: bool | Omit = omit,
+    # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+    # The extra values given here take precedence over values defined on the client or passed to this method.
+    extra_headers: Headers | None = None,
+    extra_query: Query | None = None,
+    extra_body: Body | None = None,
+    timeout: float | httpx.Timeout | None | NotGiven = not_given,) -> ReframeTransformNegativeThoughtsResponse:
         """
         Transform negative thoughts into positive perspectives with Ted's help.
 
@@ -139,19 +130,13 @@ class AsyncReframeResource(AsyncAPIResource):
         """
         return await self._post(
             "/reframe",
-            body=await async_maybe_transform(
-                {
-                    "negative_thought": negative_thought,
-                    "recurring": recurring,
-                },
-                reframe_transform_negative_thoughts_params.ReframeTransformNegativeThoughtsParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
+            body=await async_maybe_transform({
+                "negative_thought": negative_thought,
+                "recurring": recurring,
+            }, reframe_transform_negative_thoughts_params.ReframeTransformNegativeThoughtsParams),
+            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
             cast_to=ReframeTransformNegativeThoughtsResponse,
         )
-
 
 class ReframeResourceWithRawResponse:
     def __init__(self, reframe: ReframeResource) -> None:
@@ -161,7 +146,6 @@ class ReframeResourceWithRawResponse:
             reframe.transform_negative_thoughts,
         )
 
-
 class AsyncReframeResourceWithRawResponse:
     def __init__(self, reframe: AsyncReframeResource) -> None:
         self._reframe = reframe
@@ -170,7 +154,6 @@ class AsyncReframeResourceWithRawResponse:
             reframe.transform_negative_thoughts,
         )
 
-
 class ReframeResourceWithStreamingResponse:
     def __init__(self, reframe: ReframeResource) -> None:
         self._reframe = reframe
@@ -178,7 +161,6 @@ class ReframeResourceWithStreamingResponse:
         self.transform_negative_thoughts = to_streamed_response_wrapper(
             reframe.transform_negative_thoughts,
         )
-
 
 class AsyncReframeResourceWithStreamingResponse:
     def __init__(self, reframe: AsyncReframeResource) -> None:

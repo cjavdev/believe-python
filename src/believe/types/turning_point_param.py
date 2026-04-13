@@ -3,14 +3,13 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Required, TypedDict
+
+from typing_extensions import TypedDict, Required
 
 __all__ = ["TurningPointParam"]
 
-
 class TurningPointParam(TypedDict, total=False):
     """A pivotal moment in a match."""
-
     description: Required[str]
     """What happened"""
 

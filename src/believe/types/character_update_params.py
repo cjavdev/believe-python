@@ -2,23 +2,28 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
-from datetime import date
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict, Annotated
 
-from .._types import SequenceNotStr
+from typing import Optional, Union, Iterable
+
+from datetime import date
+
 from .._utils import PropertyInfo
-from .character_role import CharacterRole
-from .growth_arc_param import GrowthArcParam
+
 from .emotional_stats_param import EmotionalStatsParam
 
-__all__ = ["CharacterUpdateParams"]
+from .growth_arc_param import GrowthArcParam
 
+from .._types import SequenceNotStr
+
+from .character_role import CharacterRole
+
+__all__ = ["CharacterUpdateParams"]
 
 class CharacterUpdateParams(TypedDict, total=False):
     background: Optional[str]
 
-    date_of_birth: Annotated[Union[str, date, None], PropertyInfo(format="iso8601")]
+    date_of_birth: Annotated[Union[str, date, None], PropertyInfo(format = "iso8601")]
 
     email: Optional[str]
 
