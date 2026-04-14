@@ -3,6 +3,6 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-__all__ = ["CharacterGetQuotesResponse"]
+__all__ = ["CharacterRetrieveQuotesResponse"]
 
-CharacterGetQuotesResponse: TypeAlias = List[str]
+CharacterRetrieveQuotesResponse: TypeAlias = List[str]

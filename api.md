@@ -14,7 +14,7 @@ from believe.types import (
     CharacterRole,
     EmotionalStats,
     GrowthArc,
-    CharacterGetQuotesResponse,
+    CharacterRetrieveQuotesResponse,
 )
 ```
 
@@ -25,7 +25,7 @@ Methods:
 - <code title="patch /characters/{character_id}">client.characters.<a href="./src/believe/resources/characters.py">update</a>(character_id, \*\*<a href="src/believe/types/character_update_params.py">params</a>) -> <a href="./src/believe/types/character.py">Character</a></code>
 - <code title="get /characters">client.characters.<a href="./src/believe/resources/characters.py">list</a>(\*\*<a href="src/believe/types/character_list_params.py">params</a>) -> <a href="./src/believe/types/character.py">SyncSkipLimitPage[Character]</a></code>
 - <code title="delete /characters/{character_id}">client.characters.<a href="./src/believe/resources/characters.py">delete</a>(character_id) -> None</code>
-- <code title="get /characters/{character_id}/quotes">client.characters.<a href="./src/believe/resources/characters.py">get_quotes</a>(character_id) -> <a href="./src/believe/types/character_get_quotes_response.py">CharacterGetQuotesResponse</a></code>
+- <code title="get /characters/{character_id}/quotes">client.characters.<a href="./src/believe/resources/characters.py">retrieve_quotes</a>(character_id) -> <a href="./src/believe/types/character_retrieve_quotes_response.py">CharacterRetrieveQuotesResponse</a></code>
 
 # Teams
 

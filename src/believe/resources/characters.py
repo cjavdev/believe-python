@@ -29,7 +29,7 @@ from ..types.character import Character
 from ..types.character_role import CharacterRole
 from ..types.growth_arc_param import GrowthArcParam
 from ..types.emotional_stats_param import EmotionalStatsParam
-from ..types.character_get_quotes_response import CharacterGetQuotesResponse
+from ..types.character_retrieve_quotes_response import CharacterRetrieveQuotesResponse
 
 __all__ = ["CharactersResource", "AsyncCharactersResource"]
 
@@ -337,7 +337,7 @@ class CharactersResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
-    def get_quotes(
+    def retrieve_quotes(
         self,
         character_id: str,
         *,
@@ -347,7 +347,7 @@ class CharactersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CharacterGetQuotesResponse:
+    ) -> CharacterRetrieveQuotesResponse:
         """
         Get all signature quotes from a specific character.
 
@@ -367,7 +367,7 @@ class CharactersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CharacterGetQuotesResponse,
+            cast_to=CharacterRetrieveQuotesResponse,
         )
 
 
@@ -674,7 +674,7 @@ class AsyncCharactersResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
-    async def get_quotes(
+    async def retrieve_quotes(
         self,
         character_id: str,
         *,
@@ -684,7 +684,7 @@ class AsyncCharactersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CharacterGetQuotesResponse:
+    ) -> CharacterRetrieveQuotesResponse:
         """
         Get all signature quotes from a specific character.
 
@@ -704,7 +704,7 @@ class AsyncCharactersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CharacterGetQuotesResponse,
+            cast_to=CharacterRetrieveQuotesResponse,
         )
 
 
@@ -727,8 +727,8 @@ class CharactersResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             characters.delete,
         )
-        self.get_quotes = to_raw_response_wrapper(
-            characters.get_quotes,
+        self.retrieve_quotes = to_raw_response_wrapper(
+            characters.retrieve_quotes,
         )
 
 
@@ -751,8 +751,8 @@ class AsyncCharactersResourceWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             characters.delete,
         )
-        self.get_quotes = async_to_raw_response_wrapper(
-            characters.get_quotes,
+        self.retrieve_quotes = async_to_raw_response_wrapper(
+            characters.retrieve_quotes,
         )
 
 
@@ -775,8 +775,8 @@ class CharactersResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             characters.delete,
         )
-        self.get_quotes = to_streamed_response_wrapper(
-            characters.get_quotes,
+        self.retrieve_quotes = to_streamed_response_wrapper(
+            characters.retrieve_quotes,
         )
 
 
@@ -799,6 +799,6 @@ class AsyncCharactersResourceWithStreamingResponse:
         self.delete = async_to_streamed_response_wrapper(
             characters.delete,
         )
-        self.get_quotes = async_to_streamed_response_wrapper(
-            characters.get_quotes,
+        self.retrieve_quotes = async_to_streamed_response_wrapper(
+            characters.retrieve_quotes,
         )

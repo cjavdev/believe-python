@@ -11,7 +11,7 @@ from believe import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
 from believe.types import (
     Character,
-    CharacterGetQuotesResponse,
+    CharacterRetrieveQuotesResponse,
 )
 from believe._utils import parse_date
 from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
@@ -323,43 +323,43 @@ class TestCharacters:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_get_quotes(self, client: Believe) -> None:
-        character = client.characters.get_quotes(
+    def test_method_retrieve_quotes(self, client: Believe) -> None:
+        character = client.characters.retrieve_quotes(
             "character_id",
         )
-        assert_matches_type(CharacterGetQuotesResponse, character, path=["response"])
+        assert_matches_type(CharacterRetrieveQuotesResponse, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_get_quotes(self, client: Believe) -> None:
-        response = client.characters.with_raw_response.get_quotes(
+    def test_raw_response_retrieve_quotes(self, client: Believe) -> None:
+        response = client.characters.with_raw_response.retrieve_quotes(
             "character_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         character = response.parse()
-        assert_matches_type(CharacterGetQuotesResponse, character, path=["response"])
+        assert_matches_type(CharacterRetrieveQuotesResponse, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_get_quotes(self, client: Believe) -> None:
-        with client.characters.with_streaming_response.get_quotes(
+    def test_streaming_response_retrieve_quotes(self, client: Believe) -> None:
+        with client.characters.with_streaming_response.retrieve_quotes(
             "character_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             character = response.parse()
-            assert_matches_type(CharacterGetQuotesResponse, character, path=["response"])
+            assert_matches_type(CharacterRetrieveQuotesResponse, character, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_get_quotes(self, client: Believe) -> None:
+    def test_path_params_retrieve_quotes(self, client: Believe) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `character_id` but received ''"):
-            client.characters.with_raw_response.get_quotes(
+            client.characters.with_raw_response.retrieve_quotes(
                 "",
             )
 
@@ -670,42 +670,42 @@ class TestAsyncCharacters:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_get_quotes(self, async_client: AsyncBelieve) -> None:
-        character = await async_client.characters.get_quotes(
+    async def test_method_retrieve_quotes(self, async_client: AsyncBelieve) -> None:
+        character = await async_client.characters.retrieve_quotes(
             "character_id",
         )
-        assert_matches_type(CharacterGetQuotesResponse, character, path=["response"])
+        assert_matches_type(CharacterRetrieveQuotesResponse, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_get_quotes(self, async_client: AsyncBelieve) -> None:
-        response = await async_client.characters.with_raw_response.get_quotes(
+    async def test_raw_response_retrieve_quotes(self, async_client: AsyncBelieve) -> None:
+        response = await async_client.characters.with_raw_response.retrieve_quotes(
             "character_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         character = await response.parse()
-        assert_matches_type(CharacterGetQuotesResponse, character, path=["response"])
+        assert_matches_type(CharacterRetrieveQuotesResponse, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_get_quotes(self, async_client: AsyncBelieve) -> None:
-        async with async_client.characters.with_streaming_response.get_quotes(
+    async def test_streaming_response_retrieve_quotes(self, async_client: AsyncBelieve) -> None:
+        async with async_client.characters.with_streaming_response.retrieve_quotes(
             "character_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             character = await response.parse()
-            assert_matches_type(CharacterGetQuotesResponse, character, path=["response"])
+            assert_matches_type(CharacterRetrieveQuotesResponse, character, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_get_quotes(self, async_client: AsyncBelieve) -> None:
+    async def test_path_params_retrieve_quotes(self, async_client: AsyncBelieve) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `character_id` but received ''"):
-            await async_client.characters.with_raw_response.get_quotes(
+            await async_client.characters.with_raw_response.retrieve_quotes(
                 "",
             )
