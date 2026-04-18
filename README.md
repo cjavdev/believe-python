@@ -189,7 +189,7 @@ from believe import Believe
 
 client = Believe()
 
-character = client.characters.create(
+characterz = client.characters.create(
     background="Legendary midfielder for Chelsea and AFC Richmond, now assistant coach. Known for his gruff exterior hiding a heart of gold.",
     emotional_stats={
         "curiosity": 40,
@@ -202,7 +202,7 @@ character = client.characters.create(
     personality_traits=["intense", "loyal", "secretly caring", "profane"],
     role="coach",
 )
-print(character.emotional_stats)
+print(characterz.emotional_stats)
 ```
 
 ## File uploads
