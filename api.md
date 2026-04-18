@@ -10,8 +10,8 @@ Types:
 
 ```python
 from believe.types import (
-    Character,
     CharacterRole,
+    Characterz,
     EmotionalStats,
     GrowthArc,
     CharacterGetQuotesResponse,
@@ -20,10 +20,10 @@ from believe.types import (
 
 Methods:
 
-- <code title="post /characters">client.characters.<a href="./src/believe/resources/characters.py">create</a>(\*\*<a href="src/believe/types/character_create_params.py">params</a>) -> <a href="./src/believe/types/character.py">Character</a></code>
-- <code title="get /characters/{character_id}">client.characters.<a href="./src/believe/resources/characters.py">retrieve</a>(character_id) -> <a href="./src/believe/types/character.py">Character</a></code>
-- <code title="patch /characters/{character_id}">client.characters.<a href="./src/believe/resources/characters.py">update</a>(character_id, \*\*<a href="src/believe/types/character_update_params.py">params</a>) -> <a href="./src/believe/types/character.py">Character</a></code>
-- <code title="get /characters">client.characters.<a href="./src/believe/resources/characters.py">list</a>(\*\*<a href="src/believe/types/character_list_params.py">params</a>) -> <a href="./src/believe/types/character.py">SyncSkipLimitPage[Character]</a></code>
+- <code title="post /characters">client.characters.<a href="./src/believe/resources/characters.py">create</a>(\*\*<a href="src/believe/types/character_create_params.py">params</a>) -> <a href="./src/believe/types/characterz.py">Characterz</a></code>
+- <code title="get /characters/{character_id}">client.characters.<a href="./src/believe/resources/characters.py">retrieve</a>(character_id) -> <a href="./src/believe/types/characterz.py">Characterz</a></code>
+- <code title="patch /characters/{character_id}">client.characters.<a href="./src/believe/resources/characters.py">update</a>(character_id, \*\*<a href="src/believe/types/character_update_params.py">params</a>) -> <a href="./src/believe/types/characterz.py">Characterz</a></code>
+- <code title="get /characters">client.characters.<a href="./src/believe/resources/characters.py">list</a>(\*\*<a href="src/believe/types/character_list_params.py">params</a>) -> <a href="./src/believe/types/characterz.py">SyncSkipLimitPage[Characterz]</a></code>
 - <code title="delete /characters/{character_id}">client.characters.<a href="./src/believe/resources/characters.py">delete</a>(character_id) -> None</code>
 - <code title="get /characters/{character_id}/quotes">client.characters.<a href="./src/believe/resources/characters.py">get_quotes</a>(character_id) -> <a href="./src/believe/types/character_get_quotes_response.py">CharacterGetQuotesResponse</a></code>
 
