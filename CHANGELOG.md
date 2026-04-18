@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.0 (2026-04-18)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/cjavdev/believe-python/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** manual updates ([08b24dc](https://github.com/cjavdev/believe-python/commit/08b24dc44c3a50cd8fb826e28bc245ca746a8fb6))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([7262915](https://github.com/cjavdev/believe-python/commit/7262915866b136628ac620abe208be5322b212cf))
+
 ## 0.5.0 (2026-04-13)
 
 Full Changelog: [v0.4.1...v0.5.0](https://github.com/cjavdev/believe-python/compare/v0.4.1...v0.5.0)
