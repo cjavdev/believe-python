@@ -7,6 +7,8 @@ The Believe Python library provides convenient access to the Believe REST API fr
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
+
+
 It is generated with [Stainless](https://www.stainless.com/).
 
 ## MCP Server
@@ -20,7 +22,7 @@ Use the Believe MCP Server to enable AI assistants to interact with this API, al
 
 ## Documentation
 
-The full API of this library can be found in [api.md](api.md).
+ The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -106,6 +108,8 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
+
+
 ## Using types
 
 Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:
@@ -154,7 +158,7 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
-Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
+Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or  `.get_next_page()` methods for more granular control working with pages:
 
 ```python
 first_page = await client.characters.list()
@@ -311,6 +315,8 @@ client.with_options(timeout=5.0).characters.list()
 On timeout, an `APITimeoutError` is thrown.
 
 Note that requests that time out are [retried twice by default](#retries).
+
+
 
 ## Advanced
 
