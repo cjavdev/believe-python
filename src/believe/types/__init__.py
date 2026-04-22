@@ -11,7 +11,7 @@ from .player import Player as Player
 from .biscuit import Biscuit as Biscuit
 from .episode import Episode as Episode
 from .position import Position as Position
-from .characterz import Characterz as Characterz
+from .character import Character as Character
 from .growth_arc import GrowthArc as GrowthArc
 from .match_type import MatchType as MatchType
 from .quote_theme import QuoteTheme as QuoteTheme

@@ -25,7 +25,7 @@ from .._response import (
 )
 from ..pagination import SyncSkipLimitPage, AsyncSkipLimitPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.characterz import Characterz
+from ..types.character import Character
 from ..types.character_role import CharacterRole
 from ..types.growth_arc_param import GrowthArcParam
 from ..types.emotional_stats_param import EmotionalStatsParam
@@ -78,7 +78,7 @@ class CharactersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Characterz:
+    ) -> Character:
         """
         Add a new character to the Ted Lasso universe.
 
@@ -140,7 +140,7 @@ class CharactersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Characterz,
+            cast_to=Character,
         )
 
     def retrieve(
@@ -153,7 +153,7 @@ class CharactersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Characterz:
+    ) -> Character:
         """
         Retrieve detailed information about a specific character.
 
@@ -173,7 +173,7 @@ class CharactersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Characterz,
+            cast_to=Character,
         )
 
     def update(
@@ -199,7 +199,7 @@ class CharactersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Characterz:
+    ) -> Character:
         """
         Update specific fields of an existing character.
 
@@ -241,7 +241,7 @@ class CharactersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Characterz,
+            cast_to=Character,
         )
 
     def list(
@@ -258,7 +258,7 @@ class CharactersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncSkipLimitPage[Characterz]:
+    ) -> SyncSkipLimitPage[Character]:
         """
         Get a paginated list of Ted Lasso characters.
 
@@ -283,7 +283,7 @@ class CharactersResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/characters",
-            page=SyncSkipLimitPage[Characterz],
+            page=SyncSkipLimitPage[Character],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -300,7 +300,7 @@ class CharactersResource(SyncAPIResource):
                     character_list_params.CharacterListParams,
                 ),
             ),
-            model=Characterz,
+            model=Character,
         )
 
     def delete(
@@ -415,7 +415,7 @@ class AsyncCharactersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Characterz:
+    ) -> Character:
         """
         Add a new character to the Ted Lasso universe.
 
@@ -477,7 +477,7 @@ class AsyncCharactersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Characterz,
+            cast_to=Character,
         )
 
     async def retrieve(
@@ -490,7 +490,7 @@ class AsyncCharactersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Characterz:
+    ) -> Character:
         """
         Retrieve detailed information about a specific character.
 
@@ -510,7 +510,7 @@ class AsyncCharactersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Characterz,
+            cast_to=Character,
         )
 
     async def update(
@@ -536,7 +536,7 @@ class AsyncCharactersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Characterz:
+    ) -> Character:
         """
         Update specific fields of an existing character.
 
@@ -578,7 +578,7 @@ class AsyncCharactersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Characterz,
+            cast_to=Character,
         )
 
     def list(
@@ -595,7 +595,7 @@ class AsyncCharactersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Characterz, AsyncSkipLimitPage[Characterz]]:
+    ) -> AsyncPaginator[Character, AsyncSkipLimitPage[Character]]:
         """
         Get a paginated list of Ted Lasso characters.
 
@@ -620,7 +620,7 @@ class AsyncCharactersResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/characters",
-            page=AsyncSkipLimitPage[Characterz],
+            page=AsyncSkipLimitPage[Character],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -637,7 +637,7 @@ class AsyncCharactersResource(AsyncAPIResource):
                     character_list_params.CharacterListParams,
                 ),
             ),
-            model=Characterz,
+            model=Character,
         )
 
     async def delete(
