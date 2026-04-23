@@ -72,7 +72,6 @@ class WebhooksResource(SyncAPIResource):
         ## Event Types
 
         Available event types to subscribe to:
-
         - `match.completed` - Fired when a football match ends
         - `team_member.transferred` - Fired when a player/coach joins or leaves a team
 
@@ -81,13 +80,11 @@ class WebhooksResource(SyncAPIResource):
         ## Webhook Signatures
 
         All webhook deliveries include Standard Webhooks signature headers:
-
         - `webhook-id` - Unique message identifier
         - `webhook-timestamp` - Unix timestamp of when the webhook was sent
         - `webhook-signature` - HMAC-SHA256 signature in format `v1,{base64_signature}`
 
-        Store the returned `secret` securely - you'll need it to verify webhook
-        signatures.
+        Store the returned `secret` securely - you'll need it to verify webhook signatures.
 
         Args:
           url: The URL to send webhook events to
@@ -222,7 +219,6 @@ class WebhooksResource(SyncAPIResource):
         Trigger a webhook event and deliver it to all subscribed endpoints.
 
         This endpoint is useful for testing your webhook integration. It will:
-
         1. Generate an event with the specified type and payload
         2. Find all webhooks subscribed to that event type
         3. Send a POST request to each webhook URL with signature headers
@@ -235,13 +231,11 @@ class WebhooksResource(SyncAPIResource):
         ## Webhook Signature Headers
 
         Each webhook delivery includes:
-
         - `webhook-id` - Unique event identifier (e.g., `evt_abc123...`)
         - `webhook-timestamp` - Unix timestamp
         - `webhook-signature` - HMAC-SHA256 signature (`v1,{base64}`)
 
         To verify signatures, compute:
-
         ```
         signature = HMAC - SHA256(key=base64_decode(secret_without_prefix), message="{timestamp}.{raw_json_payload}")
         ```
@@ -325,7 +319,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
         ## Event Types
 
         Available event types to subscribe to:
-
         - `match.completed` - Fired when a football match ends
         - `team_member.transferred` - Fired when a player/coach joins or leaves a team
 
@@ -334,13 +327,11 @@ class AsyncWebhooksResource(AsyncAPIResource):
         ## Webhook Signatures
 
         All webhook deliveries include Standard Webhooks signature headers:
-
         - `webhook-id` - Unique message identifier
         - `webhook-timestamp` - Unix timestamp of when the webhook was sent
         - `webhook-signature` - HMAC-SHA256 signature in format `v1,{base64_signature}`
 
-        Store the returned `secret` securely - you'll need it to verify webhook
-        signatures.
+        Store the returned `secret` securely - you'll need it to verify webhook signatures.
 
         Args:
           url: The URL to send webhook events to
@@ -475,7 +466,6 @@ class AsyncWebhooksResource(AsyncAPIResource):
         Trigger a webhook event and deliver it to all subscribed endpoints.
 
         This endpoint is useful for testing your webhook integration. It will:
-
         1. Generate an event with the specified type and payload
         2. Find all webhooks subscribed to that event type
         3. Send a POST request to each webhook URL with signature headers
@@ -488,13 +478,11 @@ class AsyncWebhooksResource(AsyncAPIResource):
         ## Webhook Signature Headers
 
         Each webhook delivery includes:
-
         - `webhook-id` - Unique event identifier (e.g., `evt_abc123...`)
         - `webhook-timestamp` - Unix timestamp
         - `webhook-signature` - HMAC-SHA256 signature (`v1,{base64}`)
 
         To verify signatures, compute:
-
         ```
         signature = HMAC - SHA256(key=base64_decode(secret_without_prefix), message="{timestamp}.{raw_json_payload}")
         ```

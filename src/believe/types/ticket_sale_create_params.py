@@ -30,7 +30,7 @@ class TicketSaleCreateParams(TypedDict, total=False):
     """Number of tickets purchased"""
 
     subtotal: Required[str]
-    """Subtotal before discount and tax (unit_price \\** quantity)"""
+    """Subtotal before discount and tax (unit_price * quantity)"""
 
     tax: Required[str]
     """Tax amount (20% UK VAT on discounted subtotal)"""
