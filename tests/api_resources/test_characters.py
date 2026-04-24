@@ -10,7 +10,7 @@ import pytest
 from believe import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
 from believe.types import (
-    Character,
+    Characterz,
     CharacterGetQuotesResponse,
 )
 from believe._utils import parse_date
@@ -38,7 +38,7 @@ class TestCharacters:
             personality_traits=["intense", "loyal", "secretly caring", "profane"],
             role="coach",
         )
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -72,7 +72,7 @@ class TestCharacters:
             signature_quotes=["He's here, he's there, he's every-f***ing-where, Roy Kent!", "Whistle!"],
             team_id="afc-richmond",
         )
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -94,7 +94,7 @@ class TestCharacters:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         character = response.parse()
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -116,7 +116,7 @@ class TestCharacters:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             character = response.parse()
-            assert_matches_type(Character, character, path=["response"])
+            assert_matches_type(Characterz, character, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -126,7 +126,7 @@ class TestCharacters:
         character = client.characters.retrieve(
             "character_id",
         )
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -138,7 +138,7 @@ class TestCharacters:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         character = response.parse()
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -150,7 +150,7 @@ class TestCharacters:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             character = response.parse()
-            assert_matches_type(Character, character, path=["response"])
+            assert_matches_type(Characterz, character, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -168,7 +168,7 @@ class TestCharacters:
         character = client.characters.update(
             character_id="character_id",
         )
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -203,7 +203,7 @@ class TestCharacters:
             signature_quotes=["string"],
             team_id="team_id",
         )
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -215,7 +215,7 @@ class TestCharacters:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         character = response.parse()
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -227,7 +227,7 @@ class TestCharacters:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             character = response.parse()
-            assert_matches_type(Character, character, path=["response"])
+            assert_matches_type(Characterz, character, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -243,7 +243,7 @@ class TestCharacters:
     @parametrize
     def test_method_list(self, client: Believe) -> None:
         character = client.characters.list()
-        assert_matches_type(SyncSkipLimitPage[Character], character, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Characterz], character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -255,7 +255,7 @@ class TestCharacters:
             skip=0,
             team_id="team_id",
         )
-        assert_matches_type(SyncSkipLimitPage[Character], character, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Characterz], character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -265,7 +265,7 @@ class TestCharacters:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         character = response.parse()
-        assert_matches_type(SyncSkipLimitPage[Character], character, path=["response"])
+        assert_matches_type(SyncSkipLimitPage[Characterz], character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -275,7 +275,7 @@ class TestCharacters:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             character = response.parse()
-            assert_matches_type(SyncSkipLimitPage[Character], character, path=["response"])
+            assert_matches_type(SyncSkipLimitPage[Characterz], character, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -385,7 +385,7 @@ class TestAsyncCharacters:
             personality_traits=["intense", "loyal", "secretly caring", "profane"],
             role="coach",
         )
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -419,7 +419,7 @@ class TestAsyncCharacters:
             signature_quotes=["He's here, he's there, he's every-f***ing-where, Roy Kent!", "Whistle!"],
             team_id="afc-richmond",
         )
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -441,7 +441,7 @@ class TestAsyncCharacters:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         character = await response.parse()
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -463,7 +463,7 @@ class TestAsyncCharacters:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             character = await response.parse()
-            assert_matches_type(Character, character, path=["response"])
+            assert_matches_type(Characterz, character, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -473,7 +473,7 @@ class TestAsyncCharacters:
         character = await async_client.characters.retrieve(
             "character_id",
         )
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -485,7 +485,7 @@ class TestAsyncCharacters:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         character = await response.parse()
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -497,7 +497,7 @@ class TestAsyncCharacters:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             character = await response.parse()
-            assert_matches_type(Character, character, path=["response"])
+            assert_matches_type(Characterz, character, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -515,7 +515,7 @@ class TestAsyncCharacters:
         character = await async_client.characters.update(
             character_id="character_id",
         )
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -550,7 +550,7 @@ class TestAsyncCharacters:
             signature_quotes=["string"],
             team_id="team_id",
         )
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -562,7 +562,7 @@ class TestAsyncCharacters:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         character = await response.parse()
-        assert_matches_type(Character, character, path=["response"])
+        assert_matches_type(Characterz, character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -574,7 +574,7 @@ class TestAsyncCharacters:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             character = await response.parse()
-            assert_matches_type(Character, character, path=["response"])
+            assert_matches_type(Characterz, character, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -590,7 +590,7 @@ class TestAsyncCharacters:
     @parametrize
     async def test_method_list(self, async_client: AsyncBelieve) -> None:
         character = await async_client.characters.list()
-        assert_matches_type(AsyncSkipLimitPage[Character], character, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Characterz], character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -602,7 +602,7 @@ class TestAsyncCharacters:
             skip=0,
             team_id="team_id",
         )
-        assert_matches_type(AsyncSkipLimitPage[Character], character, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Characterz], character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -612,7 +612,7 @@ class TestAsyncCharacters:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         character = await response.parse()
-        assert_matches_type(AsyncSkipLimitPage[Character], character, path=["response"])
+        assert_matches_type(AsyncSkipLimitPage[Characterz], character, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -622,7 +622,7 @@ class TestAsyncCharacters:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             character = await response.parse()
-            assert_matches_type(AsyncSkipLimitPage[Character], character, path=["response"])
+            assert_matches_type(AsyncSkipLimitPage[Characterz], character, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
