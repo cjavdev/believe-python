@@ -8,10 +8,10 @@ from .growth_arc import GrowthArc
 from .character_role import CharacterRole
 from .emotional_stats import EmotionalStats
 
-__all__ = ["Character"]
+__all__ = ["Characterz"]
 
 
-class Character(BaseModel):
+class Characterz(BaseModel):
     """Full character model with ID."""
 
     id: str
