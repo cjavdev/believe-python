@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.10.0 (2026-04-28)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/cjavdev/believe-python/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **api:** manual updates ([2d9c279](https://github.com/cjavdev/believe-python/commit/2d9c279c2cd71af7bf124d114cfb323a1d5de589))
+* support setting headers via env ([04df6d5](https://github.com/cjavdev/believe-python/commit/04df6d56937ef090093aa543f358388bd4276421))
+
+
+### Bug Fixes
+
+* use correct field name format for multipart file arrays ([0d439a0](https://github.com/cjavdev/believe-python/commit/0d439a0f18751e2b5ebbae910575752dc5910d85))
+
 ## 0.9.0 (2026-04-27)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/cjavdev/believe-python/compare/v0.8.0...v0.9.0)
