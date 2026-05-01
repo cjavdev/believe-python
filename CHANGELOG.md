@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.1 (2026-05-01)
+
+Full Changelog: [v0.10.0...v0.10.1](https://github.com/cjavdev/believe-python/compare/v0.10.0...v0.10.1)
+
+### Chores
+
+* **internal:** reformat pyproject.toml ([d5325b1](https://github.com/cjavdev/believe-python/commit/d5325b14b9a2e42a8b6b3776df738d7c439d8499))
+
 ## 0.10.0 (2026-04-28)
 
 Full Changelog: [v0.9.0...v0.10.0](https://github.com/cjavdev/believe-python/compare/v0.9.0...v0.10.0)
