@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from believe._types import Base64FileInput, omit, not_given
-from believe._utils import (
+from believe_py._types import Base64FileInput, omit, not_given
+from believe_py._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from believe._compat import PYDANTIC_V1
-from believe._models import BaseModel
+from believe_py._compat import PYDANTIC_V1
+from believe_py._models import BaseModel
 
 _T = TypeVar("_T")
 
