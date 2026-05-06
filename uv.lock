@@ -225,13 +225,8 @@ wheels = [
 ]
 
 [[package]]
-<<<<<<< HEAD
 name = "believe-py"
-version = "0.7.0"
-=======
-name = "believe"
-version = "0.0.1"
->>>>>>> 5863835 (Apply custom code)
+version = "0.10.1"
 source = { editable = "." }
 dependencies = [
     { name = "anyio" },

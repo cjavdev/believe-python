@@ -1,7 +1,5 @@
 # Changelog
 
-<<<<<<< HEAD
-=======
 ## 0.10.1 (2026-05-01)
 
 Full Changelog: [v0.10.0...v0.10.1](https://github.com/cjavdev/believe-python/compare/v0.10.0...v0.10.1)
@@ -49,7 +47,6 @@ Full Changelog: [v0.7.0...v0.7.1](https://github.com/cjavdev/believe-python/comp
 
 * **internal:** more robust bootstrap script ([f3b32fc](https://github.com/cjavdev/believe-python/commit/f3b32fc27cfeeac266f5196f4cfaab99f6ec197c))
 
->>>>>>> 5863835 (Apply custom code)
 ## 0.7.0 (2026-04-22)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/cjavdev/believe-python/compare/v0.6.0...v0.7.0)
