@@ -5,8 +5,8 @@ from typing import Union
 
 import pydantic
 
-from believe import _compat
-from believe._utils._json import openapi_dumps
+from believe_py import _compat
+from believe_py._utils._json import openapi_dumps
 
 
 class TestOpenapiDumps:

@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from believe._utils import PropertyInfo
-from believe._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
-from believe._models import DISCRIMINATOR_CACHE, BaseModel, construct_type
+from believe_py._utils import PropertyInfo
+from believe_py._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
+from believe_py._models import DISCRIMINATOR_CACHE, BaseModel, construct_type
 
 
 class BasicModel(BaseModel):
