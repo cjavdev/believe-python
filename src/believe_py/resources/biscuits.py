@@ -90,8 +90,7 @@ class BiscuitsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncSkipLimitPage[Biscuit]:
         """
-        Get a paginated list of Ted's famous homemade biscuits! Each comes with a
-        heartwarming message.
+        Get a paginated list of Ted's famous homemade biscuits! Each comes with a heartwarming message.
 
         Args:
           limit: Maximum number of items to return (max: 100)
@@ -213,8 +212,7 @@ class AsyncBiscuitsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Biscuit, AsyncSkipLimitPage[Biscuit]]:
         """
-        Get a paginated list of Ted's famous homemade biscuits! Each comes with a
-        heartwarming message.
+        Get a paginated list of Ted's famous homemade biscuits! Each comes with a heartwarming message.
 
         Args:
           limit: Maximum number of items to return (max: 100)
