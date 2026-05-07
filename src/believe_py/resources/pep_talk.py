@@ -56,9 +56,7 @@ class PepTalkResource(SyncAPIResource):
     ) -> PepTalkRetrieveResponse:
         """Get a motivational pep talk from Ted Lasso himself.
 
-        By default returns the
-        complete pep talk. Add `?stream=true` to get Server-Sent Events (SSE) streaming
-        the pep talk chunk by chunk.
+        By default returns the complete pep talk. Add `?stream=true` to get Server-Sent Events (SSE) streaming the pep talk chunk by chunk.
 
         Args:
           stream: If true, returns SSE stream instead of full response
@@ -119,9 +117,7 @@ class AsyncPepTalkResource(AsyncAPIResource):
     ) -> PepTalkRetrieveResponse:
         """Get a motivational pep talk from Ted Lasso himself.
 
-        By default returns the
-        complete pep talk. Add `?stream=true` to get Server-Sent Events (SSE) streaming
-        the pep talk chunk by chunk.
+        By default returns the complete pep talk. Add `?stream=true` to get Server-Sent Events (SSE) streaming the pep talk chunk by chunk.
 
         Args:
           stream: If true, returns SSE stream instead of full response

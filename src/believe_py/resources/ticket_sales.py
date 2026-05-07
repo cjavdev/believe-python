@@ -87,7 +87,7 @@ class TicketSalesResource(SyncAPIResource):
 
           quantity: Number of tickets purchased
 
-          subtotal: Subtotal before discount and tax (unit_price \\** quantity)
+          subtotal: Subtotal before discount and tax (unit_price * quantity)
 
           tax: Tax amount (20% UK VAT on discounted subtotal)
 
@@ -247,8 +247,7 @@ class TicketSalesResource(SyncAPIResource):
     ) -> SyncSkipLimitPage[TicketSale]:
         """Get a paginated list of all ticket sales with optional filtering.
 
-        With 300
-        records, this endpoint is ideal for practicing pagination.
+        With 300 records, this endpoint is ideal for practicing pagination.
 
         Args:
           coupon_code: Filter by coupon code (use 'none' for sales without coupons)
@@ -391,7 +390,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
 
           quantity: Number of tickets purchased
 
-          subtotal: Subtotal before discount and tax (unit_price \\** quantity)
+          subtotal: Subtotal before discount and tax (unit_price * quantity)
 
           tax: Tax amount (20% UK VAT on discounted subtotal)
 
@@ -551,8 +550,7 @@ class AsyncTicketSalesResource(AsyncAPIResource):
     ) -> AsyncPaginator[TicketSale, AsyncSkipLimitPage[TicketSale]]:
         """Get a paginated list of all ticket sales with optional filtering.
 
-        With 300
-        records, this endpoint is ideal for practicing pagination.
+        With 300 records, this endpoint is ideal for practicing pagination.
 
         Args:
           coupon_code: Filter by coupon code (use 'none' for sales without coupons)

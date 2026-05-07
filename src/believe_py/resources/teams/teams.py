@@ -294,8 +294,7 @@ class TeamsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncSkipLimitPage[Team]:
         """
-        Get a paginated list of all teams with optional filtering by league or culture
-        score.
+        Get a paginated list of all teams with optional filtering by league or culture score.
 
         Args:
           league: Filter by league
@@ -725,8 +724,7 @@ class AsyncTeamsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Team, AsyncSkipLimitPage[Team]]:
         """
-        Get a paginated list of all teams with optional filtering by league or culture
-        score.
+        Get a paginated list of all teams with optional filtering by league or culture score.
 
         Args:
           league: Filter by league

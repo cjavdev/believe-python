@@ -21,8 +21,7 @@ class Chunk(BaseModel):
 
     emotional_beat: Optional[str] = None
     """
-    The emotional purpose of this chunk (e.g., greeting, acknowledgment, wisdom,
-    affirmation, encouragement)
+    The emotional purpose of this chunk (e.g., greeting, acknowledgment, wisdom, affirmation, encouragement)
     """
 
 

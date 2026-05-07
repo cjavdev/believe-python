@@ -54,8 +54,7 @@ class CommentaryResource(SyncAPIResource):
     ) -> object:
         """Stream live match commentary for a specific match.
 
-        Uses Server-Sent Events (SSE)
-        to stream commentary events in real-time.
+        Uses Server-Sent Events (SSE) to stream commentary events in real-time.
 
         Args:
           extra_headers: Send extra headers
@@ -112,8 +111,7 @@ class AsyncCommentaryResource(AsyncAPIResource):
     ) -> object:
         """Stream live match commentary for a specific match.
 
-        Uses Server-Sent Events (SSE)
-        to stream commentary events in real-time.
+        Uses Server-Sent Events (SSE) to stream commentary events in real-time.
 
         Args:
           extra_headers: Send extra headers

@@ -259,8 +259,7 @@ class EpisodesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncSkipLimitPage[Episode]:
         """
-        Get a paginated list of all Ted Lasso episodes with optional filtering by
-        season.
+        Get a paginated list of all Ted Lasso episodes with optional filtering by season.
 
         Args:
           character_focus: Filter by character focus (character ID)
@@ -601,8 +600,7 @@ class AsyncEpisodesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Episode, AsyncSkipLimitPage[Episode]]:
         """
-        Get a paginated list of all Ted Lasso episodes with optional filtering by
-        season.
+        Get a paginated list of all Ted Lasso episodes with optional filtering by season.
 
         Args:
           character_focus: Filter by character focus (character ID)

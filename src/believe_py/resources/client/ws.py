@@ -56,16 +56,15 @@ class WsResource(SyncAPIResource):
         Simple WebSocket test endpoint for connectivity testing.
 
         Connect to test WebSocket functionality. The server will:
-
         1. Send a welcome message on connection
         2. Echo back any message you send
 
         ## Example
 
         ```javascript
-        const ws = new WebSocket("ws://localhost:8000/ws/test");
+        const ws = new WebSocket('ws://localhost:8000/ws/test');
         ws.onmessage = (event) => console.log(event.data);
-        ws.send("Hello!"); // Server responds with echo
+        ws.send('Hello!');  // Server responds with echo
         ```
         """
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
@@ -116,16 +115,15 @@ class AsyncWsResource(AsyncAPIResource):
         Simple WebSocket test endpoint for connectivity testing.
 
         Connect to test WebSocket functionality. The server will:
-
         1. Send a welcome message on connection
         2. Echo back any message you send
 
         ## Example
 
         ```javascript
-        const ws = new WebSocket("ws://localhost:8000/ws/test");
+        const ws = new WebSocket('ws://localhost:8000/ws/test');
         ws.onmessage = (event) => console.log(event.data);
-        ws.send("Hello!"); // Server responds with echo
+        ws.send('Hello!');  // Server responds with echo
         ```
         """
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}

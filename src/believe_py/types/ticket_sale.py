@@ -33,7 +33,7 @@ class TicketSale(BaseModel):
     """Number of tickets purchased"""
 
     subtotal: str
-    """Subtotal before discount and tax (unit_price \\** quantity)"""
+    """Subtotal before discount and tax (unit_price * quantity)"""
 
     tax: str
     """Tax amount (20% UK VAT on discounted subtotal)"""
