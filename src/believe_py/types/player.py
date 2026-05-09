@@ -22,7 +22,7 @@ class Player(BaseModel):
     """Jersey/shirt number"""
 
     position: Position
-    """Playing position on the field"""
+    """Players position on the field"""
 
     team_id: str
     """ID of the team they belong to"""

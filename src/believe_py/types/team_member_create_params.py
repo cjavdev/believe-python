@@ -35,7 +35,7 @@ class MemberPlayerBase(TypedDict, total=False):
     """Jersey/shirt number"""
 
     position: Required[Position]
-    """Playing position on the field"""
+    """Players position on the field"""
 
     team_id: Required[str]
     """ID of the team they belong to"""
