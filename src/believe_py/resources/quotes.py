@@ -69,6 +69,7 @@ class QuotesResource(SyncAPIResource):
         is_funny: bool | Omit = omit,
         is_inspirational: bool | Omit = omit,
         popularity_score: Optional[float] | Omit = omit,
+        season: Optional[int] | Omit = omit,
         secondary_themes: List[QuoteTheme] | Omit = omit,
         times_shared: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -100,6 +101,8 @@ class QuotesResource(SyncAPIResource):
 
           popularity_score: Popularity/virality score (0-100)
 
+          season: Season number (1-3) when the quote occurred
+
           secondary_themes: Additional themes
 
           times_shared: Number of times shared on social media
@@ -125,6 +128,7 @@ class QuotesResource(SyncAPIResource):
                     "is_funny": is_funny,
                     "is_inspirational": is_inspirational,
                     "popularity_score": popularity_score,
+                    "season": season,
                     "secondary_themes": secondary_themes,
                     "times_shared": times_shared,
                 },
@@ -180,6 +184,7 @@ class QuotesResource(SyncAPIResource):
         is_inspirational: Optional[bool] | Omit = omit,
         moment_type: Optional[QuoteMoment] | Omit = omit,
         popularity_score: Optional[float] | Omit = omit,
+        season: Optional[int] | Omit = omit,
         secondary_themes: Optional[List[QuoteTheme]] | Omit = omit,
         text: Optional[str] | Omit = omit,
         theme: Optional[QuoteTheme] | Omit = omit,
@@ -220,6 +225,7 @@ class QuotesResource(SyncAPIResource):
                     "is_inspirational": is_inspirational,
                     "moment_type": moment_type,
                     "popularity_score": popularity_score,
+                    "season": season,
                     "secondary_themes": secondary_themes,
                     "text": text,
                     "theme": theme,
@@ -521,6 +527,7 @@ class AsyncQuotesResource(AsyncAPIResource):
         is_funny: bool | Omit = omit,
         is_inspirational: bool | Omit = omit,
         popularity_score: Optional[float] | Omit = omit,
+        season: Optional[int] | Omit = omit,
         secondary_themes: List[QuoteTheme] | Omit = omit,
         times_shared: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -552,6 +559,8 @@ class AsyncQuotesResource(AsyncAPIResource):
 
           popularity_score: Popularity/virality score (0-100)
 
+          season: Season number (1-3) when the quote occurred
+
           secondary_themes: Additional themes
 
           times_shared: Number of times shared on social media
@@ -577,6 +586,7 @@ class AsyncQuotesResource(AsyncAPIResource):
                     "is_funny": is_funny,
                     "is_inspirational": is_inspirational,
                     "popularity_score": popularity_score,
+                    "season": season,
                     "secondary_themes": secondary_themes,
                     "times_shared": times_shared,
                 },
@@ -632,6 +642,7 @@ class AsyncQuotesResource(AsyncAPIResource):
         is_inspirational: Optional[bool] | Omit = omit,
         moment_type: Optional[QuoteMoment] | Omit = omit,
         popularity_score: Optional[float] | Omit = omit,
+        season: Optional[int] | Omit = omit,
         secondary_themes: Optional[List[QuoteTheme]] | Omit = omit,
         text: Optional[str] | Omit = omit,
         theme: Optional[QuoteTheme] | Omit = omit,
@@ -672,6 +683,7 @@ class AsyncQuotesResource(AsyncAPIResource):
                     "is_inspirational": is_inspirational,
                     "moment_type": moment_type,
                     "popularity_score": popularity_score,
+                    "season": season,
                     "secondary_themes": secondary_themes,
                     "text": text,
                     "theme": theme,
