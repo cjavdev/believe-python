@@ -17,10 +17,10 @@ class ConflictResolveResponse(BaseModel):
     """Understanding the root cause"""
 
     diamond_dogs_advice: str
-    """Advice from the Diamond Dogs support group"""
+    """Advice from the Diamond Dogs support groups"""
 
     potential_outcome: str
-    """What resolution could look like"""
+    """What resolution could look like if successful"""
 
     steps_to_resolution: List[str]
     """Concrete steps to resolve the conflict"""

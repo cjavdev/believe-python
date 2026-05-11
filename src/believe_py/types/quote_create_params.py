@@ -1,49 +1,49 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from __future__ import annotations
 
-from .._models import BaseModel
+from typing import List, Optional
+from typing_extensions import Required, TypedDict
+
 from .quote_theme import QuoteTheme
 from .quote_moment import QuoteMoment
 
-__all__ = ["Quote"]
+__all__ = ["QuoteCreateParams"]
 
 
-class Quote(BaseModel):
-    """Full quote model with ID."""
-
-    id: str
-    """Unique identifier"""
-
-    character_id: str
+class QuoteCreateParams(TypedDict, total=False):
+    character_id: Required[str]
     """ID of the character who said it"""
 
-    context: str
+    context: Required[str]
     """Context in which the quote was said"""
 
-    moment_type: QuoteMoment
+    moment_type: Required[QuoteMoment]
     """Type of moment when the quote was said"""
 
-    text: str
+    text: Required[str]
     """The quote text"""
 
-    theme: QuoteTheme
+    theme: Required[QuoteTheme]
     """Primary theme of the quote"""
 
-    episode_id: Optional[str] = None
+    episode_id: Optional[str]
     """Episode where the quote appears"""
 
-    is_funny: Optional[bool] = None
+    is_funny: bool
     """Whether this quote is humorous"""
 
-    is_inspirational: Optional[bool] = None
+    is_inspirational: bool
     """Whether this quote is inspirational"""
 
-    popularity_score: Optional[float] = None
+    popularity_score: Optional[float]
     """Popularity/virality score (0-100)"""
 
-    secondary_themes: Optional[List[QuoteTheme]] = None
+    season: Optional[int]
+    """Season number (1-3) when the quote occurred"""
+
+    secondary_themes: List[QuoteTheme]
     """Additional themes"""
 
-    times_shared: Optional[int] = None
+    times_shared: Optional[int]
     """Number of times shared on social media"""

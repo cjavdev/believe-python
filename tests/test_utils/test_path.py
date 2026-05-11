@@ -4,7 +4,7 @@ from typing import Any
 
 import pytest
 
-from believe._utils._path import path_template
+from believe_py._utils._path import path_template
 
 
 @pytest.mark.parametrize(
