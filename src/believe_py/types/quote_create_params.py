@@ -39,6 +39,9 @@ class QuoteCreateParams(TypedDict, total=False):
     popularity_score: Optional[float]
     """Popularity/virality score (0-100)"""
 
+    season: Optional[int]
+    """Season number (1-3) when the quote occurred"""
+
     secondary_themes: List[QuoteTheme]
     """Additional themes"""
 
