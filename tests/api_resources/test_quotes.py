@@ -45,6 +45,7 @@ class TestQuotes:
             is_funny=False,
             is_inspirational=True,
             popularity_score=98.5,
+            season=1,
             secondary_themes=["leadership", "teamwork"],
             times_shared=250000,
         )
@@ -146,6 +147,7 @@ class TestQuotes:
             is_inspirational=True,
             moment_type="halftime_speech",
             popularity_score=0,
+            season=1,
             secondary_themes=["belief"],
             text="x",
             theme="belief",
@@ -436,6 +438,7 @@ class TestAsyncQuotes:
             is_funny=False,
             is_inspirational=True,
             popularity_score=98.5,
+            season=1,
             secondary_themes=["leadership", "teamwork"],
             times_shared=250000,
         )
@@ -537,6 +540,7 @@ class TestAsyncQuotes:
             is_inspirational=True,
             moment_type="halftime_speech",
             popularity_score=0,
+            season=1,
             secondary_themes=["belief"],
             text="x",
             theme="belief",
