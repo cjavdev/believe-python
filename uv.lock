@@ -226,7 +226,7 @@ wheels = [
 
 [[package]]
 name = "believe-py"
-version = "0.10.2"
+version = "0.7.0"
 source = { editable = "." }
 dependencies = [
     { name = "anyio" },
