@@ -27,6 +27,8 @@ class QuoteUpdateParams(TypedDict, total=False):
 
     popularity_score: Optional[float]
 
+    season: Optional[int]
+
     secondary_themes: Optional[List[QuoteTheme]]
 
     text: Optional[str]
