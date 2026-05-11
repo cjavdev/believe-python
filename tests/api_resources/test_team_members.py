@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from believe import Believe, AsyncBelieve
+from believe_py import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
-from believe.types import (
+from believe_py.types import (
     Coach,
     Player,
     TeamMemberListResponse,
@@ -18,7 +18,7 @@ from believe.types import (
     TeamMemberRetrieveResponse,
     TeamMemberListStaffResponse,
 )
-from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+from believe_py.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

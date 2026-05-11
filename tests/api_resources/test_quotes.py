@@ -7,12 +7,12 @@ from typing import Any, cast
 
 import pytest
 
-from believe import Believe, AsyncBelieve
+from believe_py import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
-from believe.types import (
+from believe_py.types import (
     Quote,
 )
-from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+from believe_py.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -45,6 +45,7 @@ class TestQuotes:
             is_funny=False,
             is_inspirational=True,
             popularity_score=98.5,
+            season=1,
             secondary_themes=["leadership", "teamwork"],
             times_shared=250000,
         )
@@ -146,6 +147,7 @@ class TestQuotes:
             is_inspirational=True,
             moment_type="halftime_speech",
             popularity_score=0,
+            season=1,
             secondary_themes=["belief"],
             text="x",
             theme="belief",
@@ -436,6 +438,7 @@ class TestAsyncQuotes:
             is_funny=False,
             is_inspirational=True,
             popularity_score=98.5,
+            season=1,
             secondary_themes=["leadership", "teamwork"],
             times_shared=250000,
         )
@@ -537,6 +540,7 @@ class TestAsyncQuotes:
             is_inspirational=True,
             moment_type="halftime_speech",
             popularity_score=0,
+            season=1,
             secondary_themes=["belief"],
             text="x",
             theme="belief",

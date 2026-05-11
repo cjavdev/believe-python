@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from believe import Believe, AsyncBelieve
+from believe_py import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")

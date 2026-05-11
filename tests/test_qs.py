@@ -4,7 +4,7 @@ from urllib.parse import unquote
 
 import pytest
 
-from believe._qs import Querystring, stringify
+from believe_py._qs import Querystring, stringify
 
 
 def test_empty() -> None:
