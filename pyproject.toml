@@ -1,5 +1,9 @@
 [project]
+<<<<<<< HEAD
+name = "believe_py"
+=======
 name = "believe"
+>>>>>>> 2db0053 (Apply custom code)
 version = "0.7.0"
 description = "The official Python library for the believe API"
 dynamic = ["readme"]

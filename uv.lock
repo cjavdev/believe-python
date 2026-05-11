@@ -225,7 +225,11 @@ wheels = [
 ]
 
 [[package]]
+<<<<<<< HEAD
+name = "believe-py"
+=======
 name = "believe"
+>>>>>>> 2db0053 (Apply custom code)
 version = "0.7.0"
 source = { editable = "." }
 dependencies = [
