@@ -42,6 +42,9 @@ class Quote(BaseModel):
     popularity_score: Optional[float] = None
     """Popularity/virality score (0-100)"""
 
+    season: Optional[int] = None
+    """Season number (1-3) when the quote occurred"""
+
     secondary_themes: Optional[List[QuoteTheme]] = None
     """Additional themes"""
 
