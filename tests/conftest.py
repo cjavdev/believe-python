@@ -10,15 +10,15 @@ import httpx
 import pytest
 from pytest_asyncio import is_async_test
 
-from believe import Believe, AsyncBelieve, DefaultAioHttpClient
-from believe._utils import is_dict
+from believe_py import Believe, AsyncBelieve, DefaultAioHttpClient
+from believe_py._utils import is_dict
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest  # pyright: ignore[reportPrivateImportUsage]
 
 pytest.register_assert_rewrite("tests.utils")
 
-logging.getLogger("believe").setLevel(logging.DEBUG)
+logging.getLogger("believe_py").setLevel(logging.DEBUG)
 
 
 # automatically add `pytest.mark.asyncio()` to all of our async tests

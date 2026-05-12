@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
-from believe import Believe, AsyncBelieve
+from believe_py import Believe, AsyncBelieve
 from tests.utils import assert_matches_type
-from believe.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
-from believe.types.coaching import CoachingPrinciple
+from believe_py.pagination import SyncSkipLimitPage, AsyncSkipLimitPage
+from believe_py.types.coaching import CoachingPrinciple
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

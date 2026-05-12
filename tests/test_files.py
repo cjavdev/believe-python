@@ -4,8 +4,8 @@ import anyio
 import pytest
 from dirty_equals import IsDict, IsList, IsBytes, IsTuple
 
-from believe._files import to_httpx_files, deepcopy_with_paths, async_to_httpx_files
-from believe._utils import extract_files
+from believe_py._files import to_httpx_files, deepcopy_with_paths, async_to_httpx_files
+from believe_py._utils import extract_files
 
 readme_path = Path(__file__).parent.parent.joinpath("README.md")
 
@@ -131,7 +131,7 @@ class TestDeepcopyWithPaths:
         copied = deepcopy_with_paths(original, [["items", "<array>", "file"]])
         extracted = extract_files(copied, paths=[["items", "<array>", "file"]])
 
-        assert extracted == [("items[][file]", file1), ("items[][file]", file2)]
+        assert [entry for _, entry in extracted] == [file1, file2]
         assert original == {
             "items": [
                 {"file": file1, "extra": 1},

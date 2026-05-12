@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from believe import Believe, AsyncBelieve
-from believe._streaming import Stream, AsyncStream, ServerSentEvent
+from believe_py import Believe, AsyncBelieve
+from believe_py._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio

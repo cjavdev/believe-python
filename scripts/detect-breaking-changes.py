@@ -54,18 +54,18 @@ def main() -> None:
         raise RuntimeError("You must specify a base ref to run breaking change detection against") from err
 
     package = griffe.load(
-        "believe",
+        "believe_py",
         search_paths=[Path(__file__).parent.parent.joinpath("src")],
     )
     old_package = griffe.load_git(
-        "believe",
+        "believe_py",
         ref=against_ref,
         search_paths=["src"],
     )
     assert isinstance(package, griffe.Module)
     assert isinstance(old_package, griffe.Module)
 
-    output = list(find_breaking_changes(package, old_package, path=["believe"]))
+    output = list(find_breaking_changes(package, old_package, path=["believe_py"]))
     if output:
         rich.print(Text("Breaking changes detected!", style=Style(color="rgb(165, 79, 87)")))
         rich.print()
