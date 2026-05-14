@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.4](https://github.com/cjavdev/believe-python/compare/v0.10.3...v0.10.4) (2026-05-14)
+
+
+### Chores
+
+* regenerate from believe[#86](https://github.com/cjavdev/believe-python/issues/86) (try this) ([d6fa297](https://github.com/cjavdev/believe-python/commit/d6fa29714af41a53bcebc62e57bed5147a27cd29))
+* regenerate SDKs from believe[#86](https://github.com/cjavdev/believe-python/issues/86) (try this) ([78ae9d1](https://github.com/cjavdev/believe-python/commit/78ae9d14c961ea4b3aa767ffce02aaf10e06ef5a))
+
 ## [0.10.3](https://github.com/cjavdev/believe-python/compare/v0.10.2...v0.10.3) (2026-05-12)
 
 
